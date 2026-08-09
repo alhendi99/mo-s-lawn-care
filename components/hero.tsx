@@ -66,8 +66,8 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-service-line hero-reveal hidden min-h-14 items-center justify-between overflow-hidden border-t border-paper/18 py-3 [animation-delay:440ms] sm:flex"
-                  <div className="hero-marquee w-full overflow-hidden" aria-label="Services we provide">
+        <div className="hero-service-line hero-reveal hidden min-h-14 items-center justify-between overflow-hidden border-t border-paper/18 py-3 [animation-delay:440ms] sm:flex">
+          <div className="hero-marquee w-full overflow-hidden" aria-label="Services we provide">
             <div className="hero-marquee-track">
               {[false, true].map((isDuplicate) => (
                 <ul
