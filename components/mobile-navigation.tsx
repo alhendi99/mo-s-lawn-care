@@ -26,10 +26,11 @@ export function MobileNavigation() {
     <div className="lg:hidden">
       <button
         type="button"
+        aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
-        className="flex h-11 min-w-11 items-center gap-2 px-1 text-[0.8125rem] font-semibold tracking-[0.18em] text-paper uppercase"
+        className="relative z-50 flex h-11 min-w-11 items-center gap-2 px-1 text-[0.8125rem] font-semibold tracking-[0.18em] text-paper uppercase"
       >
         {open ? 'Close' : 'Menu'}
         <span aria-hidden="true" className="relative block h-3 w-4">
