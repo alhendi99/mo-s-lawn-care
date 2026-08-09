@@ -449,8 +449,7 @@ function SurfaceStage() {
         </div>
       </div>
 
-      <div className="yard-xray__panorama snap-x snap-mandatory touch-pan-x overflow-x-auto overscroll-x-contain border-t border-ink/10 [scrollbar-width:none] md:snap-none">
-        <div className="yard-xray__season-track relative flex min-h-[34rem] w-max md:w-full">
+<div className="yard-xray__panorama snap-x snap-mandatory overflow-x-auto overscroll-x-contain border-t border-ink/10 [scrollbar-width:none] md:snap-none">        <div className="yard-xray__season-track relative flex min-h-[34rem] w-max md:w-full">
           {seasonPanorama.map((season, index) => {
             const services = season.serviceNames.map(
               (serviceName) =>
