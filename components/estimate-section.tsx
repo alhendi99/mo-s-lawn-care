@@ -6,7 +6,7 @@ export function EstimateSection() {
     <section
       id="estimate"
       aria-labelledby="estimate-heading"
-      className="bg-evergreen py-16 sm:py-24"
+      className="bg-evergreen"
     >
       <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
         <div className="grid overflow-hidden border border-paper/15 lg:grid-cols-[minmax(0,0.78fr)_minmax(32rem,1fr)]">
@@ -36,7 +36,7 @@ export function EstimateSection() {
             </div>
           </div>
 
-          <div className="bg-paper p-6 sm:p-9 lg:p-12">
+          <div id="estimate-form" className="bg-paper p-6 sm:p-9 lg:p-12">
             <EstimateForm />
           </div>
         </div>

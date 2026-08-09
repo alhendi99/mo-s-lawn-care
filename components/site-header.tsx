@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Phone } from 'lucide-react'
+import { Mail, Phone } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { MobileNavigation } from './mobile-navigation'
 import { nav, site } from '@/lib/site'
@@ -65,7 +65,7 @@ export function SiteHeader() {
               {site.phone}
             </a>
             <a
-              href="#estimate"
+              href="#estimate-form"
               className="flex h-12 items-center border border-paper/35 px-5 text-[0.8125rem] font-bold tracking-[0.18em] text-paper uppercase transition-colors duration-200 hover:border-paper hover:bg-paper hover:text-evergreen"
             >
               Get Estimate
@@ -97,13 +97,13 @@ export function SiteHeader() {
         <a
           href={site.phoneHref}
           tabIndex={persistent ? undefined : -1}
-          className="flex min-h-12 items-center justify-center gap-2 text-sm font-bold tracking-[0.12em] text-paper uppercase"
+          className="flex min-h-12 items-center justify-center gap-2 text-sm font-bold tracking-[0.12em] text-paper uppercase whitespace-nowrap"
         >
           <Phone aria-hidden="true" size={18} strokeWidth={2.25} />
-          Call {site.phone}
+          {site.phone}
         </a>
         <a
-          href="#estimate"
+          href="#estimate-form"
           tabIndex={persistent ? undefined : -1}
           className="flex min-h-12 items-center justify-center bg-[#D5EE72] px-3 text-sm font-bold tracking-[0.1em] text-evergreen uppercase"
         >

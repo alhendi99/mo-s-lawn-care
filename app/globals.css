@@ -69,6 +69,16 @@
 }
 
 @layer components {
+  .gallery-track {
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    touch-action: pan-x pan-y;
+  }
+
+  .gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+
   .eyebrow {
     font-family: var(--font-sans);
     font-size: clamp(0.75rem, 0.68rem + 0.25vw, 0.875rem);

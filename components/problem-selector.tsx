@@ -64,7 +64,7 @@ export function ProblemSelector() {
                     ))}
                   </ul>
                   <a
-                    href="#estimate"
+                    href="#estimate-form"
                     className="mt-5 inline-flex items-center gap-2 text-[0.8125rem] font-bold tracking-[0.18em] text-paper uppercase underline decoration-paper/30 underline-offset-[6px] transition-colors duration-200 hover:decoration-paper"
                   >
                     Get an estimate for this

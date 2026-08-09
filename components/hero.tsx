@@ -50,7 +50,7 @@ export function Hero() {
             </p>
 
             <div className="hero-reveal mt-4 flex flex-col gap-3 [animation-delay:340ms] sm:mt-6 sm:flex-row sm:items-center">
-              <a href="#estimate" className="btn-solid group w-full sm:w-auto">
+              <a href="#estimate-form" className="btn-solid group w-full sm:w-auto">
                 Get a free estimate
                 <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
                   ↗

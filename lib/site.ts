@@ -14,7 +14,7 @@ export const site = {
   wordmarkLine: 'Lawn Care & Snow Removal',
   phone: '(515) 868-8636', // e.g. "(515) 000-0000"
   phoneHref: 'tel:+15158688636',
-  email: '', // e.g. "hello@moslawncare.com"
+  email: 'Moslawncaredsm@gmail.com',
   location: 'Des Moines, Iowa',
   serviceArea: serviceAreas.join(', '),
   workingHours: 'Saturday–Thursday, 9:00–11:00 PM',

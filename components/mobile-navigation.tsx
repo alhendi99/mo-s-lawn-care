@@ -63,7 +63,7 @@ export function MobileNavigation() {
             ))}
           </nav>
           <a
-            href="#estimate"
+            href="#estimate-form"
             onClick={() => setOpen(false)}
             className="btn-solid mt-8 w-full"
             style={{ backgroundColor: 'var(--accent)' }}
