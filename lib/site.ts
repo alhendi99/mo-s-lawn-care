@@ -1,0 +1,230 @@
+export const site = {
+  companyName: "Mo's Lawn Care and Snow Removal Services LLC",
+  shortName: "Mo's",
+  wordmarkLine: 'Lawn Care & Snow Removal',
+  phone: '', // e.g. "(515) 000-0000"
+  email: '', // e.g. "hello@moslawncare.com"
+  location: 'Des Moines, Iowa',
+  serviceArea: 'Des Moines and the surrounding metro',
+  socialLinks: [] as { label: string; href: string }[],
+  formEndpoint: '', // POST target — leave empty until connected
+  heroVideo: '/hero-video.mp4',
+  heroPoster: '/seasons/summer.png', // replace with /hero-poster.webp
+} as const
+
+export const nav = [
+  { label: 'Seasons', href: '#seasons' },
+  { label: 'Services', href: '#problems' },
+  { label: 'Property', href: '#property' },
+  { label: 'Our Work', href: '#work' },
+] as const
+
+export const services = [
+  'Mowing Service',
+  'Fertilizing and Weed Control',
+  'Flower Beds Maintenance',
+  'Overgrown Yards Cleanup',
+  'Spring Cleanup',
+  'Fall Cleanup',
+  'Leaves Removal',
+  'Snow Removal',
+  'Ground Clearance',
+  'Grading',
+  'Aeration and Seeding',
+  'Landscaping',
+] as const
+
+export type SeasonKey = 'spring' | 'summer' | 'fall' | 'winter'
+
+export type Season = {
+  key: SeasonKey
+  label: string
+  months: string
+  image: string
+  headline: string
+  copy: string
+  services: string[]
+  accent: string
+  accentInk: string
+  surface: string
+}
+
+export const seasons: Season[] = [
+  {
+    key: 'spring',
+    label: 'Spring',
+    months: 'Mar — May',
+    image: '/seasons/spring.png',
+    headline: 'Wake the yard up.',
+    copy: 'Winter leaves a mess behind. Spring is for clearing it out, feeding the lawn and getting beds ready before growth takes off.',
+    services: [
+      'Spring Cleanup',
+      'Aeration and Seeding',
+      'Fertilizing and Weed Control',
+      'Flower Beds Maintenance',
+      'Landscaping',
+      'Grading',
+    ],
+    accent: '#6E9A5B',
+    accentInk: '#16210F',
+    surface: '#F3F0E7',
+  },
+  {
+    key: 'summer',
+    label: 'Summer',
+    months: 'Jun — Aug',
+    image: '/seasons/summer.png',
+    headline: 'Keep it sharp all season.',
+    copy: 'Iowa summers grow fast. Consistent mowing, edging and weed control are what keep a property looking maintained instead of managed.',
+    services: [
+      'Mowing Service',
+      'Fertilizing and Weed Control',
+      'Flower Beds Maintenance',
+      'Landscaping',
+      'Overgrown Yards Cleanup',
+    ],
+    accent: '#3E7A45',
+    accentInk: '#0F1F13',
+    surface: '#F1F0E6',
+  },
+  {
+    key: 'fall',
+    label: 'Fall',
+    months: 'Sep — Nov',
+    image: '/seasons/fall.png',
+    headline: 'Get ahead of the leaves.',
+    copy: 'Leaves smother a lawn fast. Fall is for hauling them off, opening the soil and setting the yard up to survive the freeze.',
+    services: [
+      'Fall Cleanup',
+      'Leaves Removal',
+      'Aeration and Seeding',
+      'Ground Clearance',
+      'Overgrown Yards Cleanup',
+    ],
+    accent: '#B4632B',
+    accentInk: '#24120A',
+    surface: '#F4EFE4',
+  },
+  {
+    key: 'winter',
+    label: 'Winter',
+    months: 'Dec — Feb',
+    image: '/seasons/winter.png',
+    headline: 'Keep the driveway open.',
+    copy: 'When the snow comes, the job is access. Driveways, walks and entries cleared so you can get out and people can get in.',
+    services: ['Snow Removal'],
+    accent: '#5E7C8C',
+    accentInk: '#101A20',
+    surface: '#EEF1F2',
+  },
+]
+
+export const problems = [
+  {
+    id: 'grass',
+    title: 'The grass is out of control.',
+    answer:
+      'We get it back to a maintained height, haul the clippings, then keep it on a schedule so it never gets there again.',
+    services: ['Mowing Service', 'Overgrown Yards Cleanup'],
+  },
+  {
+    id: 'weeds',
+    title: 'Weeds are taking over.',
+    answer:
+      'Targeted treatment plus feeding, so the lawn itself gets thick enough to crowd weeds out on its own.',
+    services: ['Fertilizing and Weed Control'],
+  },
+  {
+    id: 'thin',
+    title: 'My lawn has bare / thin spots.',
+    answer:
+      'Compacted soil is usually the cause. We pull cores to open the ground, then drop seed straight into the holes.',
+    services: ['Aeration and Seeding'],
+  },
+  {
+    id: 'beds',
+    title: 'The flower beds need help.',
+    answer:
+      'Beds get weeded, edged and re-defined — and if the layout is the real problem, we redesign it.',
+    services: ['Flower Beds Maintenance', 'Landscaping'],
+  },
+  {
+    id: 'leaves',
+    title: 'Leaves. Everywhere.',
+    answer:
+      'Full removal off the lawn, beds and hard surfaces before they mat down and kill the grass underneath.',
+    services: ['Leaves Removal', 'Fall Cleanup'],
+  },
+  {
+    id: 'reset',
+    title: 'The whole yard needs a reset.',
+    answer:
+      'A single clearing pass: debris out, growth cut back, edges re-cut. One visit that gives you a starting point again.',
+    services: ['Spring Cleanup', 'Fall Cleanup', 'Ground Clearance'],
+  },
+  {
+    id: 'uneven',
+    title: 'The ground is uneven.',
+    answer:
+      'Low spots, ruts and water running the wrong direction get reshaped so the surface drains and mows cleanly.',
+    services: ['Grading'],
+  },
+  {
+    id: 'snow',
+    title: 'Snow blocked the way.',
+    answer:
+      'Driveways, walkways and entries cleared so the property stays usable through the storm.',
+    services: ['Snow Removal'],
+  },
+] as const
+
+export type Hotspot = {
+  id: string
+  n: number
+  label: string
+  x: number
+  y: number
+  services: string[]
+}
+
+export const propertyHotspots: Hotspot[] = [
+  { id: 'lawn', n: 1, label: 'The Lawn', x: 34, y: 76, services: ['Mowing Service', 'Fertilizing and Weed Control', 'Aeration and Seeding'] },
+  { id: 'beds', n: 2, label: 'Flower Beds', x: 58, y: 53, services: ['Flower Beds Maintenance', 'Landscaping'] },
+  { id: 'trees', n: 3, label: 'Trees & Leaves', x: 22, y: 22, services: ['Leaves Removal', 'Fall Cleanup'] },
+  { id: 'mulch', n: 4, label: 'Ground & Mulch', x: 12, y: 62, services: ['Ground Clearance', 'Grading'] },
+  { id: 'overgrown', n: 5, label: 'Landscape Edge', x: 88, y: 52, services: ['Overgrown Yards Cleanup', 'Landscaping', 'Spring Cleanup'] },
+  { id: 'driveway', n: 6, label: 'The Driveway', x: 76, y: 84, services: ['Snow Removal'] },
+]
+
+export type Project = {
+  id: string
+  title: string
+  meta: string
+  before: string
+  after: string
+}
+
+// Set `before`/`after` to real photos when available — e.g. "/projects/yard-before.webp"
+export const projects: Project[] = [
+  { id: 'overgrown', title: 'Overgrown Yard Cleanup', meta: 'Des Moines, IA', before: '', after: '' },
+  { id: 'leaves', title: 'Fall / Leaves Cleanup', meta: 'Des Moines, IA', before: '', after: '' },
+  { id: 'restoration', title: 'Landscaping / Lawn Restoration', meta: 'Des Moines, IA', before: '', after: '' },
+]
+
+export const aboveGround = [
+  'Mowing Service',
+  'Flower Beds Maintenance',
+  'Landscaping',
+  'Overgrown Yards Cleanup',
+  'Spring Cleanup',
+  'Fall Cleanup',
+  'Leaves Removal',
+  'Snow Removal',
+]
+
+export const belowGround = [
+  'Aeration and Seeding',
+  'Fertilizing and Weed Control',
+  'Grading',
+  'Ground Clearance',
+]
