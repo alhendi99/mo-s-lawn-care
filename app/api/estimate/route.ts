@@ -37,7 +37,7 @@ export async function POST(request: Request) {
   const message = textValue(payload.message, 2000)
   const phoneDigits = phone.replace(/\D/g, '')
 
-  if (!name || phoneDigits.length < 10 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!name || phoneDigits.length < 10 || (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
     return Response.json({ error: 'Please check the required contact fields.' }, { status: 400 })
   }
 
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
     const { data, error } = await resend.emails.send({
       from,
       to: [to],
-      replyTo: email,
+      replyTo: email || undefined,
       subject: `New estimate request from ${name}`,
       react: EstimateRequestEmail({ name, phone, email, service, message }),
       tags: [{ name: 'source', value: 'estimate-form' }],

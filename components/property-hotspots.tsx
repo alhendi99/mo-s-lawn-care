@@ -67,7 +67,7 @@ export function PropertyHotspots() {
             })`,
           }}
         >
-          <p className="text-[0.75rem] font-semibold tracking-[0.2em] text-paper/45 uppercase tabular-nums">
+          <p className="text-[0.75rem] font-semibold tracking-[0.16em] text-paper/70 uppercase tabular-nums">
             {String(spot.n).padStart(2, '0')} / {propertyHotspots.length}
           </p>
           <p className="mt-1.5 font-display text-xl leading-none font-extrabold tracking-[-0.03em] text-paper uppercase">

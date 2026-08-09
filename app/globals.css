@@ -83,20 +83,27 @@
   }
 
   .hero-display {
-    max-width: 13ch;
+    max-width: 100%;
     font-family: var(--font-sans);
-    font-size: clamp(2.75rem, 1.4rem + 3.25rem, 5.5rem);
+    font-size: clamp(2.15rem, 10.5vw, 2.85rem);
     font-weight: 700;
     letter-spacing: -0.055em;
     line-height: 0.91;
     text-wrap: nowrap;
   }
 
+  @media (min-width: 40rem) {
+    .hero-display {
+      max-width: 13ch;
+      font-size: clamp(3.25rem, 6.6vw, 5.5rem);
+    }
+  }
+
   .hero-kicker {
     font-family: var(--font-sans);
     font-size: clamp(0.75rem, 0.68rem + 0.22vw, 0.875rem);
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.12em;
     line-height: 1.4;
     text-transform: uppercase;
   }
@@ -190,13 +197,14 @@
     justify-content: center;
     gap: 0.625rem;
     min-height: 3.25rem;
-    padding: 0 1.75rem;
+    padding: 0 1rem;
     background-color: var(--accent);
     color: var(--btn-fg);
-    font-size: 0.9375rem;
+    font-size: 0.8125rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+    white-space: nowrap;
     transition:
       background-color 200ms ease,
       transform 150ms ease;
@@ -204,6 +212,18 @@
 
   .btn-solid:hover {
     background-color: color-mix(in oklab, var(--accent) 84%, #000);
+  }
+
+  @media (min-width: 40rem) {
+    .hero-kicker {
+      letter-spacing: 0.16em;
+    }
+
+    .btn-solid {
+      padding: 0 1.75rem;
+      font-size: 0.9375rem;
+      letter-spacing: 0.14em;
+    }
   }
 
   .btn-solid:active {
@@ -258,6 +278,30 @@
 
   .hotspot-pulse::after {
     animation-delay: -0.725s;
+  }
+
+  .phone-float {
+    isolation: isolate;
+    animation: phone-float-glow 1.65s ease-in-out infinite alternate;
+  }
+
+  .phone-float::before,
+  .phone-float::after {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border: 3px solid #102019;
+    border-radius: 999px;
+    box-shadow: 0 0 0 5px rgba(213, 238, 114, 0.6);
+    content: '';
+    pointer-events: none;
+    animation: phone-float-pulse 1.65s ease-out infinite;
+  }
+
+  .phone-float::after {
+    border-color: #d5ee72;
+    box-shadow: 0 0 0 4px rgba(16, 32, 25, 0.45);
+    animation-delay: -0.825s;
   }
 
   .comparison-handle {
@@ -331,6 +375,33 @@
   100% {
     opacity: 0;
     transform: scale(1.8);
+  }
+}
+
+@keyframes phone-float-pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0.94);
+  }
+  60% {
+    opacity: 0.62;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.05);
+  }
+}
+
+@keyframes phone-float-glow {
+  from {
+    box-shadow:
+      0 0 0 0 rgba(213, 238, 114, 0.5),
+      0 12px 35px rgba(8, 20, 14, 0.3);
+  }
+  to {
+    box-shadow:
+      0 0 0 12px rgba(213, 238, 114, 0),
+      0 16px 44px rgba(8, 20, 14, 0.42);
   }
 }
 

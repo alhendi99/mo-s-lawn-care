@@ -7,10 +7,11 @@ type Status = 'idle' | 'sending' | 'sent' | 'error'
 type FieldName = 'name' | 'phone' | 'email'
 type FieldErrors = Partial<Record<FieldName, string>>
 
-const requiredFields: FieldName[] = ['name', 'phone', 'email']
+const requiredFields: FieldName[] = ['name', 'phone']
+const fieldOrder: FieldName[] = ['name', 'phone', 'email']
 
 const fieldClass =
-  'mt-1.5 h-11 w-full border-0 border-b border-[color:var(--rule)] bg-transparent px-0 text-base text-ink outline-none transition-colors duration-200 placeholder:text-ink-soft/45 hover:border-ink/35 focus:border-accent aria-invalid:border-red-700 aria-invalid:focus:border-red-700'
+  'mt-1.5 h-11 w-full border-0 border-b border-[color:var(--rule)] bg-transparent px-0 text-base text-ink outline-none transition-colors duration-200 placeholder:text-ink-soft/85 hover:border-ink/35 focus:border-accent aria-invalid:border-red-700 aria-invalid:focus:border-red-700'
 
 const labelClass =
   'block text-[0.75rem] font-semibold tracking-[0.14em] text-ink-soft uppercase'
@@ -23,7 +24,7 @@ export function EstimateForm() {
     const field = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     const name = field.name as FieldName
 
-    if (requiredFields.includes(name) && errors[name]) {
+    if (errors[name]) {
       setErrors((current) => ({ ...current, [name]: undefined }))
     }
     if (status === 'sent' || status === 'error') setStatus('idle')
@@ -48,16 +49,14 @@ export function EstimateForm() {
       nextErrors.phone = 'Enter a valid 10-digit phone number.'
     }
 
-    if (!email) {
-      nextErrors.email = 'Please enter your email address.'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       nextErrors.email = 'Enter a valid email address.'
     }
 
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors)
       setStatus('idle')
-      const firstInvalidField = requiredFields.find((fieldName) => nextErrors[fieldName])
+      const firstInvalidField = fieldOrder.find((fieldName) => nextErrors[fieldName])
       if (firstInvalidField) {
         requestAnimationFrame(() => {
           const input = form.elements.namedItem(firstInvalidField)
@@ -104,7 +103,7 @@ export function EstimateForm() {
             Request an estimate
           </h3>
         </div>
-        <p className="shrink-0 text-[0.6875rem] tracking-[0.12em] text-ink-soft uppercase">
+        <p className="shrink-0 text-[0.75rem] tracking-[0.1em] text-ink-soft uppercase">
           * Required
         </p>
       </div>
@@ -141,7 +140,7 @@ export function EstimateForm() {
             type="tel"
             required
             autoComplete="tel"
-            placeholder="(515) 868-8636"
+            placeholder="Your phone number"
             className={fieldClass}
             aria-invalid={Boolean(errors.phone)}
             aria-describedby={errors.phone ? 'phone-error' : undefined}
@@ -155,13 +154,12 @@ export function EstimateForm() {
 
         <div className="col-span-2">
           <label className={labelClass} htmlFor="email">
-            Email <span className="text-accent">*</span>
+            Email <span className="font-normal tracking-normal normal-case">(optional)</span>
           </label>
           <input
             id="email"
             name="email"
             type="email"
-            required
             autoComplete="email"
             placeholder="you@example.com"
             className={fieldClass}

@@ -197,7 +197,7 @@ export function SeasonDial() {
                   <span className="font-display text-3xl leading-none font-extrabold tracking-[-0.04em] text-paper uppercase">
                     {season.label}
                   </span>
-                  <span className="mt-1.5 text-[0.6875rem] font-semibold tracking-[0.2em] text-paper/50 uppercase">
+                  <span className="mt-1.5 text-[0.75rem] font-semibold tracking-[0.16em] text-paper/70 uppercase">
                     {season.months}
                   </span>
                 </div>

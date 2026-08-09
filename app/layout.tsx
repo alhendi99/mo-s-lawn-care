@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   title: "Mo's Lawn Care & Snow Removal | Des Moines, IA",
   description:
     "Mo's Lawn Care and Snow Removal Services LLC takes care of Des Moines properties year-round — mowing, fertilizing, cleanups, leaf removal, aeration, landscaping and winter snow removal. Request a free estimate.",
-  generator: 'v0.app',
   icons: {
     icon: [{ url: '/favicon.ico', type: 'image/x-icon' }],
     shortcut: '/favicon.ico',

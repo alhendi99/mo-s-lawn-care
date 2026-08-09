@@ -1,12 +1,13 @@
 import { BeforeAfterSlider } from '@/components/before-after-slider'
 import { CrossSection } from '@/components/cross-section'
 import { EstimateSection } from '@/components/estimate-section'
+import { Gallery } from '@/components/gallery'
 import { Hero } from '@/components/hero'
 import { ProblemSelector } from '@/components/problem-selector'
 import { PropertyHotspots } from '@/components/property-hotspots'
 import { SeasonDial } from '@/components/season-dial'
 import { SiteHeader } from '@/components/site-header'
-import { nav, services, site } from '@/lib/site'
+import { nav, openingDays, serviceAreas, services, site } from '@/lib/site'
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -20,7 +21,17 @@ const structuredData = {
     addressRegion: 'IA',
     addressCountry: 'US',
   },
-  areaServed: { '@type': 'City', name: 'Des Moines' },
+  areaServed: serviceAreas.map((name) => ({
+    '@type': 'City',
+    name,
+    containedInPlace: { '@type': 'State', name: 'Iowa' },
+  })),
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: openingDays.map((day) => `https://schema.org/${day}`),
+    opens: '21:00',
+    closes: '23:00',
+  },
   makesOffer: services.map((name) => ({
     '@type': 'Offer',
     itemOffered: { '@type': 'Service', name },
@@ -36,7 +47,7 @@ export default function Page() {
       />
       <SiteHeader />
 
-      <main>
+      <main className="pb-16 md:pb-0">
         <Hero />
 
         <SeasonDial />
@@ -49,7 +60,7 @@ export default function Page() {
           style={{ '--accent': '#7FAE68', '--btn-fg': '#102019' } as React.CSSProperties}
         >
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
-            <p className="eyebrow text-paper/45">Start with the problem.</p>
+            <p className="eyebrow text-paper/70">Start with the problem.</p>
             <h2 id="problems-heading" className="display-md mt-5 max-w-[16ch] text-paper">
               What&apos;s going on
               <br />
@@ -103,6 +114,8 @@ export default function Page() {
           </div>
         </section>
 
+        <Gallery />
+
         {/* 7 — LOCAL TRUST */}
         <section aria-labelledby="local-heading" className="bg-paper-dim py-20 sm:py-28">
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
@@ -112,7 +125,7 @@ export default function Page() {
               <span style={{ color: 'var(--accent)' }}>Ready for every season.</span>
             </h2>
 
-            <div className="rule mt-12 grid gap-10 border-[color:var(--rule)] pt-10 lg:grid-cols-3">
+            <div className="rule mt-12 grid max-w-6xl gap-10 border-[color:var(--rule)] pt-10 sm:grid-cols-2 sm:gap-16 lg:grid-cols-3">
               <div>
                 <p className="eyebrow text-ink-soft">The company</p>
                 <p className="mt-3 font-display text-xl leading-tight font-bold tracking-[-0.02em] uppercase">
@@ -124,10 +137,10 @@ export default function Page() {
                 <p className="eyebrow text-ink-soft">Service area</p>
                 <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink">{site.serviceArea}</p>
               </div>
-              <div>
-                <p className="eyebrow text-ink-soft">Reviews</p>
-                <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink-soft">
-                  Customer reviews will be published here once they&apos;re collected from Google.
+              <div className="sm:col-span-2 lg:col-span-1">
+                <p className="eyebrow text-ink-soft">Working hours</p>
+                <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink">
+                  {site.workingHours}
                 </p>
               </div>
             </div>
@@ -138,20 +151,20 @@ export default function Page() {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-evergreen py-14">
+      <footer className="bg-evergreen pt-14 pb-28 md:pb-14">
         <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <p className="font-display text-3xl leading-none font-extrabold tracking-[-0.04em] text-paper uppercase">
                 Mo&apos;s
               </p>
-              <p className="mt-2 text-[0.75rem] font-semibold tracking-[0.2em] text-paper/50 uppercase">
+              <p className="mt-2 text-[0.75rem] font-semibold tracking-[0.16em] text-paper/70 uppercase">
                 {site.wordmarkLine}
               </p>
             </div>
 
             <div>
-              <p className="eyebrow text-paper/40">Company</p>
+              <p className="eyebrow text-paper/65">Company</p>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-paper/70">
                 {site.companyName}
                 <br />
@@ -160,7 +173,7 @@ export default function Page() {
             </div>
 
             <nav aria-label="Footer">
-              <p className="eyebrow text-paper/40">Sections</p>
+              <p className="eyebrow text-paper/65">Sections</p>
               <ul className="mt-3 space-y-1.5">
                 {nav.map((item) => (
                   <li key={item.href}>
@@ -184,16 +197,25 @@ export default function Page() {
             </nav>
 
             <div>
-              <p className="eyebrow text-paper/40">Contact</p>
-              <p className="mt-3 text-[0.9375rem] leading-relaxed text-paper/70">
-                {site.phone || 'Phone — coming soon'}
-                <br />
-                {site.email || 'Email — coming soon'}
-              </p>
+              <p className="eyebrow text-paper/65">Contact</p>
+              <a
+                href={site.phoneHref}
+                className="mt-3 inline-flex min-h-11 items-center text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
+              >
+                {site.phone}
+              </a>
+              {site.email ? (
+                <a
+                  href={`mailto:${site.email}`}
+                  className="block text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
+                >
+                  {site.email}
+                </a>
+              ) : null}
             </div>
           </div>
 
-          <p className="rule mt-12 border-paper/15 pt-6 text-[0.8125rem] tracking-[0.14em] text-paper/35 uppercase">
+          <p className="rule mt-12 border-paper/15 pt-6 text-[0.8125rem] tracking-[0.12em] text-paper/60 uppercase">
             © {new Date().getFullYear()} {site.companyName}
           </p>
         </div>

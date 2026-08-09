@@ -41,10 +41,10 @@ function Frame({
       <p className="font-display text-2xl leading-none font-extrabold tracking-[-0.03em] text-paper/70 uppercase sm:text-4xl">
         {label}
       </p>
-      <p className="text-[0.8125rem] leading-relaxed tracking-[0.14em] text-paper/40 uppercase">
+      <p className="text-[0.8125rem] leading-relaxed tracking-[0.12em] text-paper/70 uppercase">
         Photo placeholder
       </p>
-      <code className="text-[0.8125rem] text-paper/35">{path}</code>
+      <code className="text-[0.8125rem] text-paper/65">{path}</code>
     </div>
   )
 }

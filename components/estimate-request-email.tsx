@@ -71,7 +71,7 @@ export function EstimateRequestEmail({
           </div>
           <div style={{ marginBottom: '22px' }}>
             <p style={detailLabel}>Email</p>
-            <p style={detailValue}>{email}</p>
+            <p style={detailValue}>{email || 'Not provided'}</p>
           </div>
           <div style={{ marginBottom: '22px' }}>
             <p style={detailLabel}>Service</p>
@@ -86,7 +86,9 @@ export function EstimateRequestEmail({
         </div>
 
         <p style={{ margin: '16px 0 0', color: '#65706b', fontSize: '12px', lineHeight: 1.5 }}>
-          Reply to this email to respond directly to {name}.
+          {email
+            ? `Reply to this email to respond directly to ${name}.`
+            : `${name} did not provide an email address; follow up by phone.`}
         </p>
       </div>
     </div>

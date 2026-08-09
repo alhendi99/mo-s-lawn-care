@@ -115,7 +115,7 @@ export function Gallery() {
       <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
         <header className="grid gap-6 border-t border-[color:var(--rule)] pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)] lg:items-end lg:gap-16">
           <div>
-            <p className="eyebrow text-ink-soft">Field notes · Des Moines</p>
+            <p className="eyebrow text-ink-soft">Service gallery · Illustrative views</p>
             <h2 id="gallery-heading" className="display-md mt-5 max-w-[16ch]">
               Care you can
               <br />
@@ -123,8 +123,8 @@ export function Gallery() {
             </h2>
           </div>
           <p className="max-w-md text-[1.0625rem] leading-relaxed text-ink-soft lg:pb-2">
-            A closer look at the mowing lines, clean edges, open driveways, and planted details
-            that finish a property.
+            Examples of the mowing lines, clean edges, open driveways, and planted details that
+            show what each service is designed to achieve.
           </p>
         </header>
 
@@ -164,7 +164,7 @@ export function Gallery() {
         </div>
 
         <div className="mt-8 flex flex-col gap-5 border-t border-[color:var(--rule)] pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="eyebrow text-ink-soft">12 views · Four-season care</p>
+          <p className="eyebrow text-ink-soft">12 illustrative views · Four-season care</p>
           <a href="#estimate" className="btn-ghost group w-fit text-ink">
             Start with your property
             <span
@@ -191,7 +191,7 @@ export function Gallery() {
           >
             <div className="flex items-center justify-between gap-5 border-b border-paper/15 pb-4">
               <div>
-                <p className="text-[0.6875rem] font-semibold tracking-[0.18em] text-paper/45 uppercase tabular-nums">
+                <p className="text-[0.75rem] font-semibold tracking-[0.14em] text-paper/70 uppercase tabular-nums">
                   {String(activeIndex + 1).padStart(2, '0')} / {galleryItems.length}
                 </p>
                 <p className="mt-1 font-display text-lg font-bold tracking-[-0.02em] uppercase sm:text-xl">
@@ -241,7 +241,7 @@ export function Gallery() {
               </button>
             </div>
 
-            <p className="border-t border-paper/15 pt-4 text-center text-[0.6875rem] tracking-[0.16em] text-paper/45 uppercase">
+            <p className="border-t border-paper/15 pt-4 text-center text-[0.75rem] tracking-[0.14em] text-paper/70 uppercase">
               Use ← → keys to browse · Esc to close
             </p>
           </div>

@@ -20,7 +20,7 @@ export function ProblemSelector() {
                 onClick={() => setOpen(isOpen ? null : p.id)}
                 className="group flex w-full items-center gap-4 py-5 text-left sm:gap-8 sm:py-7"
               >
-                <span className="w-7 shrink-0 pt-1 text-[0.75rem] font-semibold tracking-[0.16em] text-paper/35 tabular-nums">
+                <span className="w-7 shrink-0 pt-1 text-[0.75rem] font-semibold tracking-[0.14em] text-paper/65 tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span
@@ -51,7 +51,7 @@ export function ProblemSelector() {
                   {p.answer}
                 </p>
                 <div>
-                  <p className="eyebrow text-paper/40">What we&apos;d send out</p>
+                  <p className="eyebrow text-paper/70">What we&apos;d send out</p>
                   <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
                     {p.services.map((s) => (
                       <li

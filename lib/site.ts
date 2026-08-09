@@ -1,11 +1,23 @@
+export const serviceAreas = ['Des Moines', 'Ankeny', 'Waukee', 'Norwalk', 'Altoona'] as const
+export const openingDays = [
+  'Saturday',
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+] as const
+
 export const site = {
   companyName: "Mo's Lawn Care and Snow Removal Services LLC",
   shortName: "Mo's",
   wordmarkLine: 'Lawn Care & Snow Removal',
   phone: '(515) 868-8636', // e.g. "(515) 000-0000"
+  phoneHref: 'tel:+15158688636',
   email: '', // e.g. "hello@moslawncare.com"
   location: 'Des Moines, Iowa',
-  serviceArea: 'Des Moines and the surrounding metro',
+  serviceArea: serviceAreas.join(', '),
+  workingHours: 'Saturday–Thursday, 9:00–11:00 PM',
   socialLinks: [] as { label: string; href: string }[],
   formEndpoint: '/api/estimate',
   heroVideo:

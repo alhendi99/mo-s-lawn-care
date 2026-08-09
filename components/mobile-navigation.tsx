@@ -69,7 +69,7 @@ export function MobileNavigation() {
           >
             Get a free estimate
           </a>
-          <p className="mt-auto pt-10 text-sm leading-relaxed text-paper/50">
+          <p className="mt-auto pt-10 text-sm leading-relaxed text-paper/70">
             {site.companyName}
             <br />
             {site.location}
