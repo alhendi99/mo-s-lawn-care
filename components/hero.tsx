@@ -32,8 +32,8 @@ export function Hero() {
       <div className="mx-auto flex w-full max-w-[112rem] flex-1 flex-col justify-end px-5 pt-20 sm:px-8 sm:pt-28 lg:pt-32">
         <div className="hero-content max-w-[34rem] pb-5 sm:max-w-none sm:pb-9 xl:grid xl:grid-cols-[minmax(0,1.45fr)_minmax(19rem,0.65fr)] xl:items-end xl:gap-16 xl:pb-12">
           <div>
-            <p className="hero-kicker hero-reveal flex items-center gap-2 whitespace-nowrap text-paper/72 sm:gap-3">
-              <span className="h-px w-6 bg-accent sm:w-12" aria-hidden="true" />
+            <p className="hero-kicker hero-reveal flex items-center gap-3 text-paper/72">
+              <span className="h-px w-8 bg-accent sm:w-12" aria-hidden="true" />
               Des Moines · Year-round care
             </p>
 
@@ -66,8 +66,8 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-service-line hero-reveal hidden min-h-14 items-center justify-between overflow-hidden border-t border-paper/18 py-3 [animation-delay:440ms] sm:flex">
-          <div className="hero-marquee w-full overflow-hidden" aria-label="Services we provide">
+        <div className="hero-service-line hero-reveal hidden min-h-14 items-center justify-between overflow-hidden border-t border-paper/18 py-3 [animation-delay:440ms] sm:flex"
+                  <div className="hero-marquee w-full overflow-hidden" aria-label="Services we provide">
             <div className="hero-marquee-track">
               {[false, true].map((isDuplicate) => (
                 <ul
