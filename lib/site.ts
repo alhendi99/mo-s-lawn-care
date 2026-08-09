@@ -2,13 +2,14 @@ export const site = {
   companyName: "Mo's Lawn Care and Snow Removal Services LLC",
   shortName: "Mo's",
   wordmarkLine: 'Lawn Care & Snow Removal',
-  phone: '', // e.g. "(515) 000-0000"
+  phone: '(515) 868-8636', // e.g. "(515) 000-0000"
   email: '', // e.g. "hello@moslawncare.com"
   location: 'Des Moines, Iowa',
   serviceArea: 'Des Moines and the surrounding metro',
   socialLinks: [] as { label: string; href: string }[],
-  formEndpoint: '', // POST target — leave empty until connected
-  heroVideo: '/hero-video.mp4',
+  formEndpoint: '/api/estimate',
+  heroVideo:
+    'https://pub-acf6b2cc2dcb4403ab5f2feafb362365.r2.dev/mo-s-lawn-hero.mp4',
   heroPoster: '/seasons/summer.png', // replace with /hero-poster.webp
 } as const
 
@@ -17,6 +18,7 @@ export const nav = [
   { label: 'Services', href: '#problems' },
   { label: 'Property', href: '#property' },
   { label: 'Our Work', href: '#work' },
+  { label: 'Gallery', href: '#gallery' },
 ] as const
 
 export const services = [
@@ -65,10 +67,13 @@ export const seasons: Season[] = [
       'Landscaping',
       'Grading',
     ],
-    accent: '#6E9A5B',
-    accentInk: '#16210F',
-    surface: '#F3F0E7',
+
+    // Fresh sage green
+    accent: '#7FA66A',
+    accentInk: '#182414',
+    surface: '#F2F3E9',
   },
+
   {
     key: 'summer',
     label: 'Summer',
@@ -83,10 +88,13 @@ export const seasons: Season[] = [
       'Landscaping',
       'Overgrown Yards Cleanup',
     ],
-    accent: '#3E7A45',
-    accentInk: '#0F1F13',
-    surface: '#F1F0E6',
+
+    // Deep rich lawn green
+    accent: '#39704A',
+    accentInk: '#0C1E13',
+    surface: '#EDF1E8',
   },
+
   {
     key: 'fall',
     label: 'Fall',
@@ -101,10 +109,13 @@ export const seasons: Season[] = [
       'Ground Clearance',
       'Overgrown Yards Cleanup',
     ],
-    accent: '#B4632B',
-    accentInk: '#24120A',
-    surface: '#F4EFE4',
+
+    // Burnt autumn copper
+    accent: '#B86632',
+    accentInk: '#28140A',
+    surface: '#F4EADF',
   },
+
   {
     key: 'winter',
     label: 'Winter',
@@ -113,9 +124,11 @@ export const seasons: Season[] = [
     headline: 'Keep the driveway open.',
     copy: 'When the snow comes, the job is access. Driveways, walks and entries cleared so you can get out and people can get in.',
     services: ['Snow Removal'],
-    accent: '#5E7C8C',
-    accentInk: '#101A20',
-    surface: '#EEF1F2',
+
+    // Cold steel blue
+    accent: '#6D8795',
+    accentInk: '#101C23',
+    surface: '#EBF0F2',
   },
 ]
 
@@ -206,9 +219,27 @@ export type Project = {
 
 // Set `before`/`after` to real photos when available — e.g. "/projects/yard-before.webp"
 export const projects: Project[] = [
-  { id: 'overgrown', title: 'Overgrown Yard Cleanup', meta: 'Des Moines, IA', before: '', after: '' },
-  { id: 'leaves', title: 'Fall / Leaves Cleanup', meta: 'Des Moines, IA', before: '', after: '' },
-  { id: 'restoration', title: 'Landscaping / Lawn Restoration', meta: 'Des Moines, IA', before: '', after: '' },
+  {
+    id: 'overgrown',
+    title: 'Overgrown Yard Cleanup',
+    meta: 'Des Moines, IA',
+    before: '/seasons/before-after/overgrownyard-cleanup-before.png',
+    after: '/seasons/before-after/overgrownyard-cleanup-after.png',
+  },
+  {
+    id: 'leaves',
+    title: 'Fall / Leaves Cleanup',
+    meta: 'Des Moines, IA',
+    before: '/seasons/before-after/fall-leaves-cleanup-before.png',
+    after: '/seasons/before-after/fall-leaves-cleanup-after.png',
+  },
+  {
+    id: 'restoration',
+    title: 'Landscaping / Lawn Restoration',
+    meta: 'Des Moines, IA',
+    before: '/seasons/before-after/Landscaping-Lawn-Restoration-before.png',
+    after: '/seasons/before-after/Landscaping-Lawn-Restoration-after.png',
+  },
 ]
 
 export const aboveGround = [

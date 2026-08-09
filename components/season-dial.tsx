@@ -65,21 +65,28 @@ export function SeasonDial() {
     >
       <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <h2 id="seasons-heading" className="display-lg max-w-[22ch]">
+          <h2 id="seasons-heading" className="display-md max-w-[22ch]">
             Des Moines has
             <br />
             four seasons.
             <br />
             <span style={{ color: 'var(--accent)' }}>We handle all of them.</span>
           </h2>
-          <p className="eyebrow shrink-0 text-ink-soft lg:pb-3">
-            Turn the dial <span aria-hidden="true">→</span>
-          </p>
+          <div className="flex shrink-0 items-center gap-4 border-l-[3px] border-[color:var(--accent)] py-1 pl-4 lg:mb-2">
+            <p className="text-[0.9375rem] leading-tight font-bold tracking-[0.08em] text-ink uppercase">
+              Turn the dial
+              <span className="mt-1 block text-ink-soft">to change the season</span>
+            </p>
+            <span
+              aria-hidden="true"
+              className="season-cue grid h-10 w-10 shrink-0 place-items-center rounded-full bg-accent text-lg font-bold text-accent-ink"
+            >
+              ↓
+            </span>
+          </div>
         </div>
 
-        <div className="rule mt-10 border-[color:var(--rule)] sm:mt-14" />
-
-        <div className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
+        <div className="mt-4 grid gap-12 lg:mt-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-start lg:gap-16">
           {/* Seasonal photograph */}
           <figure className="order-2 lg:order-1">
             <div className="relative aspect-[16/10] w-full overflow-hidden bg-evergreen">
@@ -117,9 +124,22 @@ export function SeasonDial() {
                 </span>
               </div>
             </div>
-            <figcaption className="rule mt-3 border-[color:var(--rule)] pt-3 text-xs tracking-[0.16em] text-ink-soft uppercase">
-              One property · Four seasons
-            </figcaption>
+        <p className="eyebrow mt-8 text-ink-soft">What we do in {season.label}</p>
+            <ul className="mt-3">
+              {season.services.map((name) => (
+                <li
+                  key={name}
+                  className="rule flex items-baseline gap-3 border-[color:var(--rule)] py-2.5 font-display text-xl leading-tight font-semibold tracking-[-0.02em] uppercase sm:text-2xl"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full"
+                    style={{ backgroundColor: 'var(--accent)' }}
+                  />
+                  {name}
+                </li>
+              ))}
+            </ul>
           </figure>
 
           {/* Dial + services */}
@@ -177,7 +197,7 @@ export function SeasonDial() {
                   <span className="font-display text-3xl leading-none font-extrabold tracking-[-0.04em] text-paper uppercase">
                     {season.label}
                   </span>
-                  <span className="mt-1.5 text-[0.5625rem] font-semibold tracking-[0.2em] text-paper/50 uppercase">
+                  <span className="mt-1.5 text-[0.6875rem] font-semibold tracking-[0.2em] text-paper/50 uppercase">
                     {season.months}
                   </span>
                 </div>
@@ -190,7 +210,7 @@ export function SeasonDial() {
                     role="radio"
                     aria-checked={s.key === active}
                     onClick={() => select(s.key)}
-                    className={`absolute ${positions[i].className} flex h-11 min-w-[4.5rem] items-center justify-center px-2 text-[0.6875rem] font-bold tracking-[0.18em] uppercase transition-colors duration-200`}
+                    className={`absolute ${positions[i].className} flex h-11 min-w-[4.75rem] items-center justify-center px-2 text-[0.8125rem] font-bold tracking-[0.18em] uppercase transition-colors duration-200`}
                     style={{
                       color: s.key === active ? season.accent : '#4a5250',
                       backgroundColor: season.surface,
@@ -202,29 +222,13 @@ export function SeasonDial() {
               </div>
             </div>
 
-            <p className="mt-8 font-display text-2xl leading-[1.05] font-bold tracking-[-0.02em] sm:text-3xl">
+            <p className="mt-8 font-display text-3xl leading-[1.05] font-bold tracking-[-0.02em] sm:text-4xl">
               {season.headline}
             </p>
-            <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-ink-soft">
+            <p className="mt-3 max-w-prose text-[1.0625rem] leading-relaxed text-ink-soft">
               {season.copy}
             </p>
 
-            <p className="eyebrow mt-8 text-ink-soft">What we do in {season.label}</p>
-            <ul className="mt-3">
-              {season.services.map((name) => (
-                <li
-                  key={name}
-                  className="rule flex items-baseline gap-3 border-[color:var(--rule)] py-2.5 font-display text-lg leading-tight font-semibold tracking-[-0.02em] uppercase sm:text-xl"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full"
-                    style={{ backgroundColor: 'var(--accent)' }}
-                  />
-                  {name}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>

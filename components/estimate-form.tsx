@@ -4,27 +4,70 @@ import { useState } from 'react'
 import { services, site } from '@/lib/site'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
+type FieldName = 'name' | 'phone' | 'email'
+type FieldErrors = Partial<Record<FieldName, string>>
+
+const requiredFields: FieldName[] = ['name', 'phone', 'email']
 
 const fieldClass =
-  'mt-2 h-12 w-full border border-[color:var(--rule)] bg-white px-3.5 text-[0.9375rem] text-ink outline-none transition-colors duration-200 focus:border-[color:var(--accent)]'
+  'mt-1.5 h-11 w-full border-0 border-b border-[color:var(--rule)] bg-transparent px-0 text-base text-ink outline-none transition-colors duration-200 placeholder:text-ink-soft/45 hover:border-ink/35 focus:border-accent aria-invalid:border-red-700 aria-invalid:focus:border-red-700'
 
-const labelClass = 'block text-[0.6875rem] font-semibold tracking-[0.16em] text-ink-soft uppercase'
+const labelClass =
+  'block text-[0.75rem] font-semibold tracking-[0.14em] text-ink-soft uppercase'
 
 export function EstimateForm() {
   const [status, setStatus] = useState<Status>('idle')
+  const [errors, setErrors] = useState<FieldErrors>({})
 
-  // Connect a real endpoint by setting `site.formEndpoint` in lib/site.ts
+  function handleChange(event: React.FormEvent<HTMLFormElement>) {
+    const field = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    const name = field.name as FieldName
+
+    if (requiredFields.includes(name) && errors[name]) {
+      setErrors((current) => ({ ...current, [name]: undefined }))
+    }
+    if (status === 'sent' || status === 'error') setStatus('idle')
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
-    const data = Object.fromEntries(new FormData(form).entries())
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData.entries())
+    const name = String(formData.get('name') ?? '').trim()
+    const phone = String(formData.get('phone') ?? '').trim()
+    const email = String(formData.get('email') ?? '').trim()
+    const nextErrors: FieldErrors = {}
 
-    if (!site.formEndpoint) {
-      console.log('[v0] Estimate request (no endpoint configured):', data)
-      setStatus('sent')
-      form.reset()
+    if (!name) nextErrors.name = 'Please enter your name.'
+
+    const phoneDigits = phone.replace(/\D/g, '')
+    if (!phone) {
+      nextErrors.phone = 'Please enter your phone number.'
+    } else if (phoneDigits.length < 10) {
+      nextErrors.phone = 'Enter a valid 10-digit phone number.'
+    }
+
+    if (!email) {
+      nextErrors.email = 'Please enter your email address.'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      nextErrors.email = 'Enter a valid email address.'
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors)
+      setStatus('idle')
+      const firstInvalidField = requiredFields.find((fieldName) => nextErrors[fieldName])
+      if (firstInvalidField) {
+        requestAnimationFrame(() => {
+          const input = form.elements.namedItem(firstInvalidField)
+          if (input instanceof HTMLElement) input.focus()
+        })
+      }
       return
     }
+
+    setErrors({})
 
     setStatus('sending')
     try {
@@ -35,6 +78,7 @@ export function EstimateForm() {
       })
       if (!res.ok) throw new Error('Request failed')
       setStatus('sent')
+      setErrors({})
       form.reset()
     } catch {
       setStatus('error')
@@ -42,94 +86,162 @@ export function EstimateForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
-      <div>
-        <label className={labelClass} htmlFor="name">
-          Name
-        </label>
-        <input id="name" name="name" required autoComplete="name" className={fieldClass} />
+    <form
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      noValidate
+      aria-busy={status === 'sending'}
+      className="relative"
+    >
+      <div className="pointer-events-none absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+      <div className="flex items-end justify-between gap-5 border-b border-[color:var(--rule)] pb-5">
+        <div>
+          <p className="eyebrow text-accent">Start here</p>
+          <h3 className="mt-3 font-display text-2xl leading-none font-bold tracking-[-0.035em] text-ink uppercase sm:text-3xl">
+            Request an estimate
+          </h3>
+        </div>
+        <p className="shrink-0 text-[0.6875rem] tracking-[0.12em] text-ink-soft uppercase">
+          * Required
+        </p>
       </div>
 
-      <div>
-        <label className={labelClass} htmlFor="phone">
-          Phone
-        </label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          required
-          autoComplete="tel"
-          className={fieldClass}
-        />
-      </div>
+      <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5">
+        <div className="col-span-2 sm:col-span-1">
+          <label className={labelClass} htmlFor="name">
+            Name <span className="text-accent">*</span>
+          </label>
+          <input
+            id="name"
+            name="name"
+            required
+            autoComplete="name"
+            placeholder="Your name"
+            className={fieldClass}
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? 'name-error' : undefined}
+          />
+          {errors.name && (
+            <p id="name-error" role="alert" className="mt-2 text-sm font-medium text-red-700">
+              {errors.name}
+            </p>
+          )}
+        </div>
 
-      <div>
-        <label className={labelClass} htmlFor="email">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          className={fieldClass}
-        />
-      </div>
+        <div className="col-span-2 sm:col-span-1">
+          <label className={labelClass} htmlFor="phone">
+            Phone <span className="text-accent">*</span>
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            autoComplete="tel"
+            placeholder="(515) 868-8636"
+            className={fieldClass}
+            aria-invalid={Boolean(errors.phone)}
+            aria-describedby={errors.phone ? 'phone-error' : undefined}
+          />
+          {errors.phone && (
+            <p id="phone-error" role="alert" className="mt-2 text-sm font-medium text-red-700">
+              {errors.phone}
+            </p>
+          )}
+        </div>
 
-      <div>
-        <label className={labelClass} htmlFor="zip">
-          ZIP Code
-        </label>
-        <input
-          id="zip"
-          name="zip"
-          inputMode="numeric"
-          autoComplete="postal-code"
-          className={fieldClass}
-        />
-      </div>
+        <div className="col-span-2">
+          <label className={labelClass} htmlFor="email">
+            Email <span className="text-accent">*</span>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="you@example.com"
+            className={fieldClass}
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? 'email-error' : undefined}
+          />
+          {errors.email && (
+            <p id="email-error" role="alert" className="mt-2 text-sm font-medium text-red-700">
+              {errors.email}
+            </p>
+          )}
+        </div>
 
-      <div className="sm:col-span-2">
-        <label className={labelClass} htmlFor="service">
-          What do you need help with?
-        </label>
-        <select id="service" name="service" defaultValue="" className={fieldClass}>
-          <option value="" disabled>
-            Select a service
-          </option>
-          {services.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-          <option value="Not sure yet">Not sure yet</option>
-        </select>
-      </div>
+        <div className="col-span-2">
+          <label className={labelClass} htmlFor="service">
+            What do you need help with?
+          </label>
+          <div className="relative">
+            <select
+              id="service"
+              name="service"
+              defaultValue=""
+              className={`${fieldClass} appearance-none pr-10`}
+            >
+              <option value="" disabled>
+                Select a service
+              </option>
+              {services.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute right-1 bottom-3 text-sm text-accent"
+            >
+              ↓
+            </span>
+          </div>
+        </div>
 
-      <div className="sm:col-span-2">
-        <label className={labelClass} htmlFor="message">
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          className={`${fieldClass} h-auto py-3 leading-relaxed`}
-          placeholder="Tell us about the property and what's going on out there."
-        />
-      </div>
+        <div className="col-span-2">
+          <label className={labelClass} htmlFor="message">
+            Tell us what&apos;s going on
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows={2}
+            className={`${fieldClass} min-h-20 resize-y py-2 leading-relaxed`}
+            placeholder="Property details, timing, or the problem you want solved."
+          />
+        </div>
 
-      <div className="sm:col-span-2">
-        <button type="submit" className="btn-solid w-full" disabled={status === 'sending'}>
-          {status === 'sending' ? 'Sending…' : 'Get a free estimate'}
+        <button
+          type="submit"
+          className="group col-span-2 mt-2 flex min-h-14 w-full items-center justify-between bg-evergreen px-6 text-[0.875rem] font-bold tracking-[0.12em] text-paper uppercase transition-colors duration-200 hover:bg-evergreen-700 disabled:cursor-wait disabled:opacity-65"
+          disabled={status === 'sending'}
+        >
+          <span>{status === 'sending' ? 'Sending your request…' : 'Request my free estimate'}</span>
+          <span
+            aria-hidden="true"
+            className="text-lg transition-transform duration-200 group-hover:translate-x-1"
+          >
+            →
+          </span>
         </button>
 
-        <p aria-live="polite" className="mt-3 min-h-5 text-[0.8125rem] text-ink-soft">
-          {status === 'sent' && "Thanks — your request was captured. We'll be in touch."}
-          {status === 'error' && 'Something went wrong. Please try again.'}
-        </p>
+        <div className="col-span-2 flex flex-col gap-1.5 text-xs text-ink-soft sm:flex-row sm:items-start sm:justify-between">
+          <p aria-live="polite" className="min-h-4 sm:max-w-[17rem] sm:text-right">
+            {status === 'sent' && (
+              <span className="font-semibold text-accent">Thanks — we&apos;ll be in touch.</span>
+            )}
+            {status === 'error' && (
+              <span className="text-red-700">Something went wrong. Please try again.</span>
+            )}
+          </p>
+        </div>
       </div>
     </form>
   )

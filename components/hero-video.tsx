@@ -7,6 +7,7 @@ import { site } from '@/lib/site'
 export function HeroVideo() {
   const [reduced, setReduced] = useState(true)
   const [failed, setFailed] = useState(false)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -29,19 +30,21 @@ export function HeroVideo() {
       {!reduced && !failed && (
         <video
           key={site.heroVideo}
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          src={site.heroVideo}
+          className={`hero-video absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${
+            ready ? 'opacity-100' : 'opacity-0'
+          }`}
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={site.heroPoster}
           aria-hidden="true"
           tabIndex={-1}
+          onCanPlay={() => setReady(true)}
           onError={() => setFailed(true)}
-        >
-          <source src={site.heroVideo} type="video/mp4" />
-        </video>
+        />
       )}
     </>
   )

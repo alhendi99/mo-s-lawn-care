@@ -1,68 +1,93 @@
 import { HeroVideo } from './hero-video'
 
+const heroServices = [
+  'Mowing service',
+  'Aeration and seeding',
+  'Leaves removal',
+  'Snow removal',
+  'Fertilizing and weed control',
+  'Flower beds maintenance',
+  'Overgrown yards cleanup',
+  'Spring cleanup',
+  'Fall cleanup',
+  'Ground clearance',
+  'Grading',
+  'Landscaping',
+] as const
+
 export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-evergreen"
-      style={{ '--accent': '#A8CE86', '--btn-fg': '#102019' } as React.CSSProperties}
+      aria-labelledby="hero-heading"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-evergreen"
+      style={{ '--accent': '#D5EE72', '--btn-fg': '#102019' } as React.CSSProperties}
     >
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 -z-10">
         <HeroVideo />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(to top, rgba(16,32,25,0.95) 0%, rgba(16,32,25,0.72) 45%, rgba(16,32,25,0.42) 100%)',
-          }}
-        />
+        <div className="hero-vignette absolute inset-0" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-evergreen/95 via-evergreen/45 to-transparent" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[112rem] px-5 pt-32 pb-10 sm:px-8 sm:pb-14">
-        <p className="eyebrow text-paper/70">
-          Des Moines, Iowa <span className="px-1 text-accent">•</span> Year-Round Property Care
-        </p>
+      <div className="mx-auto flex w-full max-w-[112rem] flex-1 flex-col justify-end px-5 pt-24 sm:px-8 sm:pt-28 lg:pt-32">
+        <div className="hero-content pb-7 sm:pb-9 xl:grid xl:grid-cols-[minmax(0,1.45fr)_minmax(19rem,0.65fr)] xl:items-end xl:gap-16 xl:pb-12">
+          <div>
+            <p className="hero-kicker hero-reveal flex items-center gap-3 text-paper/72">
+              <span className="h-px w-8 bg-accent sm:w-12" aria-hidden="true" />
+              Des Moines · Year-round care
+            </p>
 
-        <h1 className="display-xl mt-5 text-paper">
-          Your property
-          <br />
-          doesn&apos;t get
-          <br />
-          <span className="text-accent">an off-season.</span>
-        </h1>
+            <h1 id="hero-heading" className="hero-reveal hero-display mt-5 text-paper [animation-delay:120ms]">
+              <span className="block">Your property.</span>
+              <span className="block text-accent">No off-season.</span>
+            </h1>
+          </div>
 
-        <div className="mt-8 grid gap-8 sm:mt-10 lg:grid-cols-[minmax(0,32rem)_1fr] lg:items-end lg:gap-16">
-          <p className="max-w-prose text-[0.9375rem] leading-relaxed text-paper/80 sm:text-base">
-            From weekly mowing to winter snow removal, Mo&apos;s keeps Des Moines properties looking
-            cared for in every season.
-          </p>
+          <div className="mt-7 max-w-[31rem] sm:mt-8 xl:mt-0 xl:pb-1">
+            <p className="hero-reveal text-[1.0625rem] leading-relaxed text-paper/78 [animation-delay:240ms] sm:text-lg">
+              Mowing, landscaping, cleanups, and snow removal for Des Moines properties—all year
+              long.
+            </p>
 
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center lg:justify-end">
-            <a href="#estimate" className="btn-solid w-full sm:w-auto">
-              Get a free estimate
-            </a>
-            <a
-              href="#seasons"
-              className="btn-ghost justify-center text-paper/80 transition-colors duration-200 hover:text-paper sm:justify-start"
-            >
-              Explore the seasons
-              <span aria-hidden="true">↓</span>
-            </a>
+            <div className="hero-reveal mt-6 flex flex-col gap-3 [animation-delay:340ms] sm:flex-row sm:items-center">
+              <a href="#estimate" className="btn-solid group w-full sm:w-auto">
+                Get a free estimate
+                <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+              <a href="#seasons" className="hero-text-link group justify-center sm:justify-start">
+                See what we handle
+                <span className="transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true">
+                  ↓
+                </span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="relative mx-auto w-full max-w-[112rem] px-5 sm:px-8">
-        <div className="rule border-paper/15 py-4">
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[0.625rem] font-semibold tracking-[0.2em] text-paper/45 uppercase">
-            <li>Spring</li>
-            <li aria-hidden="true">/</li>
-            <li>Summer</li>
-            <li aria-hidden="true">/</li>
-            <li>Fall</li>
-            <li aria-hidden="true">/</li>
-            <li>Winter</li>
-          </ul>
+        <div className="hero-service-line hero-reveal flex min-h-14 items-center justify-between overflow-hidden border-t border-paper/18 py-3 [animation-delay:440ms]">
+          <div className="hero-marquee w-full overflow-hidden" aria-label="Services we provide">
+            <div className="hero-marquee-track">
+              {[false, true].map((isDuplicate) => (
+                <ul
+                  key={isDuplicate ? 'duplicate' : 'primary'}
+                  className="hero-marquee-group"
+                  aria-hidden={isDuplicate ? true : undefined}
+                >
+                  {heroServices.map((service) => (
+                    <li
+                      key={`${isDuplicate ? 'duplicate' : 'primary'}-${service}`}
+                      className="hero-marquee-item"
+                    >
+                      <span>{service}</span>
+                      <span className="hero-marquee-dot" aria-hidden="true" />
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

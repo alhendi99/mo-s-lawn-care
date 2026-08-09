@@ -22,11 +22,8 @@ export const metadata: Metadata = {
     "Mo's Lawn Care and Snow Removal Services LLC takes care of Des Moines properties year-round — mowing, fertilizing, cleanups, leaf removal, aeration, landscaping and winter snow removal. Request a free estimate.",
   generator: 'v0.app',
   icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
+    icon: [{ url: '/favicon.ico', type: 'image/x-icon' }],
+    shortcut: '/favicon.ico',
     apple: '/apple-icon.png',
   },
   openGraph: {

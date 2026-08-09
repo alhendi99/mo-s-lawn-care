@@ -1,6 +1,6 @@
 import { BeforeAfterSlider } from '@/components/before-after-slider'
 import { CrossSection } from '@/components/cross-section'
-import { EstimateForm } from '@/components/estimate-form'
+import { EstimateSection } from '@/components/estimate-section'
 import { Hero } from '@/components/hero'
 import { ProblemSelector } from '@/components/problem-selector'
 import { PropertyHotspots } from '@/components/property-hotspots'
@@ -50,12 +50,12 @@ export default function Page() {
         >
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <p className="eyebrow text-paper/45">Start with the problem.</p>
-            <h2 id="problems-heading" className="display-lg mt-5 max-w-[16ch] text-paper">
+            <h2 id="problems-heading" className="display-md mt-5 max-w-[16ch] text-paper">
               What&apos;s going on
               <br />
               <span style={{ color: 'var(--accent)' }}>out there?</span>
             </h2>
-            <p className="mt-6 max-w-prose text-[0.9375rem] leading-relaxed text-paper/65">
+            <p className="mt-6 max-w-prose text-[1.0625rem] leading-relaxed text-paper/65">
               Most people don&apos;t call looking for a service name. They call because something in
               the yard got away from them. Pick the one that sounds like your property.
             </p>
@@ -67,12 +67,15 @@ export default function Page() {
         <section id="property" aria-labelledby="property-heading" className="bg-paper py-20 sm:py-28">
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <h2 id="property-heading" className="display-lg max-w-[18ch]">
+              <h2
+                id="property-heading"
+                className="max-w-[18ch] text-[clamp(1.75rem,1.05rem+3vw,3.5rem)] uppercase"
+              >
                 One property.
                 <br />
                 <span style={{ color: 'var(--accent)' }}>A lot to take care of.</span>
               </h2>
-              <p className="max-w-prose text-[0.9375rem] leading-relaxed text-ink-soft lg:pb-3 lg:text-right">
+              <p className="max-w-prose text-[1.0625rem] leading-relaxed text-ink-soft lg:pb-3 lg:text-right">
                 Explore the property to see where Mo&apos;s can help.
               </p>
             </div>
@@ -86,21 +89,17 @@ export default function Page() {
         <section
           id="work"
           aria-labelledby="work-heading"
-          className="bg-evergreen py-20 sm:py-28"
+          className="bg-evergreen pt-20 pb-2 sm:pt-28 sm:pb-2"
           style={{ '--accent': '#7FAE68', '--btn-fg': '#102019' } as React.CSSProperties}
         >
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
-            <h2 id="work-heading" className="display-lg text-paper">
+            <h2 id="work-heading" className="display-md text-paper">
               The Mo&apos;s effect.
             </h2>
-            <p className="eyebrow mt-5" style={{ color: 'var(--accent)' }}>
+            <p className="eyebrow mt-0" style={{ color: 'var(--accent)' }}>
               Drag to see the difference
             </p>
             <BeforeAfterSlider />
-            <p className="mt-6 max-w-prose text-[0.8125rem] leading-relaxed text-paper/45">
-              Project photography is being added. These frames are placeholders — no customer
-              results are represented here yet.
-            </p>
           </div>
         </section>
 
@@ -119,15 +118,15 @@ export default function Page() {
                 <p className="mt-3 font-display text-xl leading-tight font-bold tracking-[-0.02em] uppercase">
                   {site.companyName}
                 </p>
-                <p className="mt-2 text-[0.9375rem] text-ink-soft">{site.location}</p>
+                <p className="mt-2 text-[1.0625rem] text-ink-soft">{site.location}</p>
               </div>
               <div>
                 <p className="eyebrow text-ink-soft">Service area</p>
-                <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink">{site.serviceArea}</p>
+                <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink">{site.serviceArea}</p>
               </div>
               <div>
                 <p className="eyebrow text-ink-soft">Reviews</p>
-                <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
+                <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink-soft">
                   Customer reviews will be published here once they&apos;re collected from Google.
                 </p>
               </div>
@@ -135,37 +134,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* 8 — ESTIMATE */}
-        <section id="estimate" aria-labelledby="estimate-heading" className="bg-paper py-20 sm:py-28">
-          <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,34rem)] lg:gap-20">
-            <div>
-              <h2 id="estimate-heading" className="display-lg max-w-[14ch]">
-                Your property.
-                <br />
-                <span style={{ color: 'var(--accent)' }}>Let Mo&apos;s handle it.</span>
-              </h2>
-              <p className="mt-6 max-w-prose text-[0.9375rem] leading-relaxed text-ink-soft">
-                Tell us what you&apos;re dealing with and we&apos;ll help figure out the right
-                service.
-              </p>
-
-              <ul className="rule mt-10 flex flex-wrap gap-x-6 gap-y-2 border-[color:var(--rule)] pt-6">
-                {services.map((s) => (
-                  <li
-                    key={s}
-                    className="text-[0.6875rem] font-semibold tracking-[0.14em] text-ink-soft uppercase"
-                  >
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="border-t-[3px] pt-8" style={{ borderColor: 'var(--accent)' }}>
-              <EstimateForm />
-            </div>
-          </div>
-        </section>
+        <EstimateSection />
       </main>
 
       {/* FOOTER */}
@@ -176,14 +145,14 @@ export default function Page() {
               <p className="font-display text-3xl leading-none font-extrabold tracking-[-0.04em] text-paper uppercase">
                 Mo&apos;s
               </p>
-              <p className="mt-2 text-[0.625rem] font-semibold tracking-[0.2em] text-paper/50 uppercase">
+              <p className="mt-2 text-[0.75rem] font-semibold tracking-[0.2em] text-paper/50 uppercase">
                 {site.wordmarkLine}
               </p>
             </div>
 
             <div>
               <p className="eyebrow text-paper/40">Company</p>
-              <p className="mt-3 text-[0.8125rem] leading-relaxed text-paper/70">
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-paper/70">
                 {site.companyName}
                 <br />
                 {site.location}
@@ -197,7 +166,7 @@ export default function Page() {
                   <li key={item.href}>
                     <a
                       href={item.href}
-                      className="text-[0.8125rem] text-paper/70 transition-colors duration-200 hover:text-paper"
+                      className="text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
                     >
                       {item.label}
                     </a>
@@ -206,7 +175,7 @@ export default function Page() {
                 <li>
                   <a
                     href="#estimate"
-                    className="text-[0.8125rem] text-paper/70 transition-colors duration-200 hover:text-paper"
+                    className="text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
                   >
                     Get Estimate
                   </a>
@@ -216,7 +185,7 @@ export default function Page() {
 
             <div>
               <p className="eyebrow text-paper/40">Contact</p>
-              <p className="mt-3 text-[0.8125rem] leading-relaxed text-paper/70">
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-paper/70">
                 {site.phone || 'Phone — coming soon'}
                 <br />
                 {site.email || 'Email — coming soon'}
@@ -224,7 +193,7 @@ export default function Page() {
             </div>
           </div>
 
-          <p className="rule mt-12 border-paper/15 pt-6 text-[0.6875rem] tracking-[0.14em] text-paper/35 uppercase">
+          <p className="rule mt-12 border-paper/15 pt-6 text-[0.8125rem] tracking-[0.14em] text-paper/35 uppercase">
             © {new Date().getFullYear()} {site.companyName}
           </p>
         </div>

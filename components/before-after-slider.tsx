@@ -41,10 +41,10 @@ function Frame({
       <p className="font-display text-2xl leading-none font-extrabold tracking-[-0.03em] text-paper/70 uppercase sm:text-4xl">
         {label}
       </p>
-      <p className="text-[0.6875rem] leading-relaxed tracking-[0.14em] text-paper/40 uppercase">
+      <p className="text-[0.8125rem] leading-relaxed tracking-[0.14em] text-paper/40 uppercase">
         Photo placeholder
       </p>
-      <code className="text-[0.6875rem] text-paper/35">{path}</code>
+      <code className="text-[0.8125rem] text-paper/35">{path}</code>
     </div>
   )
 }
@@ -71,7 +71,7 @@ export function BeforeAfterSlider() {
               setProjectIndex(i)
               setValue(50)
             }}
-            className="flex min-h-11 items-center text-[0.6875rem] font-bold tracking-[0.16em] uppercase transition-colors duration-200"
+            className="flex min-h-11 items-center text-[0.8125rem] font-bold tracking-[0.16em] uppercase transition-colors duration-200"
             style={{ color: i === projectIndex ? 'var(--accent)' : 'rgba(243,240,231,0.5)' }}
           >
             {p.title}
@@ -97,17 +97,20 @@ export function BeforeAfterSlider() {
           style={{ left: `${value}%`, backgroundColor: 'var(--accent)' }}
         >
           <span
-            className="absolute top-1/2 left-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-xs font-bold text-white"
-            style={{ backgroundColor: 'var(--accent)' }}
+            className="comparison-handle absolute top-1/2 left-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-sm font-bold text-white"
+            style={{
+              backgroundColor: 'var(--accent)',
+              boxShadow: '0 0 0 3px rgba(255,255,255,0.3), 0 5px 20px rgba(0,0,0,0.3)',
+            }}
           >
-            ↔
+            <span className="comparison-arrows">↔</span>
           </span>
         </div>
 
-        <span className="pointer-events-none absolute top-4 left-4 text-[0.625rem] font-bold tracking-[0.2em] text-paper/70 uppercase">
+        <span className="pointer-events-none absolute top-4 left-4 text-[0.75rem] font-bold tracking-[0.2em] text-paper/70 uppercase">
           Before
         </span>
-        <span className="pointer-events-none absolute top-4 right-4 text-[0.625rem] font-bold tracking-[0.2em] text-paper/70 uppercase">
+        <span className="pointer-events-none absolute top-4 right-4 text-[0.75rem] font-bold tracking-[0.2em] text-paper/70 uppercase">
           After
         </span>
 
@@ -121,13 +124,6 @@ export function BeforeAfterSlider() {
           aria-label={`Reveal before and after for ${project.title}`}
           className="absolute inset-0 h-full w-full cursor-ew-resize appearance-none bg-transparent opacity-0"
         />
-      </div>
-
-      <div className="mt-4 flex flex-wrap items-baseline justify-between gap-2 border-t border-paper/15 pt-4">
-        <p className="font-display text-lg font-bold tracking-[-0.02em] text-paper uppercase">
-          {project.title}
-        </p>
-        <p className="text-[0.6875rem] tracking-[0.16em] text-paper/45 uppercase">{project.meta}</p>
       </div>
     </div>
   )

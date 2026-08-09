@@ -23,13 +23,13 @@ export function MobileNavigation() {
   }, [open])
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         type="button"
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
-        className="flex h-11 min-w-11 items-center gap-2 px-1 text-[0.6875rem] font-semibold tracking-[0.18em] text-paper uppercase"
+        className="flex h-11 min-w-11 items-center gap-2 px-1 text-[0.8125rem] font-semibold tracking-[0.18em] text-paper uppercase"
       >
         {open ? 'Close' : 'Menu'}
         <span aria-hidden="true" className="relative block h-3 w-4">
@@ -55,7 +55,7 @@ export function MobileNavigation() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rule border-[color:var(--rule-dark)] py-5 font-display text-3xl font-bold tracking-[-0.02em] text-paper uppercase"
+                className="rule border-[color:var(--rule-dark)] py-5 font-display text-4xl font-bold tracking-[-0.02em] text-paper uppercase"
               >
                 {item.label}
               </a>
@@ -69,7 +69,7 @@ export function MobileNavigation() {
           >
             Get a free estimate
           </a>
-          <p className="mt-auto pt-10 text-xs leading-relaxed text-paper/50">
+          <p className="mt-auto pt-10 text-sm leading-relaxed text-paper/50">
             {site.companyName}
             <br />
             {site.location}
