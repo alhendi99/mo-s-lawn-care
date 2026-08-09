@@ -1,0 +1,43 @@
+[  665652ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  666838ms] [LOG] [Fast Refresh] done in 618ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  667163ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  667254ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  667317ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  667405ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  667518ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  667591ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  667742ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  667876ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668155ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668256ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668337ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668408ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668513ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668596ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668710ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668839ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668900ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  668963ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  669076ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  669141ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  669221ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  669277ms] [LOG] [Fast Refresh] done in 1305ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  669505ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  669758ms] [LOG] [Fast Refresh] done in 353ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  685439ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  686229ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  687013ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  709329ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  709378ms] [LOG] [Fast Refresh] done in 151ms @ http://localhost:3000/_next/static/chunks/18od_next_dist_0kzi8zd._.js:776
+[  765669ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  766673ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  767678ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  768680ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  769683ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  774687ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  779690ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  784697ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  789700ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  794705ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  799711ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256
+[  804714ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/hmr?id=I0_XolDnDFoDKmlkxcCXp' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/18od_next_dist_client_1c0y_56._.js:16256

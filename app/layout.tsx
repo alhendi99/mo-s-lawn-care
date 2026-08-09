@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Archivo, Inter } from 'next/font/google'
+import { SITE_ORIGIN } from '@/lib/site-url'
 import './globals.css'
 
 const display = Archivo({
@@ -17,21 +18,76 @@ const body = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Mo's Lawn Care & Snow Removal | Des Moines, IA",
+  metadataBase: new URL(SITE_ORIGIN),
+  title: "Lawn Care Service in Des Moines, Iowa | Mo's Lawn Care",
   description:
-    "Mo's Lawn Care and Snow Removal Services LLC takes care of Des Moines properties year-round — mowing, fertilizing, cleanups, leaf removal, aeration, landscaping and winter snow removal. Request a free estimate.",
-  icons: {
-    icon: [{ url: '/favicon.ico', type: 'image/x-icon' }],
-    shortcut: '/favicon.ico',
-    apple: '/apple-icon.png',
+    "Need a lawn care service in Des Moines, Iowa? Mo's provides lawn care, landscaping, leaf and yard cleanup, and snow removal. Request a free estimate.",
+  applicationName: "Mo's Lawn Care",
+  authors: [{ name: "Mo's Lawn Care and Snow Removal Services LLC", url: SITE_ORIGIN }],
+  creator: "Mo's Lawn Care and Snow Removal Services LLC",
+  publisher: "Mo's Lawn Care and Snow Removal Services LLC",
+  keywords: [
+    'lawn care service in Des Moines Iowa',
+    'Des Moines lawn care',
+    'snow removal Des Moines',
+    'leaf cleanup Des Moines',
+    'yard cleanup Des Moines',
+    'landscaping Des Moines',
+  ],
+  alternates: {
+    canonical: '/',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', type: 'image/x-icon', sizes: 'any' },
+      { url: '/icon-light-32x32.png', type: 'image/png', sizes: '32x32', media: '(prefers-color-scheme: light)' },
+      { url: '/icon-dark-32x32.png', type: 'image/png', sizes: '32x32', media: '(prefers-color-scheme: dark)' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/apple-icon.png', type: 'image/png', sizes: '180x180' }],
+  },
+  manifest: '/manifest.webmanifest',
   openGraph: {
-    title: "Mo's Lawn Care & Snow Removal | Des Moines, IA",
+    title: "Lawn Care Service in Des Moines, Iowa | Mo's Lawn Care",
     description:
-      'Year-round property care in Des Moines, Iowa. Mowing, cleanups, landscaping and snow removal.',
+      "Year-round lawn care, landscaping, cleanups, and snow removal from Mo's Lawn Care in Des Moines, Iowa.",
+    url: '/',
+    siteName: "Mo's Lawn Care",
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: '/seasons/summer.png',
+        width: 1672,
+        height: 941,
+        alt: "A maintained Des Moines lawn representing Mo's Lawn Care services",
+      },
+    ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Lawn Care Service in Des Moines, Iowa | Mo's Lawn Care",
+    description:
+      "Year-round lawn care, landscaping, cleanups, and snow removal from Mo's Lawn Care in Des Moines, Iowa.",
+    images: [
+      {
+        url: '/seasons/summer.png',
+        alt: "A maintained Des Moines lawn representing Mo's Lawn Care services",
+      },
+    ],
+  },
+  category: 'Lawn care service',
 }
 
 export const viewport: Viewport = {

@@ -7,44 +7,14 @@ import { ProblemSelector } from '@/components/problem-selector'
 import { PropertyHotspots } from '@/components/property-hotspots'
 import { SeasonDial } from '@/components/season-dial'
 import { SiteHeader } from '@/components/site-header'
-import { nav, openingDays, serviceAreas, services, site } from '@/lib/site'
-
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: site.companyName,
-  description:
-    'Year-round lawn care, property maintenance and snow removal in Des Moines, Iowa.',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Des Moines',
-    addressRegion: 'IA',
-    addressCountry: 'US',
-  },
-  areaServed: serviceAreas.map((name) => ({
-    '@type': 'City',
-    name,
-    containedInPlace: { '@type': 'State', name: 'Iowa' },
-  })),
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: openingDays.map((day) => `https://schema.org/${day}`),
-    opens: '21:00',
-    closes: '23:00',
-  },
-  makesOffer: services.map((name) => ({
-    '@type': 'Offer',
-    itemOffered: { '@type': 'Service', name },
-  })),
-}
+import { StructuredData } from '@/components/structured-data'
+import { nav, site } from '@/lib/site'
+import { localBusinessStructuredData, websiteStructuredData } from '@/lib/structured-data'
 
 export default function Page() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={[localBusinessStructuredData, websiteStructuredData]} />
       <SiteHeader />
 
       <main className="pb-16 md:pb-0">
