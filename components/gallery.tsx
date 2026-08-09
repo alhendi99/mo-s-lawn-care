@@ -92,7 +92,7 @@ export function Gallery() {
   }, [activeIndex])
 
   return (
-    <section id="gallery" aria-labelledby="gallery-heading" className="overflow-hidden bg-paper py-20 sm:py-28">
+    <section id="gallery" aria-labelledby="gallery-heading" className="overflow-hidden bg-paper pt-20 sm:py-28">
       <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
         <header className="grid gap-6 border-t border-[color:var(--rule)] pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)] lg:items-end lg:gap-16">
           <div>

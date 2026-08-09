@@ -23,7 +23,7 @@ export default function Page() {
         {/* <SeasonDial /> */}
         <CrossSection />
       <section id="property" aria-labelledby="property-heading" className="bg-paper py-20 sm:py-28">
-          <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
+          <div className="mx-auto w-full pb-0 max-w-[112rem] px-5 sm:px-8 ">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <h2
                 id="property-heading"
