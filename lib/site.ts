@@ -234,8 +234,8 @@ export const projects: Project[] = [
     id: '2',
     title: 'Fall / Leaves Cleanup',
     meta: 'Des Moines, IA',
-    before: '/seasons/before-after/before2.webp',
-    after: '/seasons/before-after/after2.webp',
+    before: '/seasons/before-after/after2.webp',
+    after: '/seasons/before-after/before2.webp',
   },
   {
     id: '3',
