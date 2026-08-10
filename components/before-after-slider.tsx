@@ -19,17 +19,21 @@ function Frame({
         src={src || '/placeholder.svg'}
         alt={`${label} — Mo's Lawn Care project`}
         fill
-        sizes="(min-width: 1280px) 1100px, 100vw"
+        sizes="(min-width: 1536px) 1500px, (min-width: 1024px) 90vw, 100vw"
         loading="lazy"
         className="object-cover"
       />
     )
   }
+
   const isBefore = label === 'Before'
+
   return (
     <div
       className={`flex h-full w-full flex-col justify-center gap-2 px-[8%] ${
-        isBefore ? 'items-start text-left' : 'items-end text-right'
+        isBefore
+          ? 'items-start text-left'
+          : 'items-end text-right'
       }`}
       style={{
         backgroundColor: isBefore ? '#2a2a24' : '#20361f',
@@ -38,92 +42,329 @@ function Frame({
           : 'repeating-linear-gradient(45deg, rgba(243,240,231,0.05) 0 1px, transparent 1px 18px)',
       }}
     >
-      <p className="font-display text-2xl leading-none font-extrabold tracking-[-0.03em] text-paper/70 uppercase sm:text-4xl">
+      <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60 sm:text-sm">
         {label}
-      </p>
-      <p className="text-[0.8125rem] leading-relaxed tracking-[0.12em] text-paper/70 uppercase">
+      </span>
+
+      <span className="text-lg font-semibold text-white sm:text-2xl">
         Photo placeholder
-      </p>
-      <code className="text-[0.8125rem] text-paper/65">{path}</code>
+      </span>
+
+      <span className="text-xs text-white/40 sm:text-sm">
+        {path}
+      </span>
     </div>
   )
 }
 
 export function BeforeAfterSlider() {
-  const [projectIndex, setProjectIndex] = useState(0)
+  const [slideIndex, setSlideIndex] = useState(0)
   const [value, setValue] = useState(50)
-  const project = projects[projectIndex]
+
+  const project = projects[slideIndex]
+
+  const changeSlide = (index: number) => {
+    setSlideIndex(index)
+    setValue(50)
+  }
+
+  const previousSlide = () => {
+    changeSlide(
+      slideIndex === 0
+        ? projects.length - 1
+        : slideIndex - 1
+    )
+  }
+
+  const nextSlide = () => {
+    changeSlide(
+      slideIndex === projects.length - 1
+        ? 0
+        : slideIndex + 1
+    )
+  }
 
   return (
-    <div className="mt-10 sm:mt-14">
+    <div className="w-full">
+      {/* Slider + navigation */}
       <div
-        role="tablist"
-        aria-label="Projects"
-        className="flex flex-wrap gap-x-6 gap-y-2 border-t border-paper/15 pt-4"
+        className="
+          relative
+          mx-auto
+          w-full
+          max-w-[1600px]
+
+          sm:px-14
+          lg:px-16
+          xl:px-20
+        "
       >
-        {projects.map((p, i) => (
-          <button
-            key={p.id}
-            type="button"
-            role="tab"
-            aria-selected={i === projectIndex}
-            onClick={() => {
-              setProjectIndex(i)
-              setValue(50)
+        {/* Previous project */}
+        <button
+          type="button"
+          onClick={previousSlide}
+          aria-label="Previous project"
+          className="
+            absolute
+            left-1
+            top-1/2
+            z-40
+            grid
+            h-8
+            w-8
+            -translate-y-1/2
+            place-items-center
+            rounded-full
+            bg-black/50
+            text-lg
+            text-white
+            backdrop-blur-sm
+            transition
+            hover:bg-black/75
+
+            sm:left-2
+            sm:h-10
+            sm:w-10
+            sm:text-xl
+
+            lg:left-2
+            lg:h-12
+            lg:w-12
+            lg:text-2xl
+          "
+        >
+          ‹
+        </button>
+
+        {/* Image / Before After Slider */}
+        <div
+          className="
+            relative
+            w-full
+            overflow-hidden
+            rounded-xl
+            shadow-2xl
+
+            aspect-[4/5]
+            min-[480px]:aspect-[4/3]
+            sm:aspect-[3/2]
+            md:aspect-[16/10]
+            lg:aspect-[16/9]
+            xl:aspect-[2/1]
+          "
+        >
+          {/* After */}
+          <div className="absolute inset-0">
+            <Frame
+              src={project.after}
+              label="After"
+              path={`/projects/${project.id}-after.webp`}
+            />
+          </div>
+
+          {/* Before */}
+          <div
+            className="absolute inset-0"
+            style={{
+              clipPath: `inset(0 ${100 - value}% 0 0)`,
             }}
-            className="flex min-h-11 items-center text-[0.8125rem] font-bold tracking-[0.16em] uppercase transition-colors duration-200"
-            style={{ color: i === projectIndex ? 'var(--accent)' : 'rgba(243,240,231,0.5)' }}
           >
-            {p.title}
-          </button>
-        ))}
+            <Frame
+              src={project.before}
+              label="Before"
+              path={`/projects/${project.id}-before.webp`}
+            />
+          </div>
+
+          {/* Comparison line */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 z-20 w-px"
+            style={{
+              left: `${value}%`,
+              backgroundColor: 'var(--accent)',
+            }}
+          >
+            {/* Comparison handle */}
+            <span
+              className="
+                comparison-handle
+                absolute
+                left-1/2
+                top-1/2
+                grid
+                h-9
+                w-9
+                -translate-x-1/2
+                -translate-y-1/2
+                place-items-center
+                rounded-full
+                text-xs
+                font-bold
+                text-white
+
+                sm:h-11
+                sm:w-11
+                sm:text-sm
+
+                lg:h-14
+                lg:w-14
+                lg:text-base
+              "
+              style={{
+                backgroundColor: 'var(--accent)',
+                boxShadow:
+                  '0 0 0 3px rgba(255,255,255,0.3), 0 5px 20px rgba(0,0,0,0.3)',
+              }}
+            >
+              ↔
+            </span>
+          </div>
+
+          {/* Before label */}
+          <span
+            className="
+              pointer-events-none
+              absolute
+              left-3
+              top-3
+              z-20
+              text-[0.6rem]
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              text-white/80
+
+              sm:left-4
+              sm:top-4
+              sm:text-xs
+
+              lg:left-6
+              lg:top-6
+              lg:text-sm
+            "
+          >
+            Before
+          </span>
+
+          {/* After label */}
+          <span
+            className="
+              pointer-events-none
+              absolute
+              right-3
+              top-3
+              z-20
+              text-[0.6rem]
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              text-white/80
+
+              sm:right-4
+              sm:top-4
+              sm:text-xs
+
+              lg:right-6
+              lg:top-6
+              lg:text-sm
+            "
+          >
+            After
+          </span>
+
+          {/* Before / After control */}
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={1}
+            value={value}
+            onChange={(e) =>
+              setValue(Number(e.target.value))
+            }
+            aria-label={`Reveal before and after for ${project.title}`}
+            className="
+  absolute
+  inset-0
+  z-30
+  h-full
+  w-full
+  cursor-ew-resize
+  appearance-none
+  bg-transparent
+  opacity-0
+
+"
+          />
+        </div>
+
+        {/* Next project */}
+        <button
+          type="button"
+          onClick={nextSlide}
+          aria-label="Next project"
+          className="
+            absolute
+            right-1
+            top-1/2
+            z-40
+            grid
+            h-8
+            w-8
+            -translate-y-1/2
+            place-items-center
+            rounded-full
+            bg-black/50
+            text-lg
+            text-white
+            backdrop-blur-sm
+            transition
+            hover:bg-black/75
+
+            sm:right-2
+            sm:h-10
+            sm:w-10
+            sm:text-xl
+
+            lg:right-2
+            lg:h-12
+            lg:w-12
+            lg:text-2xl
+          "
+        >
+          ›
+        </button>
       </div>
 
-      <div className="relative mt-4 aspect-[16/10] w-full overflow-hidden sm:aspect-[16/9]">
-        <div className="absolute inset-0">
-          <Frame src={project.after} label="After" path={`/projects/${project.id}-after.webp`} />
-        </div>
-
-        <div
-          className="absolute inset-0"
-          style={{ clipPath: `inset(0 ${100 - value}% 0 0)` }}
-        >
-          <Frame src={project.before} label="Before" path={`/projects/${project.id}-before.webp`} />
-        </div>
-
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 w-px"
-          style={{ left: `${value}%`, backgroundColor: 'var(--accent)' }}
-        >
-          <span
-            className="comparison-handle absolute top-1/2 left-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-sm font-bold text-white"
-            style={{
-              backgroundColor: 'var(--accent)',
-              boxShadow: '0 0 0 3px rgba(255,255,255,0.3), 0 5px 20px rgba(0,0,0,0.3)',
-            }}
-          >
-            <span className="comparison-arrows">↔</span>
-          </span>
-        </div>
-
-        <span className="pointer-events-none absolute top-4 left-4 text-[0.75rem] font-bold tracking-[0.2em] text-paper/70 uppercase">
-          Before
-        </span>
-        <span className="pointer-events-none absolute top-4 right-4 text-[0.75rem] font-bold tracking-[0.2em] text-paper/70 uppercase">
-          After
-        </span>
-
-        <input
-          type="range"
-          min={0}
-          max={100}
-          step={1}
-          value={value}
-          onChange={(e) => setValue(Number(e.target.value))}
-          aria-label={`Reveal before and after for ${project.title}`}
-          className="absolute inset-0 h-full w-full cursor-ew-resize appearance-none bg-transparent opacity-0"
-        />
+      {/* Dots */}
+      <div
+        className="mt-5 flex flex-wrap items-center justify-center gap-2"
+        role="tablist"
+        aria-label="Projects"
+      >
+        {projects.map((project, index) => (
+          <button
+            key={project.id}
+            type="button"
+            role="tab"
+            aria-selected={index === slideIndex}
+            aria-label={`Show ${project.title}`}
+            onClick={() => changeSlide(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === slideIndex
+                ? 'w-8'
+                : 'w-2 bg-white/30 hover:bg-white/60'
+            }`}
+            style={
+              index === slideIndex
+                ? {
+                    backgroundColor: 'var(--accent)',
+                  }
+                : undefined
+            }
+          />
+        ))}
       </div>
     </div>
   )

@@ -20,9 +20,8 @@ export const site = {
   workingHours: 'Saturday–Thursday, 9:00–11:00 PM',
   socialLinks: [] as { label: string; href: string }[],
   formEndpoint: '/api/estimate',
-  heroVideo:
-    'https://pub-acf6b2cc2dcb4403ab5f2feafb362365.r2.dev/mo-s-lawn-hero.mp4',
-  heroPoster: '/seasons/summer.png', // replace with /hero-poster.webp
+  heroVideo: '/hero-background.mp4',
+  heroPoster: '/hero-poster.webp', // replace with /hero-poster.webp
 } as const
 
 export const nav = [
@@ -232,25 +231,46 @@ export type Project = {
 // Set `before`/`after` to real photos when available — e.g. "/projects/yard-before.webp"
 export const projects: Project[] = [
   {
-    id: 'overgrown',
-    title: 'Overgrown Yard Cleanup',
-    meta: 'Des Moines, IA',
-    before: '/seasons/before-after/overgrownyard-cleanup-before.png',
-    after: '/seasons/before-after/overgrownyard-cleanup-after.png',
-  },
-  {
-    id: 'leaves',
+    id: '2',
     title: 'Fall / Leaves Cleanup',
     meta: 'Des Moines, IA',
-    before: '/seasons/before-after/fall-leaves-cleanup-before.png',
-    after: '/seasons/before-after/fall-leaves-cleanup-after.png',
+    before: '/seasons/before-after/before2.webp',
+    after: '/seasons/before-after/after2.webp',
   },
   {
-    id: 'restoration',
+    id: '3',
     title: 'Landscaping / Lawn Restoration',
     meta: 'Des Moines, IA',
-    before: '/seasons/before-after/Landscaping-Lawn-Restoration-before.png',
-    after: '/seasons/before-after/Landscaping-Lawn-Restoration-after.png',
+    before: '/seasons/before-after/before3.webp',
+    after: '/seasons/before-after/after3.webp',
+  },
+  {
+    id: '4',
+    title: 'Landscaping / Lawn Restoration',
+    meta: 'Des Moines, IA',
+    before: '/seasons/before-after/before4.webp',
+    after: '/seasons/before-after/after4.webp',
+  },
+  {
+    id: '5',
+    title: 'Landscaping / Lawn Restoration',
+    meta: 'Des Moines, IA',
+    before: '/seasons/before-after/before5.webp',
+    after: '/seasons/before-after/after5.webp',
+  },
+  {
+    id: '6',
+    title: 'Landscaping / Lawn Restoration',
+    meta: 'Des Moines, IA',
+    before: '/seasons/before-after/before6.webp',
+    after: '/seasons/before-after/after6.webp',
+  },
+  {
+    id: '7',
+    title: 'Landscaping / Lawn Restoration',
+    meta: 'Des Moines, IA',
+    before: '/seasons/before-after/before7.webp',
+    after: '/seasons/before-after/after7.webp',
   },
 ]
 

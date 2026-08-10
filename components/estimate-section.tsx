@@ -12,7 +12,7 @@ export function EstimateSection() {
         <div className="grid overflow-hidden border border-paper/15 lg:grid-cols-[minmax(0,0.78fr)_minmax(32rem,1fr)]">
           <div className="relative min-h-[28rem] overflow-hidden lg:min-h-[42rem]">
             <Image
-              src="/gallery/gallery12.png"
+              src="/gallery12.webp"
               alt="Maintained front lawn and landscaped beds along a Des Moines home"
               fill
               sizes="(min-width: 1024px) 44vw, 100vw"

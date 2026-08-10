@@ -382,22 +382,6 @@ function SurfaceStage() {
   return (
     <div className="yard-xray__surface relative isolate overflow-hidden bg-paper">
       <div className="flex items-start justify-between gap-5 px-5 pt-6 sm:px-8 sm:pt-8 lg:px-10">
-        <div className="flex items-center gap-3">
-          <span className="relative grid h-8 w-8 place-items-center rounded-full border border-[color:var(--accent)]/35">
-            <span className="font-mono text-[0.5rem] tracking-[0.04em] text-[color:var(--accent)]">
-              01
-            </span>
-            <span className="yard-xray__grade-dot absolute inset-1 rounded-full border border-[color:var(--accent)]/25" />
-          </span>
-          <div>
-            <p className="font-mono text-[0.625rem] tracking-[0.2em] text-ink uppercase">
-              Above grade
-            </p>
-            <p className="mt-1 text-[0.6875rem] tracking-[0.08em] text-ink-soft">
-              Seasonal surface care
-            </p>
-          </div>
-        </div>
 
         <div className="hidden items-center gap-3 font-mono text-[0.5625rem] tracking-[0.18em] text-ink-soft uppercase sm:flex">
           <span>One property</span>
@@ -408,13 +392,9 @@ function SurfaceStage() {
 
       <div className="grid gap-8 px-5 pt-10 pb-10 sm:px-8 sm:pt-14 sm:pb-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end lg:gap-16 lg:px-10">
         <div>
-          <p className="mb-5 flex items-center gap-3 font-mono text-[0.5625rem] tracking-[0.2em] text-ink-soft uppercase sm:mb-7">
-            <span className="h-px w-8 bg-[color:var(--accent)]" />
-            A full year of care
-          </p>
           <h3
             id="ground-heading"
-            className="max-w-[11ch] font-display text-[clamp(3.1rem,7.4vw,7.6rem)] leading-[0.82] font-semibold tracking-[-0.07em] text-ink uppercase"
+            className="max-w-[18ch] font-display text-[clamp(1.75rem,1.05rem+3vw,3.5rem)] leading-[0.82] font-semibold tracking-[-0.07em] text-ink uppercase"
           >
             One yard.
             <span className="block text-[color:var(--accent)]">
@@ -448,6 +428,17 @@ function SurfaceStage() {
           </div>
         </div>
       </div>
+            <div className="relative z-10  px-5 flex items-center gap-4 border-b border-paper/12 pb-4">
+              <div className="flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full border border-paper/40 bg-[color:var(--accent)]" />
+                <h3 className="font-mono text-[0.75rem] tracking-[0.2em]  uppercase">
+                  Above grade
+                </h3>
+              </div>
+              <span className="font-mono text-[0.6875rem] tracking-[0.18em]  uppercase">
+                Seasonal surface care
+              </span>
+            </div>
 
 <div className="yard-xray__panorama snap-x snap-mandatory overflow-x-auto overscroll-x-contain border-t border-ink/10 [scrollbar-width:none] md:snap-none">        <div className="yard-xray__season-track relative flex min-h-[34rem] w-max md:w-full">
           {seasonPanorama.map((season, index) => {
@@ -623,11 +614,11 @@ export function CrossSection() {
             />
             <SoilNetwork />
 
-            <div className="relative z-10 flex items-center justify-between gap-4 border-b border-paper/12 pb-4">
+            <div className="relative z-10 flex items-center gap-4 border-b border-paper/12 pb-4">
               <div className="flex items-center gap-3">
                 <span className="h-2 w-2 rounded-full border border-paper/40 bg-[color:var(--accent)]" />
                 <h3 className="font-mono text-[0.75rem] tracking-[0.2em] text-paper uppercase">
-                  02 / Below ground
+                   Below ground
                 </h3>
               </div>
               <span className="font-mono text-[0.6875rem] tracking-[0.18em] text-paper/55 uppercase">

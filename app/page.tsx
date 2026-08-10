@@ -8,6 +8,7 @@ import { PropertyHotspots } from '@/components/property-hotspots'
 import { SeasonDial } from '@/components/season-dial'
 import { SiteHeader } from '@/components/site-header'
 import { StructuredData } from '@/components/structured-data'
+import { Testimonials } from '@/components/testimonials'
 import { nav, site } from '@/lib/site'
 import { localBusinessStructuredData, websiteStructuredData } from '@/lib/structured-data'
 
@@ -50,7 +51,7 @@ export default function Page() {
         <section
           id="work"
           aria-labelledby="work-heading"
-          className="bg-evergreen pt-20 pb-2 sm:pt-28 sm:pb-2"
+          className="bg-evergreen pt-5 pb-2 sm:pt-5 sm:pb-2"
           style={{ '--accent': '#7FAE68', '--btn-fg': '#102019' } as React.CSSProperties}
         >
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
@@ -60,51 +61,22 @@ export default function Page() {
             <p className="eyebrow mt-0" style={{ color: 'var(--accent)' }}>
               Drag to see the difference
             </p>
+            <br />
             <BeforeAfterSlider />
           </div>
         </section>
 
 
-        {/* 7 — LOCAL TRUST */}
-        <section aria-labelledby="local-heading" className="bg-paper-dim py-20 sm:py-28">
-          <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
-            <h2 id="local-heading" className="display-md max-w-[20ch]">
-              Built for Des Moines.
-              <br />
-              <span style={{ color: 'var(--accent)' }}>Ready for every season.</span>
-            </h2>
-
-            <div className="rule mt-12 grid max-w-6xl gap-10 border-[color:var(--rule)] pt-10 sm:grid-cols-2 sm:gap-16 lg:grid-cols-3">
-              <div>
-                <p className="eyebrow text-ink-soft">The company</p>
-                <p className="mt-3 font-display text-xl leading-tight font-bold tracking-[-0.02em] uppercase">
-                  {site.companyName}
-                </p>
-                <p className="mt-2 text-[1.0625rem] text-ink-soft">{site.location}</p>
-              </div>
-              <div>
-                <p className="eyebrow text-ink-soft">Service area</p>
-                <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink">{site.serviceArea}</p>
-              </div>
-              <div className="sm:col-span-2 lg:col-span-1">
-                <p className="eyebrow text-ink-soft">Working hours</p>
-                <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink">
-                  {site.workingHours}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
         <Gallery />
-        {/* 3 — YOUR YARD HAS PROBLEMS */}
         <section
           id="problems"
           aria-labelledby="problems-heading"
           className="bg-evergreen py-20 sm:py-28"
           style={{ '--accent': '#7FAE68', '--btn-fg': '#102019' } as React.CSSProperties}
         >
+          <Testimonials />
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
-            <p className="eyebrow text-paper/70">Start with the problem.</p>
+<br />
             <h2 id="problems-heading" className="display-md mt-5 max-w-[16ch] text-paper">
               What&apos;s going on
               <br />
@@ -125,11 +97,17 @@ export default function Page() {
         <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <p className="font-display text-3xl leading-none font-extrabold tracking-[-0.04em] text-paper uppercase">
-                Mo&apos;s
+              <p className="eyebrow text-paper/65">
+                Service Area:
               </p>
               <p className="mt-2 text-[0.75rem] font-semibold tracking-[0.16em] text-paper/70 uppercase">
-                {site.wordmarkLine}
+                Des Moines, Ankeny, Waukee, Norwalk, Altoona
+              </p>
+              <p className="mt-4 eyebrow text-paper/65">
+                Working Hours:
+              </p>
+              <p className="mt-2 font-semibold tracking-[0.16em] text-paper/70 uppercase">
+                Saturday–Thursday, 9:00–11:00 PM
               </p>
             </div>
 
