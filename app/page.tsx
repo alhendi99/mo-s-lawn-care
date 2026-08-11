@@ -9,6 +9,7 @@ import { SeasonDial } from '@/components/season-dial'
 import { SiteHeader } from '@/components/site-header'
 import { StructuredData } from '@/components/structured-data'
 import { Testimonials } from '@/components/testimonials'
+import { LocalizedNav, Tr } from '@/components/tr'
 import { nav, site } from '@/lib/site'
 import { localBusinessStructuredData, websiteStructuredData } from '@/lib/structured-data'
 
@@ -30,12 +31,12 @@ export default function Page() {
                 id="property-heading"
                 className="max-w-[18ch] text-[clamp(1.75rem,1.05rem+3vw,3.5rem)] uppercase"
               >
-                One property.
+                <Tr text="One property." />
                 <br />
-                <span style={{ color: 'var(--accent)' }}>A lot to take care of.</span>
+                <span style={{ color: 'var(--accent)' }}><Tr text="A lot to take care of." /></span>
               </h2>
               <p className="max-w-prose text-[1.0625rem] leading-relaxed text-ink-soft lg:pb-3 lg:text-right">
-                Explore the property to see where Mo&apos;s can help.
+                <Tr text="Explore the property to see where Mo's can help." />
               </p>
             </div>
             <PropertyHotspots />
@@ -56,10 +57,10 @@ export default function Page() {
         >
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <h2 id="work-heading" className="display-md text-paper">
-              The Mo&apos;s effect.
+              <Tr text="The Mo's effect." />
             </h2>
             <p className="eyebrow mt-0" style={{ color: 'var(--accent)' }}>
-              Drag to see the difference
+              <Tr text="Drag to see the difference" />
             </p>
             <br />
             <BeforeAfterSlider />
@@ -78,13 +79,12 @@ export default function Page() {
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
 <br />
             <h2 id="problems-heading" className="display-md mt-5 max-w-[16ch] text-paper">
-              What&apos;s going on
+              <Tr text="What's going on" />
               <br />
-              <span style={{ color: 'var(--accent)' }}>out there?</span>
+              <span style={{ color: 'var(--accent)' }}><Tr text="out there?" /></span>
             </h2>
             <p className="mt-6 max-w-prose text-[1.0625rem] leading-relaxed text-paper/65">
-              Most people don&apos;t call looking for a service name. They call because something in
-              the yard got away from them. Pick the one that sounds like your property.
+              <Tr text="Most people don't call looking for a service name. They call because something in the yard got away from them. Pick the one that sounds like your property." />
             </p>
             <ProblemSelector />
           </div>
@@ -98,21 +98,21 @@ export default function Page() {
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <p className="eyebrow text-paper/65">
-                Service Area:
+                <Tr text="Service Area:" />
               </p>
               <p className="mt-2 text-[0.75rem] font-semibold tracking-[0.16em] text-paper/70 uppercase">
                 Des Moines, Ankeny, Waukee, Norwalk, Altoona
               </p>
               <p className="mt-4 eyebrow text-paper/65">
-                Working Hours:
+                <Tr text="Working Hours:" />
               </p>
               <p className="mt-2 font-semibold tracking-[0.16em] text-paper/70 uppercase">
-                Saturday–Thursday, 9:00–11:00 PM
+                <Tr text="Saturday–Thursday, 9:00–11:00 PM" />
               </p>
             </div>
 
             <div>
-              <p className="eyebrow text-paper/65">Company</p>
+              <p className="eyebrow text-paper/65"><Tr text="Company" /></p>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-paper/70">
                 {site.companyName}
                 <br />
@@ -120,8 +120,8 @@ export default function Page() {
               </p>
             </div>
 
-            <nav aria-label="Footer">
-              <p className="eyebrow text-paper/65">Sections</p>
+            <LocalizedNav label="Footer">
+              <p className="eyebrow text-paper/65"><Tr text="Sections" /></p>
               <ul className="mt-3 space-y-1.5">
                 {nav.map((item) => (
                   <li key={item.href}>
@@ -129,7 +129,7 @@ export default function Page() {
                       href={item.href}
                       className="text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
                     >
-                      {item.label}
+                      <Tr text={item.label} />
                     </a>
                   </li>
                 ))}
@@ -138,14 +138,14 @@ export default function Page() {
                     href="#estimate-form"
                     className="text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
                   >
-                    Get Estimate
+                    <Tr text="Get Estimate" />
                   </a>
                 </li>
               </ul>
-            </nav>
+            </LocalizedNav>
 
             <div>
-              <p className="eyebrow text-paper/65">Contact</p>
+              <p className="eyebrow text-paper/65"><Tr text="Contact" /></p>
               <a
                 href={site.phoneHref}
                 className="mt-3 inline-flex min-h-11 items-center text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { services, site } from '@/lib/site'
+import { useI18n } from '@/lib/i18n'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 type FieldName = 'name' | 'phone' | 'email'
@@ -17,6 +18,7 @@ const labelClass =
   'block text-[0.75rem] font-semibold tracking-[0.14em] text-ink-soft uppercase'
 
 export function EstimateForm() {
+  const { locale, t } = useI18n()
   const [status, setStatus] = useState<Status>('idle')
   const [errors, setErrors] = useState<FieldErrors>({})
 
@@ -34,23 +36,23 @@ export function EstimateForm() {
     event.preventDefault()
     const form = event.currentTarget
     const formData = new FormData(form)
-    const data = Object.fromEntries(formData.entries())
+    const data = { ...Object.fromEntries(formData.entries()), locale }
     const name = String(formData.get('name') ?? '').trim()
     const phone = String(formData.get('phone') ?? '').trim()
     const email = String(formData.get('email') ?? '').trim()
     const nextErrors: FieldErrors = {}
 
-    if (!name) nextErrors.name = 'Please enter your name.'
+    if (!name) nextErrors.name = t('Please enter your name.')
 
     const phoneDigits = phone.replace(/\D/g, '')
     if (!phone) {
-      nextErrors.phone = 'Please enter your phone number.'
+      nextErrors.phone = t('Please enter your phone number.')
     } else if (phoneDigits.length < 10) {
-      nextErrors.phone = 'Enter a valid 10-digit phone number.'
+      nextErrors.phone = t('Enter a valid 10-digit phone number.')
     }
 
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors.email = 'Enter a valid email address.'
+      nextErrors.email = t('Enter a valid email address.')
     }
 
     if (Object.keys(nextErrors).length > 0) {
@@ -93,32 +95,32 @@ export function EstimateForm() {
       className="relative"
     >
       <div className="pointer-events-none absolute -left-[9999px]" aria-hidden="true">
-        <label htmlFor="website">Website</label>
+        <label htmlFor="website">{t('Website')}</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
       <div className="flex items-end justify-between gap-5 border-b border-[color:var(--rule)] pb-5">
         <div>
-          <p className="eyebrow text-accent">Start here</p>
+          <p className="eyebrow text-accent">{t('Start here')}</p>
           <h3 className="mt-3 font-display text-2xl leading-none font-bold tracking-[-0.035em] text-ink uppercase sm:text-3xl">
-            Request an estimate
+            {t('Request an estimate')}
           </h3>
         </div>
         <p className="shrink-0 text-[0.75rem] tracking-[0.1em] text-ink-soft uppercase">
-          * Required
+          * {t('Required')}
         </p>
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5">
         <div className="col-span-2 sm:col-span-1">
           <label className={labelClass} htmlFor="name">
-            Name <span className="text-accent">*</span>
+            {t('Name')} <span className="text-accent">*</span>
           </label>
           <input
             id="name"
             name="name"
             required
             autoComplete="name"
-            placeholder="Your name"
+            placeholder={t('Your name')}
             className={fieldClass}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? 'name-error' : undefined}
@@ -132,7 +134,7 @@ export function EstimateForm() {
 
         <div className="col-span-2 sm:col-span-1">
           <label className={labelClass} htmlFor="phone">
-            Phone <span className="text-accent">*</span>
+            {t('Phone')} <span className="text-accent">*</span>
           </label>
           <input
             id="phone"
@@ -140,7 +142,7 @@ export function EstimateForm() {
             type="tel"
             required
             autoComplete="tel"
-            placeholder="Your phone number"
+            placeholder={t('Your phone number')}
             className={fieldClass}
             aria-invalid={Boolean(errors.phone)}
             aria-describedby={errors.phone ? 'phone-error' : undefined}
@@ -154,7 +156,7 @@ export function EstimateForm() {
 
         <div className="col-span-2">
           <label className={labelClass} htmlFor="email">
-            Email <span className="font-normal tracking-normal normal-case">(optional)</span>
+            {t('Email')} <span className="font-normal tracking-normal normal-case">({t('optional')})</span>
           </label>
           <input
             id="email"
@@ -175,7 +177,7 @@ export function EstimateForm() {
 
         <div className="col-span-2">
           <label className={labelClass} htmlFor="service">
-            What do you need help with?
+            {t('What do you need help with?')}
           </label>
           <div className="relative">
             <select
@@ -185,14 +187,14 @@ export function EstimateForm() {
               className={`${fieldClass} appearance-none pr-10`}
             >
               <option value="" disabled>
-                Select a service
+                {t('Select a service')}
               </option>
               {services.map((s) => (
                 <option key={s} value={s}>
-                  {s}
+                  {t(s)}
                 </option>
               ))}
-              <option value="Not sure yet">Not sure yet</option>
+              <option value="Not sure yet">{t('Not sure yet')}</option>
             </select>
             <span
               aria-hidden="true"
@@ -205,14 +207,14 @@ export function EstimateForm() {
 
         <div className="col-span-2">
           <label className={labelClass} htmlFor="message">
-            Tell us what&apos;s going on
+            {t("Tell us what's going on")}
           </label>
           <textarea
             id="message"
             name="message"
             rows={2}
             className={`${fieldClass} min-h-20 resize-y py-2 leading-relaxed`}
-            placeholder="Property details, timing, or the problem you want solved."
+            placeholder={t('Property details, timing, or the problem you want solved.')}
           />
         </div>
 
@@ -221,7 +223,7 @@ export function EstimateForm() {
           className="group col-span-2 mt-2 flex min-h-14 w-full items-center justify-between bg-evergreen px-6 text-[0.875rem] font-bold tracking-[0.12em] text-paper uppercase transition-colors duration-200 hover:bg-evergreen-700 disabled:cursor-wait disabled:opacity-65"
           disabled={status === 'sending'}
         >
-          <span>{status === 'sending' ? 'Sending your request…' : 'Request my free estimate'}</span>
+          <span>{t(status === 'sending' ? 'Sending your request…' : 'Request my free estimate')}</span>
           <span
             aria-hidden="true"
             className="text-lg transition-transform duration-200 group-hover:translate-x-1"
@@ -233,10 +235,10 @@ export function EstimateForm() {
         <div className="col-span-2 flex flex-col gap-1.5 text-xs text-ink-soft sm:flex-row sm:items-start sm:justify-between">
           <p aria-live="polite" className="min-h-4 sm:max-w-[17rem] sm:text-right">
             {status === 'sent' && (
-              <span className="font-semibold text-accent">Thanks — we&apos;ll be in touch.</span>
+              <span className="font-semibold text-accent">{t("Thanks — we'll be in touch.")}</span>
             )}
             {status === 'error' && (
-              <span className="text-red-700">Something went wrong. Please try again.</span>
+              <span className="text-red-700">{t('Something went wrong. Please try again.')}</span>
             )}
           </p>
         </div>

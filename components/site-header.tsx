@@ -4,9 +4,12 @@ import Image from 'next/image'
 import { Mail, Phone } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { MobileNavigation } from './mobile-navigation'
+import { LanguageSwitcher } from './language-switcher'
 import { nav, site } from '@/lib/site'
+import { useI18n } from '@/lib/i18n'
 
 export function SiteHeader() {
+  const { t } = useI18n()
   const [persistent, setPersistent] = useState(false)
 
   useEffect(() => {
@@ -35,27 +38,27 @@ export function SiteHeader() {
           <a href="#top" className="group flex items-center gap-3 text-paper">
             <Image
               src="/top.png"
-              alt="Mo's Lawn Care and Snow Removal"
+              alt={t("Mo's Lawn Care and Snow Removal")}
               width={56}
               height={56}
               priority
               className="h-12 w-12 object-cover sm:h-14 sm:w-14"
             />
             <span className="hidden text-[0.75rem] leading-tight font-semibold tracking-[0.16em] text-paper/75 uppercase sm:block">
-              Lawn Care
+              {t('Lawn Care')}
               <br />
-              &amp; Snow Removal
+              {t('& Snow Removal')}
             </span>
           </a>
 
-          <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
+          <nav aria-label={t('Primary navigation')} className="hidden items-center gap-7 lg:flex">
             {nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 className="text-[0.8125rem] font-semibold tracking-[0.18em] text-paper/75 uppercase transition-colors duration-200 hover:text-paper"
               >
-                {item.label}
+                {t(item.label)}
               </a>
             ))}
             <a
@@ -68,18 +71,21 @@ export function SiteHeader() {
               href="#estimate-form"
               className="flex h-12 items-center border border-paper/35 px-5 text-[0.8125rem] font-bold tracking-[0.18em] text-paper uppercase transition-colors duration-200 hover:border-paper hover:bg-paper hover:text-evergreen"
             >
-              Get Estimate
+              {t('Get Estimate')}
             </a>
           </nav>
 
-          <MobileNavigation />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher compact />
+            <MobileNavigation />
+          </div>
         </div>
       </header>
 
       <a
         href="tel:+15158688636"
-        aria-label={`Call Mo's Lawn Care at ${site.phone}`}
-        title={`Call ${site.phone}`}
+        aria-label={`${t("Call Mo's Lawn Care at")} ${site.phone}`}
+        title={`${t('Call')} ${site.phone}`}
         className={`phone-float fixed right-6 bottom-6 z-40 hidden h-14 w-14 items-center justify-center rounded-full bg-[#D5EE72] text-evergreen shadow-[0_12px_35px_rgba(8,20,14,0.3)] transition-[transform,opacity,background-color] duration-300 hover:scale-105 hover:bg-paper focus-visible:scale-105 motion-reduce:transition-none md:flex ${
           persistent ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
         }`}
@@ -107,7 +113,7 @@ export function SiteHeader() {
           tabIndex={persistent ? undefined : -1}
           className="flex min-h-12 items-center justify-center bg-[#D5EE72] px-3 text-sm font-bold tracking-[0.1em] text-evergreen uppercase"
         >
-          Free estimate
+          {t('Free estimate')}
         </a>
       </div>
     </>

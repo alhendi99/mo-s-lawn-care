@@ -3,8 +3,10 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { propertyHotspots } from '@/lib/site'
+import { useI18n } from '@/lib/i18n'
 
 export function PropertyHotspots() {
+  const { t } = useI18n()
   const [active, setActive] = useState<string>(propertyHotspots[0].id)
   const spot = propertyHotspots.find((h) => h.id === active) ?? propertyHotspots[0]
 
@@ -13,7 +15,7 @@ export function PropertyHotspots() {
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-evergreen">
         <Image
           src="/seasons/summer.png"
-          alt="A Des Moines residential property in summer: mowed front lawn, flower beds along the house, mature trees and a concrete driveway"
+          alt={t('A Des Moines residential property in summer: mowed front lawn, flower beds along the house, mature trees and a concrete driveway')}
           fill
           sizes="(min-width: 1280px) 1200px, 100vw"
           loading="lazy"
@@ -30,11 +32,11 @@ export function PropertyHotspots() {
               onMouseEnter={() => setActive(h.id)}
               onFocus={() => setActive(h.id)}
               aria-pressed={isActive}
-              className="absolute grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center"
+              className="absolute z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center"
               style={{ left: `${h.x}%`, top: `${h.y}%` }}
             >
               <span className="sr-only">
-                {h.label}: {h.services.join(', ')}
+                {t(h.label)}: {h.services.map(t).join(', ')}
               </span>
               <span
                 aria-hidden="true"
@@ -56,7 +58,7 @@ export function PropertyHotspots() {
 
         {/* compact readout — desktop / tablet only */}
         <div
-          className="absolute hidden w-[min(20rem,38%)] border-t-2 border-accent p-4 transition-[top,left,right,transform] duration-300 sm:block"
+          className="pointer-events-none absolute z-10 hidden w-[min(20rem,38%)] border-t-2 border-accent p-4 transition-[top,left,right,transform] duration-300 sm:block"
           style={{
             backgroundColor: 'rgba(16,32,25,0.96)',
             top: `${spot.y}%`,
@@ -71,12 +73,12 @@ export function PropertyHotspots() {
             {String(spot.n).padStart(2, '0')} / {propertyHotspots.length}
           </p>
           <p className="mt-1.5 font-display text-xl leading-none font-extrabold tracking-[-0.03em] text-paper uppercase">
-            {spot.label}
+            {t(spot.label)}
           </p>
           <ul className="mt-3 space-y-1">
             {spot.services.map((s) => (
               <li key={s} className="text-[0.9375rem] leading-snug text-paper/75">
-                {s}
+                {t(s)}
               </li>
             ))}
           </ul>
@@ -111,10 +113,10 @@ export function PropertyHotspots() {
                 </span>
                 <span className="min-w-0">
                   <span className="block font-display text-lg font-semibold tracking-[-0.01em] uppercase">
-                    {h.label}
+                    {t(h.label)}
                   </span>
                   <span className="mt-0.5 block text-[0.9375rem] leading-snug text-ink-soft">
-                    {h.services.join(' · ')}
+                    {h.services.map(t).join(' · ')}
                   </span>
                 </span>
               </button>

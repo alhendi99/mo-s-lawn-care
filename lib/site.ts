@@ -272,6 +272,13 @@ export const projects: Project[] = [
     before: '/seasons/before-after/before7.webp',
     after: '/seasons/before-after/after7.webp',
   },
+  {
+    id: '8',
+    title: 'Landscaping / Lawn Restoration',
+    meta: 'Des Moines, IA',
+    before: '/gallery7.webp',
+    after: '/gallery8.webp',
+  },
 ]
 
 export const aboveGround = [

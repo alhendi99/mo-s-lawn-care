@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { projects } from '@/lib/site'
+import { useI18n } from '@/lib/i18n'
 
 function Frame({
   src,
@@ -13,11 +14,12 @@ function Frame({
   label: string
   path: string
 }) {
+  const { t } = useI18n()
   if (src) {
     return (
       <Image
         src={src || '/placeholder.svg'}
-        alt={`${label} — Mo's Lawn Care project`}
+        alt={`${t(label)} — ${t("Mo's Lawn Care project")}`}
         fill
         sizes="(min-width: 1536px) 1500px, (min-width: 1024px) 90vw, 100vw"
         loading="lazy"
@@ -47,7 +49,7 @@ function Frame({
       </span>
 
       <span className="text-lg font-semibold text-white sm:text-2xl">
-        Photo placeholder
+        {t('Photo placeholder')}
       </span>
 
       <span className="text-xs text-white/40 sm:text-sm">
@@ -58,6 +60,7 @@ function Frame({
 }
 
 export function BeforeAfterSlider() {
+  const { t } = useI18n()
   const [slideIndex, setSlideIndex] = useState(0)
   const [value, setValue] = useState(50)
 
@@ -103,7 +106,7 @@ export function BeforeAfterSlider() {
         <button
           type="button"
           onClick={previousSlide}
-          aria-label="Previous project"
+          aria-label={t('Previous project')}
           className="
             absolute
             left-1
@@ -244,7 +247,7 @@ export function BeforeAfterSlider() {
               lg:text-sm
             "
           >
-            Before
+            {t('Before')}
           </span>
 
           {/* After label */}
@@ -270,7 +273,7 @@ export function BeforeAfterSlider() {
               lg:text-sm
             "
           >
-            After
+            {t('After')}
           </span>
 
           {/* Before / After control */}
@@ -283,7 +286,7 @@ export function BeforeAfterSlider() {
             onChange={(e) =>
               setValue(Number(e.target.value))
             }
-            aria-label={`Reveal before and after for ${project.title}`}
+            aria-label={`${t('Reveal before and after for')} ${t(project.title)}`}
             className="
   absolute
   inset-0
@@ -303,7 +306,7 @@ export function BeforeAfterSlider() {
         <button
           type="button"
           onClick={nextSlide}
-          aria-label="Next project"
+          aria-label={t('Next project')}
           className="
             absolute
             right-1
@@ -341,7 +344,7 @@ export function BeforeAfterSlider() {
       <div
         className="mt-5 flex flex-wrap items-center justify-center gap-2"
         role="tablist"
-        aria-label="Projects"
+        aria-label={t('Projects')}
       >
         {projects.map((project, index) => (
           <button
@@ -349,7 +352,7 @@ export function BeforeAfterSlider() {
             type="button"
             role="tab"
             aria-selected={index === slideIndex}
-            aria-label={`Show ${project.title}`}
+            aria-label={`${t('Show')} ${t(project.title)}`}
             onClick={() => changeSlide(index)}
             className={`h-2 rounded-full transition-all duration-300 ${
               index === slideIndex

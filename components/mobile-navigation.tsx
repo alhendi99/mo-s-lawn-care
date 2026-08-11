@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { nav, site } from '@/lib/site'
+import { useI18n } from '@/lib/i18n'
 
 export function MobileNavigation() {
+  const { t } = useI18n()
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -26,13 +28,13 @@ export function MobileNavigation() {
     <div className="lg:hidden">
       <button
         type="button"
-        aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-label={t(open ? 'Close navigation menu' : 'Open navigation menu')}
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
         className="relative z-50 flex h-11 min-w-11 items-center gap-2 px-1 text-[0.8125rem] font-semibold tracking-[0.18em] text-paper uppercase"
       >
-        {open ? 'Close' : 'Menu'}
+        {t(open ? 'Close' : 'Menu')}
         <span aria-hidden="true" className="relative block h-3 w-4">
           <span
             className="absolute left-0 block h-px w-4 bg-paper transition-transform duration-200"
@@ -50,7 +52,7 @@ export function MobileNavigation() {
           id="mobile-menu"
           className="fixed inset-0 top-0 z-40 flex flex-col bg-evergreen px-5 pt-24 pb-10"
         >
-          <nav aria-label="Primary" className="flex flex-col">
+          <nav aria-label={t('Primary navigation')} className="flex flex-col">
             {nav.map((item) => (
               <a
                 key={item.href}
@@ -58,7 +60,7 @@ export function MobileNavigation() {
                 onClick={() => setOpen(false)}
                 className="rule border-[color:var(--rule-dark)] py-5 font-display text-4xl font-bold tracking-[-0.02em] text-paper uppercase"
               >
-                {item.label}
+                {t(item.label)}
               </a>
             ))}
           </nav>
@@ -68,7 +70,7 @@ export function MobileNavigation() {
             className="btn-solid mt-8 w-full"
             style={{ backgroundColor: 'var(--accent)' }}
           >
-            Get a free estimate
+            {t('Get a free estimate')}
           </a>
           <p className="mt-auto pt-10 text-sm leading-relaxed text-paper/70">
             {site.companyName}

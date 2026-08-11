@@ -95,7 +95,7 @@
   .hero-display {
     max-width: 100%;
     font-family: var(--font-sans);
-    font-size: clamp(2.15rem, 10.5vw, 2.85rem);
+    font-size: clamp(1.875rem, 9vw, 2.45rem);
     font-weight: 700;
     letter-spacing: -0.055em;
     line-height: 0.91;

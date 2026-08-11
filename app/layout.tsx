@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Archivo, Inter } from 'next/font/google'
 import { SITE_ORIGIN } from '@/lib/site-url'
+import { I18nProvider } from '@/lib/i18n'
 import './globals.css'
 
 const display = Archivo({
@@ -103,7 +104,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${body.variable} bg-background`}>
       <body className="antialiased">
-        {children}
+        <I18nProvider>{children}</I18nProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

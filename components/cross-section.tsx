@@ -1,4 +1,7 @@
+"use client";
+
 import { aboveGround, belowGround } from "@/lib/site";
+import { useI18n } from "@/lib/i18n";
 
 const soilParticles = Array.from({ length: 52 }, (_, i) => ({
   cx: ((i * 173) % 1360) + 20,
@@ -280,10 +283,12 @@ function SeasonGlyph({ season }: { season: SeasonKey }) {
           <circle cx="60" cy="60" r="34" opacity="0.35" />
           {Array.from({ length: 12 }).map((_, index) => {
             const angle = (index / 12) * Math.PI * 2;
-            const x1 = 60 + Math.cos(angle) * 42;
-            const y1 = 60 + Math.sin(angle) * 42;
-            const x2 = 60 + Math.cos(angle) * 52;
-            const y2 = 60 + Math.sin(angle) * 52;
+            // Normalize trigonometric results so server and browser engines
+            // serialize the SVG path to exactly the same attribute value.
+            const x1 = (60 + Math.cos(angle) * 42).toFixed(3);
+            const y1 = (60 + Math.sin(angle) * 42).toFixed(3);
+            const x2 = (60 + Math.cos(angle) * 52).toFixed(3);
+            const y2 = (60 + Math.sin(angle) * 52).toFixed(3);
             return <path key={index} d={`M${x1} ${y1} L${x2} ${y2}`} />;
           })}
         </g>
@@ -379,51 +384,43 @@ function SeasonAtmosphere({
 }
 
 function SurfaceStage() {
+  const { t } = useI18n();
   return (
     <div className="yard-xray__surface relative isolate overflow-hidden bg-paper">
-      <div className="flex items-start justify-between gap-5 px-5 pt-6 sm:px-8 sm:pt-8 lg:px-10">
-
-        <div className="hidden items-center gap-3 font-mono text-[0.5625rem] tracking-[0.18em] text-ink-soft uppercase sm:flex">
-          <span>One property</span>
-          <span className="h-px w-10 bg-ink/15" />
-          <span>365 days of care</span>
-        </div>
-      </div>
-
       <div className="grid gap-8 px-5 pt-10 pb-10 sm:px-8 sm:pt-14 sm:pb-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end lg:gap-16 lg:px-10">
         <div>
           <h3
             id="ground-heading"
             className="max-w-[18ch] font-display text-[clamp(1.75rem,1.05rem+3vw,3.5rem)] leading-[0.82] font-semibold tracking-[-0.07em] text-ink uppercase"
           >
-            One yard.
+            {t('One yard.')}
             <span className="block text-[color:var(--accent)]">
-              Four seasons.
+              {t('Four seasons.')}
             </span>
           </h3>
         </div>
 
         <div className="border-t border-ink/15 pt-5 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-7">
           <p className="max-w-[32rem] text-[clamp(1rem,1.4vw,1.2rem)] leading-[1.55] text-ink/70">
-            Your yard changes with the weather. Our care changes with it—without lowering the standard.
+            {t('Your yard changes with the weather. Our care changes with it—without lowering the standard.')}
           </p>
 
-          <div className="mt-6 flex items-center gap-4 md:hidden" aria-label="Swipe horizontally to change the season">
+          <div className="mt-6 flex items-center gap-4 md:hidden" aria-label={t('Swipe horizontally to change the season')}>
             <span aria-hidden="true" className="yard-xray__swipe-cue relative h-11 w-[5.5rem] shrink-0 overflow-hidden rounded-full border border-ink/20 bg-ink/[0.035]">
               <span className="absolute top-1/2 left-3 -translate-y-1/2 text-[0.6875rem] text-ink/30">‹</span>
               <span className="absolute top-1/2 right-3 -translate-y-1/2 text-[0.6875rem] text-ink/30">›</span>
               <span className="yard-xray__swipe-thumb absolute top-1/2 left-1/2 grid h-7 w-7 translate-x-[-50%] translate-y-[calc(-50%+8px)] place-items-center rounded-full bg-[color:var(--accent)] text-[0.75rem] text-paper shadow-[0_5px_14px_rgba(18,44,35,0.2)]">↔</span>
             </span>
             <span>
-              <span className="block font-mono text-[0.6875rem] font-semibold tracking-[0.18em] text-ink uppercase">Swipe to explore</span>
-              <span className="mt-1 block text-[0.75rem] text-ink-soft">Drag sideways to change the season</span>
+              <span className="block font-mono text-[0.6875rem] font-semibold tracking-[0.18em] text-ink uppercase">{t('Swipe to explore')}</span>
+              <span className="mt-1 block text-[0.75rem] text-ink-soft">{t('Drag sideways to change the season')}</span>
             </span>
           </div>
 
           <div className="mt-6 hidden items-center gap-3 md:flex">
             <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[color:var(--accent)]" />
             <p className="font-mono text-[0.625rem] tracking-[0.16em] text-ink-soft uppercase">
-              Hover a season to reveal its work
+              {t('Hover a season to reveal its work')}
             </p>
           </div>
         </div>
@@ -432,11 +429,11 @@ function SurfaceStage() {
               <div className="flex items-center gap-3">
                 <span className="h-2 w-2 rounded-full border border-paper/40 bg-[color:var(--accent)]" />
                 <h3 className="font-mono text-[0.75rem] tracking-[0.2em]  uppercase">
-                  Above grade
+                  {t('Above grade')}
                 </h3>
               </div>
               <span className="font-mono text-[0.6875rem] tracking-[0.18em]  uppercase">
-                Seasonal surface care
+                {t('Seasonal surface care')}
               </span>
             </div>
 
@@ -470,7 +467,7 @@ function SurfaceStage() {
                   >
                     S{String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="opacity-60">{season.months}</span>
+                  <span className="opacity-60">{t(season.months)}</span>
                 </div>
 
                 <div className="relative z-10 grid flex-1 place-items-center py-4 opacity-70">
@@ -479,13 +476,13 @@ function SurfaceStage() {
 
                 <div className="relative z-20 mt-auto">
                   <p className="font-mono text-[0.75rem] font-semibold tracking-[0.16em] uppercase opacity-85">
-                    {season.line}
+                    {t(season.line)}
                   </p>
                   <h4
                     id={`season-${season.key}`}
                     className="mt-2 font-display text-[clamp(2.5rem,4.5vw,5.25rem)] leading-[0.82] font-semibold tracking-[-0.06em] uppercase"
                   >
-                    {season.label}
+                    {t(season.label)}
                   </h4>
 
                   <ul className="mt-5 flex flex-wrap gap-2">
@@ -498,7 +495,7 @@ function SurfaceStage() {
                           backgroundColor: `${season.ink}14`,
                         }}
                       >
-                        {name}
+                        {t(name)}
                       </li>
                     ))}
                   </ul>
@@ -521,6 +518,7 @@ function SurfaceStage() {
 }
 
 function RootService({ name, index }: { name: string; index: number }) {
+  const { t } = useI18n();
   const isLeft = index % 2 === 0;
 
   return (
@@ -537,10 +535,10 @@ function RootService({ name, index }: { name: string; index: number }) {
         </span>
         <div className="min-w-0">
           <p className="font-display text-base leading-[1.05] font-semibold tracking-[-0.02em] text-paper uppercase sm:text-lg">
-            {name}
+            {t(name)}
           </p>
           <p className="mt-2 text-[0.6875rem] leading-relaxed tracking-[0.12em] text-paper/42 uppercase">
-            Foundation work · Root zone
+            {t('Foundation work · Root zone')}
           </p>
         </div>
       </div>
@@ -556,6 +554,7 @@ function RootService({ name, index }: { name: string; index: number }) {
 }
 
 function RootCore() {
+  const { t } = useI18n();
   return (
     <div
       aria-hidden="true"
@@ -566,10 +565,10 @@ function RootCore() {
       <span className="absolute h-[55%] w-[55%] rounded-full border border-[color:var(--accent)]/45 bg-evergreen/80 shadow-[0_0_80px_rgba(255,255,255,0.06)]" />
       <span className="relative flex h-24 w-24 flex-col items-center justify-center rounded-full bg-[color:var(--accent)] text-center text-evergreen shadow-[0_0_50px_rgba(255,255,255,0.12)]">
         <span className="font-mono text-[0.5625rem] tracking-[0.2em]">
-          ROOT
+          {t('ROOT')}
         </span>
         <span className="mt-1 font-display text-lg leading-none font-bold tracking-[-0.04em]">
-          SYSTEM
+          {t('SYSTEM')}
         </span>
       </span>
     </div>
@@ -577,21 +576,20 @@ function RootCore() {
 }
 
 export function CrossSection() {
+  const { t } = useI18n();
   return (
     <section
       aria-labelledby="ground-heading"
       className="yard-xray relative isolate overflow-hidden bg-paper pt-0 pb-0 text-ink sm:pt-0 sm:pb-1 lg:pt-0 lg:pb-0"
     >
-      <div>
-
-        <div className="relative mt-14 border border-ink/12 bg-paper shadow-[0_40px_100px_rgba(18,44,35,0.12)] sm:mt-20">
+        <div className="relative border border-ink/12 bg-paper shadow-[0_40px_100px_rgba(18,44,35,0.12)]">
           <SurfaceStage />
 
           <div className="relative z-30 h-0">
             <div className="absolute top-0 right-0 left-0 h-[3px] -translate-y-1/2 bg-[color:var(--accent)] shadow-[0_0_22px_color-mix(in_srgb,var(--accent)_55%,transparent)]" />
             <div className="absolute top-0 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 whitespace-nowrap border border-[color:var(--accent)] bg-paper px-4 py-2 font-mono text-[0.6875rem] tracking-[0.18em] text-ink uppercase shadow-[0_8px_30px_rgba(18,44,35,0.16)] sm:px-5">
               <span className="yard-xray__grade-dot h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
-              Grade line · ± 00.00
+              {t('Grade line')} · ± 00.00
             </div>
           </div>
 
@@ -618,11 +616,11 @@ export function CrossSection() {
               <div className="flex items-center gap-3">
                 <span className="h-2 w-2 rounded-full border border-paper/40 bg-[color:var(--accent)]" />
                 <h3 className="font-mono text-[0.75rem] tracking-[0.2em] text-paper uppercase">
-                   Below ground
+                   {t('Below ground')}
                 </h3>
               </div>
               <span className="font-mono text-[0.6875rem] tracking-[0.18em] text-paper/55 uppercase">
-                Structural care
+                {t('Structural care')}
               </span>
             </div>
 
@@ -637,9 +635,9 @@ export function CrossSection() {
 
             <div className="relative z-10 grid gap-8 border-t border-paper/12 pt-7 lg:grid-cols-[1fr_auto] lg:items-end">
               <p className="max-w-[34ch] font-display text-[clamp(1.55rem,3.2vw,3.6rem)] leading-[0.95] font-semibold tracking-[-0.045em] text-paper uppercase">
-                The surface gets noticed.
+                {t('The surface gets noticed.')}
                 <span className="block text-[color:var(--accent)]">
-                  The system earns it.
+                  {t('The system earns it.')}
                 </span>
               </p>
 
@@ -649,16 +647,14 @@ export function CrossSection() {
                   <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
                 </span>
                 <p className="font-mono text-[0.6875rem] leading-relaxed tracking-[0.16em] text-paper/60 uppercase">
-                  One property
+                  {t('One property')}
                   <br />
-                  One complete system
+                  {t('One complete system')}
                 </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
       <style>{`
         .yard-xray__blade {
           transform-box: fill-box;

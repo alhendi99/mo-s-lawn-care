@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { Reveal } from "./reveal";
+import { useI18n } from "@/lib/i18n";
 
 type ReviewCategory =
   | "mixed"
@@ -717,6 +718,7 @@ const REVIEWS: Review[] = [
 ] as Review[];
 
 export function Testimonials() {
+  const { t } = useI18n();
   const [activeCategory, setActiveCategory] =
     useState<ReviewCategory>("mixed");
   const [index, setIndex] = useState(0);
@@ -794,7 +796,7 @@ export function Testimonials() {
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center rounded-full border border-[#3e7a45]/15 bg-[#3e7a45]/5 px-4 py-2">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#3e7a45]">
-                Google Reviews
+                {t('Google Reviews')}
               </p>
             </div>
 
@@ -802,24 +804,23 @@ export function Testimonials() {
               id="reviews-heading"
               className="mt-5 text-balance text-3xl font-bold tracking-tight text-[#1d2b1f] sm:text-4xl lg:text-5xl"
             >
-              Trusted by homeowners across{" "}
+              {t('Trusted by homeowners across')}{" "}
               <span className="text-[#3e7a45]">Des Moines</span>
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Real feedback from customers who trusted Mo&apos;s Lawn Care &
-              Snow Removal Services with their properties.
+              {t("Real feedback from customers who trusted Mo's Lawn Care & Snow Removal Services with their properties.")}
             </p>
 
             <a
               href="https://www.google.com/maps/place/Mo's+lawn+care+%26+Snow+removal+services+LLC/@41.6726196,-93.5720955,13z/data=!4m18!1m9!3m8!1s0x87ee99e896289b53:0x97b64e4e08676e75!2sMo's+lawn+care+%26+Snow+removal+services+LLC!8m2!3d41.6726196!4d-93.5720955!9m1!1b1!16s%2Fg%2F11h00c8p6r!3m7!1s0x87ee99e896289b53:0x97b64e4e08676e75!8m2!3d41.6726196!4d-93.5720955!9m1!1b1!16s%2Fg%2F11h00c8p6r?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="View all 160 Google reviews"
+              aria-label={t('View all 160 Google reviews')}
               className="group flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
             >
               <span className="font-bold text-[#244729] transition-colors group-hover:text-[#3e7a45]">
-                5.0 on Google
+                {t('5.0 on Google')}
               </span>
 
               <span
@@ -830,7 +831,7 @@ export function Testimonials() {
               </span>
 
               <span className="text-muted-foreground transition-colors group-hover:text-[#3e7a45]">
-                160 customer reviews
+                {t('160 customer reviews')}
               </span>
             </a>
           </div>
@@ -840,7 +841,7 @@ export function Testimonials() {
         <Reveal className="mt-10">
                  <div
           className="mt-6 flex items-center gap-4 md:hidden"
-          aria-label="Swipe horizontally to change the category"
+          aria-label={t('Swipe horizontally to change the category')}
         >
           <span
             aria-hidden="true"
@@ -858,17 +859,17 @@ export function Testimonials() {
           </span>
           <span>
             <span className="block font-mono text-[0.6875rem] font-semibold tracking-[0.18em] text-ink uppercase">
-              Swipe to explore
+              {t('Swipe to explore')}
             </span>
             <span className="mt-1 block text-[0.75rem] text-ink-soft">
-              Drag sideways to change the category
+              {t('Drag sideways to change the category')}
             </span>
           </span>
         </div>
           <div
             className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0"
             role="tablist"
-            aria-label="Review categories"
+            aria-label={t('Review categories')}
           >
             {categoriesWithCounts.map((category) => {
               const isActive = category.id === activeCategory;
@@ -887,7 +888,7 @@ export function Testimonials() {
                       : "border-[#3e7a45]/15 bg-white text-[#244729] hover:border-[#3e7a45]/35 hover:bg-[#eef6ef]")
                   }
                 >
-                  <span>{category.label}</span>
+                  <span>{t(category.label)}</span>
                   <span
                     className={
                       "grid min-w-7 place-items-center rounded-full px-2 py-0.5 text-xs tabular-nums " +
@@ -907,9 +908,9 @@ export function Testimonials() {
         <Reveal className="mt-7">
           <div className="text-center">
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#3e7a45]">
-              {activeCategoryData?.label}
+              {activeCategoryData ? t(activeCategoryData.label) : ''}
               {activeCategoryData
-                ? ` · ${activeCategoryData.count} reviews`
+                ? ` · ${activeCategoryData.count} ${t('reviews')}`
                 : ""}
             </p>
           </div>
@@ -955,7 +956,7 @@ export function Testimonials() {
                     {review.rating ? (
                       <div
                         className="flex gap-0.5 text-[#3e7a45]"
-                        aria-label={`${review.rating} out of 5 stars`}
+                        aria-label={`${review.rating} ${t('out of 5 stars')}`}
                       >
                         {Array.from({ length: review.rating }).map((_, i) => (
                           <Star key={i} className="size-5 fill-current" />
@@ -963,12 +964,12 @@ export function Testimonials() {
                       </div>
                     ) : (
                       <span className="inline-flex rounded-full bg-[#f3f5f3] px-3 py-1 text-xs font-semibold text-muted-foreground">
-                        Rating not listed
+                        {t('Rating not listed')}
                       </span>
                     )}
 
                     <p className="mt-5 max-w-5xl whitespace-pre-line text-pretty text-lg font-medium leading-relaxed text-[#263329] sm:text-xl lg:text-2xl">
-                      &ldquo;{review.quote}&rdquo;
+                      &ldquo;{t(review.quote)}&rdquo;
                     </p>
 
                     <footer className="mt-7">
@@ -983,7 +984,7 @@ export function Testimonials() {
                           </p>
 
                           <div className="mt-0.5 flex items-center gap-2 text-sm text-muted-foreground">
-                            <span>Google Review</span>
+                            <span>{t('Google Review')}</span>
                             <span
                               className="text-[#3e7a45]/40"
                               aria-hidden="true"
@@ -992,8 +993,8 @@ export function Testimonials() {
                             </span>
                             <span>
                               {review.rating
-                                ? `${review.rating}-star customer review`
-                                : "Rating not listed"}
+                                ? `${t('Customer review rated')} ${review.rating} ${t('stars')}`
+                                : t('Rating not listed')}
                             </span>
                           </div>
                         </div>
@@ -1033,7 +1034,7 @@ export function Testimonials() {
                   <button
                     type="button"
                     onClick={() => go(index - 1, -1)}
-                    aria-label="Previous review"
+                    aria-label={t('Previous review')}
                     className="grid size-11 place-items-center rounded-full border border-[#3e7a45]/25 bg-white text-[#3e7a45] transition-all duration-200 hover:border-[#3e7a45] hover:bg-[#3e7a45] hover:text-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3e7a45] focus-visible:ring-offset-2"
                   >
                     <ChevronLeft className="size-5" />
@@ -1042,7 +1043,7 @@ export function Testimonials() {
                   <button
                     type="button"
                     onClick={() => go(index + 1, 1)}
-                    aria-label="Next review"
+                    aria-label={t('Next review')}
                     className="grid size-11 place-items-center rounded-full bg-[#3e7a45] text-white shadow-sm transition-all duration-200 hover:bg-[#326438] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3e7a45] focus-visible:ring-offset-2"
                   >
                     <ChevronRight className="size-5" />
