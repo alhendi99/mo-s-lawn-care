@@ -20,7 +20,7 @@ export const site = {
   workingHours: 'Saturday–Thursday, 9:00–11:00 PM',
   socialLinks: [] as { label: string; href: string }[],
   formEndpoint: '/api/estimate',
-  heroVideo: '/Untitled.mov',
+  heroVideo: '/background.mp4',
   heroPoster: '/poster.webp', // replace with /hero-poster.webp
 } as const
 
