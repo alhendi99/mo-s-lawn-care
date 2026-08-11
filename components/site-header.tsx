@@ -113,8 +113,7 @@ export function SiteHeader() {
         >
           <Phone aria-hidden="true" size={18} strokeWidth={2.25} />
         </a>
-        <a
-          href={site.email}
+        <a href={`mailto:${site.email}`}
           tabIndex={persistent ? undefined : -1}
           className="flex min-h-12 items-center justify-center gap-2 text-sm font-bold tracking-[0.12em] text-paper uppercase whitespace-nowrap"
         >
