@@ -37,7 +37,7 @@ export function SiteHeader() {
         >
           <a href="#top" className="group flex items-center gap-3 text-paper">
             <Image
-              src="/top.png"
+              src="/logo-112x112.png"
               alt={t("Mo's Lawn Care and Snow Removal")}
               width={56}
               height={56}
@@ -95,26 +95,32 @@ export function SiteHeader() {
       </a>
 
       <div
-        className={`fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-paper/15 bg-evergreen/97 p-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(8,20,14,0.24)] backdrop-blur-md transition-[transform,opacity] duration-300 md:hidden ${
+        className={`fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-paper/15 bg-evergreen/97 p-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(8,20,14,0.24)] backdrop-blur-md transition-[transform,opacity] duration-300 md:hidden ${
           persistent ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
         }`}
         aria-hidden={!persistent}
       >
         <a
+          href="#estimate-form"
+          tabIndex={persistent ? undefined : -1}
+          className="flex min-h-12 items-center justify-center bg-[#D5EE72] px-3 text-[9px] font-bold tracking-[0.1em]  uppercase "
+        >
+          {t('Free estimate')}
+        </a>        <a
           href={site.phoneHref}
+          tabIndex={persistent ? undefined : -1}
+          className="flex min-h-12 items-center border-t border-paper/15 justify-center gap-2 text-sm font-bold tracking-[0.12em] text-paper uppercase whitespace-nowrap"
+        >
+          <Phone aria-hidden="true" size={18} strokeWidth={2.25} />
+        </a>
+        <a
+          href={site.email}
           tabIndex={persistent ? undefined : -1}
           className="flex min-h-12 items-center justify-center gap-2 text-sm font-bold tracking-[0.12em] text-paper uppercase whitespace-nowrap"
         >
-          <Phone aria-hidden="true" size={18} strokeWidth={2.25} />
-          {site.phone}
+          <Mail aria-hidden="true" size={18} strokeWidth={2.25} />
         </a>
-        <a
-          href="#estimate-form"
-          tabIndex={persistent ? undefined : -1}
-          className="flex min-h-12 items-center justify-center bg-[#D5EE72] px-3 text-sm font-bold tracking-[0.1em] text-evergreen uppercase"
-        >
-          {t('Free estimate')}
-        </a>
+  
       </div>
     </>
   )

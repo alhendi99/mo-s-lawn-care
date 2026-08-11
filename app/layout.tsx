@@ -52,11 +52,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', type: 'image/x-icon', sizes: 'any' },
-      { url: '/icon-light-32x32.png', type: 'image/png', sizes: '32x32', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', type: 'image/png', sizes: '32x32', media: '(prefers-color-scheme: dark)' },
+      { url: '/logo-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/logo-48x48.png', type: 'image/png', sizes: '48x48' },
     ],
     shortcut: '/favicon.ico',
-    apple: [{ url: '/apple-icon.png', type: 'image/png', sizes: '180x180' }],
+    apple: [{ url: '/logo-180x180.png', type: 'image/png', sizes: '180x180' }],
   },
   manifest: '/manifest.webmanifest',
   openGraph: {

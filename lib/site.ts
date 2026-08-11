@@ -276,8 +276,8 @@ export const projects: Project[] = [
     id: '8',
     title: 'Landscaping / Lawn Restoration',
     meta: 'Des Moines, IA',
-    before: '/gallery7.webp',
-    after: '/gallery8.webp',
+    before: '/media/gallery7.webp',
+    after: '/media/gallery8.webp',
   },
 ]
 
