@@ -389,7 +389,7 @@ function SurfaceStage() {
     <div className="yard-xray__surface relative isolate overflow-hidden bg-paper">
       <div className="grid gap-8 px-5 pt-10 pb-10 sm:px-8 sm:pt-14 sm:pb-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end lg:gap-16 lg:px-10">
         <div>
-          <h3
+          <h2
             id="ground-heading"
             className="max-w-[18ch] font-display text-[clamp(1.75rem,1.05rem+3vw,3.5rem)] leading-[0.82] font-semibold tracking-[-0.07em] text-ink uppercase"
           >
@@ -397,7 +397,7 @@ function SurfaceStage() {
             <span className="block text-[color:var(--accent)]">
               {t('Four seasons.')}
             </span>
-          </h3>
+          </h2>
         </div>
 
         <div className="border-t border-ink/15 pt-5 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-7">
@@ -405,7 +405,7 @@ function SurfaceStage() {
             {t('Your yard changes with the weather. Our care changes with it—without lowering the standard.')}
           </p>
 
-          <div className="mt-6 flex items-center gap-4 md:hidden" aria-label={t('Swipe horizontally to change the season')}>
+          <div className="mt-6 flex items-center gap-4 md:hidden">
             <span aria-hidden="true" className="yard-xray__swipe-cue relative h-11 w-[5.5rem] shrink-0 overflow-hidden rounded-full border border-ink/20 bg-ink/[0.035]">
               <span className="absolute top-1/2 left-3 -translate-y-1/2 text-[0.6875rem] text-ink/30">‹</span>
               <span className="absolute top-1/2 right-3 -translate-y-1/2 text-[0.6875rem] text-ink/30">›</span>
@@ -579,6 +579,7 @@ export function CrossSection() {
   const { t } = useI18n();
   return (
     <section
+      id="seasons"
       aria-labelledby="ground-heading"
       className="yard-xray relative isolate overflow-hidden bg-paper pt-0 pb-0 text-ink sm:pt-0 sm:pb-1 lg:pt-0 lg:pb-0"
     >

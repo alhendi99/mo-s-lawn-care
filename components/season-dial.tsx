@@ -99,7 +99,7 @@ export function SeasonDial() {
                 >
                   {loaded.includes(s.key) && (
                     <Image
-                      src={s.image || '/placeholder.svg'}
+                      src={s.image}
                       alt={`The same Des Moines property in ${s.label.toLowerCase()}`}
                       fill
                       sizes="(min-width: 1024px) 60vw, 100vw"

@@ -18,7 +18,7 @@ function Frame({
   if (src) {
     return (
       <Image
-        src={src || '/placeholder.svg'}
+        src={src}
         alt={`${t(label)} — ${t("Mo's Lawn Care project")}`}
         fill
         sizes="(min-width: 1536px) 1500px, (min-width: 1024px) 90vw, 100vw"
@@ -354,19 +354,22 @@ export function BeforeAfterSlider() {
             aria-selected={index === slideIndex}
             aria-label={`${t('Show')} ${t(project.title)}`}
             onClick={() => changeSlide(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === slideIndex
-                ? 'w-8'
-                : 'w-2 bg-white/30 hover:bg-white/60'
-            }`}
-            style={
-              index === slideIndex
-                ? {
-                    backgroundColor: 'var(--accent)',
-                  }
-                : undefined
-            }
-          />
+            className="group grid min-h-11 min-w-11 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-paper focus-visible:ring-offset-2 focus-visible:ring-offset-evergreen"
+          >
+            <span
+              aria-hidden="true"
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === slideIndex
+                  ? 'w-8'
+                  : 'w-2 bg-white/30 group-hover:bg-white/60'
+              }`}
+              style={
+                index === slideIndex
+                  ? { backgroundColor: 'var(--accent)' }
+                  : undefined
+              }
+            />
+          </button>
         ))}
       </div>
     </div>

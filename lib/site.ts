@@ -21,7 +21,7 @@ export const site = {
   socialLinks: [] as { label: string; href: string }[],
   formEndpoint: '/api/estimate',
   heroVideo: '/background.mp4',
-  // heroPoster: '/poster.webp', // replace with /hero-poster.webp
+  heroPoster: '/hero-poster.webp',
 } as const
 
 export const nav = [

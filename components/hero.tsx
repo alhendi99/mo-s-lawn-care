@@ -106,6 +106,7 @@ export function Hero() {
         <div className="hero-service-line hero-reveal  min-h-14 items-center justify-between overflow-hidden border-t border-paper/18 py-3 [animation-delay:440ms] sm:flex">
           <div
             className="hero-marquee w-full overflow-hidden"
+            role="group"
             aria-label={t('Services we provide')}
           >
             <div className="hero-marquee-track">

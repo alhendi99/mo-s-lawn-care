@@ -105,7 +105,7 @@ export default function RootLayout({
     <html lang="en" className={`${display.variable} ${body.variable} bg-background`}>
       <body className="antialiased">
         <I18nProvider>{children}</I18nProvider>
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.VERCEL === '1' && <Analytics />}
       </body>
     </html>
   )

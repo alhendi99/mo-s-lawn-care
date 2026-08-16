@@ -839,33 +839,30 @@ export function Testimonials() {
  
         {/* Category filters — keep the category + review count, but not a review grid. */}
         <Reveal className="mt-10">
-                 <div
-          className="mt-6 flex items-center gap-4 md:hidden"
-          aria-label={t('Swipe horizontally to change the category')}
-        >
-          <span
-            aria-hidden="true"
-            className="yard-xray__swipe-cue relative h-11 w-[5.5rem] shrink-0 overflow-hidden rounded-full border border-ink/20 bg-ink/[0.035]"
-          >
-            <span className="absolute top-1/2 left-3 -translate-y-1/2 text-[0.6875rem] text-ink/30">
-              ‹
+          <div className="mt-6 flex items-center gap-4 md:hidden">
+            <span
+              aria-hidden="true"
+              className="yard-xray__swipe-cue relative h-11 w-[5.5rem] shrink-0 overflow-hidden rounded-full border border-ink/20 bg-ink/[0.035]"
+            >
+              <span className="absolute top-1/2 left-3 -translate-y-1/2 text-[0.6875rem] text-ink/30">
+                ‹
+              </span>
+              <span className="absolute top-1/2 right-3 -translate-y-1/2 text-[0.6875rem] text-ink/30">
+                ›
+              </span>
+              <span className="yard-xray__swipe-thumb absolute top-1/2 left-1/2 grid h-7 w-7 translate-x-[-50%] translate-y-[calc(-50%+8px)] place-items-center rounded-full bg-[color:var(--accent)] text-[0.75rem] text-paper shadow-[0_5px_14px_rgba(18,44,35,0.2)]">
+                ↔
+              </span>
             </span>
-            <span className="absolute top-1/2 right-3 -translate-y-1/2 text-[0.6875rem] text-ink/30">
-              ›
+            <span>
+              <span className="block font-mono text-[0.6875rem] font-semibold tracking-[0.18em] text-ink uppercase">
+                {t('Swipe to explore')}
+              </span>
+              <span className="mt-1 block text-[0.75rem] text-ink-soft">
+                {t('Drag sideways to change the category')}
+              </span>
             </span>
-            <span className="yard-xray__swipe-thumb absolute top-1/2 left-1/2 grid h-7 w-7 translate-x-[-50%] translate-y-[calc(-50%+8px)] place-items-center rounded-full bg-[color:var(--accent)] text-[0.75rem] text-paper shadow-[0_5px_14px_rgba(18,44,35,0.2)]">
-              ↔
-            </span>
-          </span>
-          <span>
-            <span className="block font-mono text-[0.6875rem] font-semibold tracking-[0.18em] text-ink uppercase">
-              {t('Swipe to explore')}
-            </span>
-            <span className="mt-1 block text-[0.75rem] text-ink-soft">
-              {t('Drag sideways to change the category')}
-            </span>
-          </span>
-        </div>
+          </div>
           <div
             className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0"
             role="tablist"
@@ -956,10 +953,11 @@ export function Testimonials() {
                     {review.rating ? (
                       <div
                         className="flex gap-0.5 text-[#3e7a45]"
+                        role="img"
                         aria-label={`${review.rating} ${t('out of 5 stars')}`}
                       >
                         {Array.from({ length: review.rating }).map((_, i) => (
-                          <Star key={i} className="size-5 fill-current" />
+                          <Star key={i} aria-hidden="true" className="size-5 fill-current" />
                         ))}
                       </div>
                     ) : (

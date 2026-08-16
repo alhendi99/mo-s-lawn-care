@@ -194,8 +194,8 @@ export function GalleryClient({
   src={item.src}
   alt={`${t('Landscaping project')} ${index + 1}`}
   fill
-  sizes="100vw"
-  loading="eager"
+  sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 46vw, (min-width: 640px) 68vw, 84vw"
+  loading={index < 2 ? 'eager' : 'lazy'}
   className="object-contain"
 />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-evergreen/90 via-evergreen/35 to-transparent px-5 pt-20 pb-5 text-paper sm:px-6 sm:pb-6">
