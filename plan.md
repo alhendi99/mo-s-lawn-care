@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 8 complete; Task 9 not started
+- Phase: Incremental implementation — Task 9 complete; Task 10 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–8 completed; Task 9 and later are not authorized
+- Implementation status: Tasks 1–9 completed; Task 10 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -16,7 +16,8 @@
 - Task 6 repository baseline: clean `main` at `710128d`
 - Task 7 repository baseline: clean `main` at `649656b`
 - Task 8 repository baseline: clean `main` at `16c96dd`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 9 or later
+- Task 9 repository baseline: clean `main` at `b97f138`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 10 or later
 
 ## Evidence Labels
 
@@ -28,7 +29,26 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 8 complete, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 9 complete, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 9 only — Fertilization and Weed Control Service Page. Task 10 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 9 began from clean `main` at `b97f138` (`feat(seo): add aeration and seeding service page`). `git status --short` returned no entries before the first edit.
+- **Ownership and consolidation:** `/services/fertilization-weed-control` now owns `lawn fertilization des moines ia` with the exact approved title, description, H1, secondary keywords and query-free self-canonical. Fertilization and weed-control intent remains one paired page; no fertilization, weed-control, lawn-treatment, lawn-fertilizer, herbicide-treatment or city/service alias was created.
+- **Architecture and publication:** one new typed service content module reuses the Tasks 7–8 dynamic route, metadata/schema builders, breadcrumb graph and shared service renderer. The explicit publication allowlist contains exactly Lawn Mowing, Aeration and Seeding, and Fertilization & Weed Control; Tasks 10–16 remain planned and return branded 404s.
+- **Content and safety boundary:** the page covers unwanted-weed concerns, consideration of fertilization, residential/commercial context, five approved areas, distinct relationships to mowing and Aeration and Seeding, six estimate-oriented FAQs and clear Contact/call paths. It names no specific product/brand, active ingredient, chemical, fertilizer formula, material type, pesticide/herbicide method, equipment, diagnostic process, application count, schedule, credential, health/environment assurance, price/contract or guaranteed result.
+- **Media and reviews:** no repository image or review has verified fertilization/weed-control provenance. The hero therefore uses the existing neutral property image with observable alt/caption and explicit no-service/result/city/customer attribution. Two verbatim general Google review excerpts are labeled as general feedback and explicitly not treatment evidence; no Review/AggregateRating schema is emitted.
+- **Schema and breadcrumbs:** one coherent graph emits Organization/WebSite, WebPage, one consolidated Service with the existing `#organization` provider and five approved City/State areas, and one BreadcrumbList. Visible/schema hierarchy is Home → Services → Fertilization & Weed Control. No Product, Offer, FAQPage, Review, rating, price, address, geo, credential or chemical detail is encoded.
+- **Language and responsive refinement:** every new visible content string has an explicit Spanish translation that preserves the English safety boundary. The shared current breadcrumb now wraps rather than ellipsizing long translated labels, and the shared service H1 uses a narrow-screen fluid size/viewport measure while retaining the established desktop measure. At 320 px the full Spanish breadcrumb and H1 fit inside the viewport without horizontal overflow.
+- **Performance and analytics:** the page remains statically generated and adds no client component, fetch, video, gallery/review archive, form implementation, analytics event or dependency. It reuses the single existing eager hero-image strategy. Task 4's exact five-event allowlist and PII-safe lead semantics remain unchanged.
+- **Route/source QA:** production output returns 200 for the three authorized service details and 404 for Tasks 10–16, the three prohibited treatment aliases tested, and an arbitrary invalid slug. Rendered source contains the exact head data, one H1, core English content, required links, visible breadcrumb and WebPage/Service/BreadcrumbList graph; query parameters never enter the canonical.
+- **Browser QA:** production-browser checks passed at `1440×900`, `1280×800`, `390×844` and `320×568`; checks covered active Services context, hero/content/related/reviews/areas/FAQs/CTA/footer, English/Spanish, complete GBP UTM preservation, mobile menu Escape/focus return, skip-link focus, reduced motion, fixed controls, zero horizontal overflow and a final console with zero errors/warnings.
+- **Passed checks:** `pnpm validate:fertilization-weed-control`; Tasks 7–8 focused validators; Services/content/SEO/navigation/analytics/homepage validators; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; production status/source/schema/sitemap assertions; browser QA; `git diff --check`.
+- **Unavailable check:** `pnpm lint` exits 1 because the existing script invokes `eslint .` while ESLint is not installed or declared. Task 9 adds no dependency or lockfile churn.
+- **No external action:** no deployment, production/account setting, live estimate delivery, Google Business Profile edit or GA4 activation occurred.
+- **Task status:** Task 9 is `[x]` Completed because every Definition of Done item is satisfied. Task 10 was not started.
+- **Exact next action:** commit the authorized Task 9 changes, report the local result and STOP before Task 10.
+
+### Prior checkpoint — Task 8 complete, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 8 only — Aeration and Seeding Service Page. Task 9 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 8 began from clean `main` at `16c96dd` (`feat(seo): add lawn mowing service page`). `git status --short` returned no entries before the first edit.
@@ -1080,7 +1100,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 9 — Fertilization and Weed Control Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/fertilization-weed-control/` as the consolidated Des Moines treatment-intent page.
 - **Why It Is Needed:** The advertised paired service has its own commercial search intent but carries heightened truth/safety risks.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for conversion components.
@@ -1090,7 +1110,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Regulatory/licensing implications, health/environment claims, guaranteed weed elimination, exact programs or seasonal dates, PII in estimate context, unsuitable imagery.
 - **Validation:** Business/content approval, exact metadata and semantic headings, Service/Breadcrumb schema, link checks, CTA/form behavior, and manual safety/accuracy reading.
 - **Tests:** Route/metadata/H1/schema, required links, forbidden-claim term/content review, one consolidated route, and invalid slug 404.
-- **Definition of Done:** `[ ]` Page is complete and human-readable; `[ ]` only confirmed capabilities appear; `[ ]` no chemical/licensing/schedule/guarantee claims are introduced; `[ ]` ownership/schema/link checks pass.
+- **Definition of Done:** `[x]` Page is complete and human-readable; `[x]` only confirmed capabilities appear; `[x]` no chemical/licensing/schedule/guarantee claims are introduced; `[x]` ownership/schema/link checks pass.
+
+#### Task 9 implementation record
+
+- **Completed files:** new `content/services/fertilization-weed-control.ts`; new `scripts/validate-fertilization-weed-control-service.mts`; `content/services/index.ts`; `content/routes.ts`; `components/breadcrumbs.tsx`; `components/service-detail-page.tsx`; `lib/es-translations.json`; `package.json`; lifecycle-aware inherited validators; and this plan record.
+- **Consolidation decision:** the single published record owns fertilization, weed control and the approved lawn-treatment search language. No alias, split intent, treatment product, city/service permutation or alternate Service entity was added.
+- **Truth/safety decision:** the visible page states only the advertised paired service, approved residential/commercial property context, five-city service area and free-estimate path. Technical products, chemicals, formulas, methods, equipment, diagnosis, application counts/schedules, licenses/certifications, health/environment assurances, pricing/contracts and result guarantees are explicitly omitted rather than inferred from legacy marketing copy.
+- **Evidence decision:** the existing neutral property image is not characterized as a service or result. No review explicitly mentions fertilization/weed control, so two verbatim general reviews are presented with conspicuous general-feedback/no-treatment-proof context and no Review/AggregateRating schema.
+- **Shared responsive decision:** Task 9's longer Spanish label exposed reusable narrow-screen issues. The visible current breadcrumb now wraps, and service H1 typography stays within the small viewport while preserving the established measure at `sm` and above; Tasks 7–8 retain their content, metadata, schema and route lifecycle.
+- **Validation result:** the focused validator covers exact ownership, publication/consolidation, natural secondary terminology, one H1/template, provider/schema/breadcrumb parity, required links, chemical/process/schedule/regulatory/safety/result/pricing/instruction restraint, media/review provenance, Spanish completeness and sitemap isolation. The full regression matrix, repeated production build, rendered-source/status/schema/sitemap checks and four-viewport browser QA pass; lint remains unavailable because ESLint is not installed.
+- **Final result:** all four Task 9 Definition of Done checks are satisfied. Task 9 is complete and work stops before Task 10.
 
 ### Task 10 — Landscaping Service Page
 

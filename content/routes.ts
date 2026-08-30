@@ -180,7 +180,9 @@ export const routeRegistry = [
     h1: 'Lawn Fertilization & Weed Control in Des Moines, IA',
     description:
       "Professional lawn fertilization and weed control in Des Moines, IA for healthier, cleaner-looking turf. Request a free estimate from Mo's Lawn Care.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home', 'services', 'service-lawn-mowing', 'service-aeration-overseeding'],
     outboundLinkIds: ['service-aeration-overseeding', 'service-lawn-mowing', 'services', 'contact'],
   }),

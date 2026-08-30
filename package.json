@@ -16,7 +16,8 @@
     "validate:homepage": "node --experimental-strip-types scripts/validate-homepage.mts",
     "validate:services": "node --experimental-strip-types scripts/validate-services-index.mts",
     "validate:lawn-mowing": "node --experimental-strip-types scripts/validate-lawn-mowing-service.mts",
-    "validate:aeration-seeding": "node --experimental-strip-types scripts/validate-aeration-seeding-service.mts"
+    "validate:aeration-seeding": "node --experimental-strip-types scripts/validate-aeration-seeding-service.mts",
+    "validate:fertilization-weed-control": "node --experimental-strip-types scripts/validate-fertilization-weed-control-service.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

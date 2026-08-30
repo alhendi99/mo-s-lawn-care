@@ -28,7 +28,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
             <div className="relative z-10 flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-16 lg:px-[max(2rem,calc((100vw-112rem)/2+2rem))] lg:pr-14 lg:py-20">
               <div className="service-detail-reveal max-w-4xl">
                 <p className="eyebrow text-[#D5EE72]"><Tr text={content.hero.eyebrow} /></p>
-                <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(2.9rem,6.3vw,7.25rem)] leading-[0.88] font-bold tracking-[-0.055em] uppercase">
+                <h1 className="mt-6 max-w-[calc(100vw-2.5rem)] break-words font-display text-[clamp(2.35rem,12vw,7.25rem)] leading-[0.88] font-bold tracking-[-0.055em] uppercase sm:max-w-[12ch] sm:text-[clamp(2.9rem,6.3vw,7.25rem)]">
                   <Tr text={route.h1} />
                 </h1>
                 <p className="mt-7 max-w-[35rem] text-base leading-relaxed text-paper/72 sm:text-lg">

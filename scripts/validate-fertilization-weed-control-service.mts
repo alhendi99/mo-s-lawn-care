@@ -10,6 +10,7 @@ import {
   publishedServiceDetails,
   publishedServiceSlugs,
 } from '../content/services/index.ts'
+import { lawnMowingService } from '../content/services/lawn-mowing.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
 import { approvedBusinessFacts } from '../lib/site.ts'
 import {
@@ -20,26 +21,25 @@ import {
 
 const projectRoot = process.cwd()
 const read = (relativePath: string) => fs.readFileSync(path.join(projectRoot, relativePath), 'utf8')
-const route = routesById['service-aeration-overseeding']
+const route = routesById['service-fertilization-weed-control']
 
-assert.equal(route.path, '/services/aeration-overseeding')
-assert.equal(route.primaryKeyword, 'lawn aeration des moines ia')
+assert.equal(route.path, '/services/fertilization-weed-control')
+assert.equal(route.primaryKeyword, 'lawn fertilization des moines ia')
 assert.deepEqual(route.secondaryKeywords, [
-  'aeration service Des Moines',
-  'lawn seeding Des Moines',
-  'overseeding Des Moines',
-  'core aeration Des Moines',
-  'aeration and seeding Des Moines',
+  'weed control Des Moines',
+  'lawn weed control Des Moines',
+  'fertilization service Des Moines',
+  'lawn treatment Des Moines',
 ])
-assert.equal(route.title, "Lawn Aeration & Seeding in Des Moines, IA | Mo's Lawn Care")
-assert.equal(route.h1, 'Lawn Aeration & Seeding in Des Moines, IA')
+assert.equal(route.title, "Fertilization & Weed Control in Des Moines, IA | Mo's Lawn Care")
+assert.equal(route.h1, 'Lawn Fertilization & Weed Control in Des Moines, IA')
 assert.equal(
   route.description,
-  "Improve thin or compacted lawns with aeration and seeding services in Des Moines, IA. See how Mo's can help and request a free property estimate.",
+  "Professional lawn fertilization and weed control in Des Moines, IA for healthier, cleaner-looking turf. Request a free estimate from Mo's Lawn Care.",
 )
 assert.equal(
   route.canonicalUrl,
-  'https://www.moslawncaredsm.com/services/aeration-overseeding',
+  'https://www.moslawncaredsm.com/services/fertilization-weed-control',
 )
 assert.equal(route.implementationStatus, 'implemented')
 assert.equal(route.publicationStatus, 'published')
@@ -57,8 +57,8 @@ assert.deepEqual(publishedServiceSlugs, [
   'fertilization-weed-control',
 ])
 assert.equal(publishedServiceDetails.length, 3)
+assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
-assert(getPublishedServiceDetail('lawn-mowing'))
 assert.equal(
   getPublishedServiceDetail('fertilization-weed-control'),
   fertilizationWeedControlService,
@@ -79,7 +79,13 @@ for (const slug of unpublishedTaskSlugs) {
   assert.equal(routesById[`service-${slug}` as keyof typeof routesById].publicationStatus, 'planned')
 }
 
-for (const alias of ['aeration', 'seeding', 'overseeding', 'core-aeration', 'lawn-seeding']) {
+for (const alias of [
+  'fertilization',
+  'weed-control',
+  'lawn-treatment',
+  'lawn-fertilizer',
+  'herbicide-treatment',
+]) {
   assert.equal(getPublishedServiceDetail(alias), undefined, `Competing service alias resolves: ${alias}`)
   assert.equal(
     routeRegistry.some(({ path: routePath }) => routePath === `/services/${alias}`),
@@ -100,8 +106,8 @@ assert.deepEqual(
 )
 
 const serviceNode = buildServiceStructuredData(route, {
-  name: aerationOverseedingService.schema.name,
-  serviceType: aerationOverseedingService.schema.serviceType,
+  name: fertilizationWeedControlService.schema.name,
+  serviceType: fertilizationWeedControlService.schema.serviceType,
   description: route.description,
 })
 const graph = buildPageStructuredData(route, routesById.home, [serviceNode])
@@ -112,8 +118,8 @@ const breadcrumbNodes = graphNodes.filter(({ '@type': type }) => type === 'Bread
 assert.equal(webpageNodes.length, 1)
 assert.equal(serviceNodes.length, 1)
 assert.equal(breadcrumbNodes.length, 1)
-assert.equal(serviceNode.name, 'Aeration and Seeding')
-assert.equal(serviceNode.serviceType, 'Lawn aeration and seeding')
+assert.equal(serviceNode.name, 'Fertilization & Weed Control')
+assert.equal(serviceNode.serviceType, 'Lawn fertilization and weed control')
 assert.equal(serviceNode['@id'], `${route.canonicalUrl}#service`)
 assert.equal(serviceNode.url, route.canonicalUrl)
 assert.equal(serviceNode.description, route.description)
@@ -130,7 +136,7 @@ const visibleBreadcrumb = getBreadcrumbItems(route.id)
 assert.deepEqual(visibleBreadcrumb.map(({ label }) => label), [
   'Home',
   'Services',
-  'Aeration & Seeding',
+  'Fertilization & Weed Control',
 ])
 const schemaBreadcrumb = breadcrumbNodes[0].itemListElement as readonly Record<string, unknown>[]
 assert.deepEqual(schemaBreadcrumb.map(({ name }) => name), visibleBreadcrumb.map(({ label }) => label))
@@ -147,45 +153,48 @@ for (const forbiddenSchemaTerm of [
   'price',
   'address',
   'geo',
-  'guarantee',
+  'license',
+  'certification',
+  'Product',
 ]) {
   assert.equal(serializedGraph.includes(forbiddenSchemaTerm), false, `Forbidden schema: ${forbiddenSchemaTerm}`)
 }
 
 assert.deepEqual(
-  aerationOverseedingService.relatedServices.map(({ routeId }) => routeId),
-  [
-    'service-fertilization-weed-control',
-    'service-lawn-mowing',
-    'service-spring-cleanup',
-    'services',
-  ],
+  fertilizationWeedControlService.relatedServices.map(({ routeId }) => routeId),
+  ['service-aeration-overseeding', 'service-lawn-mowing', 'services'],
 )
-assert.deepEqual(aerationOverseedingService.serviceArea.cities, [
+assert.deepEqual(fertilizationWeedControlService.serviceArea.cities, [
   'Des Moines',
   'Ankeny',
   'Waukee',
   'Norwalk',
   'Altoona',
 ])
-assert.equal(aerationOverseedingService.hero.image.provenance, 'existing-neutral-property-image')
 assert.equal(
-  aerationOverseedingService.hero.image.alt,
-  'Front lawn with young trees beside homes and driveways',
+  fertilizationWeedControlService.hero.image.provenance,
+  'existing-neutral-property-image',
 )
-assert.deepEqual(aerationOverseedingService.reviews.items.map(({ name }) => name), [
-  'Lori Stiles',
-  'Mark McGrew',
-])
-assert(aerationOverseedingService.reviews.items.every(({ quote }) => /aerat/i.test(quote)))
+assert.equal(
+  fertilizationWeedControlService.hero.image.alt,
+  'Front lawns with young trees beside homes and driveways',
+)
+
 const approvedReviewSource = read('components/testimonials.tsx')
-for (const review of aerationOverseedingService.reviews.items) {
+assert.deepEqual(fertilizationWeedControlService.reviews.items.map(({ name }) => name), [
+  'Rick Terrones',
+  "Ashley O'Connor",
+])
+for (const review of fertilizationWeedControlService.reviews.items) {
   assert(approvedReviewSource.includes(review.quote), `Review excerpt is not verbatim: ${review.name}`)
+  assert.doesNotMatch(review.quote, /fertiliz|weed control/i)
 }
+assert.match(fertilizationWeedControlService.reviews.introduction, /general customer feedback/i)
+assert.match(fertilizationWeedControlService.reviews.introduction, /not proof/i)
 
 const componentSource = read('components/service-detail-page.tsx')
 const dynamicRouteSource = read('app/services/[slug]/page.tsx')
-const contentSource = read('content/services/aeration-overseeding.ts')
+const contentSource = read('content/services/fertilization-weed-control.ts')
 assert.equal(componentSource.match(/<h1\b/g)?.length, 1)
 assert.match(componentSource, /<InteriorPageShell/)
 assert.match(componentSource, /buildServiceStructuredData/)
@@ -197,54 +206,84 @@ assert.match(dynamicRouteSource, /getPublishedServiceDetail\(slug\)/)
 assert.match(dynamicRouteSource, /if \(!service\) notFound\(\)/)
 assert.doesNotMatch(dynamicRouteSource, /serviceNavigationRouteIds|routeRegistry\.find/)
 
-for (const futureArticle of [
-  'when-to-aerate-lawn-iowa',
-  'best-time-to-overseed-lawn-iowa',
-]) {
-  assert.doesNotMatch(componentSource, new RegExp(futureArticle))
-  assert.doesNotMatch(contentSource, new RegExp(futureArticle))
-}
-
 const visibleBusinessCopy = JSON.stringify({
-  hero: aerationOverseedingService.hero,
-  introduction: aerationOverseedingService.introduction,
-  scope: aerationOverseedingService.scope,
-  relatedServices: aerationOverseedingService.relatedServices,
-  propertyContext: aerationOverseedingService.propertyContext,
-  serviceArea: aerationOverseedingService.serviceArea,
-  faqs: aerationOverseedingService.faqs,
-  finalCta: aerationOverseedingService.finalCta,
+  hero: fertilizationWeedControlService.hero,
+  introduction: fertilizationWeedControlService.introduction,
+  scope: fertilizationWeedControlService.scope,
+  relatedServices: fertilizationWeedControlService.relatedServices,
+  propertyContext: fertilizationWeedControlService.propertyContext,
+  reviews: fertilizationWeedControlService.reviews,
+  serviceArea: fertilizationWeedControlService.serviceArea,
+  faqs: fertilizationWeedControlService.faqs,
+  finalCta: fertilizationWeedControlService.finalCta,
 }).toLowerCase()
 
 for (const requiredTerm of [
-  'aeration and seeding',
-  'lawn aeration in des moines, ia',
-  'aeration service in des moines',
-  'lawn seeding in des moines',
-  'overseeding in des moines',
-  'core aeration in des moines',
+  'lawn fertilization in des moines, ia',
+  'weed control in des moines',
+  'lawn weed control in des moines',
+  'fertilization service in des moines',
+  'lawn treatment in des moines',
 ]) {
   assert(visibleBusinessCopy.includes(requiredTerm), `Missing approved keyword/term: ${requiredTerm}`)
 }
 
+for (const prohibitedTechnicalTerm of [
+  'pre-emergent',
+  'post-emergent',
+  'broadleaf treatment',
+  'spot treatment',
+  'blanket application',
+  'selective herbicide',
+  'non-selective herbicide',
+  'active ingredient',
+  'n-p-k',
+  'granular treatment',
+  'liquid treatment',
+  'organic treatment',
+  'synthetic treatment',
+  'soil amendment',
+  'micronutrient',
+  'mixing instructions',
+  're-entry time',
+]) {
+  assert.equal(visibleBusinessCopy.includes(prohibitedTechnicalTerm), false, `Technical claim: ${prohibitedTechnicalTerm}`)
+}
+
 for (const unsupportedAffirmativeClaim of [
-  'we pull cores',
-  'mo\'s pulls cores',
-  'we use a core aerator',
-  'we use a slit seeder',
-  'we broadcast seed',
-  'seed directly into the holes',
-  'our seed blend',
-  'our seed mix',
-  'two passes',
-  'fertilization is included',
-  'weed control is included',
-  'guarantees a thicker lawn',
-  'guarantees germination',
-  'will fix compacted soil',
-  'ensures germination',
-  'eliminates bare spots',
-  'watering every day',
+  'we diagnose',
+  'we inspect and diagnose',
+  'we soil test',
+  'we identify weed species',
+  'we apply targeted',
+  'we use seasonal formulas',
+  'we provide follow-up treatments',
+  'four applications',
+  'five applications',
+  'six applications',
+  'weekly applications',
+  'monthly applications',
+  'licensed applicator',
+  'certified applicator',
+  'state approved',
+  'epa certified',
+  'safe for children',
+  'safe for pets',
+  'pet-friendly chemicals',
+  'environmentally safe',
+  'eco-friendly treatment',
+  'non-toxic',
+  'pollinator-safe',
+  'pesticide-free',
+  'eliminates weeds',
+  'weed-free lawn',
+  'kills all weeds',
+  'prevents weeds',
+  'guarantees greener grass',
+  'guarantees thicker turf',
+  'permanent weed control',
+  'visible results within',
+  'starting at $',
 ]) {
   assert.equal(
     visibleBusinessCopy.includes(unsupportedAffirmativeClaim),
@@ -252,11 +291,12 @@ for (const unsupportedAffirmativeClaim of [
     `Unsupported affirmative claim: ${unsupportedAffirmativeClaim}`,
   )
 }
-assert.match(visibleBusinessCopy, /does not publish equipment, plug dimensions/)
-assert.match(visibleBusinessCopy, /seed blend, cultivar and placement method are not published/)
-assert.match(visibleBusinessCopy, /does not publish a universal date/)
-assert.match(visibleBusinessCopy, /no treatment package is presented/)
-assert.match(visibleBusinessCopy, /no result or germination guarantee is published/)
+
+assert.match(visibleBusinessCopy, /does not publish a fertilizer brand, formula/)
+assert.match(visibleBusinessCopy, /does not publish a chemical, product/)
+assert.match(visibleBusinessCopy, /no price, contract, fixed visit count, recurring schedule/)
+assert.match(visibleBusinessCopy, /no result is guaranteed here/)
+assert.match(visibleBusinessCopy, /does not identify weed species or prescribe/)
 
 const spanish = JSON.parse(read('lib/es-translations.json')) as Record<string, string>
 assert(spanish[route.h1], `Missing Spanish translation: ${route.h1}`)
@@ -280,29 +320,28 @@ function collectTranslatableStrings(value: unknown, key = '', strings = new Set<
   return strings
 }
 
-for (const value of collectTranslatableStrings(aerationOverseedingService)) {
+for (const value of collectTranslatableStrings(fertilizationWeedControlService)) {
   assert(spanish[value], `Missing service-content Spanish translation: ${value}`)
 }
+assert.match(spanish[route.h1], /Fertilización y control de malezas/)
+assert.match(
+  spanish[fertilizationWeedControlService.reviews.introduction],
+  /no pruebas de un método o resultado/,
+)
 
 assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.home.canonicalUrl },
   { url: routesById.services.canonicalUrl },
   { url: routesById['service-lawn-mowing'].canonicalUrl },
+  { url: routesById['service-aeration-overseeding'].canonicalUrl },
   { url: route.canonicalUrl },
-  { url: routesById['service-fertilization-weed-control'].canonicalUrl },
 ])
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
 }
-for (const futureArticle of [
-  routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl,
-  routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl,
-]) {
-  assert.equal(buildSitemapEntries().some(({ url }) => url === futureArticle), false)
-}
 
-assert.equal(routeLabels['service-aeration-overseeding'], 'Aeration & Seeding')
+assert.equal(routeLabels['service-fertilization-weed-control'], 'Fertilization & Weed Control')
 
 console.log(
-  'Task 8 Aeration and Seeding validation passed: exact consolidated ownership, three published service details, WebPage/Service/BreadcrumbList parity, required links, article boundaries, claim restraint, approved aeration reviews, Spanish coverage, and sitemap isolation.',
+  'Task 9 Fertilization and Weed Control validation passed: exact consolidated ownership, three-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, chemical/process/regulatory/safety/result restraint, general review and neutral image provenance, Spanish coverage, and sitemap isolation.',
 )

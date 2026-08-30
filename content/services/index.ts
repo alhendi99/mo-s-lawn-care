@@ -4,6 +4,7 @@ import {
   serviceNavigationRouteIds,
 } from '../routes.ts'
 import { aerationOverseedingService } from './aeration-overseeding.ts'
+import { fertilizationWeedControlService } from './fertilization-weed-control.ts'
 import { lawnMowingService } from './lawn-mowing.ts'
 
 type ServiceRouteId = (typeof serviceNavigationRouteIds)[number]
@@ -75,7 +76,11 @@ export const servicesIndexSupportingLinks = servicesIndexSupportingRoutes.map((i
  * Only service records in this explicit list are public. A planned route in
  * `content/routes.ts` is never enough to publish a dynamic service page.
  */
-export const publishedServiceDetails = [lawnMowingService, aerationOverseedingService] as const
+export const publishedServiceDetails = [
+  lawnMowingService,
+  aerationOverseedingService,
+  fertilizationWeedControlService,
+] as const
 
 export const publishedServiceSlugs = publishedServiceDetails.map(({ slug }) => slug)
 

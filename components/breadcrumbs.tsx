@@ -16,9 +16,9 @@ export function Breadcrumbs({ routeId, className = '' }: { routeId: RouteId; cla
     <nav aria-label={t('Breadcrumb')} className={className}>
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.75rem] font-semibold tracking-[0.1em] text-ink-soft uppercase">
         {items.map((item) => (
-          <li key={item.routeId} className="flex min-w-0 items-center gap-2">
+          <li key={item.routeId} className="flex min-w-0 max-w-full items-center gap-2">
             {item.isCurrent ? (
-              <span aria-current="page" className="max-w-[34ch] truncate text-ink">
+              <span aria-current="page" className="max-w-full break-words whitespace-normal text-ink">
                 {t(item.label)}
               </span>
             ) : (

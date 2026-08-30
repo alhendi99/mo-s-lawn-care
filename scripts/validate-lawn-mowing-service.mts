@@ -9,6 +9,7 @@ import {
   publishedServiceSlugs,
 } from '../content/services/index.ts'
 import { aerationOverseedingService } from '../content/services/aeration-overseeding.ts'
+import { fertilizationWeedControlService } from '../content/services/fertilization-weed-control.ts'
 import { lawnMowingService } from '../content/services/lawn-mowing.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
 import { approvedBusinessFacts } from '../lib/site.ts'
@@ -47,13 +48,20 @@ assert.equal(metadata.description, route.description)
 assert.equal(metadata.alternates?.canonical, route.canonicalUrl)
 assert.equal((metadata.robots as { index?: boolean }).index, true)
 
-assert.deepEqual(publishedServiceSlugs, ['lawn-mowing', 'aeration-overseeding'])
-assert.equal(publishedServiceDetails.length, 2)
+assert.deepEqual(publishedServiceSlugs, [
+  'lawn-mowing',
+  'aeration-overseeding',
+  'fertilization-weed-control',
+])
+assert.equal(publishedServiceDetails.length, 3)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
+assert.equal(
+  getPublishedServiceDetail('fertilization-weed-control'),
+  fertilizationWeedControlService,
+)
 
 const unpublishedSlugs = [
-  'fertilization-weed-control',
   'landscaping',
   'flower-bed-maintenance',
   'yard-cleanup',
@@ -70,7 +78,13 @@ for (const slug of unpublishedSlugs) {
 assert.equal(getPublishedServiceDetail('not-a-real-service'), undefined)
 assert.deepEqual(
   routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id),
-  ['home', 'services', 'service-lawn-mowing', 'service-aeration-overseeding'],
+  [
+    'home',
+    'services',
+    'service-lawn-mowing',
+    'service-aeration-overseeding',
+    'service-fertilization-weed-control',
+  ],
 )
 
 const serviceNode = buildServiceStructuredData(route, {
@@ -245,6 +259,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.services.canonicalUrl },
   { url: route.canonicalUrl },
   { url: routesById['service-aeration-overseeding'].canonicalUrl },
+  { url: routesById['service-fertilization-weed-control'].canonicalUrl },
 ])
 for (const slug of unpublishedSlugs) {
   assert.equal(
@@ -256,5 +271,5 @@ for (const slug of unpublishedSlugs) {
 assert.equal(routeLabels['service-lawn-mowing'], 'Lawn Mowing')
 
 console.log(
-  'Task 7 Lawn Mowing validation passed: exact ownership within the two-service publication allowlist, WebPage/Service/BreadcrumbList parity, five approved areas, required links, provenance/claim restraint, Spanish coverage, and sitemap isolation.',
+  'Task 7 Lawn Mowing validation passed: exact ownership within the three-service publication allowlist, WebPage/Service/BreadcrumbList parity, five approved areas, required links, provenance/claim restraint, Spanish coverage, and sitemap isolation.',
 )
