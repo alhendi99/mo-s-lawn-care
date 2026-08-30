@@ -201,6 +201,52 @@
     border-top: 1px solid var(--rule);
   }
 
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    padding: 0 1rem;
+    background: #d5ee72;
+    color: #102019;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: translateY(calc(-100% - 1rem));
+    transition: transform 160ms ease;
+  }
+
+  .skip-link:focus-visible {
+    outline-color: #f3f0e7;
+    transform: translateY(0);
+  }
+
+  .global-nav-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    max-width: 8.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.25rem;
+    color: color-mix(in srgb, var(--color-paper) 72%, transparent);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.25;
+    text-align: center;
+    text-transform: uppercase;
+    transition: color 200ms ease;
+  }
+
+  .global-nav-link:hover,
+  .global-nav-link-active {
+    color: var(--color-paper);
+  }
+
   .btn-solid {
     display: inline-flex;
     align-items: center;
@@ -341,6 +387,11 @@
   .season-cue {
     animation: season-cue 850ms ease-in-out infinite alternate;
   }
+}
+
+header :focus-visible,
+footer :focus-visible {
+  outline-color: #d5ee72;
 }
 
 @keyframes hero-reveal {

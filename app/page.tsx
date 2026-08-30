@@ -6,12 +6,10 @@ import { Hero } from '@/components/hero'
 import { ProblemSelector } from '@/components/problem-selector'
 import { PropertyHotspots } from '@/components/property-hotspots'
 import { SeasonDial } from '@/components/season-dial'
-import { SiteHeader } from '@/components/site-header'
 import { StructuredData } from '@/components/structured-data'
 import { Testimonials } from '@/components/testimonials'
-import { LocalizedNav, Tr } from '@/components/tr'
+import { Tr } from '@/components/tr'
 import { routesById } from '@/content/routes'
-import { nav, site } from '@/lib/site'
 import { buildPageStructuredData } from '@/lib/structured-data'
 
 const homepageStructuredData = buildPageStructuredData(routesById.home, routesById.home)
@@ -20,7 +18,6 @@ export default function Page() {
   return (
     <>
       <StructuredData data={homepageStructuredData} />
-      <SiteHeader />
 
       <main className="">
         <Hero />
@@ -95,82 +92,6 @@ export default function Page() {
         <EstimateSection />
       </main>
 
-      {/* FOOTER */}
-      <footer className="bg-evergreen pt-14 pb-28 md:pb-14">
-        <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <p className="eyebrow text-paper/65">
-                <Tr text="Service Area:" />
-              </p>
-              <p className="mt-2 text-[0.75rem] font-semibold tracking-[0.16em] text-paper/70 uppercase">
-                Des Moines, Ankeny, Waukee, Norwalk, Altoona
-              </p>
-              <p className="mt-4 eyebrow text-paper/65">
-                <Tr text="Working Hours:" />
-              </p>
-              <p className="mt-2 font-semibold tracking-[0.16em] text-paper/70 uppercase">
-                <Tr text="Saturday–Thursday, 9:00–11:00 PM" />
-              </p>
-            </div>
-
-            <div>
-              <p className="eyebrow text-paper/65"><Tr text="Company" /></p>
-              <p className="mt-3 text-[0.9375rem] leading-relaxed text-paper/70">
-                {site.companyName}
-                <br />
-                {site.location}
-              </p>
-            </div>
-
-            <LocalizedNav label="Footer">
-              <p className="eyebrow text-paper/65"><Tr text="Sections" /></p>
-              <ul className="mt-3 space-y-1.5">
-                {nav.map((item) => (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      className="text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
-                    >
-                      <Tr text={item.label} />
-                    </a>
-                  </li>
-                ))}
-                <li>
-                  <a
-                    href="#estimate-form"
-                    className="text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
-                  >
-                    <Tr text="Get Estimate" />
-                  </a>
-                </li>
-              </ul>
-            </LocalizedNav>
-
-            <div>
-              <p className="eyebrow text-paper/65"><Tr text="Contact" /></p>
-              <a
-                href={site.phoneHref}
-                className="mt-3 inline-flex min-h-11 items-center text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
-              >
-                {site.phone}
-              </a>
-              {site.email ? (
-                <a
-                  href={`mailto:${site.email}`}
-                  className="block text-[0.9375rem] text-paper/70 transition-colors duration-200 hover:text-paper"
-                >
-                  {site.email}
-                </a>
-              ) : null}
-            </div>
-          </div>
-
-          <p className="rule mt-12 border-paper/15 pt-6 text-[0.8125rem] tracking-[0.12em] text-paper/60 uppercase">
-            © {new Date().getFullYear()} {site.companyName}
-          </p>
-        </div>
-      </footer>
     </>
   )
 }

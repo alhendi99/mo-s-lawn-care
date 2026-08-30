@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, Phone } from 'lucide-react'
 import { approvedBusinessFacts } from '@/lib/site'
@@ -41,27 +40,7 @@ export default function NotFound() {
         404
       </p>
 
-      <div className="mx-auto flex min-h-svh w-full max-w-[112rem] flex-col px-5 py-5 sm:px-8 sm:py-6">
-        <Link
-          href="/"
-          className="hero-reveal flex w-fit items-center gap-3 text-paper"
-          aria-label={`${approvedBusinessFacts.displayName} homepage`}
-        >
-          <Image
-            src="/logo-112x112.png"
-            alt=""
-            width={56}
-            height={56}
-            priority
-            className="h-12 w-12 object-cover sm:h-14 sm:w-14"
-          />
-          <span className="text-[0.7rem] leading-tight font-semibold tracking-[0.17em] text-paper/75 uppercase">
-            Lawn Care
-            <br />
-            &amp; Snow Removal
-          </span>
-        </Link>
-
+      <div className="mx-auto flex min-h-svh w-full max-w-[112rem] flex-col px-5 pt-24 pb-5 sm:px-8 sm:pt-28 sm:pb-6">
         <section className="my-auto max-w-4xl py-8 sm:py-10" aria-labelledby="not-found-heading">
           <p
             className="hero-reveal eyebrow text-[#D5EE72]"

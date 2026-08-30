@@ -1,3 +1,4 @@
+import { getBreadcrumbItems } from '../content/routes.ts'
 import type { CanonicalRoute } from '../content/types.ts'
 import { approvedBusinessFacts } from './site.ts'
 import { SITE_ORIGIN } from './site-url.ts'
@@ -97,6 +98,23 @@ function buildWebPageNode(route: CanonicalRoute): StructuredDataNode {
     isPartOf: { '@id': WEBSITE_ID },
     about: { '@id': ORGANIZATION_ID },
     publisher: { '@id': ORGANIZATION_ID },
+    ...(ids.breadcrumb ? { breadcrumb: { '@id': ids.breadcrumb } } : {}),
+  }
+}
+
+export function buildBreadcrumbStructuredData(route: CanonicalRoute): StructuredDataNode | null {
+  const id = getStructuredDataIds(route).breadcrumb
+  if (!id) return null
+
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': id,
+    itemListElement: getBreadcrumbItems(route.id).map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      item: item.isCurrent ? route.canonicalUrl : new URL(item.href, SITE_ORIGIN).toString(),
+    })),
   }
 }
 
@@ -105,12 +123,15 @@ export function buildPageStructuredData(
   homeRoute: CanonicalRoute,
   additionalNodes: readonly StructuredDataNode[] = [],
 ): StructuredDataDocument {
+  const breadcrumb = buildBreadcrumbStructuredData(route)
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
       buildOrganizationNode(homeRoute),
       buildWebsiteNode(homeRoute),
       buildWebPageNode(route),
+      ...(breadcrumb ? [breadcrumb] : []),
       ...additionalNodes,
     ],
   }

@@ -4,13 +4,14 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 2 only
+- Phase: Incremental implementation — Task 3 complete
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–2 completed; Task 3 and later are not authorized
+- Implementation status: Tasks 1–3 completed; Task 4 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
-- Preservation boundary: preserve all existing user work; do not stage, commit, push, deploy, modify production systems, or begin Task 3 or later
+- Task 3 repository baseline: clean `main` at `e24e7af`
+- Preservation boundary: preserve all existing user work; do not stage, commit, push, deploy, modify production systems, or begin Task 4 or later
 
 ## Evidence Labels
 
@@ -833,7 +834,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 3 — Global Navigation, Footer, Breadcrumbs, and Shared Page Primitives
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Make the future architecture crawlable and usable through a route-aware header, exact footer link groups, visible breadcrumbs, and restrained reusable page components.
 - **Why It Is Needed:** Current navigation is homepage-fragment based, future pages would be orphaned, and breadcrumb UI/schema need a shared source.
 - **Dependencies:** Tasks 1–2.
@@ -843,7 +844,21 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Homepage fragments from interior pages; menus on touch/keyboard; focus return and Escape; long translated labels and incomplete Spanish fallback; active-state handling; Contact/estimate fragments; duplicate footer/header landmarks.
 - **Validation:** Manually traverse desktop/mobile/keyboard navigation, compare visible breadcrumbs with registry hierarchy, inspect HTML anchors without JavaScript, verify all native contact destinations, and check responsive contrast/focus.
 - **Tests:** Internal href resolution, breadcrumb item/schema parity, global-nav/footer required-link sets, keyboard menu behavior where test tooling supports it, and an orphan-route graph assertion.
-- **Definition of Done:** `[ ]` All hubs are globally linked and all details are hub-linked; `[ ]` breadcrumb UI and data agree; `[ ]` exact footer groups and ten-service menu are present; `[ ]` mobile, keyboard, focus, language, and homepage-anchor behavior remain intact.
+- **Definition of Done:** `[x]` All hubs are globally linked and all details are hub-linked; `[x]` breadcrumb UI and data agree; `[x]` exact footer groups and ten-service menu are present; `[x]` mobile, keyboard, focus, language, and homepage-anchor behavior remain intact.
+
+#### Task 3 implementation record
+
+- **Completed files:** `app/globals.css`, `app/layout.tsx`, `app/not-found.tsx`, `app/page.tsx`, `components/breadcrumbs.tsx`, `components/interior-page-shell.tsx`, `components/mobile-navigation.tsx`, `components/services-menu.tsx`, `components/site-footer.tsx`, `components/site-header.tsx`, `content/routes.ts`, `lib/es-translations.json`, `lib/structured-data.ts`, `package.json`, `scripts/validate-navigation.mts`, and this plan record.
+- **Shared-shell decision:** the root layout now owns one route-aware header, one footer, and a translated skip link for every route. The homepage keeps its transparent-to-elevated header behavior; non-home paths receive the readable evergreen header immediately. The shared interior shell binds the visible breadcrumb component and WebPage/BreadcrumbList graph to one route ID without creating any Task 4+ route or page content.
+- **Navigation decision:** the registry defines the exact seven global destinations and all ten consolidated Services-menu destinations. Desktop uses a separate Services link and explicit disclosure button; mobile preserves the full-screen drawer, adds a separate Services link/disclosure, and keeps every destination as a real HTML link. Homepage estimate destinations remain `/#estimate-form`, while contact methods retain native `tel:` and `mailto:` URLs from the approved site record.
+- **Footer decision:** the global footer consumes approved business contact/hours data and renders the prompt-exact nine Services links, five service areas with Des Moines mapped to `/`, and five Company links. Flower Bed Maintenance remains present in the required ten-service menu but is intentionally absent from the exact footer Services list in Section 22.
+- **Breadcrumb decision:** all 28 interior hierarchies derive from registry parents and one typed label source. Visible ancestors are links, the current page is marked with `aria-current`, and the corresponding BreadcrumbList uses the same names/order/URLs; each interior WebPage node references its breadcrumb node.
+- **Accessibility/responsive decision:** added a visible-on-focus skip link, translated navigation labels, route/current-page semantics, minimum 44–48px controls, explicit desktop/mobile disclosures, body scroll locking, hidden-state tab suppression, mobile focus containment including the visible Close trigger, Escape handling and focus return, outside-pointer/blur dismissal, reduced-motion-safe transitions, and Bright Lawn focus colors. Existing mobile bottom actions, homepage anchors, language preference/query behavior, hero/header treatment, and brand typography/colors remain intact.
+- **Validation passed:** `pnpm validate:content`; `pnpm validate:seo`; new `pnpm validate:navigation`; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; `git diff --check`; production-server rendered navigation/footer review; Playwright desktop 1440px and 1280px checks; mobile 390px and 320px checks; homepage and branded 404 checks; English/Spanish long-label checks; Services disclosure link/count review; skip-link focus target; mobile Tab/Shift+Tab containment; Escape/focus return; and console review.
+- **Validation unavailable:** `pnpm lint` exits 1 because the pre-existing script invokes `eslint .` while ESLint is not installed or declared. This is unavailable tooling, not a passed lint run, and Task 3 adds no dependency or lockfile change.
+- **Browser findings:** the completed Task 3 UI produced no browser errors. Three existing image-preload timing warnings remain on the homepage and belong to the later media/performance task. A stale pre-build local server initially produced one obsolete chunk 500; it was isolated, stopped, rebuilt, and the final production server returned no such error.
+- **Staged-rollout boundary:** only `/` is currently implemented/published and remains the sole sitemap entry. Navigation records intentionally target the registered future architecture, but no Services, area, company, Contact, or Blog page was created or promoted; those page tasks remain separate. Production/deployment, live assistive-technology/device testing, and validation after future interior routes consume the shell remain manual/later-task checks.
+- **Final result:** all four Task 3 Definition of Done checks are satisfied. Task 3 is complete and work stops before Task 4.
 
 ### Task 4 — GA4 Foundation and Conversion Measurement
 

@@ -1,5 +1,5 @@
 import { getCanonicalUrl } from '../lib/site-url.ts'
-import type { CanonicalRoute, CanonicalRouteInput } from './types.ts'
+import type { CanonicalRoute, CanonicalRouteInput, RouteId } from './types.ts'
 
 const plannedRouteState = {
   implementationStatus: 'planned',
@@ -834,3 +834,130 @@ export const routesById = Object.fromEntries(routeRegistry.map((route) => [route
   (typeof routeRegistry)[number]['id'],
   (typeof routeRegistry)[number]
 >
+
+export const routeLabels = {
+  home: 'Home',
+  services: 'Services',
+  'service-lawn-mowing': 'Lawn Mowing',
+  'service-aeration-overseeding': 'Aeration & Seeding',
+  'service-fertilization-weed-control': 'Fertilization & Weed Control',
+  'service-landscaping': 'Landscaping',
+  'service-flower-bed-maintenance': 'Flower Bed Maintenance',
+  'service-yard-cleanup': 'Yard Cleanup',
+  'service-spring-cleanup': 'Spring Cleanup',
+  'service-fall-cleanup-leaf-removal': 'Fall Cleanup & Leaf Removal',
+  'service-grading': 'Grading',
+  'service-snow-removal': 'Snow Removal',
+  'commercial-property-services': 'Commercial Property Services',
+  'service-areas': 'Service Areas',
+  'service-area-ankeny': 'Ankeny',
+  'service-area-waukee': 'Waukee',
+  'service-area-norwalk': 'Norwalk',
+  'service-area-altoona': 'Altoona',
+  about: 'About',
+  'our-work': 'Our Work',
+  reviews: 'Reviews',
+  contact: 'Contact',
+  blog: 'Lawn Care Tips',
+  'article-when-to-aerate-lawn-iowa': 'When to Aerate a Lawn in Iowa',
+  'article-best-time-to-overseed-lawn-iowa': 'When to Overseed a Lawn in Iowa',
+  'article-how-often-to-mow-lawn-iowa': 'How Often to Mow a Lawn in Iowa',
+  'article-spring-lawn-cleanup-des-moines': 'Spring Lawn Cleanup Checklist',
+  'article-fall-leaf-cleanup-des-moines': 'Fall Leaf Cleanup Tips',
+  'article-central-iowa-lawn-care-calendar': 'Central Iowa Lawn Care Calendar',
+} as const satisfies Readonly<Record<RouteId, string>>
+
+export const primaryNavigationRouteIds = [
+  'services',
+  'service-areas',
+  'our-work',
+  'reviews',
+  'blog',
+  'about',
+  'contact',
+] as const satisfies readonly RouteId[]
+
+export const serviceNavigationRouteIds = [
+  'service-lawn-mowing',
+  'service-aeration-overseeding',
+  'service-fertilization-weed-control',
+  'service-landscaping',
+  'service-flower-bed-maintenance',
+  'service-yard-cleanup',
+  'service-spring-cleanup',
+  'service-fall-cleanup-leaf-removal',
+  'service-grading',
+  'service-snow-removal',
+] as const satisfies readonly RouteId[]
+
+export const footerServiceNavigationRouteIds = [
+  'service-lawn-mowing',
+  'service-aeration-overseeding',
+  'service-fertilization-weed-control',
+  'service-landscaping',
+  'service-yard-cleanup',
+  'service-spring-cleanup',
+  'service-fall-cleanup-leaf-removal',
+  'service-grading',
+  'service-snow-removal',
+] as const satisfies readonly RouteId[]
+
+export const serviceAreaNavigationRouteIds = [
+  'home',
+  'service-area-ankeny',
+  'service-area-waukee',
+  'service-area-norwalk',
+  'service-area-altoona',
+] as const satisfies readonly RouteId[]
+
+export const companyNavigationRouteIds = [
+  'about',
+  'our-work',
+  'reviews',
+  'blog',
+  'contact',
+] as const satisfies readonly RouteId[]
+
+function resolveNavigationRoutes<const T extends readonly RouteId[]>(ids: T) {
+  return ids.map((id) => ({
+    id,
+    label: routeLabels[id],
+    href: routesById[id].path,
+  }))
+}
+
+export const primaryNavigationRoutes = resolveNavigationRoutes(primaryNavigationRouteIds)
+export const serviceNavigationRoutes = resolveNavigationRoutes(serviceNavigationRouteIds)
+export const footerServiceNavigationRoutes = resolveNavigationRoutes(
+  footerServiceNavigationRouteIds,
+)
+export const serviceAreaNavigationRoutes = serviceAreaNavigationRouteIds.map((id) => ({
+  id,
+  label: id === 'home' ? 'Des Moines' : routeLabels[id],
+  href: routesById[id].path,
+}))
+export const companyNavigationRoutes = resolveNavigationRoutes(companyNavigationRouteIds)
+
+export type BreadcrumbItem = Readonly<{
+  routeId: RouteId
+  label: string
+  href: string
+  isCurrent: boolean
+}>
+
+export function getBreadcrumbItems(routeId: RouteId): readonly BreadcrumbItem[] {
+  const hierarchy: RouteId[] = []
+  let currentId: RouteId | null = routeId
+
+  while (currentId) {
+    hierarchy.unshift(currentId)
+    currentId = routesById[currentId].parentId
+  }
+
+  return hierarchy.map((id, index) => ({
+    routeId: id,
+    label: routeLabels[id],
+    href: routesById[id].path,
+    isCurrent: index === hierarchy.length - 1,
+  }))
+}

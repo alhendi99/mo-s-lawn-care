@@ -1,6 +1,9 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Archivo, Inter } from 'next/font/google'
+import { SiteFooter } from '@/components/site-footer'
+import { SiteHeader } from '@/components/site-header'
+import { Tr } from '@/components/tr'
 import { routesById } from '@/content/routes'
 import { I18nProvider } from '@/lib/i18n'
 import { buildRouteMetadata } from '@/lib/metadata'
@@ -34,7 +37,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${body.variable} bg-background`}>
       <body className="antialiased">
-        <I18nProvider>{children}</I18nProvider>
+        <I18nProvider>
+          <a href="#main-content" className="skip-link">
+            <Tr text="Skip to main content" />
+          </a>
+          <SiteHeader />
+          <div id="main-content" tabIndex={-1} className="outline-none">
+            {children}
+          </div>
+          <SiteFooter />
+        </I18nProvider>
         {process.env.VERCEL === '1' && <Analytics />}
       </body>
     </html>
