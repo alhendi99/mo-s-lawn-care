@@ -5,6 +5,7 @@ import {
 } from '../routes.ts'
 import { aerationOverseedingService } from './aeration-overseeding.ts'
 import { fertilizationWeedControlService } from './fertilization-weed-control.ts'
+import { landscapingService } from './landscaping.ts'
 import { lawnMowingService } from './lawn-mowing.ts'
 
 type ServiceRouteId = (typeof serviceNavigationRouteIds)[number]
@@ -80,6 +81,7 @@ export const publishedServiceDetails = [
   lawnMowingService,
   aerationOverseedingService,
   fertilizationWeedControlService,
+  landscapingService,
 ] as const
 
 export const publishedServiceSlugs = publishedServiceDetails.map(({ slug }) => slug)

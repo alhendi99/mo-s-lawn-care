@@ -28,7 +28,13 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
             <div className="relative z-10 flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-16 lg:px-[max(2rem,calc((100vw-112rem)/2+2rem))] lg:pr-14 lg:py-20">
               <div className="service-detail-reveal max-w-4xl">
                 <p className="eyebrow text-[#D5EE72]"><Tr text={content.hero.eyebrow} /></p>
-                <h1 className="mt-6 max-w-[calc(100vw-2.5rem)] break-words font-display text-[clamp(2.35rem,12vw,7.25rem)] leading-[0.88] font-bold tracking-[-0.055em] uppercase sm:max-w-[12ch] sm:text-[clamp(2.9rem,6.3vw,7.25rem)]">
+                <h1
+                  className={`mt-6 max-w-[calc(100vw-2.5rem)] break-words font-display text-[clamp(2.35rem,12vw,7.25rem)] leading-[0.88] font-bold tracking-[-0.055em] uppercase sm:max-w-[12ch] ${
+                    content.hero.compactHeading
+                      ? 'sm:text-[clamp(2.9rem,5.55vw,7.25rem)]'
+                      : 'sm:text-[clamp(2.9rem,6.3vw,7.25rem)]'
+                  }`}
+                >
                   <Tr text={route.h1} />
                 </h1>
                 <p className="mt-7 max-w-[35rem] text-base leading-relaxed text-paper/72 sm:text-lg">
@@ -194,6 +200,53 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
             </div>
           </div>
         </section>
+
+        {content.workPreview && (
+          <section aria-labelledby={sectionId('work-preview')} className="overflow-hidden bg-evergreen py-18 text-paper sm:py-26">
+            <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
+              <header className="grid gap-7 border-t border-paper/18 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-16">
+                <div>
+                  <p className="eyebrow text-[#D5EE72]"><Tr text={content.workPreview.eyebrow} /></p>
+                  <h2 id={sectionId('work-preview')} className="display-md mt-5 max-w-[13ch] text-paper">
+                    <Tr text={content.workPreview.heading} />
+                  </h2>
+                </div>
+                <div className="lg:pb-2">
+                  <p className="max-w-[35rem] text-[1.0625rem] leading-relaxed text-paper/65">
+                    <Tr text={content.workPreview.introduction} />
+                  </p>
+                  <Link href={routesById['our-work'].path} prefetch={false} className="btn-ghost mt-7 w-fit text-paper">
+                    <Tr text="View Our Work" /> <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </header>
+
+              <div className="mt-12 grid gap-4 lg:grid-cols-3">
+                {content.workPreview.images.map((image, index) => (
+                  <figure key={image.src} className="group border-t border-paper/18 pt-4">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-paper/5">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, 100vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                      />
+                    </div>
+                    <figcaption className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-4 pt-4 text-sm leading-relaxed text-paper/68">
+                      <span className="text-[0.68rem] font-bold tracking-[0.16em] text-[#D5EE72] tabular-nums">0{index + 1}</span>
+                      <Tr text={image.caption} />
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+
+              <p className="mt-8 max-w-3xl border-t border-paper/18 pt-5 text-sm leading-relaxed text-paper/52">
+                <Tr text={content.workPreview.clarification} />
+              </p>
+            </div>
+          </section>
+        )}
 
         <section aria-labelledby={sectionId('reviews')} className="bg-paper py-18 sm:py-26">
           <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.55fr_1fr] lg:gap-20">

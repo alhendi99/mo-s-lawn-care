@@ -4,11 +4,11 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 9 complete; Task 10 not started
+- Phase: Incremental implementation — Task 10 complete; Task 11 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–9 completed; Task 10 and later are not authorized
+- Implementation status: Tasks 1–10 completed; Task 11 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
-- Last checkpoint: 2026-08-30 (Asia/Amman)
+- Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
 - Task 3 repository baseline: clean `main` at `e24e7af`
 - Task 4 repository baseline: clean `main` at `abfe88d`
@@ -17,7 +17,8 @@
 - Task 7 repository baseline: clean `main` at `649656b`
 - Task 8 repository baseline: clean `main` at `16c96dd`
 - Task 9 repository baseline: clean `main` at `b97f138`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 10 or later
+- Task 10 repository baseline: clean `main` at `20337d3`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 11 or later
 
 ## Evidence Labels
 
@@ -29,7 +30,27 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 9 complete, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 10 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 10 only — Landscaping Service Page. Task 11 and later remain unauthorized and `[ ]` Not started.
+- **Baseline and checkpoint:** Task 10 resumed from the existing WIP checkpoint above clean Task 9 commit `20337d3` (`feat(seo): add fertilization and weed control service page`). Accidental Playwright/output artifacts remain removed and are not part of the Task 10 change.
+- **Ownership and publication:** `/services/landscaping` now owns `landscaping des moines ia` with the exact approved title, description, H1, secondary terminology and query-free self-canonical. The publication allowlist contains exactly Lawn Mowing, Aeration and Seeding, Fertilization & Weed Control, and Landscaping; no landscaping alias or Task 11–16 route is registered or indexable.
+- **Capability boundary:** Landscaping is the only confirmed high-level capability reused. The page does not claim landscape architecture/design credentials, a design package, installation, engineering, drainage correction, construction, hardscape, retaining walls, patios/pavers, irrigation, lighting, excavation, planting programs, sod installation, tree/stump removal, grading as an included process, a formal workflow, project schedule, pricing, contract or guarantee.
+- **Intent separation:** ordinary crawlable links keep Flower Bed Maintenance, Grading and Yard Cleanup as distinct future intents rather than automatic Landscaping inclusions. Additional contextual links lead to Our Work, Commercial Property Services and Contact while those future destinations remain unpublished until their own tasks authorize them.
+- **Media provenance:** the shared service renderer accepts an optional server-rendered work preview, and only Landscaping opts into it. The preview contains exactly three existing local 1600×1200 archive images; the full 79-image source list is not serialized. Direct inspection supports only observable descriptions of exposed soil/dark material, rolled turf beside an edged soil area/lawn, and a person using a walk-behind machine over exposed soil.
+- **Attribution restraint:** the preview and hero do not invent a city, Des Moines attribution, customer identity, commercial/residential classification, Landscaping-project attribution, service performed, installation/redesign claim, date or season. Their visible alt/caption copy remains neutral, and no image is represented as proof of a completed Landscaping project.
+- **Reviews:** no approved review excerpt verifies completed landscaping work. Two verbatim excerpts are therefore labeled as general company feedback and explicitly not Landscaping capability/project/result proof; no Review or AggregateRating schema is emitted.
+- **Schema and source:** rendered production source contains the exact title, description, one exact H1, clean canonical, required English content and links, visible Home → Services → Landscaping breadcrumb, one WebPage, one Service, one BreadcrumbList, provider reference and visible/schema breadcrumb parity. Query parameters do not change title or canonical, and unsupported capabilities are absent from JSON-LD.
+- **Route and sitemap isolation:** production returns 200 for the four authorized service details and branded noindex 404s without redirects for Tasks 11–16, arbitrary invalid slugs and tested Landscaping aliases. The sitemap contains exactly `/`, `/services` and the four authorized detail URLs.
+- **Responsive refinement:** visual QA identified a one-letter desktop orphan in the Landscaping H1. A typed, opt-in compact desktop heading size fixes that page at 1280 and 1440 while leaving mobile and Tasks 7–9 on their established sizing. The complete post-fix matrix has zero horizontal overflow, clipped headings/captions or fixed-control/footer collision.
+- **Browser QA:** fresh production contexts pass at `1440×900`, `1280×800`, `390×844` and `320×568`. Checks cover header, active Services context, breadcrumb, hero, all Landscaping sections, three-image preview, related links, general-feedback labeling, service areas, FAQs, CTA, footer, mobile navigation/current service, Spanish, UTM preservation, stable metadata/canonical, visible skip focus, Escape/focus return, reduced motion, image loading and zero application console errors/warnings.
+- **Passed checks:** `pnpm validate:landscaping`; Tasks 7–9 focused validators; Services/content/SEO/navigation/analytics/homepage validators; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; production route/source/schema/sitemap assertions; browser QA; and `git diff --check`.
+- **Unavailable check:** `pnpm lint` exits 1 because the existing script invokes `eslint .` while ESLint is not installed or declared. No dependency or lockfile change was introduced.
+- **No external action:** no deployment, production/account change, Google Business Profile edit, indexing request or analytics activation occurred.
+- **Task status:** Task 10 is `[x]` Completed because all four Definition of Done items are satisfied. Task 11 was not started.
+- **Exact next action:** amend the valid WIP checkpoint as `feat(seo): add landscaping service page`, report the local result and STOP before Task 11.
+
+### Prior checkpoint — Task 9 complete, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 9 only — Fertilization and Weed Control Service Page. Task 10 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 9 began from clean `main` at `b97f138` (`feat(seo): add aeration and seeding service page`). `git status --short` returned no entries before the first edit.
@@ -1124,7 +1145,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 10 — Landscaping Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/landscaping/` for Des Moines landscaping service intent using verified work and capabilities.
 - **Why It Is Needed:** Landscaping is a core advertised intent and a major route into the existing visual portfolio.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs; Task 24 may later expand the Work destination without blocking the link.
@@ -1134,7 +1155,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Conflating landscaping with engineering, design credentials, construction, drainage correction, or services not verified; large gallery payload; location-stuffed alts.
 - **Validation:** Exact metadata/canonical/H1, claim and project provenance review, service schema, required links, responsive media, one H1, and CTA behavior.
 - **Tests:** Route/metadata/schema, related-link set, project selector without false city metadata, invalid slug 404, and no prohibited engineering/design claims.
-- **Definition of Done:** `[ ]` Accurate distinctive landscaping page is rendered; `[ ]` real work is reused efficiently and honestly; `[ ]` required links/schema/metadata pass; `[ ]` no broader capability is implied without approval.
+- **Definition of Done:** `[x]` Accurate distinctive landscaping page is rendered; `[x]` real work is reused efficiently and honestly; `[x]` required links/schema/metadata pass; `[x]` no broader capability is implied without approval.
 
 ### Task 11 — Flower Bed Maintenance Service Page
 

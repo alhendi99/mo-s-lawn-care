@@ -10,6 +10,7 @@ import {
 } from '../content/services/index.ts'
 import { aerationOverseedingService } from '../content/services/aeration-overseeding.ts'
 import { fertilizationWeedControlService } from '../content/services/fertilization-weed-control.ts'
+import { landscapingService } from '../content/services/landscaping.ts'
 import { lawnMowingService } from '../content/services/lawn-mowing.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
 import { approvedBusinessFacts } from '../lib/site.ts'
@@ -52,17 +53,18 @@ assert.deepEqual(publishedServiceSlugs, [
   'lawn-mowing',
   'aeration-overseeding',
   'fertilization-weed-control',
+  'landscaping',
 ])
-assert.equal(publishedServiceDetails.length, 3)
+assert.equal(publishedServiceDetails.length, 4)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert.equal(
   getPublishedServiceDetail('fertilization-weed-control'),
   fertilizationWeedControlService,
 )
+assert.equal(getPublishedServiceDetail('landscaping'), landscapingService)
 
 const unpublishedSlugs = [
-  'landscaping',
   'flower-bed-maintenance',
   'yard-cleanup',
   'spring-cleanup',
@@ -84,6 +86,7 @@ assert.deepEqual(
     'service-lawn-mowing',
     'service-aeration-overseeding',
     'service-fertilization-weed-control',
+    'service-landscaping',
   ],
 )
 
@@ -260,6 +263,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: route.canonicalUrl },
   { url: routesById['service-aeration-overseeding'].canonicalUrl },
   { url: routesById['service-fertilization-weed-control'].canonicalUrl },
+  { url: routesById['service-landscaping'].canonicalUrl },
 ])
 for (const slug of unpublishedSlugs) {
   assert.equal(

@@ -80,6 +80,7 @@ assertTaskOneFoundation({
     'service-lawn-mowing',
     'service-aeration-overseeding',
     'service-fertilization-weed-control',
+    'service-landscaping',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

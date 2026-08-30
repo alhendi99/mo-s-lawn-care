@@ -14,6 +14,17 @@ type ServiceDetailReview = Readonly<{
   sourceLabel: 'Google Review'
 }>
 
+type ServiceDetailWorkImage = Readonly<{
+  src: string
+  width: number
+  height: number
+  alt: string
+  caption: string
+  provenance: 'existing-property-care-gallery'
+  cityAttribution: null
+  serviceAttribution: null
+}>
+
 export type ServiceDetailContent = Readonly<{
   slug: string
   routeId: ServiceRouteId
@@ -24,6 +35,7 @@ export type ServiceDetailContent = Readonly<{
   hero: Readonly<{
     eyebrow: string
     summary: string
+    compactHeading?: boolean
     image: Readonly<{
       src: string
       width: number
@@ -64,6 +76,13 @@ export type ServiceDetailContent = Readonly<{
     residential: string
     commercial: string
     portfolio: string
+  }>
+  workPreview?: Readonly<{
+    eyebrow: string
+    heading: string
+    introduction: string
+    images: readonly ServiceDetailWorkImage[]
+    clarification: string
   }>
   reviews: Readonly<{
     eyebrow: string

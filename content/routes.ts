@@ -203,7 +203,9 @@ export const routeRegistry = [
     h1: 'Landscaping Services in Des Moines, IA',
     description:
       "Upgrade and maintain your outdoor space with landscaping services in Des Moines, IA. View Mo's work and request a free residential or commercial estimate.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home', 'services', 'service-flower-bed-maintenance', 'service-yard-cleanup'],
     outboundLinkIds: [
       'service-flower-bed-maintenance',
