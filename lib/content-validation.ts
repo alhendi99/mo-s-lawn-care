@@ -6,6 +6,26 @@ type ApprovedBusinessFactsShape = Readonly<{
   phone: Readonly<{ display: string; e164: string; href: string }>
   email: Readonly<{ address: string; href: string }>
   serviceAreas: readonly Readonly<{ id: string; city: string }>[]
+  businessPresence: Readonly<{
+    type: string
+    publicStreetAddress: Readonly<{ status: string; [key: string]: unknown }>
+    localityOnlyPostalAddress: Readonly<{ status: string; [key: string]: unknown }>
+    geoCoordinates: Readonly<{ status: string; [key: string]: unknown }>
+  }>
+  openingHours: Readonly<{
+    status: string
+    days: readonly string[]
+    opens: string
+    closes: string
+    displayCopy: string
+  }>
+  externalProfiles: readonly Readonly<{ id: string; label: string; href: string }>[]
+  reviewSummary: Readonly<{
+    sourceProfileId: string
+    displayCopy: string
+    countPolicy: string
+    aggregateRatingStructuredData: string
+  }>
   [key: string]: unknown
 }>
 
@@ -18,6 +38,8 @@ type TaskOneValidationInput = Readonly<{
   expectedPaths: readonly string[]
   expectedPrimaryKeywords: Readonly<Record<string, string>>
   expectedOrigin: string
+  expectedGoogleBusinessProfileUrl: string
+  expectedReviewDisplayCopy: string
   approvedBusinessFacts: ApprovedBusinessFactsShape
   pendingBusinessFacts: PendingBusinessFactsShape
 }>
@@ -36,17 +58,30 @@ const forbiddenPaths = new Set([
 ])
 
 const forbiddenApprovedFactKeys = [
+  'address',
   'publicAddress',
-  'openingHours',
   'workingHours',
-  'googleReviewProfile',
-  'googleReviewSummary',
   'googleReviewUrl',
   'reviewCount',
   'rating',
+  'aggregateRating',
+  'geo',
   'socialLinks',
   'socialProfiles',
 ] as const
+
+const forbiddenNestedFactKeys = new Set([
+  'streetAddress',
+  'addressLocality',
+  'addressRegion',
+  'postalCode',
+  'latitude',
+  'longitude',
+  'geo',
+  'aggregateRating',
+  'rating',
+  'reviewCount',
+])
 
 function duplicates(values: readonly string[]) {
   return [...new Set(values.filter((value, index) => values.indexOf(value) !== index))]
@@ -54,6 +89,17 @@ function duplicates(values: readonly string[]) {
 
 function sameMembers(actual: readonly string[], expected: readonly string[]) {
   return actual.length === expected.length && actual.every((value) => expected.includes(value))
+}
+
+function collectForbiddenNestedKeys(value: unknown, found = new Set<string>()) {
+  if (!value || typeof value !== 'object') return found
+
+  for (const [key, nestedValue] of Object.entries(value)) {
+    if (forbiddenNestedFactKeys.has(key)) found.add(key)
+    collectForbiddenNestedKeys(nestedValue, found)
+  }
+
+  return found
 }
 
 export function collectTaskOneValidationErrors(input: TaskOneValidationInput) {
@@ -186,10 +232,77 @@ export function collectTaskOneValidationErrors(input: TaskOneValidationInput) {
     errors.push('Approved service areas must contain exactly Des Moines, Ankeny, Waukee, Norwalk, and Altoona.')
   }
 
+  if (approvedBusinessFacts.businessPresence.type !== 'service-area-business') {
+    errors.push('Business presence must be recorded as a Service Area Business.')
+  }
+  for (const [key, policy, expectedStatus] of [
+    [
+      'publicStreetAddress',
+      approvedBusinessFacts.businessPresence.publicStreetAddress,
+      'not-approved-for-publication',
+    ],
+    [
+      'localityOnlyPostalAddress',
+      approvedBusinessFacts.businessPresence.localityOnlyPostalAddress,
+      'prohibited',
+    ],
+    ['geoCoordinates', approvedBusinessFacts.businessPresence.geoCoordinates, 'prohibited'],
+  ] as const) {
+    if (policy.status !== expectedStatus) {
+      errors.push(`Business presence policy ${key} must be ${expectedStatus}.`)
+    }
+    const storedValueKeys = Object.keys(policy).filter((field) => field !== 'status')
+    if (storedValueKeys.length > 0) {
+      errors.push(`Business presence policy ${key} stores a prohibited value: ${storedValueKeys.join(', ')}.`)
+    }
+  }
+
+  const expectedOpeningDays = [
+    'Saturday',
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+  ]
+  if (
+    approvedBusinessFacts.openingHours.status !== 'verified' ||
+    !sameMembers(approvedBusinessFacts.openingHours.days, expectedOpeningDays) ||
+    approvedBusinessFacts.openingHours.opens !== '08:00' ||
+    approvedBusinessFacts.openingHours.closes !== '18:00' ||
+    approvedBusinessFacts.openingHours.displayCopy !== 'Every day, 8:00 AM–6:00 PM'
+  ) {
+    errors.push('Approved opening hours must cover every day from 08:00 to 18:00.')
+  }
+
+  if (
+    approvedBusinessFacts.externalProfiles.length !== 1 ||
+    approvedBusinessFacts.externalProfiles[0]?.id !== 'google-business-profile' ||
+    approvedBusinessFacts.externalProfiles[0]?.label !== 'Google Business Profile' ||
+    approvedBusinessFacts.externalProfiles[0]?.href !== input.expectedGoogleBusinessProfileUrl
+  ) {
+    errors.push('Google Business Profile must be the only approved external profile.')
+  }
+
+  if (
+    approvedBusinessFacts.reviewSummary.sourceProfileId !== 'google-business-profile' ||
+    approvedBusinessFacts.reviewSummary.displayCopy !== input.expectedReviewDisplayCopy ||
+    approvedBusinessFacts.reviewSummary.countPolicy !== 'minimum-display-copy' ||
+    approvedBusinessFacts.reviewSummary.aggregateRatingStructuredData !== 'prohibited'
+  ) {
+    errors.push('Review summary must use centralized 170+ display copy and prohibit aggregateRating schema.')
+  }
+
   for (const key of forbiddenApprovedFactKeys) {
     if (Object.hasOwn(approvedBusinessFacts, key)) {
       errors.push(`Unverified optional field appears in approved business facts: ${key}.`)
     }
+  }
+
+  const forbiddenNestedKeys = collectForbiddenNestedKeys(approvedBusinessFacts)
+  if (forbiddenNestedKeys.size > 0) {
+    errors.push(`Approved business facts contain prohibited address, geo, rating, or count data: ${[...forbiddenNestedKeys].join(', ')}.`)
   }
 
   for (const [key, pendingFact] of Object.entries(pendingBusinessFacts)) {

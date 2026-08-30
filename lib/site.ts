@@ -16,7 +16,7 @@ const approvedServiceAreas = [
 export const approvedBusinessFacts = {
   verification: {
     status: 'verified' as const,
-    basis: ['task-brief', 'existing-site-configuration'] as const,
+    basis: ['task-brief', 'existing-site-configuration', 'owner-confirmation'] as const,
   },
   legalName: "Mo's Lawn Care and Snow Removal Services LLC",
   displayName: "Mo's Lawn Care",
@@ -40,25 +40,54 @@ export const approvedBusinessFacts = {
     displayName: 'Des Moines, Iowa',
   },
   serviceAreas: approvedServiceAreas,
+  businessPresence: {
+    type: 'service-area-business' as const,
+    publicStreetAddress: { status: 'not-approved-for-publication' as const },
+    localityOnlyPostalAddress: { status: 'prohibited' as const },
+    geoCoordinates: { status: 'prohibited' as const },
+  },
+  openingHours: {
+    status: 'verified' as const,
+    days: [
+      'Saturday',
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+    ] as const,
+    opens: '08:00',
+    closes: '18:00',
+    displayCopy: 'Every day, 8:00 AM–6:00 PM',
+  },
+  externalProfiles: [
+    {
+      id: 'google-business-profile',
+      label: 'Google Business Profile',
+      href: "https://www.google.com/maps/place/Mo's+lawn+care+%26+Snow+removal+services+LLC/@41.6726616,-93.2424403,10z/data=!3m1!4b1!4m6!3m5!1s0x87ee99e896289b53:0x97b64e4e08676e75!8m2!3d41.6726196!4d-93.5720955!16s%2Fg%2F11h00c8p6r?entry=ttu&g_ep=EgoyMDI2MDgyNi4wIKXMDSoASAFQAw%3D%3D",
+    },
+  ] as const,
+  reviewSummary: {
+    sourceProfileId: 'google-business-profile',
+    displayCopy: '170+ Google Reviews',
+    countPolicy: 'minimum-display-copy' as const,
+    aggregateRatingStructuredData: 'prohibited' as const,
+  },
 } as const
 
 /**
- * No disputed value is stored here. A later task may promote a field into
- * `approvedBusinessFacts` only after the owner confirms the public value.
+ * No Task 1 business-presence field currently awaits owner confirmation.
+ * Future unknowns must remain value-free until the owner confirms them.
  */
-export const pendingBusinessFacts = {
-  publicAddress: { status: 'pending-confirmation' as const },
-  openingHours: { status: 'pending-confirmation' as const },
-  googleReviewProfile: { status: 'pending-confirmation' as const },
-  googleReviewSummary: { status: 'pending-confirmation' as const },
-  socialProfiles: { status: 'pending-confirmation' as const },
-} as const
+export const pendingBusinessFacts = {} as const
 
 export const serviceAreas = approvedServiceAreas.map(({ city }) => city)
 
 /**
- * @deprecated Pending owner confirmation. This legacy export exists only so the
- * current pre-Task-2 schema continues to compile; new consumers must not use it.
+ * @deprecated This legacy six-day export exists only so the untouched pre-Task-2
+ * schema continues to compile without output changes. New consumers must use the
+ * verified seven-day `approvedBusinessFacts.openingHours` record.
  */
 export const openingDays = [
   'Saturday',
@@ -82,7 +111,12 @@ export const site = {
   emailHref: approvedBusinessFacts.email.href,
   location: approvedBusinessFacts.primaryMarket.displayName,
   serviceArea: serviceAreas.join(', '),
-  /** No social profile URL is approved yet. */
+  businessPresence: approvedBusinessFacts.businessPresence,
+  openingHours: approvedBusinessFacts.openingHours,
+  externalProfiles: approvedBusinessFacts.externalProfiles,
+  googleBusinessProfileHref: approvedBusinessFacts.externalProfiles[0].href,
+  reviewSummary: approvedBusinessFacts.reviewSummary,
+  /** @deprecated Kept empty so the untouched pre-Task-2 schema output does not change. */
   socialLinks: [] as { label: string; href: string }[],
   formEndpoint: '/api/estimate',
   heroVideo: '/background.mp4',

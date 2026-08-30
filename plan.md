@@ -7,6 +7,7 @@
 - Phase: Incremental implementation — Task 1 only
 - Planning status: Complete — Phase 1 gate passed
 - Implementation status: Task 1 completed; Task 2 and later are not authorized
+- Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
 - Task 1 repository baseline: clean `main` at `858e5c2`
 - Preservation boundary: preserve all existing user work; do not stage, commit, push, deploy, modify production systems, or begin Task 2 or later
@@ -21,7 +22,21 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 1 complete, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 1 owner-confirmation update complete, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 1 business-data maintenance only. Task 2 and later remain unauthorized and `[ ]` Not started.
+- **Owner-confirmed hours:** Saturday through Friday, every day, `08:00–18:00`; approved display copy is `Every day, 8:00 AM–6:00 PM`.
+- **Owner-confirmed business presence:** Mo's is a Service Area Business. No public street address is approved; locality-only postal addresses and replacement `geo` coordinates are prohibited.
+- **Owner-confirmed external profile:** the only approved profile is Google Business Profile at `https://www.google.com/maps/place/Mo's+lawn+care+%26+Snow+removal+services+LLC/@41.6726616,-93.2424403,10z/data=!3m1!4b1!4m6!3m5!1s0x87ee99e896289b53:0x97b64e4e08676e75!8m2!3d41.6726196!4d-93.5720955!16s%2Fg%2F11h00c8p6r?entry=ttu&g_ep=EgoyMDI2MDgyNi4wIKXMDSoASAFQAw%3D%3D`. Facebook and Instagram are not approved and have no placeholders.
+- **Owner-confirmed review policy:** central display copy is `170+ Google Reviews`; it is a minimum-style marketing label, not a precise live total. Self-serving `aggregateRating` structured data remains prohibited.
+- **Implementation:** promoted the resolved fields into `approvedBusinessFacts`; reduced `pendingBusinessFacts` to an empty value-free record; derived future-facing `site` fields without wiring them into any current UI/schema consumer; strengthened Task 1 validation for all seven days, normalized hours, Service Area Business/address/geo policy, the exact sole GBP URL, exact review display copy, and aggregate-rating restraint.
+- **Output-preservation boundary:** the legacy six-day `openingDays` compatibility export and empty legacy `socialLinks` remain only so the untouched pre-Task-2 schema output does not change. Existing footer, review UI, metadata, schema, sitemap, pages, and navigation were not modified; migrating their stale literals requires separate authorization.
+- **Passed checks:** `pnpm validate:content`; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; `git diff --check`; untracked-file whitespace checks; final `git status --short` and scope review.
+- **Task status:** Task 1 remains `[x]` Completed. No Definition of Done item regressed.
+- **No external action:** nothing was staged, committed, pushed, deployed, or changed in production or any account.
+- **Exact next action:** STOP. Do not begin Task 2 without separate authorization.
+
+### Prior checkpoint — initial Task 1 completion, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 1 only — Approved Business Data, Route Registry, and Validation Foundation.
 - **Final task state:** Task 1 is `[x]` Completed. Tasks 2–39 remain `[ ]` Not started and unauthorized.
@@ -365,9 +380,9 @@ Draft and verify the complete 29-URL ownership map and repository-specific techn
 ### Structured data
 
 - Emit one coherent `@graph` per page with stable IDs and no conflicting duplicates.
-- Default to Organization + WebSite + WebPage because no public address is approved. Upgrade to `HomeAndConstructionBusiness` only after full public address confirmation.
+- Use Organization + WebSite + WebPage because the owner confirmed the company is a Service Area Business with no public street address. Do not fabricate a locality-only address or add `geo` coordinates as a substitute.
 - Add Service/BreadcrumbList to service pages; appropriate WebPage/CollectionPage/AboutPage/ContactPage/Blog/BlogPosting/ItemList entities elsewhere.
-- Keep schema synchronized with visible content; omit address, geo, hours, priceRange, review/aggregateRating, author, dates, FAQs, images, and offers when unverified.
+- Keep schema synchronized with visible content; omit address and geo under the confirmed Service Area Business policy, use verified hours only where supported by the future approved schema design, and omit priceRange, review/aggregateRating, author, dates, FAQs, images, and offers when unverified.
 
 ### Content and business facts
 
@@ -543,8 +558,8 @@ The brief supplies no secondary-keyword lists for the six individual articles. T
   - `${canonical}#breadcrumb`
   - `${canonical}#service` on service pages
   - `${canonical}#article` on blog articles
-- Homepage graph: Organization (or approved HomeAndConstructionBusiness), WebSite, WebPage. Interior pages reference the same organization/website IDs and add the applicable page/breadcrumb/service/item/article nodes.
-- Until a full public address is approved, use Organization without fabricated `address`/`geo`. Omit hours until the discrepancy is resolved. If an approved public address later exists, switch centrally to `HomeAndConstructionBusiness` and emit complete factual address data.
+- Homepage graph: Organization, WebSite, WebPage. Interior pages reference the same organization/website IDs and add the applicable page/breadcrumb/service/item/article nodes.
+- The owner confirmed a Service Area Business with no public street address. Use Organization without `address` or `geo`; never emit a locality-only postal address or coordinates as a substitute. The approved hours are every day `08:00–18:00` and may be consumed only where the future selected schema type supports them accurately.
 - Service schema names/descriptions/areas mirror visible content and reference the one provider ID. City pages use WebPage + visible-service ItemList, never a fabricated business per city.
 - About uses AboutPage; Contact ContactPage; hubs/work/reviews use CollectionPage/WebPage as appropriate; blog hub uses Blog/CollectionPage + ItemList; articles use BlogPosting/Article + WebPage + publisher only with real maintained fields.
 - No `aggregateRating` or self-serving review schema. No FAQ schema by default; visible FAQs can exist without it. No ImageObject city/location claims without metadata.
@@ -561,9 +576,9 @@ The brief supplies no secondary-keyword lists for the six individual articles. T
 
 ### 7. Business-information single source of truth
 
-- `site` should contain normalized business name, short name, canonical origin, phone display/E.164/href, email, approved primary location wording, typed service areas, form endpoint, verified social links, verified Google review URL, and optional approved public address/hours.
-- Do not expose empty/unknown optional values. Footer and schema omit hours rather than selecting a disputed source.
-- Review summary, if retained, becomes one central record with rating/count/source URL/`verifiedAt`; otherwise use non-numeric trust copy and a link to the live source.
+- `site` should contain normalized business name, short name, canonical origin, phone display/E.164/href, email, approved primary location wording, typed service areas, form endpoint, verified daily hours, the Service Area Business/address/geo publication policy, the sole approved Google Business Profile URL, and centralized review display policy.
+- Do not store or expose a public street address, locality-only postal address, or geo coordinates. The only approved external profile is Google Business Profile; do not add Facebook, Instagram, or guessed placeholders.
+- Review summary uses the centralized display copy `170+ Google Reviews` as minimum-style copy rather than a precise live count. Do not add `aggregateRating` structured data.
 - Separate customer review quotes from business claims. Review wording can be displayed accurately as attributed customer speech, but it does not automatically authorize company-wide guarantees or schema facts.
 - Record owner confirmations in this document or a small approved-data file before implementation tasks consume them.
 
@@ -748,24 +763,24 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Why It Is Needed:** Metadata, sitemap, navigation, schema, page content, and analytics will drift or expose disputed facts if they continue to use duplicated literals; later tasks also need one authoritative path inventory.
 - **Dependencies:** None; this is the first implementation task and still requires owner answers for any fact marked unverified.
 - **Files Involved:** `lib/site.ts`, `lib/site-url.ts`, new `content/types.ts`, new `content/routes.ts`, new `lib/content-validation.ts`, `.env.example`; `package.json`, `pnpm-lock.yaml`, `tsconfig.json`, and test configuration only if the authorized validation choice requires them.
-- **Implementation Details:** Normalize business name, origin, phone display/E.164/href, email, five confirmed service areas, review/social links, and optional address/hours with explicit verification state; omit disputed hours and any unapproved address from consumers. Register exactly the 29 target URLs with exact page type, parent, primary/secondary ownership, title, H1, description, implementation/publication status, indexability, and link IDs. Prohibit `/service-areas/des-moines-ia/`, service/city permutations, duplicate paths, query-bearing canonical paths, and thin split pages. Add safe environment documentation without real secrets and select the smallest compatible test setup without gratuitous dependencies or dual-lockfile churn.
+- **Implementation Details:** Normalize business name, origin, phone display/E.164/href, email, five confirmed service areas, verified daily hours, Service Area Business/address/geo publication policy, the sole approved Google Business Profile URL, and centralized review display copy/policy. Register exactly the 29 target URLs with exact page type, parent, primary/secondary ownership, title, H1, description, implementation/publication status, indexability, and link IDs. Prohibit `/service-areas/des-moines-ia/`, service/city permutations, duplicate paths, query-bearing canonical paths, and thin split pages. Add safe environment documentation without real secrets and select the smallest compatible test setup without gratuitous dependencies or dual-lockfile churn.
 - **SEO Impact:** Governs every target URL and prevents canonical, ownership, fact, and sitemap divergence before pages are created.
 - **Edge Cases:** Missing owner confirmations; apostrophe/HTML escaping in the business name; root-path joining; optional facts accidentally rendered as empty strings; duplicate aliases; stale `package-lock.json` versus declared pnpm workflow; no installed dependencies.
 - **Validation:** Review the registry against Section E, count 29 unique indexable paths, confirm exact metadata strings, confirm all parents/references resolve, and inspect consumers for remaining duplicated business literals before migrating them.
 - **Tests:** Add pure-data assertions for route count/uniqueness, valid hierarchy, exact ownership values, clean paths, forbidden-route absence, normalized contact values, and omission of unverified optional fields; run typecheck/build only if dependencies are available under the authorized task.
-- **Definition of Done:** `[x]` One typed registry contains all and only the 29 targets; `[x]` approved facts are centralized and unknown address/hours remain omitted from approved data; `[x]` validation is repeatable and its actual pass/fail/unavailable/not-run results are recorded; `[x]` no page UI or SEO implementation beyond the foundation is started.
+- **Definition of Done:** `[x]` One typed registry contains all and only the 29 targets; `[x]` approved facts and owner-confirmed publication policies are centralized without storing an address/geo or unapproved profile; `[x]` validation is repeatable and its actual pass/fail/unavailable/not-run results are recorded; `[x]` no page UI or SEO implementation beyond the foundation is started.
 
 #### Task 1 implementation record
 
 - **Completed files:** `lib/site.ts`, `lib/site-url.ts`, `content/types.ts`, `content/routes.ts`, `lib/content-validation.ts`, `scripts/validate-content.mts`, `.env.example`, `package.json`, `tsconfig.json`, and this plan record.
-- **Business-data decision:** `approvedBusinessFacts` contains only the legal/display identity, canonical origin, normalized repository-configured phone/email, primary market wording, and the five task-confirmed service areas. Address, hours, Google review profile/summary, and social profiles have no stored candidate value and are explicitly `pending-confirmation`.
-- **Compatibility boundary:** the pre-existing disputed opening-day export remains explicitly deprecated only so the untouched pre-Task-2 structured-data module compiles. The approved-facts object and every new Task 1 consumer reject hours/address/review/social values. Removing unsafe legacy schema/footer/review output belongs to the separately authorized technical SEO/page tasks and was not started here.
+- **Business-data decision:** `approvedBusinessFacts` contains the legal/display identity, canonical origin, normalized repository-configured phone/email, primary market wording, five service areas, verified every-day `08:00–18:00` hours, Service Area Business publication policy, exact Google Business Profile URL, and centralized `170+ Google Reviews` display policy. `pendingBusinessFacts` is empty because these Task 1 owner questions are resolved.
+- **Compatibility boundary:** the pre-existing six-day `openingDays` export remains explicitly deprecated only so the untouched pre-Task-2 structured-data module compiles without output changes. New consumers must use the verified seven-day record. Address/locality/geo values are absent, legacy `socialLinks` remains empty, and migrating current footer/schema/review literals belongs to later separately authorized tasks.
 - **Route decision:** the registry contains exactly the homepage, Services hub + 10 services, Commercial, Service Areas hub + four cities, About, Our Work, Reviews, Contact, Blog hub + six articles. It excludes the prohibited Des Moines area page, split consolidated services, service/city permutations, queries, fragments, trailing duplicates, API routes, metadata routes, and utility routes.
 - **Lifecycle decision:** only the existing homepage is `implemented`/`published`; all 28 interior targets are `planned`. Indexability describes intended ownership on publication and does not publish a route.
-- **Validation passed:** `pnpm validate:content` reported `29 canonical routes and 5 approved service areas`; `pnpm exec tsc --noEmit --incremental false` passed with no output; `pnpm build` compiled, typechecked, generated all seven current framework pages, and confirmed only the pre-existing public route set; manual exact metadata/ownership review passed; neither lockfile changed.
+- **Validation passed:** `pnpm validate:content` reported `29 canonical routes, 5 approved service areas, verified daily hours, and 1 approved external profile`; `pnpm exec tsc --noEmit --incremental false` passed with no output; `pnpm build` compiled, typechecked, generated all seven current framework pages, and confirmed only the pre-existing public route set; neither lockfile changed.
 - **Validation unavailable:** `pnpm lint` exited 1 with `eslint: command not found`; this is the pre-existing missing lint dependency/config documented during planning, not an introduced lint finding.
 - **Validation not run:** no standalone unit/e2e suite exists; browser/production/account checks and Task 2+ metadata/schema/sitemap/navigation/page/GA4 checks were outside the authorized scope.
-- **Unresolved owner questions:** public hours, public address, Google review URL/rating/count governance, and social profile URLs remain pending confirmation. No candidate value was selected or invented.
+- **Resolved owner confirmations:** public hours are every day `08:00–18:00`; the company is a Service Area Business with no publishable address or replacement geo; the exact GBP URL is approved; review display is `170+ Google Reviews` without `aggregateRating`; GBP is the only approved external profile.
 - **Final result:** all four Task 1 Definition of Done checks are satisfied. Task 1 is complete and work stops before Task 2.
 
 ### Task 2 — Global Metadata, Canonical, Schema, Sitemap, Robots, and 404 Foundation
@@ -775,12 +790,12 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Why It Is Needed:** The current site has homepage-only metadata, a volatile one-URL sitemap, unverified LocalBusiness fields, no coherent entity graph, and no branded 404 verification.
 - **Dependencies:** Task 1.
 - **Files Involved:** `app/layout.tsx`, `app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts`, new `app/not-found.tsx`, `components/structured-data.tsx`, `lib/structured-data.ts`, new `lib/metadata.ts`, `lib/site-url.ts`, route-registry tests.
-- **Implementation Details:** Create exact-record metadata helpers with self-canonicals, Open Graph, Twitter, index/follow defaults, and verified social images; remove `keywords`. Emit an Organization-led `@graph` with stable `#organization`, `#website`, page, breadcrumb, service, and article IDs as applicable; withhold address, geo, disputed hours, ratings, price, dates, and other unverified fields. Generate the sitemap from records whose routes are actually implemented and published, with clean URLs and real dates only; each later page task promotes its route only when it exists, and the completed rollout must contain exactly 29 entries. Keep robots permissive and sitemap-referencing. Add a useful not-found UI and verify actual 404 status. Do not add speculative redirects or redirect unknown URLs home.
+- **Implementation Details:** Create exact-record metadata helpers with self-canonicals, Open Graph, Twitter, index/follow defaults, and verified social images; remove `keywords`. Emit an Organization-led `@graph` with stable `#organization`, `#website`, page, breadcrumb, service, and article IDs as applicable; consume the verified daily hours only where supported, withhold address and geo under the confirmed Service Area Business policy, and omit ratings, price, dates, and other unverified fields. Generate the sitemap from records whose routes are actually implemented and published, with clean URLs and real dates only; each later page task promotes its route only when it exists, and the completed rollout must contain exactly 29 entries. Keep robots permissive and sitemap-referencing. Add a useful not-found UI and verify actual 404 status. Do not add speculative redirects or redirect unknown URLs home.
 - **SEO Impact:** Establishes crawl/index controls, entity consistency, canonical ownership, and discovery for all 29 pages while correcting unsafe current schema.
 - **Edge Cases:** Root canonical formatting; Next trailing-slash normalization; query/UTM/lang variants; missing social images; JSON escaping; invalid dynamic slugs; sitemap accidentally including API/drafts/404; hosting-level redirects not visible in code.
 - **Validation:** Inspect rendered head/source for the homepage and fixture records, parse JSON-LD, inspect `/sitemap.xml` and `/robots.txt`, request a missing route for a true 404, and verify the deployed slash convention before launch.
 - **Tests:** Metadata exactness/uniqueness, canonical construction, sitemap exact membership/exclusions, robots sitemap URL, structured-data serialization/stable IDs/forbidden fields, and 404 status smoke test.
-- **Definition of Done:** `[ ]` Shared metadata/schema builders consume Task 1 data; `[ ]` sitemap publication filtering excludes every not-yet-implemented, utility, draft and query URL and is designed to reach exactly 29 after all page tasks; `[ ]` disputed facts and review schema are absent; `[ ]` missing pages return 404; `[ ]` all checks and unresolved hosting assumptions are recorded.
+- **Definition of Done:** `[ ]` Shared metadata/schema builders consume Task 1 data; `[ ]` sitemap publication filtering excludes every not-yet-implemented, utility, draft and query URL and is designed to reach exactly 29 after all page tasks; `[ ]` fabricated address/geo and self-serving review schema are absent while verified hours are handled accurately; `[ ]` missing pages return 404; `[ ]` all checks and unresolved hosting assumptions are recorded.
 
 ### Task 3 — Global Navigation, Footer, Breadcrumbs, and Shared Page Primitives
 
@@ -1095,9 +1110,9 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Status:** `[ ]` Not started
 - **Objective:** Create `/reviews/`, reuse the categorized reviews efficiently, and resolve how mutable rating/count/source data is governed.
 - **Why It Is Needed:** Review trust is valuable, but current records and a hardcoded “160” count conflict and must not produce misleading schema or payloads.
-- **Dependencies:** Tasks 1–3; owner confirmation of Google review URL, summary-display policy and update process; Task 4 for external/contact tracking where applicable.
+- **Dependencies:** Tasks 1–3; Task 1 now supplies the verified Google Business Profile URL and `170+ Google Reviews` display policy; Task 4 for external/contact tracking where applicable.
 - **Files Involved:** new `app/reviews/page.tsx`, new/extracted `content/reviews.ts`, `components/testimonials.tsx`, shared review/page components, `lib/site.ts`, metadata/schema tests.
-- **Implementation Details:** Apply exact metadata/H1; extract the 106 records with stable IDs, ratings/categories/source/provenance fields where available, retain theme filtering, show useful curated/paginated or client-batched content rather than hundreds in initial HTML, and centralize or remove exact aggregate count/rating. Link relevant verified service categories, Our Work, Contact and approved Google review URL. Emit CollectionPage/BreadcrumbList only; do not add Review or aggregateRating schema for self-serving rich results.
+- **Implementation Details:** Apply exact metadata/H1; extract the 106 records with stable IDs, ratings/categories/source/provenance fields where available, retain theme filtering, show useful curated/paginated or client-batched content rather than hundreds in initial HTML, and replace precise aggregate claims with the centralized `170+ Google Reviews` display copy. Link relevant verified service categories, Our Work, Contact and the approved Google Business Profile URL. Emit CollectionPage/BreadcrumbList only; do not add Review or aggregateRating schema for self-serving rich results.
 - **SEO Impact:** Owns branded review intent and supplies trust/contextual links without manipulative review markup.
 - **Edge Cases:** Null/negative review records, current live count drift, duplicate records, review text copyright/source, missing dates/cities, false category inference, huge client bundle.
 - **Validation:** Dataset/count/category reconciliation, source/link approval, exact metadata/H1/canonical/schema, initial payload inspection, filter/keyboard/mobile checks, and explicit absence of aggregate/review schema.
@@ -1249,9 +1264,9 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Status:** `[ ]` Not started
 - **Objective:** Audit the final per-page entity graphs against visible content, schema rules, verified facts and Google validation tools.
 - **Why It Is Needed:** Shared builders can still emit mismatched page types, breadcrumbs, dates, images or unsafe business/review claims after all pages are assembled.
-- **Dependencies:** Tasks 1–35; owner address/hours decisions if available, otherwise omissions remain authoritative.
+- **Dependencies:** Tasks 1–35; Task 1 supplies the verified daily hours and confirmed Service Area Business no-address/no-geo policy.
 - **Files Involved:** `lib/structured-data.ts`, `components/structured-data.tsx`, route/content records, all page renderers, schema tests and validation notes.
-- **Implementation Details:** Validate one coherent graph per page: homepage WebSite/WebPage/Organization; hubs appropriate CollectionPage/Blog/ItemList; services WebPage/Service/Breadcrumb; cities WebPage/visible ItemList/Breadcrumb and no local entity; About/Contact page types; Work/Reviews restraint; articles BlogPosting/Article/WebPage/Breadcrumb/publisher. Confirm stable IDs and references, schema-visible parity, valid absolute clean URLs and escaping. Omit unverified address/geo/hours/price/rating/author/dates/images/FAQ/offers; never add aggregateRating or city LocalBusinesses.
+- **Implementation Details:** Validate one coherent graph per page: homepage WebSite/WebPage/Organization; hubs appropriate CollectionPage/Blog/ItemList; services WebPage/Service/Breadcrumb; cities WebPage/visible ItemList/Breadcrumb and no local entity; About/Contact page types; Work/Reviews restraint; articles BlogPosting/Article/WebPage/Breadcrumb/publisher. Confirm stable IDs and references, schema-visible parity, valid absolute clean URLs and escaping. Emit no address or geo for the confirmed Service Area Business, handle verified daily hours only where supported, omit unverified price/author/dates/images/FAQ/offers, and never add aggregateRating or city LocalBusinesses.
 - **SEO Impact:** Improves machine-readable consistency for all 29 pages without misleading rich-result attempts.
 - **Edge Cases:** Duplicate/conflicting graph nodes, malformed apostrophe/HTML, breadcrumb mismatch, ItemList order drift, unmaintained `dateModified`, optional images without dimensions, fake LocalBusiness eligibility pressure.
 - **Validation:** Parse every JSON-LD script, compare nodes to rendered content, run Schema.org validator and Google Rich Results Test where applicable after deployment, document expected non-eligibility rather than forcing markup.
@@ -1352,8 +1367,8 @@ Run this checklist against the canonical production origin after an explicitly a
 - [ ] Confirm stable `#organization`, `#website`, per-page, breadcrumb, service and article IDs reference one coherent graph and clean canonical URLs.
 - [ ] Confirm every service has visible-matching Service schema and five approved areas; city pages have no fake LocalBusiness; hubs' ItemLists match visible cards/order.
 - [ ] Confirm AboutPage, ContactPage, CollectionPage/Blog and Article/BlogPosting types match visible content and real publisher/image/date/author data only.
-- [ ] Confirm no unverified address, geo, disputed hours, priceRange, license/certification, founding facts, guarantees, aggregateRating, self-serving Review schema, fake FAQ schema or city business entity.
-- [ ] Reconfirm authoritative business hours/address decision, contact values, service scope, social/review URLs and review count policy against the approved single source; omit unresolved values.
+- [ ] Confirm no address, locality-only postal address, replacement geo, priceRange, license/certification, founding facts, guarantees, aggregateRating, self-serving Review schema, fake FAQ schema or city business entity; confirm verified hours are accurate where used.
+- [ ] Reconfirm every-day `08:00–18:00` hours, Service Area Business policy, contact values, service scope, sole approved GBP URL, no Facebook/Instagram profiles, and `170+ Google Reviews` display policy against the approved single source.
 
 ### Content, city anti-doorway, reviews, and blog accuracy
 

@@ -67,15 +67,20 @@ const expectedPrimaryKeywords: Readonly<Record<string, string>> = {
   '/blog/central-iowa-lawn-care-calendar': 'central iowa lawn care calendar',
 }
 
+const expectedGoogleBusinessProfileUrl =
+  "https://www.google.com/maps/place/Mo's+lawn+care+%26+Snow+removal+services+LLC/@41.6726616,-93.2424403,10z/data=!3m1!4b1!4m6!3m5!1s0x87ee99e896289b53:0x97b64e4e08676e75!8m2!3d41.6726196!4d-93.5720955!16s%2Fg%2F11h00c8p6r?entry=ttu&g_ep=EgoyMDI2MDgyNi4wIKXMDSoASAFQAw%3D%3D"
+
 assertTaskOneFoundation({
   routes: routeRegistry,
   expectedPaths,
   expectedPrimaryKeywords,
   expectedOrigin: SITE_ORIGIN,
+  expectedGoogleBusinessProfileUrl,
+  expectedReviewDisplayCopy: '170+ Google Reviews',
   approvedBusinessFacts,
   pendingBusinessFacts,
 })
 
 console.log(
-  `Task 1 content validation passed: ${routeRegistry.length} canonical routes and ${approvedBusinessFacts.serviceAreas.length} approved service areas.`,
+  `Task 1 content validation passed: ${routeRegistry.length} canonical routes, ${approvedBusinessFacts.serviceAreas.length} approved service areas, verified daily hours, and 1 approved external profile.`,
 )
