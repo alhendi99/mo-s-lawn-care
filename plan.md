@@ -1,0 +1,1384 @@
+# Mo's Lawn Care SEO Architecture and Incremental Implementation Plan
+
+> Phase 1 planning document. No implementation task is authorized or started.
+
+## Document Status
+
+- Phase: Phase 1 — repository analysis and planning only
+- Planning status: Complete — Phase 1 gate passed
+- Implementation status: Not authorized
+- Last checkpoint: 2026-08-30 (Asia/Amman)
+- Repository baseline: `main` at `f0f1dc4`, tracking `origin/main`
+- Preservation boundary: preserve all existing user work; do not modify application code, install dependencies, stage, commit, push, deploy, or change production configuration
+
+## Evidence Labels
+
+- **Verified:** directly confirmed in repository files, git state, or a read-only command.
+- **Assumption:** a provisional design choice that must be validated during implementation.
+- **Missing:** not present in the inspected repository.
+- **Owner confirmation required:** business or account information that cannot be safely inferred from code.
+- **Manual external action:** requires production, Google, Vercel, or other account access and is not a repository-only change.
+
+## Live Checkpoint
+
+### Work completed
+
+- Read `app/prompt.md` completely through Section 60 and the final instruction that the next step will be separately authorized.
+- Recorded the initial git state and complete tracked/visible file inventory.
+- Inspected the Next.js configuration, package manifests, lockfile headers, TypeScript and Tailwind/PostCSS configuration, environment-variable names, App Router route files, root layout, homepage composition, shared data, structured-data helpers, localization provider, estimate API and form, navigation, gallery, before/after experience, seasonal/property/problem experiences, review dataset/component, global styles, local asset metadata, and prior Playwright artifacts.
+- Searched the repository for routing, metadata, canonical, sitemap, robots, structured data, analytics, privacy/consent, redirects, verification, and localization implementation.
+- Confirmed no repository changes preceded creation of this file.
+
+### Files and directories inspected
+
+- Root/configuration: `.gitignore`, `package.json`, `package-lock.json` (root importer/header), `pnpm-lock.yaml` (root importer/header), `pnpm-workspace.yaml`, `next.config.mjs`, `tsconfig.json`, `postcss.config.mjs`, `components.json`, `next-env.d.ts`
+- Routes: `app/layout.tsx`, `app/page.tsx`, `app/manifest.ts`, `app/robots.ts`, `app/sitemap.ts`, `app/api/estimate/route.ts`
+- Data/helpers: `lib/site.ts`, `lib/site-url.ts`, `lib/structured-data.ts`, `lib/i18n.tsx`, `lib/es-translations.json`, `lib/utils.ts`, `data/all_image_urls.txt`
+- Components: all files under `components/`, including the full large `cross-section.tsx` and `testimonials.tsx` implementations
+- Styling/assets: `app/globals.css`; all `public/` filenames, types, byte sizes, and raster dimensions; local gallery-reference existence
+- Historical QA: `.playwright-cli/` log severity summaries and the saved accessibility snapshot structure
+- Sensitive configuration: `.env.local` variable names only; values were not printed or recorded
+
+### Verified findings
+
+- The project uses Next.js 16.3 App Router, React 19, TypeScript, Tailwind CSS 4, `next/image`, Motion, Resend, and Vercel Analytics.
+- Only `/` and `/api/estimate` application routes exist; framework metadata routes provide `/robots.txt`, `/sitemap.xml`, and `/manifest.webmanifest`. There are no service, area, trust, contact, gallery, review, or blog pages yet.
+- The homepage is a server page that composes many client components beneath a client i18n provider. Most interactive homepage copy is server-rendered initially in English and then hydrated.
+- Global metadata includes one homepage title/description/canonical, Open Graph, Twitter metadata, and a deprecated-for-Google `keywords` array. No per-page metadata architecture exists.
+- The sitemap contains only `/` and computes `lastModified` at request/build time. Robots allows `/` and references the sitemap. No redirect, middleware, custom 404, Search Console verification, or canonical-query normalization implementation was found.
+- JSON-LD currently emits `LocalBusiness` and `WebSite`. The LocalBusiness entity includes unverified business hours and a locality-only postal address; the prompt requires these to be withheld until verified. The entity ID is `#business`, while the specification recommends a stable organization graph conceptually using `#organization`.
+- Business name, phone, email, service areas, advertised services, form endpoint, hero media, and working hours are partly centralized in `lib/site.ts`, but business hours and some contact/phone values are duplicated in components/schema.
+- The estimate form performs client validation, POSTs JSON to `/api/estimate`, and treats any 2xx response as success. The API validates again, uses a honeypot, and sends email through Resend. A honeypot submission returns `{ ok: true }` without email delivery, which is a relevant future lead-event edge case.
+- `.env.local` contains only `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `RESEND_TO_EMAIL`; no analytics measurement ID is configured.
+- Vercel Analytics renders only when `VERCEL === '1'`. No GA4, GTM, Google tag, analytics helper, custom lead/click events, consent mechanism, cookie/privacy implementation, or environment-specific GA4 controls were found.
+- English/Spanish is client-side only: query parameter `?lang=`, localStorage, in-place string lookup, DOM title/meta-description mutation, and document-language mutation. URLs do not change by locale, no hreflang exists, and translations are incomplete/fallback-based rather than a verified indexable Spanish architecture.
+- Gallery content is read synchronously from a text file by a server component: 79 sources total (11 local, 68 Google-hosted remote). The client initially renders 10 and adds batches of 10 near the end. Labels/alts are generic and the source list carries no city, service, dimensions, or verified project metadata.
+- The before/after dataset contains seven displayed project pairs with `Des Moines, IA` metadata, but those values require provenance/business confirmation before location claims are expanded. One unused `before1.webp` asset exists.
+- Local `public/` assets total about 28 MB. Several files named `.webp` actually contain JPEG or PNG data; the four season PNGs are roughly 2.6–3.0 MB each, and two before/after files are roughly 2.8–3.2 MB. Hero video is about 1.7 MB and the hero poster about 864 KB.
+- The homepage has real semantic headings, links for anchors/contact destinations, labels, reduced-motion handling, and keyboard interactions, but service names in the seasonal, property, gallery, and problem experiences are generally plain text/buttons rather than crawlable service-page links.
+- Review content is embedded directly in a large client component and categorized. The UI hardcodes `5.0`, `160 customer reviews`, and a Google Maps review URL. The dataset includes at least one review with no rating and includes a negative review; no city metadata or source/update timestamps are stored.
+- The embedded review dataset contains 106 records: 104 five-star records, one four-star record, and one record with a null rating. Category counts are mixed 20, other 14, speed 11, lawn 10, cleanup/price/quality 9 each, customer 7, communication/professional 6 each, and snow 5. This does not substantiate the separately hardcoded current total of 160.
+- Existing marketing copy makes specific operational claims about hauling clippings, scheduled mowing, targeted treatment/feeding, core aeration and seed placement, flower-bed redesign, removal from hard surfaces, cutback/edging, drainage reshaping, and clearing walks/entries. These are repository facts about current copy, not verified business capabilities; each must be confirmed or softened before reuse on SEO pages.
+- There is no blog/content model, article source record, publishing workflow, Markdown/MDX/CMS system, or blog route.
+- No README, `.env.example`, test source/configuration, ESLint configuration/dependency, formatter configuration, CI/CD workflow, Docker configuration, Vercel configuration file, or hosting documentation is present. Only historical `.playwright-cli` artifacts are tracked.
+- `package.json` declares pnpm 11.20.0, but both pnpm and npm lockfiles are tracked. Dependencies are not installed in the current checkout, so no build/lint/test command has been run during Phase 1.
+- A tracked `tsconfig.tsbuildinfo` is stale: it records an older `heroPoster` type error that no longer matches current `lib/site.ts`. It is not evidence of the current build state. The latest saved browser-console artifact shows Vercel Analytics failing to load locally from `/_vercel/insights/script.js`, which confirms local analytics noise but not a production fault.
+
+### Assumptions and unresolved questions
+
+- **Assumption:** use framework-native App Router static pages and typed content/configuration without a CMS or new routing/SEO library.
+- **Assumption:** follow Next.js/Vercel canonical slash behavior consistently after an implementation-time rendered-route check; do not invent redirects now.
+- **Unresolved:** production hosting is likely Vercel based on code and analytics usage, but no deployment config/documentation proves the account/project settings.
+- **Unresolved:** provenance and permission for the 68 Google-hosted gallery URLs and embedded review dataset.
+- **Unresolved:** whether `Des Moines, IA` in every before/after project record is verified job-location metadata or a generic label.
+- **Unresolved:** whether any homepage service-process copy represents confirmed capabilities; several claims are more specific than the prompt permits without verification.
+
+### Owner confirmation required
+
+- Authoritative public business hours and whether any hours should appear on pages or in schema.
+- Whether a legitimate public physical business address exists and is approved for publication; if not, use Organization-based schema without a fabricated address.
+- Verified GA4 Measurement ID, GA4/GTM ownership, Enhanced Measurement settings, and whether a consent solution or policy is required for the approved deployment context.
+- Whether `click_to_call` should become a secondary GA4 key event after validation.
+- Current Google review URL, rating/count display policy, and an approved update process.
+- Social profile URLs, approved logo/social images, and any Search Console/Business Profile access.
+- Verified service inclusions and exclusions, residential/commercial availability by service, estimate workflow expectations, public company history/trust facts, and gallery/review location metadata.
+- Approval of factual blog publication/update dates, author/publisher attribution, image-to-article mapping, and the ongoing content review owner.
+
+### Decisions made and reasons
+
+- Preserve the existing homepage and extract/reuse its strongest experiences; the prompt prohibits a rebuild and the repository already contains substantial branded interactions.
+- Plan for a central typed route/content/business configuration to prevent sitemap, metadata, navigation, schema, and business facts from diverging.
+- Treat Spanish as a preserved UI convenience in the initial rollout unless approved, complete localized content and URL governance are supplied; the current implementation is not an indexable bilingual architecture.
+- Do not rely on the existing LocalBusiness schema until address/hours are confirmed; an Organization-led graph is the safe default.
+- Do not add a CMS, GA4 library, or SEO library by default; Next.js metadata routes/components and a small analytics helper are sufficient unless implementation evidence proves otherwise.
+
+### Commands and validation already run
+
+- `wc`, `sed` in bounded ranges, and complete-file reads for `app/prompt.md` and source/data files
+- `git rev-parse --show-toplevel`, `git status --short --branch`, `git ls-files`, `git log --oneline`, `git remote get-url origin`
+- `rg --files`, `rg` source searches, `find`, `ls -la`, `wc -l`, `du -ah`, `file`, `sips`, `awk`
+- Environment values were redacted; only variable names were inspected
+- No install, build, typecheck, lint, test, dev server, network request, commit, push, deployment, or production change has been performed
+
+### Current changed files
+
+- Pre-existing user change: `app/prompt.md` is untracked and must remain untouched.
+- Phase 1 change: `plan.md` is newly created by this analysis and is the only permitted working file.
+
+### Checkpoint next action (superseded by the later task-structure checkpoint)
+
+Draft and verify the complete 29-URL ownership map and repository-specific technical design, then replace the remaining Section A–G placeholders and build the dependency-ordered implementation task list.
+
+### Checkpoint remaining analysis and planning work (completed in the continuation)
+
+- Reconcile all 29 target public URLs and exact metadata/keyword ownership from the specification.
+- Design file impacts, content model, schema graph, analytics/event contract, deduplication, PII protections, sitemap/robots/canonical approach, localization implications, and blog sourcing/publishing workflow.
+- Write every incremental task with all required fields and concrete repository files.
+- Add automated/manual QA and post-deployment account actions.
+- Re-read the completed `plan.md`, verify final git diff/status, and stop.
+
+### Blockers
+
+- No blocker to finishing Phase 1 planning.
+- Production activation and several content/schema/analytics decisions will be blocked later pending the owner confirmations listed above.
+
+### Task-structure checkpoint — 2026-08-30 (Asia/Amman)
+
+- **Checkpoint state:** the dependency-ordered 39-task implementation structure and complete repository-specific manual post-deployment QA checklist have been inserted into `plan.md`.
+- **Task status invariant:** all 39 implementation tasks remain `[ ]` Not started`; no application, dependency, test, configuration, account, deployment, or production work has begun.
+- **Coverage inserted:** shared facts/routes, technical SEO, navigation/breadcrumbs, GA4 events and safety, homepage, Services and all 10 service pages, Commercial, Service Areas and four cities, About, Our Work, Reviews, Contact, Blog foundation and six article tasks, image/performance, internal links, schema, full validation, manual account actions, and documentation/cleanup.
+- **Preservation state:** `app/prompt.md` remains user-owned and untouched; only `plan.md` has been edited. The two pre-existing visible untracked files are preserved.
+- **Exact next action:** re-read this completed `plan.md` from beginning to end; validate it line by line against `app/prompt.md`; verify every required task field, all 29 URLs, six articles, metadata, schema, internal links, GA4 triggers/deduplication/PII/environment rules, automated tests, manual account steps, and QA items; then record final diff/status and close the Phase 1 gate only if all checks pass.
+- **Filesystem fallback:** if filesystem access fails during final validation, preserve this checkpoint, make no further change, and stop safely with the last successful state.
+
+---
+
+## Section A — Project Understanding
+
+### Framework and runtime
+
+- **Verified:** Next.js 16.3.0 App Router, React/React DOM 19.2.8, strict TypeScript 5.7.3, Tailwind CSS 4/PostCSS, `next/image`, `next/font`, Motion 13, Lucide, Base UI/shadcn support, Resend 6.18.1, and Vercel Analytics 1.6.1.
+- **Verified:** `package.json` declares pnpm 11.20.0 and provides only `dev`, `build`, `start`, and `lint` scripts. Both `pnpm-lock.yaml` and `package-lock.json` are tracked and resolve the same inspected core versions, but pnpm is the declared package manager.
+- **Verified:** Node 22.22.0 and pnpm 11.20.0 are available on the analysis host, but `node_modules` and `.next` are absent. Phase 1 did not install or build.
+
+### Application and component architecture
+
+- **Verified:** `app/layout.tsx` owns global fonts, English `<html lang>`, global metadata, the client `I18nProvider`, and conditionally mounted Vercel Analytics.
+- **Verified:** `app/page.tsx` is the only public page and is a Server Component. It composes `SiteHeader`, `Hero`, `CrossSection`, `PropertyHotspots`, `BeforeAfterSlider`, `Gallery`, `Testimonials`, `ProblemSelector`, `EstimateSection`, inline footer markup, and homepage JSON-LD.
+- **Verified:** `Gallery` is a Server Component that reads `data/all_image_urls.txt` synchronously and passes the complete item array to `GalleryClient`. Most other interactive homepage experiences are Client Components.
+- **Verified:** shared business, service, seasonal, problem, hotspot, and before/after data live primarily in `lib/site.ts`; reviews and review categories are embedded in `components/testimonials.tsx`; gallery sources are a plain text file; translations are a JSON string dictionary.
+- **Reusable infrastructure:** `SiteHeader`, `MobileNavigation`, `LanguageSwitcher`, `Hero`/`HeroVideo`, `CrossSection`, `PropertyHotspots`, `BeforeAfterSlider`, `Gallery`/`GalleryClient`, `Testimonials`, `ProblemSelector`, `EstimateSection`/`EstimateForm`, `StructuredData`, `Tr`, `LocalizedNav`, the site/service/project datasets, Next metadata routes, and the Resend email endpoint/template.
+- **Reusable with modification:** navigation/footer must become route-aware and global; interactive service labels must gain real links; gallery/review datasets must be extracted and given stable typed metadata; metadata/schema utilities must be generalized; the estimate form needs a reusable page-context/event contract.
+
+### Rendering strategy
+
+- **Verified:** the repository uses App Router Server and Client Components, not a client-only SPA router.
+- **Verified by code inspection:** `/` does not call request-time APIs and is eligible for static prerendering, while `/api/estimate` is a Node.js route handler. This eligibility has not been confirmed with a current production build.
+- **Verified:** English text from Client Components has deterministic initial state and was present in the saved Playwright accessibility snapshot, so core homepage text is not waiting for a post-mount fetch. Spanish is applied after hydration.
+- **Design implication:** all planned SEO pages should remain statically rendered/prerenderable where possible; interactive enhancements may hydrate, but titles, headings, body copy, links, breadcrumbs, and JSON-LD must be in initial rendered HTML.
+
+### Routing strategy
+
+- **Verified:** file-system App Router routes only; no third-party routing library, middleware, rewrites, redirects, route groups, dynamic public route, custom 404, or error boundary exists.
+- **Verified current routes:** `/`, `/api/estimate`, `/robots.txt`, `/sitemap.xml`, and `/manifest.webmanifest`.
+- **Desired:** 29 canonical public content URLs: homepage; services hub plus 10 services; commercial hub; service-area hub plus four city pages; About, Our Work, Reviews, Contact; blog hub plus six articles. There will be no `/service-areas/des-moines-ia/`.
+
+### Current homepage structure
+
+1. Fixed route-anchor header with language controls, click-to-call, estimate CTA, and mobile navigation.
+2. Full-viewport video/poster hero with the current H1, contact links, and service marquee.
+3. Active four-season `CrossSection` experience (the older `SeasonDial` remains in the repository but is commented out in `app/page.tsx`).
+4. Interactive property hotspots.
+5. Seven-item before/after project slider.
+6. 79-source gallery carousel/modal.
+7. Categorized review carousel and Google review outbound link.
+8. Problem-based accordion/service discovery.
+9. Image-led estimate section and Resend-backed form.
+10. Inline footer with service areas, unverified working hours, anchor navigation, phone, and email.
+
+### Content and business-data architecture
+
+- **Verified:** `lib/site.ts` is a partial single source of truth for business name, display name, phone, email, primary location, service-area string, working hours, form endpoint, hero media, navigation, services, seasons, problem answers, hotspots, and before/after projects.
+- **Verified duplication:** hardcoded phone href in `SiteHeader`; service-area list and hours in the homepage footer; rating/count and Google review URL in `Testimonials`; business address/hours/services in schema.
+- **Verified gap:** there is no typed route registry, page-content registry, FAQ source, related-link source, approved-facts record, evidence/provenance field, or content lifecycle status.
+- **Required truth policy:** existing copy and customer reviews are evidence that wording exists in the repository, not automatic proof that every described process or guarantee is approved. Unverified capability details must be confirmed or rewritten conservatively.
+
+### Estimate form and backend architecture
+
+- **Verified client flow:** uncontrolled HTML form with required name/phone, optional email/service/message, client validation/focus management, JSON `fetch`, a disabled sending state, inline success/error messaging, and form reset on any 2xx response.
+- **Verified server flow:** Node route handler parses JSON, truncates fields, silently accepts a filled honeypot, validates name/phone/email, checks three Resend environment variables, sends a React email, and returns explicit 400/502/503 failures or `{ ok: true, id }` after provider success.
+- **Verified gaps:** no rate limiting, formal shared payload type/schema, submission idempotency, GA4 events, success-event deduplication, error classification, or automated form tests. The prompt does not authorize replacing this workflow; planned changes wrap and harden it incrementally.
+
+### Gallery and review architecture
+
+- **Verified gallery:** 79 URL lines (11 local, 68 `lh3.googleusercontent.com` remote); generic sequential labels/alts; no service/city/source/dimensions/license/featured metadata. Ten figures render initially; more are added client-side in batches, while all URLs are serialized to the client prop.
+- **Verified before/after:** seven configured pairs, all labeled `Des Moines, IA`; titles are one fall/leaf cleanup and six landscaping/lawn restoration entries; image alt combines only Before/After and project wording.
+- **Verified reviews:** 106 embedded records with categories and rating values, presented one at a time. No stable review id, source URL per review, review date, city, service tags beyond one category, or last-verified timestamp exists.
+
+### Blog/content architecture
+
+- **Missing:** no blog routes, hub, article content, Markdown/MDX parser, CMS, database, content types, citations/sources, dates, author model, image mapping, sitemap integration, or publishing workflow.
+- **Design direction:** typed framework-native static content split by article, rendered by one shared App Router article template, with no CMS or new parser dependency.
+
+### Analytics and event tracking
+
+- **Verified:** `@vercel/analytics` is loaded from the root layout only when `process.env.VERCEL === '1'`.
+- **Missing:** GA4, GTM, Google tag, Measurement ID, data layer, consent controls, analytics helper, form/call/email events, environment guard beyond Vercel Analytics, custom dimensions, and analytics tests.
+- **Verified local behavior:** a saved browser artifact shows `/_vercel/insights/script.js` returning 404 locally when the Vercel Analytics component was rendered in that historical session.
+
+### Localization
+
+- **Verified:** English/Spanish is implemented client-side in `lib/i18n.tsx`; initial locale is English, then `?lang=en|es` or `localStorage` selects the UI locale.
+- **Verified:** switching language uses `history.replaceState`, mutates `<html lang>`, document title, and meta description after hydration, and looks up exact English strings in `es-translations.json` with English fallback.
+- **Missing:** localized routes, server-locale negotiation, Spanish server metadata, hreflang, localized canonicals, complete page translations, translation QA/status, and an indexable bilingual architecture.
+
+### Deployment and operations
+
+- **Verified:** Git branch `main` tracks `origin/main` at `f0f1dc4`; origin is GitHub. `.gitignore` excludes `.vercel`, `.env*.local`, `node_modules`, `.next`, and `.DS_Store`.
+- **Inference, not verified deployment fact:** Vercel is likely used because the code checks Vercel environment variables and imports Vercel Analytics. There is no `vercel.json`, local `.vercel` state, CI workflow, hosting document, or production environment inventory.
+- **Verified:** `.env.local` has the three Resend keys only; values were not inspected. No `.env.example` documents required configuration.
+
+### Existing SEO implementation
+
+- Root Next Metadata API configuration, clean production origin helper, homepage canonical, robots directives, icons/manifest, Open Graph/Twitter metadata, a one-URL sitemap, permissive robots metadata route, and homepage LocalBusiness/WebSite JSON-LD.
+- No route-level metadata factory, breadcrumb UI/schema, page-type/service/article schemas, canonical route registry, metadata validation, SEO tests, blog cluster, service/location pages, or internal crawl architecture.
+
+## Section B — Current SEO State
+
+### Route and indexation baseline
+
+| Area | Verified current state | Risk/gap |
+| --- | --- | --- |
+| Public content routes | `/` only | All 28 required interior URLs are missing. |
+| API | `POST /api/estimate` | Must remain outside sitemap/navigation and must not be treated as content. |
+| Missing URLs | No catch-all redirect or custom not-found file | Next should provide framework 404 behavior, but actual HTTP status was not runtime-verified in Phase 1. Add branded 404 and test status later. |
+| Redirects/rewrites | None in repository | Do not invent legacy redirects; audit production/analytics/Search Console before adding any. |
+
+### Metadata, title, headings, and canonical
+
+- **Title:** `Lawn Care Service in Des Moines, Iowa | Mo's Lawn Care`; differs from required homepage title.
+- **H1:** `Commercial & Residential property services`; does not own the required `lawn care des moines ia` intent clearly enough.
+- **Description:** one homepage description; close to target topic but not the specified copy.
+- **Canonical:** root metadata self-canonicalizes `/` against `https://www.moslawncaredsm.com`. No interior pages exist.
+- **Robots meta:** index/follow with permissive Googlebot preview settings.
+- **Open Graph/Twitter:** homepage-only values and `/seasons/summer.png`; the image's origin/project status is not documented.
+- **Keywords meta:** a `keywords` array is emitted although the specification says not to use `<meta name="keywords">` for Google.
+- **Search Console verification:** missing.
+
+### Sitemap and robots
+
+- `app/sitemap.ts` lists only the homepage and creates `lastModified: new Date()` each generation, which can report a change without a content change.
+- `app/robots.ts` allows all paths and references the production-origin sitemap. No public assets are blocked.
+- No shared route source prevents future sitemap/navigation/metadata drift.
+
+### Structured data
+
+- Homepage emits separate top-level `LocalBusiness` and `WebSite` objects.
+- `LocalBusiness` uses `#business`, locality-only `PostalAddress`, unverified Saturday–Thursday 21:00–23:00 hours, all service names, offers, service areas, phone, and an image.
+- Risks: no approved public street address; hours are explicitly disputed by the specification; a generic LocalBusiness subtype is used; service entities are homepage offers rather than page-owned entities; no `WebPage` link/entity graph; no breadcrumbs; no schema tests.
+- Reviews are not marked up, so the current site does not create self-serving aggregate-rating schema. Preserve that restraint.
+
+### Internal linking and crawl depth
+
+- Header/footer links are same-page fragment anchors plus phone/email; no interior HTML links exist.
+- Service labels in the hero marquee, CrossSection, hotspots, problem selector, and much of the gallery are not `<a href>` links.
+- The Google review link is crawlable and external. Estimate/contact links target `#estimate-form`.
+- Every planned interior page would currently be orphaned because it does not exist and global route navigation does not exist.
+
+### Content state
+
+- The homepage contains substantial, indexable English marketing copy and strong interactive UX worth preserving.
+- Service, location, commercial, company, contact, work, review, and blog content are not modeled as independent pages.
+- Operational claims, project locations, business hours, exact rating/count, image locations, commercial capabilities by service, and company-history facts lack an approval/provenance model.
+- Current service naming can seed the planned consolidated ownership model; do not split Ground Clearance, Leaves Removal, or small keyword variants into thin pages.
+
+### Images and loading
+
+- Next Image supplies generated dimensions/layout for rendered images and responsive `sizes`; hero poster and header logo use priority.
+- Hero video is `preload="auto"` for users without reduced motion, after a priority poster; this may compete for early bandwidth and requires measurement before change.
+- Property and before/after images lazy-load. Gallery images 1–2 are eager and the rest lazy; modal image is priority only when opened.
+- The complete 79-source gallery list crosses the server/client boundary even though only 10 slides initially render.
+- Generic gallery alt strings claim `Landscaping project N` without metadata; some other alts assert Des Moines/home/project context that needs verification.
+- About 28 MB of local public assets, large season PNGs, large before/after images, and file-extension/content mismatches create optimization and caching risk.
+
+### Language state
+
+- Initial/crawlable content is English at clean URLs.
+- `?lang=es` is a client preference, not a separately rendered localized document; canonical remains clean `/` and no hreflang exists.
+- Title/description mutation cannot substitute for server-generated localized metadata. Spanish dictionary fallback means the visible page can mix languages.
+- Initial rollout should preserve the control but keep one English canonical architecture unless a separate approved localization project is authorized.
+
+### Blog state
+
+- No blog routes or workflow exist. All six required articles and the hub are missing.
+- No factual source record exists. Iowa-specific content must be researched during the article tasks, not invented in the foundation task.
+
+### Analytics, conversion, and consent state
+
+- Vercel page analytics only; no GA4/GTM/Google tag.
+- No `generate_lead`, `form_start`, `form_submit_error`, `click_to_call`, or `click_email` measurement.
+- Form success is UI state only and no reusable click tracker exists.
+- Non-production Vercel Analytics behavior is based only on `VERCEL === '1'`; preview deployments may satisfy that value. Its exact production/preview behavior needs correction/verification.
+- No consent or privacy implementation was found. Production GA4 enablement must wait for owner/legal policy and stream-setting confirmation; no unsupported legal statement belongs in code or copy.
+
+### Tests, build, and deployment state
+
+- No test files/config, lint config/dependency, formatting config, CI/CD, Docker, or hosting config/documentation.
+- `npm run lint` names `eslint .` but ESLint is not declared; treat lint as unavailable until resolved in an authorized foundation task.
+- Historical Playwright logs/snapshot are artifacts, not a repeatable suite.
+- Stale `tsconfig.tsbuildinfo` cannot establish current correctness. No Phase 1 build/typecheck/lint/test was run because dependencies are absent and installation is forbidden.
+
+## Section C — Repository-Specific Requirements
+
+### Routing and rendering
+
+- Add all 29 public URLs with App Router file-system routes and keep canonical URLs clean and query-free.
+- Use dynamic typed routes for service, city, and blog slugs only where their valid slug registries are statically enumerable; invalid slugs must call `notFound()` and return 404.
+- Keep SEO-critical content, links, metadata, and JSON-LD server rendered. Use client components only for preserved interactions and tracking.
+- Do not add `/service-areas/des-moines-ia/`, separate pages for Leaves Removal/Ground Clearance, thin service+city permutations, or archive/tag/author/date pages.
+
+### UI/UX and frontend
+
+- Preserve brand, type, animation, video hero, CrossSection, property explorer, before/after, gallery, reviews, problem selector, responsive behavior, reduced-motion behavior, bilingual control, and estimate flow.
+- Refactor header/footer into route-aware shared components with HTML navigation to Services, Service Areas, Our Work, Reviews, Blog, About, and Contact.
+- Add crawlable service/area/article links inside existing homepage experiences without converting buttons that control local UI state into fake links.
+- Build reusable but composition-friendly page primitives: breadcrumbs, hero, content sections, service cards, related links, work/review excerpts, service areas, FAQs, resource links, and final CTA.
+
+### Backend, forms, and validation
+
+- Reuse `/api/estimate`, Resend, and `EstimateRequestEmail`; do not add another form backend.
+- Define a shared, bounded request/success/error contract. Preserve server-side validation and honeypot behavior while distinguishing provider-confirmed delivery from silent bot acceptance for analytics.
+- Provide form context (`form_id`, placement, page path, language, fixed service/category, city context) without sending PII to analytics.
+- Consider rate limiting/abuse protection only as a scoped security decision; do not bundle an external service into SEO work without approval.
+
+### Metadata, canonical, social, and robots
+
+- Remove keywords metadata; give every indexable page the specified unique title, description, H1, self-canonical, Open Graph fields, and Twitter equivalents.
+- Use the existing production origin helper and Next Metadata API; centralize route metadata in typed content records.
+- Follow current Next non-trailing-slash convention unless implementation-time hosting tests prove a different canonical behavior.
+- Generate sitemap entries from the canonical route/content registries; omit volatile `lastModified` unless backed by real dates.
+- Keep robots permissive for public content and reference the sitemap; do not use robots as noindex.
+
+### Structured data
+
+- Emit one coherent `@graph` per page with stable IDs and no conflicting duplicates.
+- Default to Organization + WebSite + WebPage because no public address is approved. Upgrade to `HomeAndConstructionBusiness` only after full public address confirmation.
+- Add Service/BreadcrumbList to service pages; appropriate WebPage/CollectionPage/AboutPage/ContactPage/Blog/BlogPosting/ItemList entities elsewhere.
+- Keep schema synchronized with visible content; omit address, geo, hours, priceRange, review/aggregateRating, author, dates, FAQs, images, and offers when unverified.
+
+### Content and business facts
+
+- Centralize canonical domain, business identity/contact, verified service areas, approved social/review URLs, approved hours/address status, and analytics configuration.
+- Give service, area, project, review, and blog records provenance/status fields sufficient to prevent invented local claims.
+- Treat the homepage as owner of broad Des Moines lawn care intent; consolidate related service variants exactly as specified.
+- Use useful unique city copy without fabricated neighborhoods, projects, staff, addresses, reviews, or response times.
+
+### Accessibility
+
+- Preserve one clear H1, logical headings, semantic links/buttons, labels/errors/live regions, keyboard navigation, visible focus, target sizes, dialog focus/escape behavior, meaningful alts, decorative empty alts, and reduced motion.
+- Add skip navigation and route-change/mobile-menu focus checks where appropriate.
+- Breadcrumb UI must match BreadcrumbList schema.
+
+### Performance
+
+- Establish a before-change production measurement baseline during implementation, then optimize hero/video, gallery serialization/loading, image formats/sizes, fonts, Motion/hydration, and third-party analytics.
+- Do not preload/lazy-load by rule of thumb: preserve LCP poster priority, measure whether video preload should be `metadata`/`none`, and ensure below-fold media stays lazy.
+- Replace extension/content mismatches and oversized images through documented, reversible asset processing; keep original project imagery and verify visual quality.
+
+### GA4 and conversion measurement
+
+- Add one production-gated Google tag implementation only after verifying no GTM/GA4 exists and receiving the real Measurement ID.
+- Emit `generate_lead` exactly once only after provider-confirmed successful email delivery; never on click, validation failure, bot honeypot acceptance, or failed request.
+- Emit one controlled `form_start` per form instance after first meaningful non-honeypot interaction; first verify/disable overlapping GA4 Enhanced Measurement form-interaction events.
+- Emit `form_submit_error` only for an actionable backend response, not client validation and not a request that provably never reached the backend.
+- Track all real `tel:`/`mailto:` activations through one non-blocking delegated/reusable mechanism; preserve destinations.
+- Permit only documented non-personal parameters; never send name, customer phone/email/address, free text, provider email body, or full form payload.
+- Preserve standard UTM behavior; the Google Business Profile UTM URL is a manual external update and never a canonical/internal/schema URL.
+
+### Blog publishing
+
+- Create a typed content model and static article files without CMS/database/parser dependencies.
+- Require slug, title, H1, description, primary keyword, summary, related service/articles, visible sources, approved image metadata, publication status, and optional real dates/author.
+- Research Iowa claims per article using Iowa State Extension, official government/municipal resources, or other authoritative primary sources; store source URLs and claim notes, paraphrase, and review periodically.
+- Generate hub cards, article pages, schema, internal links, and sitemap from the same registry.
+
+### Testing and deployment
+
+- Add the smallest viable repeatable test setup only when an authorized task requires it; resolve the currently nonfunctional lint script deliberately.
+- Validate route generation, unique metadata/H1, canonical URLs, sitemap coverage, schema serialization, breadcrumbs, internal links, form analytics/deduplication/PII safety, native contact links, and non-production analytics isolation.
+- Require production smoke tests, structured-data validation, GA4 DebugView/Realtime, Search Console sitemap/indexing, 404/redirect checks, mobile/accessibility review, and blog source review after deployment.
+
+## Section D — Current State vs Desired State
+
+| Major area | What exists and can be reused | Missing/modification needed | What stays unchanged |
+| --- | --- | --- | --- |
+| Framework/rendering | Next App Router, Server Components, Metadata API | Add static/dynamic typed routes and route metadata | Framework, React, TypeScript, styling stack |
+| Homepage | Strong long-form branded experience | Required H1/copy, crawlable cards/links, latest tips, route-aware CTAs | Visual identity and core interactive sections |
+| Navigation/footer | Responsive header/mobile menu and footer markup | Global route-aware HTML nav, dropdown, area/company/service links, centralized facts | Contact access and responsive behavior |
+| Services | 12 advertised service labels and related interaction data | Hub + 10 consolidated pages, truthful content, Service schema | Existing terminology where accurate |
+| Service areas | Five metro names | Hub + four unique city pages; homepage owns Des Moines | Confirmed five-city scope only |
+| Commercial | Hero says commercial/residential; some reviews imply property work | Dedicated commercial hub and verified service scope | No generic residential page |
+| Work/gallery | Before/after and 79-source gallery | Typed metadata, featured subsets, dedicated page, performance/provenance/alt cleanup | Existing images and interactions |
+| Reviews | 106 categorized records and outbound Google link | Extract typed data, curated payload, dedicated page, count/update policy | Visible trust content; no self-review schema |
+| Contact/form | Working validation + Resend flow | Dedicated page, shared contexts, explicit delivery contract, analytics/tests | One form/backend/email implementation |
+| Business data | Partial `lib/site.ts` source | Verified-facts config and removal of duplicates/unverified schema | Name, phone, email, confirmed areas unless owner corrects them |
+| Metadata | Global homepage metadata, OG/Twitter, canonical | Exact page records, factories, unique validation, remove keywords | Next Metadata API and production origin helper |
+| Schema | Homepage LocalBusiness + WebSite and safe serializer | Organization-led graph, WebPage/page-type entities, Service/Breadcrumb/Article schema | JSON-LD format and escaped serialization |
+| Sitemap/robots | Metadata routes | All canonical URLs from registry, stable dates, tests | Framework-native routes and sitemap reference |
+| 404/redirects | Framework defaults, no redirects | Branded not-found; actual status tests; evidence-led redirects only | Never redirect unknown URLs to homepage |
+| Localization | Client English/Spanish dictionary/control | Preserve as non-indexable preference; remove metadata mutation conflicts; document future localized architecture | Language control and saved preference |
+| Blog | None | Typed hub, six sourced articles, schema, publishing/update workflow | No CMS/database/new archive taxonomy |
+| Analytics | Vercel Analytics conditional | Production-safe GA4, exact event ownership/dedupe/PII tests, consent/account gate | Avoid second Google mechanism and keep Vercel only if desired |
+| Performance | Next Image, responsive sizes, lazy loading, reduced motion | Measure and optimize video/gallery/large/mislabeled assets and hydration | Real media, animation, visual quality |
+| Accessibility | Semantics, focus, labels, keyboard controls, reduced motion | Route/nav/breadcrumb/dialog audits and automated checks | Existing accessible patterns |
+| Tests/CI | Historical Playwright artifacts only | Repeatable SEO/unit/browser checks and a valid lint/type/build workflow | No unnecessary custom crawler |
+| Deployment | GitHub repo; Vercel signals | Document env/account/manual steps; confirm actual host/settings | No production config change without authorization |
+
+## Section E — SEO Ownership Map
+
+The paths below retain the specification's trailing-slash notation for readability. **Assumption:** because `next.config.mjs` does not enable `trailingSlash`, implementation canonicals should use Next's non-trailing form (for example, `https://www.moslawncaredsm.com/services`) except `/`; this must be verified against the deployed host before launch.
+
+### Homepage, services, and commercial pages
+
+| URL | Page purpose | Primary keyword | Secondary keywords | Exact title | Exact H1 | Exact meta description | Planned schema | Parent | Important inbound links | Important outbound links |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `/` | Broad Des Moines residential/commercial lawn care and snow-removal homepage | `lawn care des moines ia` | lawn care service Des Moines; lawn maintenance Des Moines; lawn care company Des Moines; residential lawn care Des Moines; property services Des Moines | `Lawn Care & Snow Removal in Des Moines, IA \| Mo's Lawn Care` | `Lawn Care & Snow Removal in Des Moines, IA` | `Professional lawn care, mowing, landscaping, cleanups, aeration, weed control and snow removal for homes and businesses in the Des Moines metro.` | WebSite + WebPage + Organization/approved business entity | None | Logo, every breadcrumb, service-area hub/Des Moines link, footer | Services/cards, commercial, four city pages, Our Work, Reviews, Blog, About, Contact |
+| `/services/` | Crawlable overview of the ten consolidated service intents | `lawn care services des moines ia` | lawn maintenance services Des Moines; yard maintenance Des Moines; landscaping and lawn care Des Moines; seasonal lawn services Des Moines | `Lawn Care Services in Des Moines, IA \| Mo's Lawn Care` | `Lawn Care Services for Des Moines Properties` | `Explore Mo's Lawn Care services in Des Moines, including mowing, aeration and seeding, weed control, landscaping, cleanups, grading and snow removal.` | CollectionPage + ItemList + BreadcrumbList | `/` | Main nav/footer, homepage service cards, every service breadcrumb | All 10 services, commercial, service areas, Contact |
+| `/services/lawn-mowing/` | Commercial-intent mowing page | `lawn mowing des moines ia` | lawn mowing service Des Moines; grass cutting service Des Moines; residential lawn mowing Des Moines; lawn maintenance Des Moines | `Lawn Mowing Service in Des Moines, IA \| Mo's Lawn Care` | `Lawn Mowing Service in Des Moines, IA` | `Keep your property sharp with professional lawn mowing in Des Moines, IA. Residential and commercial service available. Request a free estimate from Mo's.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, mowing article, related services | Aeration & Seeding, Fertilization & Weed Control, Yard Cleanup, Commercial, Our Work, mowing article, Contact |
+| `/services/aeration-overseeding/` | Consolidated aeration and seeding/overseeding commercial intent | `lawn aeration des moines ia` | aeration service Des Moines; lawn seeding Des Moines; overseeding Des Moines; core aeration Des Moines; aeration and seeding Des Moines | `Lawn Aeration & Seeding in Des Moines, IA \| Mo's Lawn Care` | `Lawn Aeration & Seeding in Des Moines, IA` | `Improve thin or compacted lawns with aeration and seeding services in Des Moines, IA. See how Mo's can help and request a free property estimate.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, aeration/overseeding/calendar articles, related services | Fertilization & Weed Control, Lawn Mowing, Spring Cleanup when relevant, aeration and overseeding articles, Services, Contact |
+| `/services/fertilization-weed-control/` | Consolidated fertilization and weed-control commercial intent | `lawn fertilization des moines ia` | weed control Des Moines; lawn weed control Des Moines; fertilization service Des Moines; lawn treatment Des Moines | `Fertilization & Weed Control in Des Moines, IA \| Mo's Lawn Care` | `Lawn Fertilization & Weed Control in Des Moines, IA` | `Professional lawn fertilization and weed control in Des Moines, IA for healthier, cleaner-looking turf. Request a free estimate from Mo's Lawn Care.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, aeration/mowing pages | Aeration & Seeding, Lawn Mowing, Services, Contact |
+| `/services/landscaping/` | Landscaping commercial intent | `landscaping des moines ia` | landscaping services Des Moines; landscaping company Des Moines; residential landscaping Des Moines; landscape maintenance Des Moines | `Landscaping Services in Des Moines, IA \| Mo's Lawn Care` | `Landscaping Services in Des Moines, IA` | `Upgrade and maintain your outdoor space with landscaping services in Des Moines, IA. View Mo's work and request a free residential or commercial estimate.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, Work, related services | Flower Bed Maintenance, Grading, Yard Cleanup, Our Work, Commercial, Contact |
+| `/services/flower-bed-maintenance/` | Flower/landscape-bed maintenance commercial intent | `flower bed maintenance des moines` | landscape bed maintenance Des Moines; flower bed cleanup Des Moines; garden bed maintenance Des Moines; bed cleanup Des Moines | `Flower Bed Maintenance in Des Moines, IA \| Mo's Lawn Care` | `Flower Bed Maintenance in Des Moines, IA` | `Keep flower beds clean and maintained with professional bed care in Des Moines, IA. Request a free estimate from Mo's Lawn Care for your property.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, landscaping/cleanup pages | Landscaping, Spring Cleanup, Fall Cleanup & Leaf Removal, Yard Cleanup, Contact |
+| `/services/yard-cleanup/` | Consolidated yard cleanup, overgrown yard, and ground-clearance intent | `yard cleanup des moines ia` | yard cleanup service Des Moines; overgrown yard cleanup Des Moines; property cleanup Des Moines; ground clearance Des Moines; overgrown lawn cleanup Des Moines | `Yard Cleanup Service in Des Moines, IA \| Mo's Lawn Care` | `Yard Cleanup Service in Des Moines, IA` | `Get overgrown yards and outdoor areas back under control with professional yard cleanup in Des Moines, IA. Contact Mo's for a free property estimate.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, cleanup/landscaping pages | Lawn Mowing, Spring Cleanup, Fall Cleanup & Leaf Removal, Grading, Landscaping, Contact |
+| `/services/spring-cleanup/` | Spring cleanup commercial intent | `spring cleanup des moines ia` | spring yard cleanup Des Moines; spring lawn cleanup Des Moines; seasonal yard cleanup Des Moines | `Spring Yard Cleanup in Des Moines, IA \| Mo's Lawn Care` | `Spring Yard Cleanup in Des Moines, IA` | `Prepare your property for the growing season with spring yard cleanup in Des Moines, IA. Request a free estimate from Mo's Lawn Care.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, spring checklist, related services | Lawn Mowing, Flower Bed Maintenance, Yard Cleanup, Landscaping, spring checklist article, Contact |
+| `/services/fall-cleanup-leaf-removal/` | Consolidated fall cleanup and leaf-removal commercial intent | `leaf removal des moines ia` | fall cleanup Des Moines; fall yard cleanup Des Moines; leaf cleanup Des Moines; leaf removal service Des Moines | `Fall Cleanup & Leaf Removal in Des Moines, IA \| Mo's Lawn Care` | `Fall Cleanup & Leaf Removal in Des Moines, IA` | `Clear leaves and seasonal debris with fall cleanup and leaf removal in Des Moines, IA. Request a free estimate from Mo's Lawn Care.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, fall tips, related services | Yard Cleanup, Lawn Mowing, Snow Removal, fall tips article, Contact |
+| `/services/grading/` | Yard-grading commercial intent within verified scope | `yard grading des moines ia` | lawn grading Des Moines; grading service Des Moines; property grading Des Moines; uneven yard grading Des Moines | `Yard Grading Service in Des Moines, IA \| Mo's Lawn Care` | `Yard Grading Services in Des Moines, IA` | `Improve uneven ground and prepare outdoor areas with yard grading services in Des Moines, IA. Tell Mo's what your property needs and get a free estimate.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, cleanup/landscaping pages | Yard Cleanup, Landscaping, Our Work, Contact |
+| `/services/snow-removal/` | Residential/commercial snow-removal intent within confirmed capabilities | `snow removal des moines ia` | snow removal service Des Moines; residential snow removal Des Moines; commercial snow removal Des Moines; driveway snow removal Des Moines | `Snow Removal Service in Des Moines, IA \| Mo's Lawn Care` | `Snow Removal Service in Des Moines, IA` | `Reliable snow removal for residential and commercial properties in Des Moines, IA. Keep driveways and access areas clear with Mo's. Request an estimate.` | WebPage + Service + BreadcrumbList | `/services/` | Services/home cards, city pages, commercial, reviews, fall page | Commercial, Service Areas, Reviews, Contact |
+| `/commercial-property-services/` | Commercial service hub, not a duplicate of every service page | `commercial lawn care des moines ia` | commercial grounds maintenance Des Moines; commercial property maintenance Des Moines; commercial landscaping Des Moines; commercial lawn service Des Moines | `Commercial Lawn Care in Des Moines, IA \| Mo's Lawn Care` | `Commercial Lawn Care & Property Services in Des Moines` | `Commercial lawn care, cleanup, landscaping and snow removal for Des Moines properties. Build a dependable property maintenance plan with Mo's Lawn Care.` | WebPage + ItemList + BreadcrumbList | `/` | Main nav, homepage residential/commercial section, Lawn Mowing/Landscaping/Snow pages, footer | Verified applicable services, Our Work, Reviews, Service Areas, Contact |
+
+### Service-area pages
+
+| URL | Page purpose | Primary keyword | Secondary keywords | Exact title | Exact H1 | Exact meta description | Planned schema | Parent | Important inbound links | Important outbound links |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `/service-areas/` | Metro coverage hub; Des Moines points to homepage | `lawn care des moines metro` | lawn care service areas Des Moines; lawn care near Des Moines; Des Moines metro lawn service | `Lawn Care Service Areas Near Des Moines, IA \| Mo's Lawn Care` | `Lawn Care Across the Des Moines Metro` | `Mo's Lawn Care serves Des Moines, Ankeny, Waukee, Norwalk and Altoona with lawn care, landscaping, seasonal cleanups and snow removal.` | CollectionPage + ItemList + BreadcrumbList | `/` | Main nav/footer, homepage area section, service/city pages | Homepage/Des Moines, Ankeny, Waukee, Norwalk, Altoona, Services, Contact |
+| `/service-areas/ankeny-ia/` | Unique Ankeny-wide lawn care intent | `lawn care ankeny ia` | lawn service Ankeny IA; lawn mowing Ankeny; landscaping Ankeny; yard cleanup Ankeny; snow removal Ankeny | `Lawn Care in Ankeny, IA \| Mo's Lawn Care` | `Lawn Care Services in Ankeny, IA` | `Professional lawn care in Ankeny, IA, including mowing, landscaping, seasonal cleanups, aeration, weed control and snow removal. Get a free estimate.` | WebPage + ItemList + BreadcrumbList; no city LocalBusiness | `/service-areas/` | Area hub, homepage, footer, selected service pages | Relevant services, area hub, selected related cities, general Work/Reviews, Contact |
+| `/service-areas/waukee-ia/` | Unique Waukee-wide lawn care intent | `lawn care waukee ia` | lawn service Waukee IA; lawn mowing Waukee; landscaping Waukee; yard cleanup Waukee; snow removal Waukee | `Lawn Care in Waukee, IA \| Mo's Lawn Care` | `Lawn Care Services in Waukee, IA` | `Professional lawn care in Waukee, IA, including mowing, landscaping, seasonal cleanups, aeration, weed control and snow removal. Get a free estimate.` | WebPage + ItemList + BreadcrumbList; no city LocalBusiness | `/service-areas/` | Area hub, homepage, footer, selected service pages | Relevant services, area hub, selected related cities, general Work/Reviews, Contact |
+| `/service-areas/norwalk-ia/` | Unique Norwalk-wide lawn care intent | `lawn care norwalk ia` | lawn service Norwalk IA; lawn mowing Norwalk; landscaping Norwalk; yard cleanup Norwalk; snow removal Norwalk | `Lawn Care in Norwalk, IA \| Mo's Lawn Care` | `Lawn Care Services in Norwalk, IA` | `Professional lawn care in Norwalk, IA, including mowing, landscaping, seasonal cleanups, aeration, weed control and snow removal. Get a free estimate.` | WebPage + ItemList + BreadcrumbList; no city LocalBusiness | `/service-areas/` | Area hub, homepage, footer, selected service pages | Relevant services, area hub, selected related cities, general Work/Reviews, Contact |
+| `/service-areas/altoona-ia/` | Unique Altoona-wide lawn care intent | `lawn care altoona ia` | lawn service Altoona IA; lawn mowing Altoona; landscaping Altoona; yard cleanup Altoona; snow removal Altoona | `Lawn Care in Altoona, IA \| Mo's Lawn Care` | `Lawn Care Services in Altoona, IA` | `Professional lawn care in Altoona, IA, including mowing, landscaping, seasonal cleanups, aeration, weed control and snow removal. Get a free estimate.` | WebPage + ItemList + BreadcrumbList; no city LocalBusiness | `/service-areas/` | Area hub, homepage, footer, selected service pages | Relevant services, area hub, selected related cities, general Work/Reviews, Contact |
+
+### Company, trust, work, and contact pages
+
+| URL | Page purpose | Primary keyword | Secondary keywords | Exact title | Exact H1 | Exact meta description | Planned schema | Parent | Important inbound links | Important outbound links |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `/about/` | Accurate company identity/trust page | `mo's lawn care des moines` | lawn care company Des Moines; local lawn care company Des Moines; Mo's Lawn Care Iowa | `About Mo's Lawn Care \| Des Moines, IA` | `About Mo's Lawn Care` | `Learn about Mo's Lawn Care and Snow Removal Services LLC, the team helping residential and commercial properties across the Des Moines metro.` | AboutPage + Organization reference + BreadcrumbList | `/` | Main nav/footer, homepage trust context, Contact | Services, Service Areas, Our Work, Reviews, Contact |
+| `/our-work/` | Canonical gallery/before-and-after collection | `lawn care projects des moines` | landscaping projects Des Moines; lawn care before and after Des Moines; lawn care gallery Des Moines; yard cleanup before after | `Lawn Care & Landscaping Projects in Des Moines \| Mo's` | `Lawn Care & Landscaping Work Across the Des Moines Metro` | `See lawn care, landscaping, cleanup and snow removal work from Mo's across the Des Moines metro, including before-and-after property transformations.` | CollectionPage + BreadcrumbList; verified ImageObject subset only | `/` | Main nav/footer, homepage gallery/before-after, relevant services/cities | Relevant services, Reviews, Contact |
+| `/reviews/` | Canonical curated company-review collection | `mo's lawn care reviews` | lawn care reviews Des Moines; Mo's Lawn Care Des Moines reviews; snow removal reviews Des Moines | `Mo's Lawn Care Reviews \| Des Moines, IA` | `What Customers Say About Mo's Lawn Care` | `Read customer feedback about Mo's Lawn Care and Snow Removal Services LLC in the Des Moines metro, from mowing and cleanup to snow removal.` | CollectionPage + BreadcrumbList; no Review/aggregateRating attempt | `/` | Main nav/footer, homepage review subset, Snow/Commercial/Work pages | Relevant services by verified category, Our Work, Contact, verified external Google review URL |
+| `/contact/` | Canonical estimate/contact conversion page | `lawn care estimate des moines` | lawn care quote Des Moines; free lawn estimate Des Moines; contact Mo's Lawn Care | `Contact Mo's Lawn Care \| Free Estimate in Des Moines, IA` | `Request a Free Property Estimate` | `Tell Mo's Lawn Care what your Des Moines-area property needs. Request a free estimate for mowing, landscaping, cleanup, lawn treatments or snow removal.` | ContactPage + Organization reference + BreadcrumbList | `/` | Main nav/footer, every service/area/article CTA, homepage form | Phone/email, Services, Service Areas, privacy/consent information if approved |
+
+### Blog hub and required initial cluster
+
+The brief supplies no secondary-keyword lists for the six individual articles. Their table cells therefore say **Missing from brief — research before drafting**; this prevents invented targets while preserving the exact primary ownership.
+
+| URL | Page purpose | Primary keyword | Secondary keywords | Exact title | Exact H1 | Exact meta description | Planned schema | Parent | Important inbound links | Important outbound links |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `/blog/` | Central Iowa informational content hub | `iowa lawn care tips` | lawn care tips Des Moines; Central Iowa lawn care guide; seasonal lawn care Iowa; Iowa yard care tips | `Iowa Lawn Care Tips & Seasonal Guides \| Mo's Lawn Care` | `Lawn Care Tips for Des Moines & Central Iowa` | `Practical lawn care and seasonal property tips for Des Moines and Central Iowa, including mowing, aeration, overseeding, cleanup and year-round planning.` | Blog or CollectionPage + ItemList + BreadcrumbList | `/` | Main nav/footer, homepage latest tips, every article breadcrumb | All six articles, naturally relevant services, Contact only where useful |
+| `/blog/when-to-aerate-lawn-iowa/` | Iowa aeration timing informational intent | `when to aerate lawn in iowa` | **Missing from brief — research before drafting** | `When to Aerate Your Lawn in Iowa \| Mo's Lawn Care` | `When Is the Best Time to Aerate a Lawn in Iowa?` | `Learn when Iowa lawns generally benefit from aeration, what signs to watch for and how aeration fits into a practical Central Iowa lawn care plan.` | BlogPosting/Article + WebPage + BreadcrumbList + Organization publisher | `/blog/` | Blog hub, calendar pillar, Aeration service helpful resources | Aeration & Seeding service, calendar pillar, overseeding article, sources |
+| `/blog/best-time-to-overseed-lawn-iowa/` | Iowa overseeding timing informational intent | `best time to overseed lawn in iowa` | **Missing from brief — research before drafting** | `Best Time to Overseed a Lawn in Iowa \| Mo's Lawn Care` | `What Is the Best Time to Overseed a Lawn in Iowa?` | `Understand the usual timing considerations for overseeding an Iowa lawn, how weather affects planning and when professional help may make sense.` | BlogPosting/Article + WebPage + BreadcrumbList + Organization publisher | `/blog/` | Blog hub, calendar pillar, Aeration service helpful resources | Aeration & Seeding service, calendar pillar, aeration article, sources |
+| `/blog/how-often-to-mow-lawn-iowa/` | Iowa mowing-frequency informational intent | `how often to mow lawn in iowa` | **Missing from brief — research before drafting** | `How Often Should You Mow a Lawn in Iowa? \| Mo's Lawn Care` | `How Often Should You Mow Your Lawn in Iowa?` | `Learn what determines mowing frequency for Iowa lawns, including growth, weather and seasonal conditions, without relying on a rigid schedule.` | BlogPosting/Article + WebPage + BreadcrumbList + Organization publisher | `/blog/` | Blog hub, calendar pillar, Lawn Mowing helpful resources | Lawn Mowing service, calendar pillar, sources |
+| `/blog/spring-lawn-cleanup-des-moines/` | Spring-cleanup checklist informational intent, distinct from service intent | `spring lawn cleanup checklist des moines` | **Missing from brief — research before drafting** | `Spring Lawn Cleanup Checklist for Des Moines Properties \| Mo's` | `A Spring Lawn Cleanup Checklist for Des Moines Properties` | `Use this practical spring cleanup checklist to prepare a Des Moines-area yard for the growing season and identify when professional cleanup can help.` | BlogPosting/Article + WebPage + BreadcrumbList + Organization publisher | `/blog/` | Blog hub, calendar pillar, Spring Cleanup helpful resources | Spring Cleanup service, calendar pillar, sources |
+| `/blog/fall-leaf-cleanup-des-moines/` | Fall leaf-cleanup advice intent, distinct from service intent | `fall leaf cleanup tips des moines` | **Missing from brief — research before drafting** | `Fall Leaf Cleanup Tips for Des Moines Properties \| Mo's` | `Fall Leaf Cleanup Tips for Des Moines Properties` | `Plan fall leaf cleanup for a Des Moines-area property with practical timing, organization and disposal considerations for the season.` | BlogPosting/Article + WebPage + BreadcrumbList + Organization publisher | `/blog/` | Blog hub, calendar pillar, Fall Cleanup service helpful resources | Fall Cleanup & Leaf Removal service, calendar pillar, verified municipal/source links |
+| `/blog/central-iowa-lawn-care-calendar/` | Informational pillar connecting the five supporting guides | `central iowa lawn care calendar` | **Missing from brief — research before drafting** | `Central Iowa Lawn Care Calendar \| Mo's Lawn Care` | `A Seasonal Lawn Care Calendar for Central Iowa` | `Plan mowing, cleanup, aeration and other lawn-care decisions through the seasons with a practical Central Iowa property-care calendar.` | BlogPosting/Article + WebPage + BreadcrumbList + Organization publisher | `/blog/` | Blog hub, all five supporting articles, homepage latest tips | All five supporting articles, relevant service pages, authoritative sources |
+
+## Section F — Technical Design
+
+### 1. Routing implementation
+
+- Keep `app/page.tsx` as the homepage; add static hub/company pages under their exact App Router folders.
+- Use `app/services/[slug]/page.tsx` with an enumerated typed service registry and `generateStaticParams()` for the 10 valid service slugs. `generateMetadata()` and the page component must read the same record; unknown slugs call `notFound()`.
+- Use `app/service-areas/[city]/page.tsx` similarly for only `ankeny-ia`, `waukee-ia`, `norwalk-ia`, and `altoona-ia`. The homepage remains the Des Moines landing page.
+- Use `app/blog/[slug]/page.tsx` with six initial published records and no catch-all archive behavior. Draft/unrecognized slugs return 404 and stay out of the sitemap.
+- Add `app/not-found.tsx` for branded, useful navigation while retaining an actual 404 response. Do not add a redirect-to-home catch-all.
+- **Assumption to verify:** Next/Vercel will permanently normalize trailing-slash variants to the configured non-trailing URL. Verify status and canonical on production before launch.
+
+### 2. Shared layout and UI composition
+
+- Move `SiteHeader` and a new extracted `SiteFooter` into the root marketing shell so every page has crawlable global navigation. The header will be route-aware: transparent/scroll-reactive on the homepage and readable on interior page heroes.
+- Use `next/link` for internal page routes and ordinary `<a>` for `tel:`, `mailto:`, external links, and true same-page fragments. Preserve homepage section IDs so old fragment links keep working.
+- Add shared `Breadcrumbs`, `PageHero`, `ServiceCardGrid`, `ServiceAreaLinks`, `RelatedLinks`, `WorkPreview`, `ReviewPreview`, `HelpfulResources`, `FaqSection`, and `EstimateCallToAction` primitives only as actual reuse emerges.
+- Dynamic service/city templates assemble these primitives with record-specific ordering, image, tone, and sections; a common data shape must not produce city-name-swapped doorway pages or visually identical service pages.
+- Reuse the single `EstimateForm` on homepage and Contact; CTA links elsewhere can route to `/contact` with an optional fixed, non-indexable query/fragment context only if it does not create canonical variants.
+
+### 3. Route, content, and business representation
+
+- Keep current interactive datasets in `lib/site.ts` initially, but strengthen the `site` record as the single approved business source. Replace duplicated phone, email, service areas, hours, Google review URL, domain, and social links with references to it.
+- Introduce one typed canonical route registry containing path, page kind, indexability, parent, nav/footer inclusion, title, H1, description, primary/secondary keywords, and social-image key. Service/city/blog records extend it with page-specific content.
+- Split large page content into independently reviewable files:
+  - `content/services/<slug>.ts` for each service;
+  - `content/service-areas/<city>.ts` for each city;
+  - `content/blog/<slug>.ts` for each article;
+  - direct static page modules/data for Services, Commercial, About, Work, Reviews, Contact, and Blog hubs where a separate data file materially improves reviewability.
+- Content records use explicit link IDs/paths rather than keyword-generated links. Type validation prevents duplicate slugs/paths and invalid related-route references.
+- Add evidence state to business-sensitive fields (`verified`, `owner-confirmation-required`, source note/date where applicable). Only verified fields flow to visible factual copy or schema.
+
+### 4. Metadata and canonical implementation
+
+- Replace the root one-page metadata object with accurate defaults and a helper that returns Next `Metadata` from the typed route record.
+- Do not use a title template that modifies the exact supplied titles; each target title is already fully branded. Use exact page titles and validate uniqueness.
+- Build canonicals by joining `SITE_ORIGIN` and the normalized clean path. Never include `lang`, UTM, form context, or any query string.
+- Generate `openGraph` title/description/url/type/image and Twitter large-card equivalents from the same record. Use `article` OG type for articles only when supported accurately.
+- Social-image records require verified real image, intrinsic dimensions, MIME/format, and honest alt text. Use a conservative verified default until service-specific images are approved.
+- Remove the metadata `keywords` array. Keep index/follow defaults for published content; drafts/utility routes do not enter the public registry.
+- Metadata tests assert path/title/H1/description/canonical uniqueness and exact ownership values.
+
+### 5. Structured-data graph
+
+- Expand `lib/structured-data.ts` into typed graph builders and retain the escaped `StructuredData` script component.
+- Stable IDs:
+  - `${SITE_ORIGIN}/#website`
+  - `${SITE_ORIGIN}/#organization`
+  - `${canonical}#webpage`
+  - `${canonical}#breadcrumb`
+  - `${canonical}#service` on service pages
+  - `${canonical}#article` on blog articles
+- Homepage graph: Organization (or approved HomeAndConstructionBusiness), WebSite, WebPage. Interior pages reference the same organization/website IDs and add the applicable page/breadcrumb/service/item/article nodes.
+- Until a full public address is approved, use Organization without fabricated `address`/`geo`. Omit hours until the discrepancy is resolved. If an approved public address later exists, switch centrally to `HomeAndConstructionBusiness` and emit complete factual address data.
+- Service schema names/descriptions/areas mirror visible content and reference the one provider ID. City pages use WebPage + visible-service ItemList, never a fabricated business per city.
+- About uses AboutPage; Contact ContactPage; hubs/work/reviews use CollectionPage/WebPage as appropriate; blog hub uses Blog/CollectionPage + ItemList; articles use BlogPosting/Article + WebPage + publisher only with real maintained fields.
+- No `aggregateRating` or self-serving review schema. No FAQ schema by default; visible FAQs can exist without it. No ImageObject city/location claims without metadata.
+- Serialize one coherent `@graph` per page and test that JSON is valid, IDs resolve consistently, visible breadcrumbs match schema, and forbidden/unverified fields are absent.
+
+### 6. Breadcrumb and internal-link architecture
+
+- Visible breadcrumbs use the route registry and render real links for every ancestor except the current page. JSON-LD consumes the same breadcrumb items.
+- Global main navigation: Services, Service Areas, Our Work, Reviews, Blog/Lawn Care Tips, About, Contact. A usable Services menu may list all 10 services without putting them all at top level.
+- Footer columns implement the exact service, area, and company groups from the specification. Des Moines links to `/`; four other cities link to their pages.
+- Homepage service cards, CrossSection labels, property service readouts, problem answers, work/review CTAs, areas, and blog tips gain real route links while their controls retain button semantics.
+- Each service page uses the service-specific outbound relationships in Section E; each article and related service form bidirectional helpful-resource links. A validation test detects orphaned indexable routes and invalid internal references.
+- Target crawl depth is three clicks or fewer: all hubs in global navigation/footer, all detail pages one click from a hub, and featured detail pages directly linked from homepage/context.
+
+### 7. Business-information single source of truth
+
+- `site` should contain normalized business name, short name, canonical origin, phone display/E.164/href, email, approved primary location wording, typed service areas, form endpoint, verified social links, verified Google review URL, and optional approved public address/hours.
+- Do not expose empty/unknown optional values. Footer and schema omit hours rather than selecting a disputed source.
+- Review summary, if retained, becomes one central record with rating/count/source URL/`verifiedAt`; otherwise use non-numeric trust copy and a link to the live source.
+- Separate customer review quotes from business claims. Review wording can be displayed accurately as attributed customer speech, but it does not automatically authorize company-wide guarantees or schema facts.
+- Record owner confirmations in this document or a small approved-data file before implementation tasks consume them.
+
+### 8. Image, gallery, and performance strategy
+
+- Create a typed project/image registry with stable ID, source, honest alt, intrinsic dimensions when known, media type, service tags, before/after pairing, featured placements, provenance/source, and optional verified city. Missing city remains missing.
+- Home loads a curated featured subset; `/our-work` owns the full experience. Do not serialize all 79 URLs into the homepage RSC payload. Use server-rendered first items plus accessible load-more/client batching or pagination on the work page.
+- Preserve the carousel/modal and before/after slider, but add dialog focus return/trapping review and make image captions/alt metadata-driven.
+- Audit the 68 remote Google URLs for permission/stability. Prefer owned local optimized copies only with authorization; do not silently copy or delete sources.
+- Convert actual PNG/JPEG payloads masquerading as `.webp`, optimize the 2.6–3.2 MB assets, generate appropriately sized variants through the existing Next image pipeline, and keep originals until visual verification. This belongs to the dedicated image task.
+- Keep the hero poster as the LCP candidate with `priority`; measure the video and change `preload="auto"` only from evidence. Keep below-fold images lazy and dimensions/sizes explicit.
+- Record before/after performance with Lighthouse/Web Vitals or a comparable production-like tool; inspect LCP, CLS, INP, bytes, request count, JS/hydration, and third-party impact without sacrificing brand motion.
+
+### 9. Sitemap, robots, 404, and redirects
+
+- `app/sitemap.ts` imports the published canonical route registry and emits exactly the 29 current target URLs. It excludes API, not-found, drafts, fragments, query strings, redirects, and utility routes.
+- Omit `lastModified` for static pages unless a real maintained update value exists; article dates flow through only when real. Avoid `new Date()` on every generation.
+- `app/robots.ts` keeps public content crawlable and references the clean production sitemap. API routes need not be in the sitemap; add a robots disallow only if a genuine crawl reason is documented.
+- `app/not-found.tsx` provides links to Services, Service Areas, Blog, and Contact while preserving 404 status.
+- No redirects are planned from repository evidence. Before launch, inspect production analytics/Search Console/backlinks; add only one-hop permanent mappings to true equivalents and test no chains.
+
+### 10. Localization implications
+
+- Initial SEO architecture remains one English canonical per route. `?lang=es` is a UI preference and is excluded from canonicals, sitemap, navigation URLs, schema IDs, and hreflang.
+- Preserve the language control and localStorage behavior, but remove client title/meta-description mutation that can conflict with server metadata. The control may translate approved visible strings with explicit English fallback; it must not imply that every interior page is fully translated.
+- Audit translation coverage and accessibility of mixed-language fallbacks. Do not auto-generate Spanish SEO copy for 29 pages.
+- A future indexable Spanish rollout requires separately approved full translations, localized paths (recommended `/es/...`), server-rendered locale metadata/content, self-canonicals, reciprocal `hreflang` (`en`, `es`, optionally `x-default`), localized sitemaps/navigation, and editorial ownership. That is outside this initial rollout unless separately authorized.
+
+### 11. Blog model, sourcing, and publishing workflow
+
+- Use a `BlogArticle` type with: slug/path, status, title, H1, description, primary keyword, optional researched secondary keywords, excerpt, sections/blocks, visible source list, claim/source notes, related service/article paths, image metadata, publisher, optional real author, optional real dates, and review owner/date.
+- Store each article in its own typed module. An index imports them, rejects duplicates/broken links, returns only `published` records to `generateStaticParams`, the hub, sitemap, and Latest Tips.
+- Article renderer supports semantic headings, paragraphs, lists/checklists, tables only when useful, inline citations/source links, contextual CTAs, related reading, and a visible Sources section. It does not turn every block into a sales CTA.
+- Publishing workflow:
+  1. Choose an approved intent that does not cannibalize a service page.
+  2. Research current Iowa-specific claims from authoritative primary sources (Iowa State Extension first; official government/municipal or other university extension as appropriate).
+  3. Record each source URL, publisher, accessed/review date, and which claims it supports; never copy source prose.
+  4. Draft and fact-check conditional advice for grass type, soil, weather, property condition, and local rules.
+  5. Obtain business approval for any Mo's capability, CTA, author, date, and image claim.
+  6. Add metadata, honest image alt/dimensions, service and related-article links, schema-compatible fields, and visible sources.
+  7. Run content/route/schema/link/source validation and editorial review.
+  8. Change status to published, which adds the route to hub/static params/sitemap.
+  9. Review seasonally or when source/service guidance changes; update `dateModified` only after a real visible update.
+- Six article tasks perform the actual web research later. No horticultural claims are prewritten in the foundation task.
+
+### 12. GA4 integration and event ownership
+
+#### Loading method and environment behavior
+
+- Because no Google tracking method exists, use a minimal framework-supported Google tag loaded `afterInteractive` with `next/script` and a small typed helper; do not install a GA4 package or introduce GTM simultaneously.
+- Server configuration uses `GA4_MEASUREMENT_ID` plus an explicit enable/environment gate. Render the client tag only when the ID matches expected `G-...` form, enablement is explicit, and deployment is production (`VERCEL_ENV === 'production'` or an approved equivalent explicit deployment environment). `NODE_ENV=production` alone is insufficient because previews are production builds.
+- Local, automated test, and preview environments render no production tag and issue no production GA requests. Tests inject a mock transport/data layer.
+- Continue Vercel Analytics only after owner privacy/analytics approval and restrict it to the intended production environment; it is not a second Google tag but still belongs in the privacy/loading review.
+- Production enablement is blocked until the real Measurement ID, stream settings, and consent/privacy decision are confirmed. No ID is invented in source or `.env.example`.
+
+#### Consent and Enhanced Measurement
+
+- Inspect the production web stream before custom events. If Enhanced Measurement form interactions are enabled, decide deliberately whether to disable that subfeature and use the controlled custom `form_start`; never knowingly send duplicate automatic/custom `form_start` events.
+- Do not enable Google Signals, advertising features, remarketing, or additional user-data collection. If consent is required by the owner's approved policy, do not load/send GA4 before the approved consent state; implementation must integrate rather than invent a legal policy.
+
+#### Form response contract and deduplication
+
+- Refine the existing API response without replacing Resend:
+  - provider-confirmed email: `{ ok: true, delivery: 'sent', submissionId }`;
+  - honeypot suppression: `{ ok: true, delivery: 'suppressed' }`;
+  - actionable failures: non-2xx with a bounded non-PII `errorCode`.
+- `generate_lead` fires in the submit handler only after parsing `delivery: 'sent'` and a stable `submissionId`. A synchronous in-flight ref prevents double requests; a per-form `Set`/successful-id ref prevents repeated callbacks, rerenders, hydration, and Strict Mode from emitting the same id twice.
+- Do not fire on button click, client validation failure, network failure, non-2xx response, malformed success response, or honeypot suppression.
+
+#### Required event contract
+
+| Event | Code owner and trigger | Allowed parameters | Key-event treatment |
+| --- | --- | --- | --- |
+| `generate_lead` | `EstimateForm`, once after provider-confirmed `delivery: 'sent'` | `form_id`, `form_name`, `lead_type`, controlled `service_category`, clean `page_path`, `placement`, `language`, route-derived `city_context` | Primary GA4 key event; manual Admin action |
+| `form_start` | `EstimateForm`, once per mounted form after first meaningful focus/input/change on a real field; coordinate Enhanced Measurement | Same non-PII form/page context; no field value | Diagnostic only |
+| `form_submit_error` | `EstimateForm`, only when a backend response is received and actionable; never validation/network-only | Form/page context plus bounded `error_type`/HTTP class, not server text or payload | Diagnostic only |
+| `click_to_call` | One delegated/reusable contact-link tracker on activation of real `a[href^="tel:"]` | clean `page_path`, sanitized business `link_url`, `link_text`, `placement`, `language`, route-derived `city_context` | Secondary intent; key-event decision requires owner approval |
+| `click_email` | Same tracker for real `a[href^="mailto:"]` | Same safe link/page fields | Secondary intent, not primary conversion |
+
+- Helper uses an allowlist per event. Never pass customer name, entered phone/email/address, message/project text, full payload, Resend response body, or arbitrary DOM/form values. Do not assign event value/currency.
+- Contact tracking is synchronous/non-blocking and never calls `preventDefault`, so phone dialer/email client behavior is preserved.
+- `page_path` is pathname-only; UTM attribution remains in GA's normal page/location collection and is not rewritten. Language changes must preserve existing UTM query parameters.
+
+#### GA4 manual administration and verification
+
+1. Verify the production Measurement ID and whether GA4 or GTM is already injected outside the repository.
+2. Review consent/privacy decision and Enhanced Measurement form settings.
+3. Deploy the disabled-by-default/production-gated implementation with approved environment values.
+4. Confirm each event and safe parameters in DebugView and Realtime.
+5. Mark `generate_lead` as the primary key event/conversion in GA4 Admin.
+6. Decide whether `click_to_call` is a secondary key event.
+7. Register only parameters that genuinely require custom dimensions.
+8. Verify Reports → Acquisition → Traffic acquisition and standard UTM attribution.
+9. Update/test the Google Business Profile website link manually as `https://www.moslawncaredsm.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp&utm_content=website_button`.
+
+### 13. Validation architecture
+
+- Add focused pure-data tests for route/content registries, metadata uniqueness/exactness, canonical construction, sitemap membership, schema JSON, breadcrumbs, internal link validity/orphans, published blog fields/sources, and forbidden city/service permutations.
+- Add form/analytics tests with mocked `fetch`/transport covering one success → one lead, duplicate callback → one lead, validation failure → zero leads, backend/network/bot failure → zero leads, safe errors, one form start, native contact destinations, parameter allowlists, and non-production silence.
+- Add a small browser route-smoke suite only if the chosen authorized testing foundation supports it; inspect HTML source/status/headings/canonicals and mobile interactions rather than building a custom crawler.
+- Required task checks use the repository's eventual supported commands and report run/pass/fail/not available separately. Build and typecheck become required before deployment; lint cannot be claimed until its missing dependency/config is resolved.
+
+## Section G — File Impact
+
+This is the expected implementation footprint, not authorization to create these files now. Exact test/asset filenames may be refined by the authorized task, and any design discovery must update this plan first.
+
+### Expected created files/modules
+
+#### App Router pages
+
+- `app/services/page.tsx` — services hub.
+- `app/services/[slug]/page.tsx` — statically enumerated service template for 10 service records.
+- `app/commercial-property-services/page.tsx` — commercial hub.
+- `app/service-areas/page.tsx` — metro service-area hub.
+- `app/service-areas/[city]/page.tsx` — statically enumerated four-city template.
+- `app/about/page.tsx`, `app/our-work/page.tsx`, `app/reviews/page.tsx`, `app/contact/page.tsx` — company/trust/conversion pages.
+- `app/blog/page.tsx`, `app/blog/[slug]/page.tsx` — blog hub and six statically enumerated articles.
+- `app/not-found.tsx` — branded actual-404 UI.
+
+#### Typed content and route data
+
+- `content/types.ts` — shared route, link, FAQ, image, service, area, source, and article types.
+- `content/routes.ts` — canonical published-route/ownership registry and hierarchy.
+- `content/services/index.ts` plus one module for each service slug — individually reviewable service content.
+- `content/service-areas/index.ts` plus `ankeny-ia.ts`, `waukee-ia.ts`, `norwalk-ia.ts`, `altoona-ia.ts` — distinct verified city content.
+- `content/blog/index.ts` plus the six exact article-slug modules — sourced blog content and publishing metadata.
+- `content/projects.ts` and `content/reviews.ts` — extracted typed work/review records with provenance/status metadata; migrate rather than duplicate the current arrays.
+
+#### Shared presentation and SEO infrastructure
+
+- `components/site-footer.tsx` — shared route footer.
+- `components/breadcrumbs.tsx` — visible navigation driven by route hierarchy.
+- `components/page-hero.tsx`, `components/service-card-grid.tsx`, `components/service-area-links.tsx`, `components/related-links.tsx`, `components/helpful-resources.tsx`, `components/faq-section.tsx`, `components/estimate-call-to-action.tsx` — add only when reused by the authorized page tasks.
+- `components/service-page.tsx`, `components/service-area-page.tsx`, `components/blog-article.tsx` — server-rendered composition templates.
+- `components/ga4.tsx`, `components/contact-link-tracker.tsx` — production-gated tag and non-blocking contact event ownership.
+- `lib/metadata.ts` — canonical/page metadata builder.
+- `lib/analytics.ts` and `lib/analytics-config.ts` — typed allowlisted events, runtime transport, and production gating.
+- `lib/content-validation.ts` — route/content/link/source validation reusable by tests/build scripts.
+
+#### Documentation, configuration, and tests
+
+- `.env.example` — names and safe comments for Resend and disabled-by-default GA4 configuration; never real values.
+- `docs/content-publishing.md` — blog research/source/image/internal-link/update workflow and business-approval checklist.
+- `tests/seo/*`, `tests/analytics/*`, and `tests/forms/*` — focused data/metadata/schema/event/response tests after the test-runner decision.
+- `tests/e2e/seo.spec.ts`, `tests/e2e/estimate-analytics.spec.ts`, and `playwright.config.ts` only if an authorized task adopts repository Playwright as the smallest repeatable browser suite.
+- Optimized image variants under a clearly named existing/new `public/` subdirectory, only after provenance and visual QA.
+
+### Expected modified files
+
+- `app/layout.tsx` — shared header/footer shell, metadata defaults, production-safe analytics mounting, language behavior integration.
+- `app/page.tsx` — required homepage metadata/content structure, crawlable links, curated work/reviews/blog previews, shared footer removal; preserve experiences.
+- `app/robots.ts`, `app/sitemap.ts`, `app/manifest.ts` — registry-driven URLs/accurate business metadata and removal of volatile dates.
+- `app/api/estimate/route.ts` — explicit delivery/suppression/error contract and shared types; keep Resend implementation.
+- `components/site-header.tsx`, `components/mobile-navigation.tsx` — global route navigation, interior-page behavior, centralized contact data, tracking placements.
+- `components/hero.tsx`, `components/cross-section.tsx`, `components/property-hotspots.tsx`, `components/problem-selector.tsx` — exact homepage targeting and crawlable contextual service links without losing controls.
+- `components/gallery.tsx`, `components/GalleryClient.tsx`, `components/before-after-slider.tsx` — typed project source, featured/full-page modes, metadata-driven alts, lower payload, preserved interaction.
+- `components/testimonials.tsx` — import extracted data, configurable curated/full modes, central review summary/link, reduced initial payload.
+- `components/estimate-section.tsx`, `components/estimate-form.tsx` — reusable placement/context, response parsing, in-flight/success dedupe, safe GA4 events.
+- `components/language-switcher.tsx`, `lib/i18n.tsx`, `lib/es-translations.json` — preserve UI translation while removing conflicting SEO metadata mutation and documenting/handling incomplete coverage.
+- `components/structured-data.tsx`, `lib/structured-data.ts` — coherent typed page graph, stable IDs, omission of unverified fields.
+- `lib/site.ts`, `lib/site-url.ts` — approved single-source business/contact/area/review/social/config data and normalized URL helpers.
+- `app/globals.css` — shared interior layouts/navigation/breadcrumbs/accessibility/performance styles while retaining tokens and motion rules.
+- `next.config.mjs` — only if verified image/redirect/production behavior requires configuration; no speculative setting.
+- `data/all_image_urls.txt` — annotate/migrate only if the gallery task cannot preserve it as a generated/legacy source without duplication.
+- `package.json`, `pnpm-lock.yaml`, `tsconfig.json`, `.gitignore` — only if an authorized validation task proves scripts/test tooling/config are needed. Use pnpm as declared; do not update both lockfiles mechanically.
+- Relevant `public/` media — lossless reference/mapping or optimized replacements after visual verification; originals remain until approved.
+- `plan.md` — status, discoveries, validation, and owner decisions after every authorized task.
+
+### Expected deleted files
+
+- **None planned.** Do not delete existing assets, historical Playwright artifacts, `package-lock.json`, generated build info, or legacy data merely for cleanup during SEO work.
+- If a later authorized task proves a file obsolete (for example, an asset after a verified byte-identical/visually approved replacement), list that exact deletion in `plan.md` before taking it and preserve recoverability in git.
+
+## Ordered Implementation Tasks
+
+The order below follows the required priorities while using the prompt's reviewable page-by-page breakdown: shared technical foundations and measurement first; homepage and service architecture next; the commercial hub and service areas after the core service cluster; trust/conversion pages next; then the required blog cluster; finally media, linking, schema, accessibility/performance, production analytics, and documentation gates. No task may begin without separate authorization, and an authorized task must stop before the next task.
+
+### Task 1 — Approved Business Data, Route Registry, and Validation Foundation
+
+- **Status:** `[ ]` Not started
+- **Objective:** Establish typed, reviewable sources for approved business facts, all 29 canonical routes, ownership metadata, internal-link references, and the smallest repeatable validation foundation.
+- **Why It Is Needed:** Metadata, sitemap, navigation, schema, page content, and analytics will drift or expose disputed facts if they continue to use duplicated literals; later tasks also need one authoritative path inventory.
+- **Dependencies:** None; this is the first implementation task and still requires owner answers for any fact marked unverified.
+- **Files Involved:** `lib/site.ts`, `lib/site-url.ts`, new `content/types.ts`, new `content/routes.ts`, new `lib/content-validation.ts`, `.env.example`; `package.json`, `pnpm-lock.yaml`, `tsconfig.json`, and test configuration only if the authorized validation choice requires them.
+- **Implementation Details:** Normalize business name, origin, phone display/E.164/href, email, five confirmed service areas, review/social links, and optional address/hours with explicit verification state; omit disputed hours and any unapproved address from consumers. Register exactly the 29 target URLs with exact page type, parent, primary/secondary ownership, title, H1, description, implementation/publication status, indexability, and link IDs. Prohibit `/service-areas/des-moines-ia/`, service/city permutations, duplicate paths, query-bearing canonical paths, and thin split pages. Add safe environment documentation without real secrets and select the smallest compatible test setup without gratuitous dependencies or dual-lockfile churn.
+- **SEO Impact:** Governs every target URL and prevents canonical, ownership, fact, and sitemap divergence before pages are created.
+- **Edge Cases:** Missing owner confirmations; apostrophe/HTML escaping in the business name; root-path joining; optional facts accidentally rendered as empty strings; duplicate aliases; stale `package-lock.json` versus declared pnpm workflow; no installed dependencies.
+- **Validation:** Review the registry against Section E, count 29 unique indexable paths, confirm exact metadata strings, confirm all parents/references resolve, and inspect consumers for remaining duplicated business literals before migrating them.
+- **Tests:** Add pure-data assertions for route count/uniqueness, valid hierarchy, exact ownership values, clean paths, forbidden-route absence, normalized contact values, and omission of unverified optional fields; run typecheck/build only if dependencies are available under the authorized task.
+- **Definition of Done:** `[ ]` One typed registry contains all and only the 29 targets; `[ ]` approved facts are centralized and unknown address/hours remain omitted; `[ ]` validation is repeatable and its actual pass/fail/not-run results are recorded; `[ ]` no page UI or SEO implementation beyond the foundation is started.
+
+### Task 2 — Global Metadata, Canonical, Schema, Sitemap, Robots, and 404 Foundation
+
+- **Status:** `[ ]` Not started
+- **Objective:** Build the shared technical SEO layer and framework metadata routes that every content task will consume.
+- **Why It Is Needed:** The current site has homepage-only metadata, a volatile one-URL sitemap, unverified LocalBusiness fields, no coherent entity graph, and no branded 404 verification.
+- **Dependencies:** Task 1.
+- **Files Involved:** `app/layout.tsx`, `app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts`, new `app/not-found.tsx`, `components/structured-data.tsx`, `lib/structured-data.ts`, new `lib/metadata.ts`, `lib/site-url.ts`, route-registry tests.
+- **Implementation Details:** Create exact-record metadata helpers with self-canonicals, Open Graph, Twitter, index/follow defaults, and verified social images; remove `keywords`. Emit an Organization-led `@graph` with stable `#organization`, `#website`, page, breadcrumb, service, and article IDs as applicable; withhold address, geo, disputed hours, ratings, price, dates, and other unverified fields. Generate the sitemap from records whose routes are actually implemented and published, with clean URLs and real dates only; each later page task promotes its route only when it exists, and the completed rollout must contain exactly 29 entries. Keep robots permissive and sitemap-referencing. Add a useful not-found UI and verify actual 404 status. Do not add speculative redirects or redirect unknown URLs home.
+- **SEO Impact:** Establishes crawl/index controls, entity consistency, canonical ownership, and discovery for all 29 pages while correcting unsafe current schema.
+- **Edge Cases:** Root canonical formatting; Next trailing-slash normalization; query/UTM/lang variants; missing social images; JSON escaping; invalid dynamic slugs; sitemap accidentally including API/drafts/404; hosting-level redirects not visible in code.
+- **Validation:** Inspect rendered head/source for the homepage and fixture records, parse JSON-LD, inspect `/sitemap.xml` and `/robots.txt`, request a missing route for a true 404, and verify the deployed slash convention before launch.
+- **Tests:** Metadata exactness/uniqueness, canonical construction, sitemap exact membership/exclusions, robots sitemap URL, structured-data serialization/stable IDs/forbidden fields, and 404 status smoke test.
+- **Definition of Done:** `[ ]` Shared metadata/schema builders consume Task 1 data; `[ ]` sitemap publication filtering excludes every not-yet-implemented, utility, draft and query URL and is designed to reach exactly 29 after all page tasks; `[ ]` disputed facts and review schema are absent; `[ ]` missing pages return 404; `[ ]` all checks and unresolved hosting assumptions are recorded.
+
+### Task 3 — Global Navigation, Footer, Breadcrumbs, and Shared Page Primitives
+
+- **Status:** `[ ]` Not started
+- **Objective:** Make the future architecture crawlable and usable through a route-aware header, exact footer link groups, visible breadcrumbs, and restrained reusable page components.
+- **Why It Is Needed:** Current navigation is homepage-fragment based, future pages would be orphaned, and breadcrumb UI/schema need a shared source.
+- **Dependencies:** Tasks 1–2.
+- **Files Involved:** `app/layout.tsx`, `components/site-header.tsx`, `components/mobile-navigation.tsx`, new `components/site-footer.tsx`, new `components/breadcrumbs.tsx`, shared page primitive files only as genuine reuse requires, `app/globals.css`, `content/routes.ts`, `lib/i18n.tsx`, `lib/es-translations.json`.
+- **Implementation Details:** Add HTML navigation for Services, Service Areas, Our Work, Reviews, Blog/Lawn Care Tips, About, and Contact; provide an accessible Services menu with all ten service links without crowding top-level navigation. Build footer columns matching the prompt's Services, five areas (Des Moines → `/`), and Company lists. Render visible breadcrumbs from the same hierarchy used by schema. Preserve mobile keyboard/focus behavior, homepage section anchors, phone/email behavior, visual identity, and language control; make interior header contrast route-aware. Add skip navigation where appropriate and avoid clickable-div link substitutes.
+- **SEO Impact:** Gives every hub and detail route a crawlable path within three clicks and supplies consistent hierarchy/anchors.
+- **Edge Cases:** Homepage fragments from interior pages; menus on touch/keyboard; focus return and Escape; long translated labels and incomplete Spanish fallback; active-state handling; Contact/estimate fragments; duplicate footer/header landmarks.
+- **Validation:** Manually traverse desktop/mobile/keyboard navigation, compare visible breadcrumbs with registry hierarchy, inspect HTML anchors without JavaScript, verify all native contact destinations, and check responsive contrast/focus.
+- **Tests:** Internal href resolution, breadcrumb item/schema parity, global-nav/footer required-link sets, keyboard menu behavior where test tooling supports it, and an orphan-route graph assertion.
+- **Definition of Done:** `[ ]` All hubs are globally linked and all details are hub-linked; `[ ]` breadcrumb UI and data agree; `[ ]` exact footer groups and ten-service menu are present; `[ ]` mobile, keyboard, focus, language, and homepage-anchor behavior remain intact.
+
+### Task 4 — GA4 Foundation and Conversion Measurement
+
+- **Status:** `[ ]` Not started
+- **Objective:** Add production-gated, PII-safe GA4 loading and the exact required lead/form/contact event model around the existing estimate workflow.
+- **Why It Is Needed:** Only Vercel page analytics exists; there is no confirmed-lead conversion measurement, funnel diagnostic, contact intent tracking, environment isolation, or event deduplication.
+- **Dependencies:** Tasks 1–3; verified production Measurement ID, stream ownership/injection audit, consent decision, and Enhanced Measurement review are activation gates, not permission to invent values.
+- **Files Involved:** `app/layout.tsx`, `app/api/estimate/route.ts`, `components/estimate-form.tsx`, `components/estimate-section.tsx`, new `components/ga4.tsx`, new `components/contact-link-tracker.tsx`, new `lib/analytics.ts`, new `lib/analytics-config.ts`, shared estimate contract/types, `.env.example`, analytics/form tests.
+- **Implementation Details:** Use one minimal `next/script` Google tag only when an explicit valid `G-...` ID and production deployment gate are satisfied; do not add GTM concurrently. Define an allowlisted event helper. Refine API responses to distinguish provider-confirmed `sent`, honeypot `suppressed`, and bounded actionable error codes. Fire `generate_lead` once per stable successful submission ID only after `sent`; use in-flight and emitted-ID guards against double clicks, rerenders, hydration, Strict Mode, and callbacks. Fire one meaningful non-honeypot `form_start`; fire `form_submit_error` only after an actionable backend response. Track every real `tel:` and `mailto:` activation without preventing/delaying navigation. Never send form values, PII, free text, arbitrary DOM content, value/currency, or production traffic from local/test/preview. Preserve standard UTMs and existing form validation/Resend delivery.
+- **SEO Impact:** Measures conversions for homepage, Contact, services, locations, commercial, and relevant article CTAs without degrading performance or trust; no keyword ownership changes.
+- **Edge Cases:** Honeypot 2xx response; malformed JSON; provider response without ID; double submission; remount; failed network before backend; client validation; external tag injection; Enhanced Measurement duplicates; consent not granted; preview builds with `NODE_ENV=production`; link text containing PII-like content.
+- **Validation:** Inspect network/tag presence by environment; exercise success/suppression/validation/backend/network cases; inspect every event payload; confirm phone/email native behavior; record Enhanced Measurement and consent decisions; keep production disabled until verified account data exists.
+- **Tests:** One sent response → one `generate_lead`; duplicate callback/ID → one; validation, suppression, failure, malformed and network error → zero leads; one `form_start`; actionable response → one safe error; native tel/mailto preserved; allowlist rejects PII/free text; non-production emits no production requests.
+- **Definition of Done:** `[ ]` Exact five-event contract is implemented and documented; `[ ]` successful delivery is the sole primary lead trigger with dedupe; `[ ]` payload/environment/consent safeguards pass; `[ ]` account-dependent activation remains explicitly blocked until verified rather than using an invented ID.
+
+### Task 5 — Homepage SEO Refactor and Crawlable Architecture
+
+- **Status:** `[ ]` Not started
+- **Objective:** Make `/` own broad Des Moines lawn-care intent while preserving and enhancing the existing branded long-form homepage.
+- **Why It Is Needed:** The current title/H1 differ from the required ownership and core service/area/content routes are not exposed through crawlable links.
+- **Dependencies:** Tasks 1–4; page links may target later registered routes, but deployment must wait until those routes exist.
+- **Files Involved:** `app/page.tsx`, `components/hero.tsx`, `components/cross-section.tsx`, `components/property-hotspots.tsx`, `components/before-after-slider.tsx`, `components/gallery.tsx`, `components/testimonials.tsx`, `components/problem-selector.tsx`, `components/estimate-section.tsx`, shared preview/card components, `lib/site.ts`, `app/globals.css`.
+- **Implementation Details:** Apply the exact homepage title, H1, description, canonical/social/schema record. Preserve hero, video, seasons, property explorer, before/after, gallery, reviews, problem navigation, estimate workflow, motion, responsive behavior, and bilingual control. Add the 12-section architecture: clear residential/commercial/free-estimate hero and click-to-call; ten crawlable service cards; linked seasonal and property references; commercial hub link; Our Work CTA and curated work; exact five-area copy/links; curated reviews; small Latest Tips with Blog CTA; correctly mapped problem links; Contact/estimate paths. Keep real anchors and avoid loading full gallery/blog archives above the fold.
+- **SEO Impact:** Directly targets `lawn care des moines ia`, becomes the strongest inbound hub for all 28 interior URLs, and avoids a competing Des Moines city page.
+- **Edge Cases:** Interactive buttons versus navigational links; duplicated H1; forthcoming routes absent in partial deployments; hero LCP; unverified operational/image/review claims; language query retaining UTM; form event duplication when reused; mobile section density.
+- **Validation:** Compare every visible section and exact metadata to Sections 6 and 18; inspect source for H1 and real links; test all preserved interactions at mobile/desktop/reduced motion; verify curated media payload and Contact flow.
+- **Tests:** Exact homepage metadata/H1/canonical/schema, ten service hrefs, five area hrefs including Des Moines `/`, commercial/work/reviews/blog/contact links, problem mapping, one H1, no forbidden city route, and regression browser tests for key interactions.
+- **Definition of Done:** `[ ]` Exact ownership and all 12 sections are present; `[ ]` preserved experiences remain functional; `[ ]` required links are crawlable in rendered HTML; `[ ]` homepage avoids unverified claims/full archive payloads and passes scoped accessibility/performance checks.
+
+### Task 6 — Services Index
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/` as the canonical overview for the ten consolidated Des Moines service intents.
+- **Why It Is Needed:** Users and crawlers need a service hub, and consolidated ownership prevents thin pages for minor variants.
+- **Dependencies:** Tasks 1–3; Task 2 provides metadata/schema; Task 5 provides homepage inbound linking.
+- **Files Involved:** new `app/services/page.tsx`, service-index content/record, shared hero/card/breadcrumb/CTA components, `content/routes.ts`, `content/services/index.ts`, `app/globals.css`.
+- **Implementation Details:** Use exact title/H1/description and `lawn care services des moines ia` ownership. Render a useful introduction and real cards for Lawn Mowing, Aeration & Seeding, Fertilization & Weed Control, Landscaping, Flower Bed Maintenance, Yard Cleanup, Spring Cleanup, Fall Cleanup & Leaf Removal, Grading, and Snow Removal; link Commercial, Service Areas, and Contact. Use visible breadcrumb plus CollectionPage/ItemList/BreadcrumbList matching cards. Do not add Ground Clearance, Leaves Removal, residential, or city/service pages.
+- **SEO Impact:** Owns the broad service-list intent and distributes internal authority to all ten service pages without cannibalizing the homepage.
+- **Edge Cases:** Duplicate card paths/titles; page deployed before child routes; ItemList order differing from visible cards; terminology `overseeding` versus approved visible `Aeration and Seeding`; excessive keyword repetition.
+- **Validation:** Compare exact metadata and all ten cards to the ownership map, inspect source links/headings/schema, and verify navigation/footer/breadcrumb inbound/outbound paths.
+- **Tests:** Route success, exact metadata/H1/canonical, ten unique expected service hrefs, ItemList/UI parity, one H1, and absence of prohibited thin variants.
+- **Definition of Done:** `[ ]` Hub renders useful non-stuffed content and all ten links; `[ ]` exact metadata/schema/breadcrumbs pass; `[ ]` no extra service intent page is introduced; `[ ]` Contact/commercial/area paths are usable.
+
+### Task 7 — Lawn Mowing Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/lawn-mowing/` as the sole commercial-intent page for Des Moines mowing service.
+- **Why It Is Needed:** Mowing is a primary advertised service with a distinct high-value intent and currently has no dedicated indexable page.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for any embedded form/contact tracking.
+- **Files Involved:** new `content/services/lawn-mowing.ts`, `app/services/[slug]/page.tsx`, shared service template/components, project/review selectors when verified, schema/metadata helpers, tests.
+- **Implementation Details:** Use exact title/H1/description and specified primary/secondary keywords naturally. Assemble breadcrumb, truthful hero/CTAs, problem/outcome, confirmed coverage, supported residential/commercial context, only verified process, 2–4+ contextual links, verified work/review excerpts, non-identical service-area wording, useful truthful FAQs, and final estimate CTA. Link Aeration & Seeding, Fertilization & Weed Control, Yard Cleanup, Commercial, Our Work, Contact; add the mowing resource only after Task 30/35 publishes it. Confirm or soften current claims about scheduling and clipping handling.
+- **SEO Impact:** Owns `lawn mowing des moines ia` and supports city, commercial, homepage, and mowing-article relationships.
+- **Edge Cases:** Unverified recurring schedules, clipping disposal, equipment, pricing/contracts, residential/commercial scope, or city-specific imagery; confusing general lawn maintenance with other service ownership.
+- **Validation:** Editorial fact check against approved business data, rendered metadata/H1/canonical, visible/schema breadcrumb parity, Service schema provider/areas, all CTAs/links, image alt/provenance, and responsive/accessibility review.
+- **Tests:** Route/static-param success, exact metadata, one H1, Service/Breadcrumb schema, required outbound links, no unsupported claims fixture, and invalid service slug 404.
+- **Definition of Done:** `[ ]` Complete truthful service template is populated; `[ ]` exact ownership and required links/schema pass; `[ ]` imagery/reviews are honestly labeled; `[ ]` no unverified process, guarantee, price, or local claim remains.
+
+### Task 8 — Aeration and Seeding Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/aeration-overseeding/` for the consolidated aeration plus seeding/overseeding commercial intent.
+- **Why It Is Needed:** The intent is required and must remain consolidated while respecting the company's existing “Aeration and Seeding” terminology.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked conversion components.
+- **Files Involved:** new `content/services/aeration-overseeding.ts`, shared service route/template/components, metadata/schema/data tests.
+- **Implementation Details:** Apply exact metadata/H1; use URL/keyword overseeding wording naturally while visible capability copy says “Aeration and Seeding” where appropriate. Include only confirmed problems, coverage, property types, process, image/review data, truthful FAQ, five-area links and CTAs. Link Fertilization & Weed Control, Lawn Mowing, Spring Cleanup when relevant, Services, Contact; add both aeration/overseeding articles only when Tasks 28–29/35 are published. Confirm or soften core-aeration/seed-placement claims.
+- **SEO Impact:** Owns `lawn aeration des moines ia` plus seeding/overseeding variants without creating competing pages.
+- **Edge Cases:** Implying a particular overseeding machine/method, seed mix, timing guarantee, outcome, treatment package, or service availability that is not confirmed; article/service cannibalization.
+- **Validation:** Exact record comparison, claim approval, visible `Aeration and Seeding` terminology, rendered links/metadata/canonical/schema, honest imagery, and FAQ/source review.
+- **Tests:** Route/metadata/H1, Service/Breadcrumb schema, required related links, consolidated-slug assertion, no separate aeration/seeding page, invalid slug 404.
+- **Definition of Done:** `[ ]` One consolidated accurate page exists; `[ ]` exact ownership and terminology rules pass; `[ ]` no method/result claim is invented; `[ ]` service and eventual article link boundaries are documented.
+
+### Task 9 — Fertilization and Weed Control Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/fertilization-weed-control/` as the consolidated Des Moines treatment-intent page.
+- **Why It Is Needed:** The advertised paired service has its own commercial search intent but carries heightened truth/safety risks.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for conversion components.
+- **Files Involved:** new `content/services/fertilization-weed-control.ts`, shared service route/template, verified media/review selectors, metadata/schema tests.
+- **Implementation Details:** Use exact title/H1/description and natural keywords. Cover user problems/outcomes and only approved service scope; include property context, verified process, service areas, truthful FAQ, CTAs, and links to Aeration & Seeding, Lawn Mowing, Services, and Contact. Explicitly exclude unverified chemical brands, formulas, schedules, pesticide claims, application counts, licenses, guarantees, and prescriptive advice; confirm or soften current “targeted treatment/feeding” copy before reuse.
+- **SEO Impact:** Owns `lawn fertilization des moines ia` and weed-control variants while avoiding unsafe or duplicative treatment pages.
+- **Edge Cases:** Regulatory/licensing implications, health/environment claims, guaranteed weed elimination, exact programs or seasonal dates, PII in estimate context, unsuitable imagery.
+- **Validation:** Business/content approval, exact metadata and semantic headings, Service/Breadcrumb schema, link checks, CTA/form behavior, and manual safety/accuracy reading.
+- **Tests:** Route/metadata/H1/schema, required links, forbidden-claim term/content review, one consolidated route, and invalid slug 404.
+- **Definition of Done:** `[ ]` Page is complete and human-readable; `[ ]` only confirmed capabilities appear; `[ ]` no chemical/licensing/schedule/guarantee claims are introduced; `[ ]` ownership/schema/link checks pass.
+
+### Task 10 — Landscaping Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/landscaping/` for Des Moines landscaping service intent using verified work and capabilities.
+- **Why It Is Needed:** Landscaping is a core advertised intent and a major route into the existing visual portfolio.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs; Task 24 may later expand the Work destination without blocking the link.
+- **Files Involved:** new `content/services/landscaping.ts`, shared service route/template, verified project/review data, metadata/schema tests.
+- **Implementation Details:** Apply exact metadata/H1; build distinct problem/outcome, confirmed coverage/process/property context, FAQs, service areas, work/review excerpts, and final CTA. Link Flower Bed Maintenance, Grading, Yard Cleanup, Our Work, Commercial, Contact. Reuse actual imagery without inventing city/project facts and confirm or soften redesign/installation/maintenance claims found in current copy.
+- **SEO Impact:** Owns `landscaping des moines ia`, strengthens Our Work/commercial relationships, and supports relevant service cross-links.
+- **Edge Cases:** Conflating landscaping with engineering, design credentials, construction, drainage correction, or services not verified; large gallery payload; location-stuffed alts.
+- **Validation:** Exact metadata/canonical/H1, claim and project provenance review, service schema, required links, responsive media, one H1, and CTA behavior.
+- **Tests:** Route/metadata/schema, related-link set, project selector without false city metadata, invalid slug 404, and no prohibited engineering/design claims.
+- **Definition of Done:** `[ ]` Accurate distinctive landscaping page is rendered; `[ ]` real work is reused efficiently and honestly; `[ ]` required links/schema/metadata pass; `[ ]` no broader capability is implied without approval.
+
+### Task 11 — Flower Bed Maintenance Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/flower-bed-maintenance/` for the distinct flower/landscape-bed maintenance intent.
+- **Why It Is Needed:** It is an advertised service and a required target that should not be buried inside general landscaping.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
+- **Files Involved:** new `content/services/flower-bed-maintenance.ts`, shared service route/template, verified project/review selectors, metadata/schema tests.
+- **Implementation Details:** Use exact metadata/H1 and natural variants. Provide a distinct, truthful page with breadcrumb, hero, problem/outcome, confirmed maintenance scope, supported property context/process, work/reviews, varied service-area copy, FAQs and CTA. Link Landscaping, Spring Cleanup, Fall Cleanup & Leaf Removal, Yard Cleanup, Contact. Verify current cutback, edging, cleanup, and redesign language rather than treating it as approved fact.
+- **SEO Impact:** Owns `flower bed maintenance des moines` and routes adjacent seasonal/landscaping demand without creating thin bed-cleanup variants.
+- **Edge Cases:** Implying gardening expertise, plant health treatments, design/installation, material hauling, seasonal schedule, or guarantees; confusing decorative images with actual work.
+- **Validation:** Content approval, exact metadata/H1/canonical, Service/Breadcrumb schema, related links, image/review provenance, FAQ truthfulness, and mobile/accessibility checks.
+- **Tests:** Route/static param, exact metadata, one H1, schema, required links, no separate bed-cleanup route, invalid slug 404.
+- **Definition of Done:** `[ ]` Required page and exact intent are complete; `[ ]` confirmed scope is clearly bounded; `[ ]` required links/media/schema pass; `[ ]` unverified gardening/design/process claims are absent.
+
+### Task 12 — Yard Cleanup Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/yard-cleanup/` as the single owner of general cleanup, overgrown-yard cleanup, and ground-clearance commercial intent.
+- **Why It Is Needed:** Three existing labels must be consolidated to prevent cannibalization and thin pages.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
+- **Files Involved:** new `content/services/yard-cleanup.ts`, shared service route/template, verified media/review data, metadata/schema tests.
+- **Implementation Details:** Apply exact metadata/H1 and include the consolidated variants naturally. Build truthful problem/outcome, approved coverage/process/property context, work/review excerpts, non-duplicated service-area language, FAQs and CTA. Link Lawn Mowing, Spring Cleanup, Fall Cleanup & Leaf Removal, Grading, Landscaping, Contact. Avoid separate Overgrown Yards Cleanup or Ground Clearance routes and confirm disposal/hauling/equipment claims before reuse.
+- **SEO Impact:** Owns `yard cleanup des moines ia` and the two consolidated sub-intents while distributing authority to seasonal and structural services.
+- **Edge Cases:** Hazardous waste, major clearing, hauling/disposal rules, lot clearing, excavation, city-specific projects, guarantees, or scope beyond ordinary property care.
+- **Validation:** Compare consolidated ownership, fact-check scope, inspect exact head/H1/canonical/schema/breadcrumb, all links/CTAs, media provenance and responsive behavior.
+- **Tests:** Expected route/metadata/H1/schema, required related links, forbidden split-route assertions, and invalid slug 404.
+- **Definition of Done:** `[ ]` One useful consolidated page covers all three approved labels; `[ ]` no thin variants exist; `[ ]` scope/claims/media are approved; `[ ]` metadata/schema/links/tests pass.
+
+### Task 13 — Spring Cleanup Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/spring-cleanup/` for commercial spring cleanup intent, distinct from the later informational checklist.
+- **Why It Is Needed:** Seasonal commercial demand needs a dedicated conversion page and careful separation from blog advice intent.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
+- **Files Involved:** new `content/services/spring-cleanup.ts`, shared service route/template, verified seasonal media/review data, metadata/schema tests.
+- **Implementation Details:** Use exact metadata/H1; provide approved problem/outcome, coverage, process, property context, service areas, reviews/work, FAQs and CTA. Link Lawn Mowing, Flower Bed Maintenance, Yard Cleanup, Landscaping, Contact. Reserve checklist/advice intent and backlink for Task 31/35; confirm debris removal, cutback, edging, or timing claims before use.
+- **SEO Impact:** Owns `spring cleanup des moines ia` without cannibalizing `/blog/spring-lawn-cleanup-des-moines/`.
+- **Edge Cases:** Rigid annual dates, weather promises, disposal/hauling, included tasks, fertilizer advice, and article CTA duplication.
+- **Validation:** Exact metadata/keyword-intent distinction, approved capability review, Service/Breadcrumb schema, required links, imagery, FAQ, responsive and CTA checks.
+- **Tests:** Route/metadata/H1/schema, required service links, commercial-versus-informational ownership assertion, invalid slug 404.
+- **Definition of Done:** `[ ]` Commercial spring page is accurate and conversion-oriented; `[ ]` informational intent remains assigned to the article; `[ ]` all exact metadata/schema/link/fact checks pass.
+
+### Task 14 — Fall Cleanup and Leaf Removal Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/fall-cleanup-leaf-removal/` as the single commercial page for fall cleanup and leaf removal.
+- **Why It Is Needed:** Both high-overlap advertised intents must be consolidated to avoid competing pages.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
+- **Files Involved:** new `content/services/fall-cleanup-leaf-removal.ts`, shared service route/template, verified seasonal media/review data, metadata/schema tests.
+- **Implementation Details:** Apply exact metadata/H1 and natural secondary variants. Include truthful problem/outcome, confirmed scope/process/property context, service areas, actual work/reviews, useful FAQs and CTA. Link Yard Cleanup, Lawn Mowing, Snow Removal, Contact. Reserve informational tips intent and backlink for Task 32/35. Do not make separate Fall Cleanup or Leaves Removal pages; verify cleanup, hard-surface clearing, hauling, and disposal claims.
+- **SEO Impact:** Owns `leaf removal des moines ia` and fall cleanup commercial variants while supporting seasonal continuity.
+- **Edge Cases:** Disposal/municipal rules, exact timing, weather, guaranteed removal, equipment, city labels, and cannibalization with the advice article.
+- **Validation:** Exact metadata/H1/canonical and intent split; content approval; Service/Breadcrumb schema; required links; media/review provenance; FAQ/CTA/responsive review.
+- **Tests:** Route/metadata/schema, required outbound links, forbidden split-route assertions, commercial-versus-informational ownership assertion, invalid slug 404.
+- **Definition of Done:** `[ ]` One accurate consolidated page exists; `[ ]` no competing seasonal/leaf page is added; `[ ]` article intent remains distinct; `[ ]` facts, links, schema, and metadata pass.
+
+### Task 15 — Grading Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/grading/` for verified yard-grading commercial intent with tightly bounded claims.
+- **Why It Is Needed:** Grading is advertised and required, but current wording risks implying specialized engineering work.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
+- **Files Involved:** new `content/services/grading.ts`, shared service route/template, verified project/review selectors, metadata/schema tests.
+- **Implementation Details:** Use exact title/H1/description; explain only confirmed problems/outcomes, coverage/process/property context, service areas, work/reviews, FAQs and estimate path. Link Yard Cleanup, Landscaping, Our Work, Contact. Explicitly avoid drainage engineering, foundation correction, excavation expertise, erosion-control engineering, certifications, and guaranteed water outcomes unless separately verified; confirm or soften current drainage-reshaping language.
+- **SEO Impact:** Owns `yard grading des moines ia` without expanding into unsupported engineering intents.
+- **Edge Cases:** Drainage/foundation safety claims, permit implications, heavy excavation, exact slope specifications, false before/after locations, and user expectations beyond scope.
+- **Validation:** Owner/scope approval, exact metadata/H1/canonical, Service/Breadcrumb schema, related links, project provenance, FAQ/CTA/accessibility review.
+- **Tests:** Route/metadata/schema, required links, prohibited-engineering-claim review, invalid slug 404.
+- **Definition of Done:** `[ ]` Page scope is accurate and visibly bounded; `[ ]` exact ownership/links/schema pass; `[ ]` no engineering, foundation, excavation, or outcome claim appears without evidence.
+
+### Task 16 — Snow Removal Service Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/services/snow-removal/` for confirmed residential/commercial snow-removal intent.
+- **Why It Is Needed:** Snow removal is a prominent seasonal service with its own high-intent search demand.
+- **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
+- **Files Involved:** new `content/services/snow-removal.ts`, shared service route/template, verified snow media/reviews, metadata/schema tests.
+- **Implementation Details:** Apply exact metadata/H1; include truthful problem/outcome, confirmed coverage/process/property types, service areas, snow-related work/reviews, useful FAQ and estimate/call paths. Link Commercial Property Services, Service Areas, Reviews, Contact. Do not claim 24/7 service, snow-depth triggers, ice management, salting, sidewalk clearing, guaranteed response times, or exact service windows unless verified; confirm current walk/entry clearing language.
+- **SEO Impact:** Owns `snow removal des moines ia` and supports commercial, city, reviews, and seasonal links.
+- **Edge Cases:** Emergency expectations, weather/availability promises, ice/salt liability, trigger depths, residential/commercial coverage differences, stale seasonal CTAs.
+- **Validation:** Capability approval, exact metadata/H1/canonical, Service/Breadcrumb schema, required links, relevant review/image labeling, native call/estimate behavior and mobile review.
+- **Tests:** Route/metadata/schema, required related links, forbidden-claim assertions/editorial check, invalid slug 404.
+- **Definition of Done:** `[ ]` Accurate snow page exists for approved property types; `[ ]` prohibited claims are absent; `[ ]` exact metadata/schema/links/CTAs pass; `[ ]` media and reviews are appropriately categorized.
+
+### Task 17 — Commercial Property Services Hub
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/commercial-property-services/` as a concise commercial service hub rather than a duplicate of ten service pages.
+- **Why It Is Needed:** Commercial property intent is required and currently appears only in broad homepage claims.
+- **Dependencies:** Tasks 1–16 so only verified applicable services are linked; Task 4 for tracked conversion paths; Task 5 for homepage inbound link.
+- **Files Involved:** new `app/commercial-property-services/page.tsx`, commercial content record/module, shared page components, verified project/review selectors, metadata/schema/link tests.
+- **Implementation Details:** Use exact title/H1/description and natural secondary terms. Explain verified commercial property support, group/link applicable mowing, cleanup, landscaping, snow and other confirmed services without copying their full pages, reuse honestly labeled work/reviews, link Service Areas, Our Work, Reviews and Contact, and provide a clear estimate CTA. Do not invent contracts, schedules, crews, equipment, response times, portfolio names, or property counts.
+- **SEO Impact:** Owns `commercial lawn care des moines ia` and distributes commercial users to the correct service pages.
+- **Edge Cases:** Some services may not be commercial; review quotes do not prove business-wide capability; repeated service copy; unsupported maintenance-plan/contract promises; exact client/project claims.
+- **Validation:** Owner confirmation of each listed commercial service, exact head/H1/canonical, schema matching visible ItemList, inbound/outbound links, content duplication review, CTA/tracking and responsive accessibility.
+- **Tests:** Route success, exact metadata, one H1, Breadcrumb/ItemList parity, only approved service links, and no unsupported contract/response claims.
+- **Definition of Done:** `[ ]` Hub uniquely serves commercial intent; `[ ]` every listed capability is verified and linked; `[ ]` it does not duplicate service-page bodies; `[ ]` metadata/schema/CTA/link checks pass.
+
+### Task 18 — Service Areas Index
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/service-areas/` as the canonical five-city metro coverage hub.
+- **Why It Is Needed:** Coverage information needs a crawlable hierarchy while the homepage remains the sole Des Moines city-intent owner.
+- **Dependencies:** Tasks 1–3, 5–17; Task 4 for tracked CTA/contact links.
+- **Files Involved:** new `app/service-areas/page.tsx`, service-area hub content/record, shared area card/breadcrumb/CTA components, metadata/schema tests.
+- **Implementation Details:** Apply exact title/H1/description and metro intent. Render confirmed coverage for only Des Moines, Ankeny, Waukee, Norwalk and Altoona; link Des Moines to `/` and the other four to their exact city routes. Link Services and Contact, show useful non-doorway explanatory copy, and use CollectionPage/ItemList/BreadcrumbList that mirrors visible links. Do not invent additional cities or a Des Moines area page.
+- **SEO Impact:** Owns `lawn care des moines metro`, supplies location hierarchy, and protects homepage ownership.
+- **Edge Cases:** Accidental `/service-areas/des-moines-ia/`; unconfirmed nearby cities; ItemList/copy mismatch; duplicate metro copy; child routes unavailable during partial rollout.
+- **Validation:** Exact metadata and five links, schema/UI order parity, clean canonical, breadcrumb, homepage/service/footer inbound links, and rendered HTML inspection.
+- **Tests:** Route/metadata/H1, expected area link set, Des Moines path equals `/`, exactly four child city paths, no unconfirmed/forbidden area routes.
+- **Definition of Done:** `[ ]` Hub lists exactly five approved areas; `[ ]` Des Moines resolves to homepage and no competing page exists; `[ ]` exact metadata/schema/links pass; `[ ]` copy is useful and non-stuffed.
+
+### Task 19 — Ankeny Service-Area Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/service-areas/ankeny-ia/` as a useful, independently readable Ankeny-wide lawn-care page.
+- **Why It Is Needed:** Ankeny is a confirmed service area with distinct city-wide intent, but the page must not become a city-name-swapped doorway page.
+- **Dependencies:** Tasks 1–18; verified service availability facts and Task 4 conversion tracking.
+- **Files Involved:** new `content/service-areas/ankeny-ia.ts`, `app/service-areas/[city]/page.tsx`, shared area template/components, metadata/schema/link tests.
+- **Implementation Details:** Use exact metadata/H1. Write genuinely distinct but factual introduction and seasonal/property-care sections; link crawlable cards for approved mowing, aeration/seeding, fertilization/weed control, landscaping, yard/seasonal cleanup, grading and snow services. Cover supported residential/commercial categories, general work/reviews unless Ankeny metadata is verified, selected related areas, area hub, and “Request a Free Estimate in Ankeny.” Emit WebPage/visible ItemList/BreadcrumbList only—never a separate LocalBusiness.
+- **SEO Impact:** Owns `lawn care ankeny ia` and feeds users to relevant commercial service pages.
+- **Edge Cases:** Fabricated neighborhoods, customers, local crews, addresses, job examples, testimonials, response times, or proximity claims; unverified city image/review labels; templated parity with other cities.
+- **Validation:** Side-by-side uniqueness/fact review against all city drafts, exact metadata/canonical/H1, approved service availability, schema/UI parity, links/CTA/tracking and mobile/accessibility.
+- **Tests:** Valid city static param, exact metadata, one H1, no LocalBusiness/address, required service/area links, and invalid city 404.
+- **Definition of Done:** `[ ]` Ankeny page is distinct and useful without invented local facts; `[ ]` exact ownership and approved services pass; `[ ]` schema/links/CTA are correct; `[ ]` media/reviews remain general unless provenance proves Ankeny.
+
+### Task 20 — Waukee Service-Area Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/service-areas/waukee-ia/` as a factual, independently useful Waukee-wide service page.
+- **Why It Is Needed:** Waukee is confirmed, but unique intent coverage cannot rely on mechanical city substitution.
+- **Dependencies:** Tasks 1–19; verified service availability and Task 4 conversion tracking.
+- **Files Involved:** new `content/service-areas/waukee-ia.ts`, shared dynamic area route/template, metadata/schema/link tests.
+- **Implementation Details:** Use exact metadata/H1; author Waukee-specific wording that stays within confirmed availability rather than invented local anecdotes. Include approved service cards, year-round range without promises, property types, honestly labeled general/verified work and reviews, selected related areas, area hub, and Waukee estimate CTA. Use WebPage/ItemList/BreadcrumbList and the one Organization reference, not a local branch entity.
+- **SEO Impact:** Owns `lawn care waukee ia` and connects Waukee demand to the consolidated service architecture.
+- **Edge Cases:** Same wording/order as Ankeny with city replacement; fake neighborhoods/projects/reviews/address/crew; unverified service coverage; cross-city duplicate canonicals.
+- **Validation:** Four-city comparative editorial review, exact head/H1/canonical, item/schema parity, approved links, CTA event context, responsive/accessibility and no local-fact fabrication.
+- **Tests:** Static-param route, exact metadata/schema, no LocalBusiness/address, required links, content uniqueness heuristic/editorial fixture, invalid city 404.
+- **Definition of Done:** `[ ]` Waukee page stands alone without doorway patterns; `[ ]` all facts/services are approved; `[ ]` exact metadata/schema/links/CTA pass; `[ ]` no false location attribution exists.
+
+### Task 21 — Norwalk Service-Area Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/service-areas/norwalk-ia/` as a distinct, truthful Norwalk-wide lawn-care page.
+- **Why It Is Needed:** Norwalk is confirmed and requires a city-intent owner within the anti-doorway rules.
+- **Dependencies:** Tasks 1–20; verified service availability and Task 4 conversion tracking.
+- **Files Involved:** new `content/service-areas/norwalk-ia.ts`, shared dynamic area route/template, metadata/schema/link tests.
+- **Implementation Details:** Apply exact metadata/H1; write unique factual service introduction and seasonal/property sections, approved service cards, property types, general or verified work/reviews, related-area links, area hub and Norwalk estimate CTA. Keep structured data to WebPage, visible ItemList, BreadcrumbList and central Organization reference.
+- **SEO Impact:** Owns `lawn care norwalk ia` and provides natural service/city/internal conversion paths.
+- **Edge Cases:** Fabricated neighborhoods, customer scale, jobs, local team/address, response times; reused city paragraphs; false image/review locations; non-approved services.
+- **Validation:** Comparative uniqueness and factual review, exact metadata/canonical/H1, visible/schema service parity, link graph, CTA context, responsive/keyboard review.
+- **Tests:** Static route/metadata/schema, no city business/address, required links, uniqueness guard/editorial check, invalid city 404.
+- **Definition of Done:** `[ ]` Norwalk page is independently readable and factual; `[ ]` exact ownership and verified service set pass; `[ ]` schema/links/CTA work; `[ ]` no unverified local attribution appears.
+
+### Task 22 — Altoona Service-Area Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/service-areas/altoona-ia/` as a distinct, truthful Altoona-wide lawn-care page.
+- **Why It Is Needed:** Altoona is the fourth confirmed non-Des Moines city and needs a single anti-doorway intent owner.
+- **Dependencies:** Tasks 1–21; verified service availability and Task 4 conversion tracking.
+- **Files Involved:** new `content/service-areas/altoona-ia.ts`, shared dynamic area route/template, metadata/schema/link tests.
+- **Implementation Details:** Use exact metadata/H1; create independently ordered/focused factual sections for availability, approved service cards, year-round range, property types, general/verified work/reviews, selected related areas, hub and Altoona estimate CTA. Emit WebPage/ItemList/BreadcrumbList with the central organization only.
+- **SEO Impact:** Owns `lawn care altoona ia` and completes the intended city architecture without service/city permutations.
+- **Edge Cases:** Doorway-template substitution, fake local facts/address/crew/projects/reviews, city-specific alt stuffing, unverified capability scope, duplicate text/canonical.
+- **Validation:** Compare all four pages line by line for substantive uniqueness and factual safety; inspect exact metadata/schema/links; validate CTA/tracking, mobile and accessibility.
+- **Tests:** Static route/metadata/schema, no LocalBusiness/address, expected links, four-city uniqueness guard/editorial review, invalid city 404.
+- **Definition of Done:** `[ ]` Altoona page is useful and unique; `[ ]` no invented local evidence appears; `[ ]` exact ownership/schema/service links/CTA pass; `[ ]` four-city anti-doorway review is complete.
+
+### Task 23 — About Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/about/` as an accurate company identity and trust page based only on approved facts.
+- **Why It Is Needed:** Users need company context, but the repository lacks sufficient evidence for a fabricated brand story.
+- **Dependencies:** Tasks 1–3; owner confirmation of any company-history facts; Task 4 for contact tracking.
+- **Files Involved:** new `app/about/page.tsx`, About content/route record, shared hero/breadcrumb/CTA components, schema/metadata tests.
+- **Implementation Details:** Apply exact metadata/H1; describe the legal business name, approved service/property/metro facts and real trust signals; link Services, Service Areas, Our Work, Reviews and Contact. Use AboutPage + Organization reference + BreadcrumbList. Do not state founding year, employee count, licenses, awards, certifications, insurance, family ownership, property counts, or unverifiable history.
+- **SEO Impact:** Owns branded `mo's lawn care des moines` intent and supports trust/internal linking without competing with the homepage.
+- **Edge Cases:** Customer reviews treated as company facts; invented founder narrative; unapproved owner portrait/name; disputed hours/address; exact rating/count drift.
+- **Validation:** Fact/evidence review for every company statement, exact metadata/H1/canonical/schema, link and CTA checks, semantic/accessibility review.
+- **Tests:** Route/metadata/H1, AboutPage/Breadcrumb schema with central organization, required links, and absence of prohibited unsupported fact fields.
+- **Definition of Done:** `[ ]` Every factual claim has approved evidence; `[ ]` exact branded ownership passes; `[ ]` schema/links/CTA are correct; `[ ]` no fictional history or credential appears.
+
+### Task 24 — Our Work and Gallery Page
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/our-work/` as the canonical home for the existing gallery and before/after work while preserving interactions.
+- **Why It Is Needed:** The visual portfolio is a strong asset but currently lives only in the homepage payload with weak metadata and no dedicated intent owner.
+- **Dependencies:** Tasks 1–3; verified image/project provenance; Task 4 for CTAs. Task 34 performs the heavier optimization pass.
+- **Files Involved:** new `app/our-work/page.tsx`, new/extracted `content/projects.ts`, `components/gallery.tsx`, `components/GalleryClient.tsx`, `components/before-after-slider.tsx`, shared page components, metadata/schema tests.
+- **Implementation Details:** Apply exact metadata/H1; migrate rather than duplicate the gallery/before-after source, give records stable IDs/provenance/honest alt/service tags/optional verified city, and expose full-page plus curated-home modes. Preserve carousel/modal and before/after behavior; server-render a useful initial subset and accessible load-more/batching. Link relevant services, Reviews and Contact. Use CollectionPage/BreadcrumbList and only useful verified ImageObjects; do not claim all work occurred in Des Moines/another city without evidence.
+- **SEO Impact:** Owns `lawn care projects des moines`, provides evidence/trust links to services and cities, and reduces homepage archive pressure.
+- **Edge Cases:** Remote URL rights/stability, missing dimensions, false city/service labels, broken before/after pairs, all 79 URLs serialized initially, focus-trap/return regression, file-type mismatch.
+- **Validation:** Record-by-record provenance/alt review, source payload/network inspection, interaction/keyboard/mobile checks, exact metadata/schema/link inspection, no duplicate dataset.
+- **Tests:** Route/metadata/H1, Collection/Breadcrumb schema, curated/full mode behavior, missing metadata fallbacks, pair integrity, no false city schema, modal accessibility where supported.
+- **Definition of Done:** `[ ]` One canonical typed work dataset powers home and Work; `[ ]` full experience is accessible and not eagerly loaded wholesale; `[ ]` every location/service claim is supported; `[ ]` exact metadata/schema/links pass.
+
+### Task 25 — Reviews Page and Review Data Governance
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/reviews/`, reuse the categorized reviews efficiently, and resolve how mutable rating/count/source data is governed.
+- **Why It Is Needed:** Review trust is valuable, but current records and a hardcoded “160” count conflict and must not produce misleading schema or payloads.
+- **Dependencies:** Tasks 1–3; owner confirmation of Google review URL, summary-display policy and update process; Task 4 for external/contact tracking where applicable.
+- **Files Involved:** new `app/reviews/page.tsx`, new/extracted `content/reviews.ts`, `components/testimonials.tsx`, shared review/page components, `lib/site.ts`, metadata/schema tests.
+- **Implementation Details:** Apply exact metadata/H1; extract the 106 records with stable IDs, ratings/categories/source/provenance fields where available, retain theme filtering, show useful curated/paginated or client-batched content rather than hundreds in initial HTML, and centralize or remove exact aggregate count/rating. Link relevant verified service categories, Our Work, Contact and approved Google review URL. Emit CollectionPage/BreadcrumbList only; do not add Review or aggregateRating schema for self-serving rich results.
+- **SEO Impact:** Owns branded review intent and supplies trust/contextual links without manipulative review markup.
+- **Edge Cases:** Null/negative review records, current live count drift, duplicate records, review text copyright/source, missing dates/cities, false category inference, huge client bundle.
+- **Validation:** Dataset/count/category reconciliation, source/link approval, exact metadata/H1/canonical/schema, initial payload inspection, filter/keyboard/mobile checks, and explicit absence of aggregate/review schema.
+- **Tests:** Route/metadata, record ID uniqueness, safe rating/null rendering, expected categories, no aggregateRating/Review JSON-LD, curated/full mode, required links.
+- **Definition of Done:** `[ ]` One governed review dataset powers home and Reviews; `[ ]` count/rating policy is approved or numeric claims are omitted; `[ ]` page remains performant/accessible; `[ ]` exact metadata/links/schema restraint pass.
+
+### Task 26 — Contact Page and Estimate Integration
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/contact/` as the canonical estimate page using the existing validated Resend workflow and Task 4 event contract.
+- **Why It Is Needed:** Every major page needs an obvious conversion destination, but duplicate form/backends would fragment behavior and lead measurement.
+- **Dependencies:** Tasks 1–4; related route architecture through Task 25.
+- **Files Involved:** new `app/contact/page.tsx`, Contact content record, `components/estimate-form.tsx`, `components/estimate-section.tsx`, `app/api/estimate/route.ts` only for already-designed shared contract integration, Contact schema/metadata/form tests.
+- **Implementation Details:** Apply exact metadata/H1; reuse one EstimateForm and `/api/estimate`, expose phone/email and links to Services/Service Areas, preserve labels/validation/focus/live messages/honeypot/Resend, and supply controlled `form_id`, placement, optional service/city context and language. Ensure Task 4 success/error/deduplication behavior is identical on homepage and Contact and that no query context enters canonical/schema or GA4 as arbitrary input. Use ContactPage + Organization reference + BreadcrumbList.
+- **SEO Impact:** Owns `lawn care estimate des moines`, consolidates conversion authority, and measures leads consistently from every route.
+- **Edge Cases:** Duplicate homepage/contact form IDs, preselected query spoofing, honeypot suppression, provider failure, validation focus, repeated submission, PII leakage, no JS, tel/mailto regression.
+- **Validation:** Exact metadata/H1/canonical/schema, success/error/suppression/manual form flows, native phone/email, page-context payload allowlist, mobile/keyboard/screen-reader messaging, and no second backend.
+- **Tests:** Contact route/metadata, form validation and focus, API response cases, exact once-per-delivery lead event, PII-free payload, native contact destinations, homepage/contact instance isolation.
+- **Definition of Done:** `[ ]` Contact page reuses the sole form/backend; `[ ]` exact metadata/schema and accessible conversion paths pass; `[ ]` confirmed-success analytics semantics pass on both placements; `[ ]` no PII or arbitrary query data reaches GA4.
+
+### Task 27 — Blog Foundation, Article Template, Publishing Workflow, and Hub
+
+- **Status:** `[ ]` Not started
+- **Objective:** Create `/blog/`, the typed six-article publishing model, one maintainable server-rendered article template, source governance, and editorial documentation.
+- **Why It Is Needed:** The required content cluster has no route, content system, citation model, or workflow, and must be added without a CMS or thin archive sprawl.
+- **Dependencies:** Tasks 1–26; specifically the technical foundation and core commercial architecture must be complete before blog work begins.
+- **Files Involved:** new `app/blog/page.tsx`, new `app/blog/[slug]/page.tsx`, new `content/blog/index.ts`, initial article record modules/skeletons without unsupported factual copy, `content/types.ts`, new `components/blog-article.tsx`, shared article/card/resource components, `docs/content-publishing.md`, sitemap/schema/link tests.
+- **Implementation Details:** Apply exact hub title/H1/description and Blog/CollectionPage + visible ItemList + BreadcrumbList. Define required slug/status/title/H1/description/keyword/excerpt/sections/sources/claim notes/related links/image/publisher/review fields and optional real dates/author. Publish only status-approved records through hub, static params, Latest Tips and sitemap; unknown/draft slugs 404. Build semantic article rendering, optional TOC only when justified, citations/Sources, contextual service/article links, restrained CTA, honest image metadata and BlogPosting/Article graphs that omit fake author/dates. Document research, approval, link, image, sitemap, validation, publish and seasonal-review steps. Do not add categories/tags/authors/dates/pagination as indexable archives or introduce CMS/database/parser dependencies.
+- **SEO Impact:** Owns `iowa lawn care tips`, establishes the six informational URLs, and creates governed bidirectional support for commercial pages.
+- **Edge Cases:** Draft leakage, duplicate slugs, article without sources, dates invented for schema, unsupported author, broken related paths, full images on cards, article keyword cannibalization, stale source claims.
+- **Validation:** Inspect hub source/cards/metadata/schema, draft and invalid 404s, registry/sitemap status behavior, template semantics, source visibility, publishing doc completeness and no archive-route creation.
+- **Tests:** Hub exact metadata/H1, six expected published-route contracts once content is approved, field/source/link validation, unique article metadata/canonicals, schema omission rules, draft exclusion and invalid slug 404.
+- **Definition of Done:** `[ ]` Hub/template/model/workflow are maintainable and dependency-light; `[ ]` publishing state controls routes/hub/sitemap consistently; `[ ]` exact hub ownership/schema pass; `[ ]` source/date/author/image safeguards and no-thin-archive rules are enforced.
+
+### Task 28 — “When to Aerate a Lawn in Iowa” Article
+
+- **Status:** `[ ]` Not started
+- **Objective:** Research, author, review, and publish `/blog/when-to-aerate-lawn-iowa/` for Iowa aeration timing intent.
+- **Why It Is Needed:** It is one of six mandatory supporting guides and creates an informational entry point to the Aeration & Seeding service.
+- **Dependencies:** Task 27; verified current authoritative sources and approved business CTA/image facts.
+- **Files Involved:** new/finalized `content/blog/when-to-aerate-lawn-iowa.ts`, approved image record, blog/service resource links, article tests.
+- **Implementation Details:** Use exact title/H1/description/primary keyword. Research Iowa timing and compaction/sign guidance with Iowa State University Extension first and other authoritative primary sources only as needed; record sources, access/review dates, and claim mappings; paraphrase. Explain weather/grass/soil/property dependencies and avoid immutable annual dates, guarantees or invented Mo's methods. Include useful sections, visible sources, relevant image if verified, natural links to Aeration & Seeding, calendar/overseeding guides when published, and a restrained estimate CTA. Include truthful Article/BlogPosting fields only.
+- **SEO Impact:** Owns `when to aerate lawn in iowa`; supports but does not replace the commercial aeration page.
+- **Edge Cases:** Source guidance changes, cool- versus warm-season assumptions, rigid calendar dates, unsupported treatment advice, article/service copy overlap, fabricated author/date/image season/location.
+- **Validation:** Claim-by-claim source/editorial review, exact metadata/H1/canonical, source links, commercial/informational intent separation, related links, schema-visible content parity, mobile/readability.
+- **Tests:** Required article fields/sources, exact metadata, route/sitemap inclusion, Article/Breadcrumb schema, Aeration service link, no unsupported dates/author, and invalid/draft behavior.
+- **Definition of Done:** `[ ]` Authoritative sources support every Iowa-specific claim; `[ ]` exact article ownership passes; `[ ]` service/related links and schema match visible content; `[ ]` business/image/date facts are approved or omitted.
+
+### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article
+
+- **Status:** `[ ]` Not started
+- **Objective:** Research, author, review, and publish `/blog/best-time-to-overseed-lawn-iowa/` for Iowa overseeding timing intent.
+- **Why It Is Needed:** The second mandatory aeration-cluster guide addresses a related informational query without creating another commercial service page.
+- **Dependencies:** Tasks 27–28; verified authoritative sources and approved CTA/image facts.
+- **Files Involved:** new/finalized `content/blog/best-time-to-overseed-lawn-iowa.ts`, approved image record, blog/service link data, tests.
+- **Implementation Details:** Apply exact metadata/H1/primary keyword; research usual timing considerations and weather/grass/site dependencies using Iowa State Extension and other official extension material as needed. Record/visible-link sources and paraphrase. Do not claim a particular Mo's overseeding process, seed blend, germination result, exact annual date or guaranteed outcome. Link Aeration & Seeding, calendar and aeration guides; keep the CTA varied and restrained; emit only truthful article schema fields.
+- **SEO Impact:** Owns `best time to overseed lawn in iowa` while reinforcing the consolidated Aeration & Seeding service ownership.
+- **Edge Cases:** Equating informational overseeding advice with confirmed service method; fertilizer/pesticide prescriptions; weather variability; duplicate aeration article sections; unsupported dates/author/image.
+- **Validation:** Source/claim audit, content differentiation from Task 28 and service page, exact metadata/canonical/H1, links, image and schema parity.
+- **Tests:** Required sources/fields, route/sitemap, exact metadata, Article/Breadcrumb schema, service/related links, and no unsupported method/date/author fields.
+- **Definition of Done:** `[ ]` Sourced Iowa guidance is accurate and conditional; `[ ]` exact intent remains informational; `[ ]` no unverified Mo's method/outcome is stated; `[ ]` metadata/schema/links/sitemap checks pass.
+
+### Task 30 — “How Often to Mow a Lawn in Iowa” Article
+
+- **Status:** `[ ]` Not started
+- **Objective:** Research, author, review, and publish `/blog/how-often-to-mow-lawn-iowa/` for Iowa mowing-frequency questions.
+- **Why It Is Needed:** This mandatory guide answers a common informational query and supports the Lawn Mowing conversion page.
+- **Dependencies:** Tasks 27–29; current authoritative sources and approved CTA/image data.
+- **Files Involved:** new/finalized `content/blog/how-often-to-mow-lawn-iowa.ts`, approved image record, related-link data, tests.
+- **Implementation Details:** Use exact title/H1/description/primary keyword. Research growth, weather, season, grass type and mowing-height/frequency principles from Iowa State Extension or authoritative official extension sources. Avoid a rigid universal schedule, exact promises, chemical guidance or invented Mo's recurring program. Include scannable sourced advice, caveats, a verified image where possible, links to Lawn Mowing and calendar guide, related reading and a restrained non-duplicated CTA.
+- **SEO Impact:** Owns `how often to mow lawn in iowa` and sends commercial demand to `/services/lawn-mowing/` without cannibalizing it.
+- **Edge Cases:** Universal weekly claims, unsafe height/pattern prescriptions, drought/weather variability, confusing advice with service schedule, unsupported author/date/image.
+- **Validation:** Claim/source review, exact metadata/H1/canonical, service/informational separation, source and internal links, schema/image parity and readability.
+- **Tests:** Published fields/sources, route/sitemap, exact metadata/schema, Lawn Mowing link, no rigid schedule/unsupported dates/author.
+- **Definition of Done:** `[ ]` Frequency guidance is sourced and condition-aware; `[ ]` exact informational ownership passes; `[ ]` service/related links and schema are correct; `[ ]` no invented schedule or service promise remains.
+
+### Task 31 — Des Moines Spring Cleanup Checklist Article
+
+- **Status:** `[ ]` Not started
+- **Objective:** Research, author, review, and publish `/blog/spring-lawn-cleanup-des-moines/` as a practical informational checklist.
+- **Why It Is Needed:** It is a mandatory seasonal guide and must remain distinct from the Spring Cleanup commercial page.
+- **Dependencies:** Tasks 27–30; current authoritative/municipal sources as applicable and approved CTA/image facts.
+- **Files Involved:** new/finalized `content/blog/spring-lawn-cleanup-des-moines.ts`, approved image record, related-link data, tests.
+- **Implementation Details:** Apply exact metadata/H1/primary keyword. Build a useful checklist from current Iowa extension guidance and official municipal sources only for any local disposal/rule claims; record and display sources, paraphrase and state property/weather dependencies. Do not invent legal rules, fixed dates, chemical programs, service inclusions or outcomes. Link Spring Cleanup and the calendar guide, related articles as useful, and use a varied restrained CTA.
+- **SEO Impact:** Owns `spring lawn cleanup checklist des moines`, supporting but not replacing `spring cleanup des moines ia` commercial ownership.
+- **Edge Cases:** City-specific disposal rules that vary or change, rigid dates, service checklist presented as guaranteed inclusions, duplicated service copy, false seasonal/city image label.
+- **Validation:** Source freshness and municipality scope, exact metadata/canonical/H1, checklist usefulness, service/article intent separation, links/schema/image and mobile readability.
+- **Tests:** Sources/fields, route/sitemap, exact metadata/schema, Spring Cleanup link, no unverified legal/date/service claims.
+- **Definition of Done:** `[ ]` Checklist facts are sourced and scoped; `[ ]` exact informational ownership is preserved; `[ ]` commercial link and schema/sitemap pass; `[ ]` no local rule or service inclusion is invented.
+
+### Task 32 — Des Moines Fall Leaf Cleanup Tips Article
+
+- **Status:** `[ ]` Not started
+- **Objective:** Research, author, review, and publish `/blog/fall-leaf-cleanup-des-moines/` for fall leaf-cleanup advice intent.
+- **Why It Is Needed:** It is a required seasonal supporting guide and a natural bridge to the consolidated fall service page.
+- **Dependencies:** Tasks 27–31; current authoritative/municipal sources as applicable and approved CTA/image facts.
+- **Files Involved:** new/finalized `content/blog/fall-leaf-cleanup-des-moines.ts`, approved image record, related-link data, tests.
+- **Implementation Details:** Use exact metadata/H1/primary keyword. Research timing, organization and disposal considerations from extension/official municipal sources, clearly identify jurisdiction and source freshness, paraphrase and avoid fixed annual dates. Do not claim unsupported Mo's disposal/process capabilities or make legal/seasonal guarantees. Link Fall Cleanup & Leaf Removal, calendar pillar and relevant guides; include visible sources and a unique restrained CTA.
+- **SEO Impact:** Owns `fall leaf cleanup tips des moines` without competing for commercial `leaf removal des moines ia` intent.
+- **Edge Cases:** Changing collection/disposal rules, city versus metro jurisdiction, weather variability, sales-heavy duplication, unverified season/location image.
+- **Validation:** Claim/jurisdiction/source audit, exact metadata/H1/canonical, intent split, related links, article schema parity, image and responsive review.
+- **Tests:** Required sources/fields, route/sitemap, exact metadata/schema, Fall service link, and no unsupported municipal/service/date assertions.
+- **Definition of Done:** `[ ]` Tips and any rule references are authoritative/current/scoped; `[ ]` exact informational ownership passes; `[ ]` service/cluster links and schema pass; `[ ]` no fabricated capability or local rule remains.
+
+### Task 33 — Central Iowa Lawn Care Calendar Pillar Article
+
+- **Status:** `[ ]` Not started
+- **Objective:** Research, author, review, and publish `/blog/central-iowa-lawn-care-calendar/` as the cluster pillar linking all five supporting guides and relevant services.
+- **Why It Is Needed:** The required pillar organizes seasonal informational demand and strengthens the entire service/content graph.
+- **Dependencies:** Tasks 27–32 so every supporting article exists and can be linked; authoritative source review and approved image/CTA facts.
+- **Files Involved:** new/finalized `content/blog/central-iowa-lawn-care-calendar.ts`, approved image record, all cluster link data, tests.
+- **Implementation Details:** Apply exact metadata/H1/primary keyword. Research season-by-season decision guidance through Iowa State Extension and other authoritative primary sources, express timing as conditional rather than fixed guarantees, and record visible sources/claim notes. Link all five articles plus relevant mowing, aeration/seeding, spring/fall cleanup and other verified services naturally. Use a restrained pillar CTA and accurate Article/BlogPosting fields only; avoid chemical prescriptions and mass duplication of supporting articles.
+- **SEO Impact:** Owns `central iowa lawn care calendar`, becomes the informational cluster hub, and distributes authority bidirectionally to five guides and commercial pages.
+- **Edge Cases:** Over-specific dates, advice varying by turf/soil/weather/property, repeating full child articles, missing reciprocal links, stale source/date metadata, unsupported author/image season.
+- **Validation:** Full source/claim audit, exact head/H1/canonical, all five bidirectional links, relevant service links, duplication/content quality review, schema/sitemap/image/accessibility.
+- **Tests:** Required sources/fields, route/sitemap, exact metadata/schema, exact five-article link set, valid service links, no unsupported dates/author.
+- **Definition of Done:** `[ ]` Sourced pillar is useful without duplicating child guides; `[ ]` all five article relationships and relevant services are linked; `[ ]` exact ownership/schema/sitemap pass; `[ ]` conditional guidance and review workflow are explicit.
+
+### Task 34 — Gallery, Image SEO, and Media Performance Optimization
+
+- **Status:** `[ ]` Not started
+- **Objective:** Reduce image/video payload and layout risk across home, services, locations, work, reviews and blog while preserving the visual identity and existing media.
+- **Why It Is Needed:** The repository has ~28 MB of local assets, mislabeled file formats, large seasonal/before-after images, 68 remote gallery URLs and excessive gallery serialization risk.
+- **Dependencies:** Tasks 5–33 so actual placements and approved metadata are known; Task 24 project registry; explicit permission before copying/replacing remote assets.
+- **Files Involved:** `content/projects.ts`, `data/all_image_urls.txt` if retained/migrated, gallery/before-after/hero/page components, approved `public/` assets/variants, `next.config.mjs` only if verified remote/image behavior requires it, performance tests/records.
+- **Implementation Details:** Establish before-change production-like LCP/CLS/INP, bytes, request, decoding, JS/hydration and third-party baselines. Add intrinsic dimensions/responsive sizes, honest alts/decorative empties, below-fold lazy loading and LCP poster priority; measure video preload before changing it. Produce visually verified optimized assets with correct formats/dimensions, keep originals until approval, serve thumbnails/card sizes instead of full gallery media, and prevent all 79 sources entering homepage initial payload. Audit remote provenance/stability rather than silently copying/deleting stock-like URLs.
+- **SEO Impact:** Improves Core Web Vitals, image discoverability and crawl UX across all 29 URLs without changing intent ownership.
+- **Edge Cases:** Visual quality loss, before/after crop drift, animation timing, remote hotlink failure, rights, incorrect alts/location stuffing, LCP regression from lazy-loading hero, CLS from unknown remote dimensions, cache invalidation.
+- **Validation:** Before/after performance report on representative mobile/desktop routes, visual diff/manual media review, network/payload inspection, file-signature checks, alt/provenance audit, gallery/modal/before-after/reduced-motion regression.
+- **Tests:** Image-record completeness, dimensions/alt rules, featured/full serialization limits, no city alt without verified metadata, browser LCP/CLS budget signals where stable, and preserved modal/slider interactions.
+- **Definition of Done:** `[ ]` Measured payload/CWV risks improve or have documented evidence-based exceptions; `[ ]` primary LCP is not lazy; `[ ]` below-fold/thumbnail behavior and dimensions are correct; `[ ]` all replacements are visually/provenance approved and no original is prematurely deleted.
+
+### Task 35 — Internal Linking and Content-Cluster Audit
+
+- **Status:** `[ ]` Not started
+- **Objective:** Complete and validate the intentional crawl graph across all 29 pages after every target page exists.
+- **Why It Is Needed:** Links added incrementally can leave orphans, broken future references, over-optimized anchors, or incomplete service/article reciprocity.
+- **Dependencies:** Tasks 1–34.
+- **Files Involved:** `content/routes.ts`, every service/area/blog/static page content record, header/footer/homepage interactive components, related/helpful-resource components, internal-link tests.
+- **Implementation Details:** Verify global nav/footer, homepage sections, hubs, breadcrumbs, every service-specific relationship in Section 20, city-to-service/area relationships, commercial/trust/work/review/contact links, and all required blog ↔ service and calendar ↔ five-article links. Add small `Helpful Resources` sections on relevant services now that articles are live. Keep natural descriptive anchors, no keyword stuffing, no JS-only service references, no canonical UTM/lang/query links, and practical crawl depth ≤3.
+- **SEO Impact:** Distributes authority, reinforces non-cannibalizing intent ownership, and ensures every indexable URL is discoverable.
+- **Edge Cases:** Duplicate links versus harmful repetition, client controls lacking anchors, links to drafts, redirecting/trailing variants, query strings, broken external sources, orphan pages hidden by menus.
+- **Validation:** Generate/review an internal link graph from typed records/rendered HTML, inspect every route's inbound/outbound set, crawl depth, anchor quality, broken/redirect links and source visibility.
+- **Tests:** No orphaned published route, all internal hrefs resolve, required service-link matrices and bidirectional article pairs, exact calendar child set, clean internal URLs, no forbidden city/service paths.
+- **Definition of Done:** `[ ]` All 29 pages have crawlable inbound and contextual outbound links; `[ ]` required matrices/reciprocity pass; `[ ]` depth is ≤3 when practical; `[ ]` anchors are natural and no draft/query/redirect link is used internally.
+
+### Task 36 — Structured Data Validation and Hardening
+
+- **Status:** `[ ]` Not started
+- **Objective:** Audit the final per-page entity graphs against visible content, schema rules, verified facts and Google validation tools.
+- **Why It Is Needed:** Shared builders can still emit mismatched page types, breadcrumbs, dates, images or unsafe business/review claims after all pages are assembled.
+- **Dependencies:** Tasks 1–35; owner address/hours decisions if available, otherwise omissions remain authoritative.
+- **Files Involved:** `lib/structured-data.ts`, `components/structured-data.tsx`, route/content records, all page renderers, schema tests and validation notes.
+- **Implementation Details:** Validate one coherent graph per page: homepage WebSite/WebPage/Organization; hubs appropriate CollectionPage/Blog/ItemList; services WebPage/Service/Breadcrumb; cities WebPage/visible ItemList/Breadcrumb and no local entity; About/Contact page types; Work/Reviews restraint; articles BlogPosting/Article/WebPage/Breadcrumb/publisher. Confirm stable IDs and references, schema-visible parity, valid absolute clean URLs and escaping. Omit unverified address/geo/hours/price/rating/author/dates/images/FAQ/offers; never add aggregateRating or city LocalBusinesses.
+- **SEO Impact:** Improves machine-readable consistency for all 29 pages without misleading rich-result attempts.
+- **Edge Cases:** Duplicate/conflicting graph nodes, malformed apostrophe/HTML, breadcrumb mismatch, ItemList order drift, unmaintained `dateModified`, optional images without dimensions, fake LocalBusiness eligibility pressure.
+- **Validation:** Parse every JSON-LD script, compare nodes to rendered content, run Schema.org validator and Google Rich Results Test where applicable after deployment, document expected non-eligibility rather than forcing markup.
+- **Tests:** Graph serialization across all page types, globally stable IDs, required nodes, breadcrumb parity, visible ItemList parity, and forbidden-field/type assertions.
+- **Definition of Done:** `[ ]` Every page graph parses and matches visible content; `[ ]` required page-type nodes and stable references pass; `[ ]` all unverified/self-serving/city-business fields are absent; `[ ]` validator results and limitations are recorded.
+
+### Task 37 — Accessibility, Performance, SEO, and Route Validation
+
+- **Status:** `[ ]` Not started
+- **Objective:** Run the full pre-deployment automated and manual quality gate across all 29 routes and the estimate/API flow.
+- **Why It Is Needed:** Incremental page work must be tested as one production build for regressions, correct status/rendering, accessibility and Core Web Vitals.
+- **Dependencies:** Tasks 1–36.
+- **Files Involved:** all changed application/content/config/test files; focused test/e2e configuration; `plan.md` for exact results only.
+- **Implementation Details:** Install only authorized locked dependencies, then run available format/lint/type/unit/integration/browser/build checks; repair only regressions in scope. Verify successful page output, unique exact titles/descriptions/H1/canonicals, source-rendered content, sitemap/robots, actual 404, redirects, link graph, schema, images, responsive layout, focus/keyboard/forms/reduced motion, preview/local analytics silence, and production-like performance. Resolve the currently nonfunctional lint setup deliberately rather than claiming it ran. Distinguish pass/fail/not available/not run.
+- **SEO Impact:** Pre-deployment gate for indexability, usability and conversion integrity across the complete architecture.
+- **Edge Cases:** Dependencies still absent, environment secrets unavailable, preview versus production behavior, flaky performance budgets, dynamic route fallback, Next slash redirects, remote image failures, stale build artifacts.
+- **Validation:** Review all command output and representative desktop/mobile rendered pages; inspect every URL/status/source/head; compare performance against Task 34 baseline; record unresolved manual/account items for Task 38.
+- **Tests:** Full registered suite: data/metadata/schema/sitemap/link/blog/form/analytics tests, production build, typecheck, functioning lint if adopted, and browser smoke/a11y flows for all route families and contact cases.
+- **Definition of Done:** `[ ]` Production build and required automated suites pass or a genuine blocker is recorded; `[ ]` all 29 routes/status/head/content are validated; `[ ]` no critical accessibility/performance/conversion regression remains; `[ ]` results are honestly classified.
+
+### Task 38 — GA4 Production Validation and Manual Account Actions
+
+- **Status:** `[ ]` Not started
+- **Objective:** After authorized deployment, verify real production measurement and complete/document the required GA4, Google Business Profile, and attribution account actions.
+- **Why It Is Needed:** Repository code can emit events but cannot mark conversions, inspect stream settings, or update external profiles without authorized account access.
+- **Dependencies:** Tasks 4, 26, 35 and 37; explicit deployment/account authorization, verified Measurement ID, consent decision, production access and a safe test-lead procedure.
+- **Files Involved:** Normally no application files; `.env.example`/analytics docs/tests only for discovered corrections; `plan.md` and deployment runbook for redacted outcomes. Never record secrets or customer PII.
+- **Implementation Details:** Verify no duplicate external GA/GTM injection, production-only tag and approved consent behavior; inspect Enhanced Measurement; test `form_start`, confirmed-success `generate_lead`, actionable `form_submit_error`, `click_to_call`, and `click_email` in DebugView/Realtime with safe data. Confirm no lead on invalid/failed/suppressed flows and no PII. Mark `generate_lead` primary key event, decide/document `click_to_call` secondary treatment, register only needed custom dimensions, verify Traffic acquisition and standard UTMs, then manually update/test the GBP website link using the exact approved UTM URL. Keep clean URLs in canonicals/sitemap/schema/internal links.
+- **SEO Impact:** Makes organic and GBP lead attribution actionable without polluting canonical signals or overstating conversions.
+- **Edge Cases:** No account authorization, delayed GA processing, ad blockers/consent denial, Enhanced Measurement duplicates, live test generating real emails, multiple data streams, accidental production traffic from preview, UTM loss in language switching.
+- **Validation:** Capture redacted event names/parameter keys and account-state checklist, compare DebugView/Realtime, check acquisition after data latency, open GBP link and verify landing/canonical behavior, and confirm native phone/email.
+- **Tests:** Manual production event matrix plus automated Task 4 regression rerun; one confirmed test submission → one lead; all negative cases → none; PII audit; preview/local network silence.
+- **Definition of Done:** `[ ]` Real production events and safe parameters are verified; `[ ]` `generate_lead` is marked primary and call decision is recorded; `[ ]` custom dimensions/attribution/GBP UTM are tested; `[ ]` any unavailable account action is explicitly blocked, never falsely marked complete.
+
+### Task 39 — Documentation, Final Cleanup, and Implementation Gate Closure
+
+- **Status:** `[ ]` Not started
+- **Objective:** Consolidate accurate operating documentation, remove only proven implementation leftovers, record final validation, and close the rollout without starting future expansion.
+- **Why It Is Needed:** The final system needs maintainable publishing, analytics, business-fact, testing and deployment procedures, and a reviewable completion record.
+- **Dependencies:** Tasks 1–38.
+- **Files Involved:** `docs/content-publishing.md`, analytics/deployment/validation documentation as selected, `.env.example`, `plan.md`, affected source/tests only for final scoped fixes; no deletion without prior exact plan entry.
+- **Implementation Details:** Document new-article workflow, fields, sourcing, image handling, sitemap/link review and update ownership; document GA4 environment/event/PII/account steps, approved business-data maintenance, review count policy, command matrix, deployment/rollback and manual QA. Reconcile README absence only if an authorized doc is created. Remove dead duplicates only when provably safe and listed first; do not refactor brand/framework/style or mass-delete legacy assets/artifacts/lockfiles. Re-run focused validation after any cleanup and record final diff/status.
+- **SEO Impact:** Protects long-term accuracy for all 29 URLs and prevents content, analytics and business facts from silently decaying.
+- **Edge Cases:** Documentation diverges from actual scripts, secrets copied into examples, cleanup deletes user work, unsupported future ideas presented as delivered, manual QA/account steps incomplete.
+- **Validation:** Line-by-line docs-to-code/plan review, command/link checks, secret scan, final production smoke/manual QA completion, and final git diff/status review scoped to authorized changes.
+- **Tests:** Re-run all tests affected by cleanup plus build/type/lint/SEO/analytics smoke checks; record not-run external checks separately.
+- **Definition of Done:** `[ ]` Documentation matches deployed behavior and contains no secrets; `[ ]` every prior task/QA result and owner decision is recorded; `[ ]` no unrelated refactor/deletion/user change is included; `[ ]` final diff/status are reviewed and the rollout stops.
+
+## Manual Post-Deployment QA
+
+Run this checklist against the canonical production origin after an explicitly authorized deployment. Record date, deployed commit, device/browser, tester, pass/fail, evidence, and follow-up owner. A repository build or preview is not a substitute for production/account checks, and no item is complete merely because an automated test exists.
+
+### Deployment identity and all 29 target URLs
+
+- [ ] Confirm the deployed commit/build and production environment values are the intended release; confirm preview/local/test environments do not use the production GA4 property.
+- [ ] Verify HTTP success, rendered content, one H1, self-canonical, indexability, and expected title/description for `/`.
+- [ ] Verify the same for `/services/`, `/services/lawn-mowing/`, `/services/aeration-overseeding/`, `/services/fertilization-weed-control/`, `/services/landscaping/`, `/services/flower-bed-maintenance/`, `/services/yard-cleanup/`, `/services/spring-cleanup/`, `/services/fall-cleanup-leaf-removal/`, `/services/grading/`, and `/services/snow-removal/`.
+- [ ] Verify the same for `/commercial-property-services/`.
+- [ ] Verify the same for `/service-areas/`, `/service-areas/ankeny-ia/`, `/service-areas/waukee-ia/`, `/service-areas/norwalk-ia/`, and `/service-areas/altoona-ia/`; confirm there is no indexable `/service-areas/des-moines-ia/`.
+- [ ] Verify the same for `/about/`, `/our-work/`, `/reviews/`, and `/contact/`.
+- [ ] Verify the same for `/blog/`, `/blog/when-to-aerate-lawn-iowa/`, `/blog/best-time-to-overseed-lawn-iowa/`, `/blog/how-often-to-mow-lawn-iowa/`, `/blog/spring-lawn-cleanup-des-moines/`, `/blog/fall-leaf-cleanup-des-moines/`, and `/blog/central-iowa-lawn-care-calendar/`.
+- [ ] Test the host's trailing-slash/non-trailing-slash behavior; confirm one canonical form, at most one direct permanent normalization hop where applicable, and no canonical/redirect conflict.
+
+### Source, metadata, canonical, rendering, and indexation
+
+- [ ] Use View Source—not only the hydrated DOM—to confirm SEO-critical English body copy, headings, internal links, metadata and JSON-LD are rendered in HTML.
+- [ ] Compare every title, H1, and meta description to Section E; confirm titles/descriptions/canonicals are unique and the homepage owns broad Des Moines intent.
+- [ ] Confirm each canonical uses HTTPS production origin, is self-referential, is query-free, and never contains `lang`, UTM, form context or a trailing-form variant.
+- [ ] Confirm Open Graph/Twitter title, description, URL, type and image resolve and accurately describe each major page; test representative shares.
+- [ ] Confirm no `<meta name="keywords">`, accidental `noindex`, duplicate H1, client-only primary copy, soft 404, or homepage canonical on interior routes.
+- [ ] Test query variants (UTM, `?lang=es`, form context) and confirm clean canonical/indexing behavior while standard UTM attribution remains available.
+- [ ] Verify Spanish controls still work as a UI preference, mixed/incomplete translations are handled honestly, metadata is not incorrectly mutated, and no unapproved Spanish SEO URLs/hreflang are emitted.
+
+### Navigation, breadcrumbs, links, and conversion paths
+
+- [ ] Crawl desktop/mobile header and footer: Services, Service Areas, Our Work, Reviews, Blog, About, Contact; ten service-menu links; exact footer service/area/company groups; Des Moines points to `/`.
+- [ ] Disable JavaScript or inspect source to confirm important service, area, article, breadcrumb and CTA navigation uses real `<a href>` links.
+- [ ] Verify visible breadcrumbs on every interior page and compare their order/URLs to BreadcrumbList JSON-LD.
+- [ ] Check every required service-specific related-link set from Section 20 and confirm anchors are descriptive/natural rather than stuffed.
+- [ ] Confirm every city page links to approved services, the area hub and related areas without fake local claims; verify every page is reachable within three clicks where practical.
+- [ ] Verify blog hub → six articles; aeration/overseeding/mowing/spring/fall articles ↔ their primary services; calendar ↔ all five guides and relevant services; no published article/page is orphaned.
+- [ ] Check all internal/external links for success, no accidental query-bearing internal URLs, no broken source links, no redirect chains, and safe external behavior.
+- [ ] Verify every primary service/location/commercial/trust/article path offers an obvious Contact, estimate or click-to-call path without duplicate form implementations.
+
+### Sitemap, robots, status codes, redirects, and Search Console
+
+- [ ] Open `/sitemap.xml`; confirm exactly the 29 canonical targets, clean HTTPS URLs and only real maintained dates; confirm no API, 404, redirect, draft, test, utility, query or thank-you URL.
+- [ ] Open `/robots.txt`; confirm public content and required JS/CSS are crawlable, sitemap location is correct, and robots is not being misused as noindex.
+- [ ] Request representative unknown, invalid service/city/blog, typo and removed URLs; confirm actual HTTP 404 with useful UI and no redirect to homepage.
+- [ ] Audit production redirects against real legacy evidence; confirm only equivalent targets, permanent status where appropriate, one hop, no loop/chain, and no unknown-to-home catch-all.
+- [ ] Inspect URL Inspection in Google Search Console for the homepage and representative service/city/blog pages; compare Google-selected canonical to declared canonical.
+- [ ] Submit or update the production sitemap in Google Search Console and confirm it is fetched successfully without unexpected exclusions/errors.
+- [ ] Request indexing after deployment for the homepage and highest-priority service/commercial pages, then selected area/blog pages where appropriate; record requests rather than promising indexing.
+
+### Structured data and business-fact accuracy
+
+- [ ] Parse every page's JSON-LD and validate representative page types with Schema.org Validator and Google Rich Results Test where applicable; record warnings and legitimate non-eligibility.
+- [ ] Confirm stable `#organization`, `#website`, per-page, breadcrumb, service and article IDs reference one coherent graph and clean canonical URLs.
+- [ ] Confirm every service has visible-matching Service schema and five approved areas; city pages have no fake LocalBusiness; hubs' ItemLists match visible cards/order.
+- [ ] Confirm AboutPage, ContactPage, CollectionPage/Blog and Article/BlogPosting types match visible content and real publisher/image/date/author data only.
+- [ ] Confirm no unverified address, geo, disputed hours, priceRange, license/certification, founding facts, guarantees, aggregateRating, self-serving Review schema, fake FAQ schema or city business entity.
+- [ ] Reconfirm authoritative business hours/address decision, contact values, service scope, social/review URLs and review count policy against the approved single source; omit unresolved values.
+
+### Content, city anti-doorway, reviews, and blog accuracy
+
+- [ ] Read all service pages for natural keyword use, unique purpose, confirmed capabilities and prohibited claims specific to fertilization, grading, snow, aeration, cleanup and other services.
+- [ ] Compare Ankeny, Waukee, Norwalk and Altoona pages side by side; confirm substantive usefulness/variation and no fabricated neighborhoods, projects, customers, crews, addresses, testimonials, response times or city imagery.
+- [ ] Confirm homepage remains the only broad Des Moines page and no service/city permutations, split leaf/ground-clearance pages, thin archive/category/tag/author/date pages or unapproved Spanish pages are indexable.
+- [ ] Verify Our Work uses the shared project source, before/after interaction remains correct, and location/service labels/alts are present only when metadata proves them.
+- [ ] Verify Reviews uses the governed shared dataset, handles null/negative records honestly, uses approved source/count policy, does not overload initial HTML, and emits no self-serving rating schema.
+- [ ] Editorially inspect the Blog hub and all six initial articles for exact intent, scannable useful content, non-repetitive CTAs, real images where available and no invented dates/authors/service facts.
+- [ ] Open every visible article source; verify publisher authority, claim support, jurisdiction, source freshness and paraphrasing for Iowa/municipal facts; confirm conditional advice for weather, turf, soil, property and local rules.
+- [ ] Confirm informational articles do not cannibalize commercial service pages and future/draft posts are absent from hub, sitemap, static routes and Latest Tips.
+
+### Forms, phone/email, GA4, privacy, and attribution
+
+- [ ] Submit the homepage and Contact forms with client-invalid data; confirm accessible errors/focus and no backend request or `generate_lead`.
+- [ ] With an approved safe test, submit each form successfully; confirm provider-delivered success UI and exactly one `generate_lead` after confirmed success, even with double click/rerender/repeated callback safeguards.
+- [ ] Exercise actionable backend failure, network failure, malformed response and honeypot suppression; confirm accurate UI, `form_submit_error` only for qualifying backend failures, and no `generate_lead`.
+- [ ] Confirm `form_start` fires once after first meaningful real-field interaction per form instance, not on view/honeypot, and does not duplicate Enhanced Measurement.
+- [ ] Activate representative `tel:` links in header, footer, hero, services, cities and Contact; confirm dialer/native destination and one non-blocking `click_to_call` with safe placement/page context.
+- [ ] Activate representative `mailto:` links; confirm native destination and one non-blocking `click_email` with safe context.
+- [ ] Inspect GA4 network/DebugView payloads and confirm no customer name, phone, email, address, message/project text, full payload, arbitrary DOM/form values, or monetary value/currency.
+- [ ] Verify the Google tag loads only under the approved production/consent conditions and local, automated test and preview traffic does not reach the production property; review continued Vercel Analytics privacy/environment behavior.
+- [ ] Confirm all five event names/parameters in GA4 DebugView and Realtime; mark `generate_lead` as the primary key event/conversion in Admin.
+- [ ] Decide with the stakeholder whether `click_to_call` is a secondary key event and record the decision; keep `form_start`, `form_submit_error` and `click_email` diagnostic/intent events as planned.
+- [ ] Register only event parameters that genuinely require custom dimensions and document names/scopes; do not enable Google Signals, advertising, remarketing or extra user-data features without separate approval.
+- [ ] Verify Reports → Acquisition → Traffic acquisition preserves standard UTMs after reporting latency.
+- [ ] Manually set/test the Google Business Profile website link as `https://www.moslawncaredsm.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp&utm_content=website_button`; confirm landing works, attribution appears, and the UTM URL is absent from canonicals/sitemap/internal links/schema.
+
+### Images, performance, accessibility, responsive behavior, and regression
+
+- [ ] Inspect mobile and desktop layout at representative narrow/wide widths for all page families; check no overlap, clipping, horizontal scroll, inaccessible menus or broken CTAs.
+- [ ] Keyboard-test skip link, header/service menu, mobile navigation, breadcrumbs, forms, gallery modal, review controls, property/season/problem experiences and before/after controls; verify focus visibility, Escape and focus return.
+- [ ] Check labels, error/live announcements, link/button semantics, one logical H1/heading hierarchy, target sizes, color contrast and reduced-motion behavior with an accessibility tool plus manual review.
+- [ ] Verify actual image content, honest useful alt or decorative empty alt, intrinsic dimensions, responsive sizes and no keyword/city stuffing; check social images and remote gallery failures.
+- [ ] Confirm primary hero/LCP media is not lazy-loaded, below-fold media is lazy, homepage uses curated gallery/review/blog subsets, article cards use thumbnails and `/our-work/` does not fetch/render every full-resolution asset initially.
+- [ ] Measure representative homepage, service, city, Work, Contact, Blog hub and article pages for LCP, CLS, INP, transferred bytes, request count, image decoding, fonts, JS/hydration, animation and third-party scripts; compare to baseline and investigate regressions.
+- [ ] Re-test the original homepage hero/video, four seasons, property explorer, before/after, gallery, reviews, problem selector, estimate form, responsive layout, animations and bilingual controls to confirm preservation.
+- [ ] Run the final production build/type/lint/test/browser suites supported by the repository and record exact commands/results as pass, fail, unavailable or not run; never infer a pass from historical Playwright artifacts.
+
+## Final Phase 1 Validation Record
+
+- **Full-file review:** Read `plan.md` completely in bounded ranges after task insertion, then reviewed every subsequent validation-only edit; final length is 1,384 lines.
+- **Prompt coverage:** Compared the completed plan line by line with `app/prompt.md` Sections 1–60. Sections A–G, preservation rules, technical/content requirements, ordered implementation workflow, automated validation, complete manual QA, and STOP gate are covered with no unresolved Phase 1 planning omission.
+- **Ownership-map audit:** Automated count found exactly 29 Section E URL rows; manual comparison confirmed the exact homepage, Services hub + 10 services, Commercial, Service Areas hub + four cities, four company/trust/contact pages, Blog hub + six articles, exact keyword ownership, titles, H1s, descriptions, schema, parents, and inbound/outbound links. `/service-areas/des-moines-ia/` is explicitly prohibited.
+- **Task-structure audit:** Automated counts found 39 sequential task headings and exactly 39 occurrences of each required field: Status, Objective, Why It Is Needed, Dependencies, Files Involved, Implementation Details, SEO Impact, Edge Cases, Validation, Tests, and Definition of Done. All 39 statuses are `[ ]` Not started; no task placeholder or in-progress/completed implementation status remains.
+- **Blog audit:** `/blog/`, all six exact initial articles, individual research/source requirements, content model, article schema, image/date/author safeguards, publishing workflow, sitemap behavior, commercial-intent separation, bidirectional service links, pillar links, tests, and post-deployment source review are covered.
+- **GA4 and manual-actions audit:** All five required events, confirmed-delivery-only lead trigger, duplicate prevention, honeypot/failure behavior, PII allowlists, native contact links, Enhanced Measurement/consent review, production-only environment gate, mocked tests, DebugView/Realtime, key-event decisions, custom dimensions, acquisition reporting, Search Console steps, and exact Google Business Profile UTM action are covered.
+- **Preservation audit:** Only `plan.md` was edited. `app/prompt.md` remained read-only; no application code, dependency, test, configuration, lockfile, asset, production system, account, staging area, commit, remote, or deployment was changed.
+- **Final `git diff -- app/prompt.md plan.md`:** no output because both files are untracked; neither is represented by ordinary tracked-file diff output.
+- **Final untracked-file diff review:** `git diff --no-index --stat /dev/null plan.md` reports `/dev/null => plan.md | 1384` and `1 file changed, 1384 insertions(+)`; `--numstat` reports `1384  0`. The full added file was reviewed through the complete-file pass.
+- **Final `git diff --check --no-index /dev/null plan.md`:** no whitespace-error output.
+- **Final `git status --short`:** exactly `?? app/prompt.md` and `?? plan.md`, matching the checkpoint and preserving both untracked files.
+
+## Final Phase 1 Gate
+
+- [x] All repository-state claims are labeled verified, assumed, missing, inferred, or owner-confirmation required; planned design statements are clearly prospective.
+- [x] All 29 required URLs and exact ownership metadata are included.
+- [x] All 39 implementation tasks contain every required field and are `[ ]` Not started.
+- [x] The Blog hub, all six initial articles, source/publishing workflow, schema, sitemap and internal-link cluster are fully planned.
+- [x] GA4 conversion measurement, deduplication, PII/environment safeguards, automated tests, manual Admin actions and GBP UTM attribution are fully planned.
+- [x] The complete manual post-deployment QA checklist is included.
+- [x] No SEO implementation or application-code change has been made.
+- [x] Final git status and diff are recorded.
+- [x] Phase 1 planning gate is complete; work stops pending separate authorization for one implementation task.
