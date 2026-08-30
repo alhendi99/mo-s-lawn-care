@@ -41,7 +41,7 @@ export function EstimateSection() {
           </div>
 
           <div id="estimate-form" className="bg-paper p-6 sm:p-9 lg:p-12">
-            <EstimateForm />
+            <EstimateForm placement="homepage_estimate" />
           </div>
         </div>
       </div>

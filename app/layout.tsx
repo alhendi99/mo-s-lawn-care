@@ -1,10 +1,13 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Archivo, Inter } from 'next/font/google'
+import { ContactLinkTracker } from '@/components/contact-link-tracker'
+import { Ga4 } from '@/components/ga4'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { Tr } from '@/components/tr'
 import { routesById } from '@/content/routes'
+import { getGa4Config, isProductionDeployment } from '@/lib/analytics-config'
 import { I18nProvider } from '@/lib/i18n'
 import { buildRouteMetadata } from '@/lib/metadata'
 import './globals.css'
@@ -34,6 +37,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const ga4 = getGa4Config()
+
   return (
     <html lang="en" className={`${display.variable} ${body.variable} bg-background`}>
       <body className="antialiased">
@@ -46,8 +51,10 @@ export default function RootLayout({
             {children}
           </div>
           <SiteFooter />
+          {ga4.enabled && <ContactLinkTracker />}
         </I18nProvider>
-        {process.env.VERCEL === '1' && <Analytics />}
+        {ga4.enabled && <Ga4 measurementId={ga4.measurementId} />}
+        {isProductionDeployment() && <Analytics />}
       </body>
     </html>
   )

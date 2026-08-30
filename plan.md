@@ -4,14 +4,15 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 3 complete
+- Phase: Incremental implementation — Task 4 complete; live GA4 activation blocked pending verified account decisions
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–3 completed; Task 4 and later are not authorized
+- Implementation status: Tasks 1–4 completed; Task 5 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
 - Task 3 repository baseline: clean `main` at `e24e7af`
-- Preservation boundary: preserve all existing user work; do not stage, commit, push, deploy, modify production systems, or begin Task 4 or later
+- Task 4 repository baseline: clean `main` at `abfe88d`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 5 or later
 
 ## Evidence Labels
 
@@ -23,7 +24,24 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 2 complete, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 4 code complete, activation blocked, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 4 only — GA4 Foundation and Conversion Measurement. Task 5 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 4 began from clean `main` at `abfe88d` (`feat(seo): add shared navigation and breadcrumbs`). `git status --short` returned no entries before the first edit.
+- **Repository audit:** no repository GA4, GTM, Google tag, Measurement ID, consent mechanism, custom analytics helper, or form/contact events existed. Vercel Analytics was the only analytics integration and used the broad `VERCEL === '1'` condition. `.env.local` contains only the three Resend variable names. No external stream/account evidence is available in the repository.
+- **Activation design:** added one minimal native Google tag using `next/script`, with no analytics dependency. It renders only when `VERCEL_ENV=production`, `GA4_ENABLED=true`, `GA4_ACTIVATION_APPROVED=true`, and `GA4_MEASUREMENT_ID` is a syntactically valid verified `G-...` value. Missing/invalid/disabled/preview/local/test states fail closed. `GA4_ACTIVATION_APPROVED` represents the documented completion of the stream ownership/injection audit, consent decision, and Enhanced Measurement review; it defaults false and no ID is present. Google Signals and ad-personalization signals are explicitly disabled. Vercel Analytics is now restricted to Vercel production rather than previews/local.
+- **Exact event contract:** the analytics client exposes only `generate_lead`, `form_start`, `form_submit_error`, `click_to_call`, and `click_email` methods; it has no generic arbitrary event API. Form events contain only fixed form identity, lead type, pathname-only page path, controlled placement, and `en`/`es`; bounded errors add only an allowlisted error type. Contact events contain pathname, fixed placement, language, and only the literal protocol `tel:` or `mailto:`—never DOM text or raw link content. No value/currency is emitted.
+- **Lead/API design:** the API now returns `{ ok: true, delivery: 'sent', submissionId }` only after Resend reports no error, `{ ok: true, delivery: 'suppressed' }` for the honeypot, and non-2xx `{ ok: false, errorCode }` for `invalid_request`, `invalid_contact`, `delivery_unavailable`, or `delivery_failed`. The server creates a UUID before sending and attaches the same non-PII ID as a Resend tag. The client emits `generate_lead` only for parsed `sent`, dedupes by that semantic ID in memory and bounded session storage, and never sends the ID to GA4. A synchronous in-flight guard blocks concurrent submits.
+- **Form/error design:** `form_start` claims once only after a trusted pointer or keyboard event targets `name`, `phone`, `email`, `service`, or `message`; honeypot, hydration, focus, autofill/state setup, programmatic/synthetic events, and later fields do not qualify. Client validation and network failures emit no submission error. Bounded backend errors and malformed backend responses emit `form_submit_error`; neither can emit a lead. Analytics transport/storage failures are caught and cannot block form behavior.
+- **Contact/UTM design:** one document-level delegated tracker observes genuine click activation of real `tel:`/`mailto:` anchors and never calls `preventDefault`. Existing native destinations remain unchanged. Standard UTMs are not copied into analytics event parameters, canonicals, internal links, schema, or the form; browser validation confirmed the existing language switch changes only `lang` and preserves all GBP UTM parameters.
+- **Passed checks:** `pnpm validate:analytics`; `pnpm validate:content`; `pnpm validate:seo`; `pnpm validate:navigation`; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; `git diff --check`; production-server HTML tag-absence check; API HTTP matrix for invalid JSON, honeypot, invalid contact, and missing delivery configuration; Playwright form validation, UTM/language preservation, mocked sent/suppressed/backend/network outcomes, exact event/payload capture, stable-ID replay dedupe, native contact href inspection, session-storage review, and console review.
+- **Browser console classification:** the normal homepage produced no warnings/errors before failure testing. The only later console errors were expected failed-resource entries deliberately induced by the 503 and offline negative cases; the mocked success/suppression logic introduced no application exception.
+- **Activation status:** GA4 is not enabled. Missing external gates are the verified production Measurement ID, production stream ownership/injection audit, consent decision, and Enhanced Measurement review. Realtime/DebugView, Admin key-event setup, custom-dimension decisions, production attribution, and GBP UTM account work remain manual Task 38 actions after authorized deployment.
+- **Task status:** Task 4 is `[x]` Completed at the repository/code level because all four Definition of Done conditions are satisfied, including the required explicit activation block instead of an invented account configuration.
+- **No external action:** no production deployment, Google/Vercel/Resend account change, live email, or GBP edit occurred. Task 5 was not started.
+- **Exact next action:** commit the authorized Task 4 changes after final diff/validation review, then STOP before Task 5.
+
+### Prior checkpoint — Task 2 complete, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 2 only — Global Metadata, Canonical, Schema, Sitemap, Robots, and 404 Foundation. Task 3 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 2 began from a clean tracked worktree on `main` at `4b944bc` (`chore(seo): record confirmed business details`), three local commits ahead of `origin/main`. `git status --short` returned no entries before the first edit.
@@ -862,7 +880,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 4 — GA4 Foundation and Conversion Measurement
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Add production-gated, PII-safe GA4 loading and the exact required lead/form/contact event model around the existing estimate workflow.
 - **Why It Is Needed:** Only Vercel page analytics exists; there is no confirmed-lead conversion measurement, funnel diagnostic, contact intent tracking, environment isolation, or event deduplication.
 - **Dependencies:** Tasks 1–3; verified production Measurement ID, stream ownership/injection audit, consent decision, and Enhanced Measurement review are activation gates, not permission to invent values.
@@ -872,7 +890,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Honeypot 2xx response; malformed JSON; provider response without ID; double submission; remount; failed network before backend; client validation; external tag injection; Enhanced Measurement duplicates; consent not granted; preview builds with `NODE_ENV=production`; link text containing PII-like content.
 - **Validation:** Inspect network/tag presence by environment; exercise success/suppression/validation/backend/network cases; inspect every event payload; confirm phone/email native behavior; record Enhanced Measurement and consent decisions; keep production disabled until verified account data exists.
 - **Tests:** One sent response → one `generate_lead`; duplicate callback/ID → one; validation, suppression, failure, malformed and network error → zero leads; one `form_start`; actionable response → one safe error; native tel/mailto preserved; allowlist rejects PII/free text; non-production emits no production requests.
-- **Definition of Done:** `[ ]` Exact five-event contract is implemented and documented; `[ ]` successful delivery is the sole primary lead trigger with dedupe; `[ ]` payload/environment/consent safeguards pass; `[ ]` account-dependent activation remains explicitly blocked until verified rather than using an invented ID.
+- **Definition of Done:** `[x]` Exact five-event contract is implemented and documented; `[x]` successful delivery is the sole primary lead trigger with dedupe; `[x]` payload/environment/consent safeguards pass; `[x]` account-dependent activation remains explicitly blocked until verified rather than using an invented ID.
+
+#### Task 4 implementation record
+
+- **Completed files:** `.env.example`, `app/api/estimate/route.ts`, `app/layout.tsx`, `components/estimate-form.tsx`, `components/estimate-section.tsx`, new `components/ga4.tsx`, new `components/contact-link-tracker.tsx`, new `lib/analytics.ts`, new `lib/analytics-config.ts`, new `lib/estimate-contract.ts`, `package.json`, new `scripts/validate-analytics.mts`, and this plan record.
+- **Configuration decision:** no Measurement ID is stored or guessed. The tag requires a verified `GA4_MEASUREMENT_ID`, explicit `GA4_ENABLED=true`, explicit `GA4_ACTIVATION_APPROVED=true`, and `VERCEL_ENV=production`; `.env.example` defaults both booleans false. Client events additionally require the marker set only by this gated initialization, so an unrelated preview/local `gtag` global cannot receive Task 4 events.
+- **Privacy decision:** callers cannot provide arbitrary event names or payloads. The helper reconstructs allowlisted parameters, normalizes path/language/placement/error fields, omits selected service/form values/submission ID/query strings/link text, and catches transport/storage errors. Manual payload and callsite audit found no customer PII, free text, response body, DOM content, value, or currency path.
+- **Delivery decision:** Resend remains the only delivery backend. A server UUID supplies the stable success identity and is included as a Resend tag/returned contract field only after provider success; it never enters analytics. Honeypot suppression still returns 200 without email but is now explicitly distinguishable. Validation, configuration and provider failures retain HTTP semantics with bounded codes and generic unchanged client error UI.
+- **Behavioral validation:** the focused validator and real browser with mocked transport/response proved first legitimate interaction → one `form_start`; one sent ID → one lead; replay/remount storage of the same ID → no duplicate; suppression/client validation/network failure → no lead; actionable backend failure → one bounded error; analytics unavailable/throwing → no workflow exception; tel/mailto remain native; UTMs remain intact through the language switch and absent from event payloads.
+- **Activation boundary:** repository implementation is complete, but live activation remains blocked pending the real ID, stream ownership/external injection audit, consent decision and Enhanced Measurement review. GA4 Admin/DebugView/Realtime/key-event/custom-dimension/acquisition/GBP actions remain Task 38, not Task 4 code work.
+- **Final result:** all four Task 4 Definition of Done checks are satisfied. Task 4 is complete and work stops before Task 5.
 
 ### Task 5 — Homepage SEO Refactor and Crawlable Architecture
 

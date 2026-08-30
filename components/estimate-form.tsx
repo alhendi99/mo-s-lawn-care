@@ -1,6 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import {
+  analytics,
+  createFormAnalyticsContext,
+  FormStartGuard,
+  mapEstimateErrorCode,
+  trackSuccessfulEstimateDelivery,
+  type EstimatePlacement,
+} from '@/lib/analytics'
+import {
+  parseEstimateApiResponse,
+  SubmissionInFlightGuard,
+  type EstimateRequestPayload,
+} from '@/lib/estimate-contract'
 import { services, site } from '@/lib/site'
 import { useI18n } from '@/lib/i18n'
 
@@ -17,10 +30,34 @@ const fieldClass =
 const labelClass =
   'block text-[0.75rem] font-semibold tracking-[0.14em] text-ink-soft uppercase'
 
-export function EstimateForm() {
+export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: EstimatePlacement }) {
   const { locale, t } = useI18n()
   const [status, setStatus] = useState<Status>('idle')
   const [errors, setErrors] = useState<FieldErrors>({})
+  const submissionInFlight = useRef(new SubmissionInFlightGuard())
+  const formStartGuard = useRef(new FormStartGuard())
+
+  function analyticsContext() {
+    const pagePath = typeof window === 'undefined' ? '/' : window.location.pathname
+    return createFormAnalyticsContext(placement, locale, pagePath)
+  }
+
+  function handleMeaningfulInteraction(
+    event: React.PointerEvent<HTMLFormElement> | React.KeyboardEvent<HTMLFormElement>,
+  ) {
+    const field = event.target
+    if (
+      !(field instanceof HTMLInputElement) &&
+      !(field instanceof HTMLSelectElement) &&
+      !(field instanceof HTMLTextAreaElement)
+    ) {
+      return
+    }
+
+    if (formStartGuard.current.claim(field.name, event.type, event.nativeEvent.isTrusted)) {
+      analytics.formStart(analyticsContext())
+    }
+  }
 
   function handleChange(event: React.FormEvent<HTMLFormElement>) {
     const field = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -36,7 +73,6 @@ export function EstimateForm() {
     event.preventDefault()
     const form = event.currentTarget
     const formData = new FormData(form)
-    const data = { ...Object.fromEntries(formData.entries()), locale }
     const name = String(formData.get('name') ?? '').trim()
     const phone = String(formData.get('phone') ?? '').trim()
     const email = String(formData.get('email') ?? '').trim()
@@ -68,21 +104,46 @@ export function EstimateForm() {
       return
     }
 
+    if (!submissionInFlight.current.claim()) return
     setErrors({})
-
     setStatus('sending')
+
     try {
+      const data: EstimateRequestPayload = {
+        name,
+        phone,
+        email,
+        service: String(formData.get('service') ?? ''),
+        message: String(formData.get('message') ?? ''),
+        website: String(formData.get('website') ?? ''),
+        locale,
+      }
       const res = await fetch(site.formEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-      if (!res.ok) throw new Error('Request failed')
+
+      const body: unknown = await res.json().catch(() => null)
+      const response = parseEstimateApiResponse(body)
+
+      if (!res.ok || !response || !response.ok) {
+        const errorType = response && !response.ok
+          ? mapEstimateErrorCode(response.errorCode)
+          : 'unexpected_response'
+        analytics.formSubmitError(analyticsContext(), errorType)
+        setStatus('error')
+        return
+      }
+
+      trackSuccessfulEstimateDelivery(response, analyticsContext())
       setStatus('sent')
       setErrors({})
       form.reset()
     } catch {
       setStatus('error')
+    } finally {
+      submissionInFlight.current.release()
     }
   }
 
@@ -90,6 +151,8 @@ export function EstimateForm() {
     <form
       onSubmit={handleSubmit}
       onChange={handleChange}
+      onPointerDownCapture={handleMeaningfulInteraction}
+      onKeyDownCapture={handleMeaningfulInteraction}
       noValidate
       aria-busy={status === 'sending'}
       className="relative"

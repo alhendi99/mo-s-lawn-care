@@ -1,33 +1,29 @@
 import { Resend } from 'resend'
 import { EstimateRequestEmail } from '@/components/estimate-request-email'
+import type { EstimateErrorCode, EstimateRequestInput } from '@/lib/estimate-contract'
 
 export const runtime = 'nodejs'
-
-type EstimatePayload = {
-  name?: unknown
-  phone?: unknown
-  email?: unknown
-  service?: unknown
-  message?: unknown
-  website?: unknown
-}
 
 function textValue(value: unknown, maxLength: number) {
   return typeof value === 'string' ? value.trim().slice(0, maxLength) : ''
 }
 
+function errorResponse(errorCode: EstimateErrorCode, status: number) {
+  return Response.json({ ok: false, errorCode }, { status })
+}
+
 export async function POST(request: Request) {
-  let payload: EstimatePayload
+  let payload: EstimateRequestInput
 
   try {
-    payload = (await request.json()) as EstimatePayload
+    payload = (await request.json()) as EstimateRequestInput
   } catch {
-    return Response.json({ error: 'Invalid request body.' }, { status: 400 })
+    return errorResponse('invalid_request', 400)
   }
 
   // Honeypot: silently accept bot submissions without sending an email.
   if (textValue(payload.website, 200)) {
-    return Response.json({ ok: true })
+    return Response.json({ ok: true, delivery: 'suppressed' })
   }
 
   const name = textValue(payload.name, 120)
@@ -38,7 +34,7 @@ export async function POST(request: Request) {
   const phoneDigits = phone.replace(/\D/g, '')
 
   if (!name || phoneDigits.length < 10 || (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
-    return Response.json({ error: 'Please check the required contact fields.' }, { status: 400 })
+    return errorResponse('invalid_contact', 400)
   }
 
   const apiKey = process.env.RESEND_API_KEY
@@ -47,28 +43,32 @@ export async function POST(request: Request) {
 
   if (!apiKey || !from || !to) {
     console.error('Resend is missing RESEND_API_KEY, RESEND_FROM_EMAIL, or RESEND_TO_EMAIL.')
-    return Response.json({ error: 'Email delivery is not configured.' }, { status: 503 })
+    return errorResponse('delivery_unavailable', 503)
   }
 
   try {
+    const submissionId = crypto.randomUUID()
     const resend = new Resend(apiKey)
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from,
       to: [to],
       replyTo: email || undefined,
       subject: `New estimate request from ${name}`,
       react: EstimateRequestEmail({ name, phone, email, service, message }),
-      tags: [{ name: 'source', value: 'estimate-form' }],
+      tags: [
+        { name: 'source', value: 'estimate-form' },
+        { name: 'submission_id', value: submissionId },
+      ],
     })
 
     if (error) {
       console.error('Resend email error:', error)
-      return Response.json({ error: 'Unable to send the estimate request.' }, { status: 502 })
+      return errorResponse('delivery_failed', 502)
     }
 
-    return Response.json({ ok: true, id: data?.id })
+    return Response.json({ ok: true, delivery: 'sent', submissionId })
   } catch (error) {
     console.error('Resend request failed:', error)
-    return Response.json({ error: 'Unable to send the estimate request.' }, { status: 502 })
+    return errorResponse('delivery_failed', 502)
   }
 }
