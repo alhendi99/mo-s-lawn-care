@@ -10,13 +10,16 @@ import { SiteHeader } from '@/components/site-header'
 import { StructuredData } from '@/components/structured-data'
 import { Testimonials } from '@/components/testimonials'
 import { LocalizedNav, Tr } from '@/components/tr'
+import { routesById } from '@/content/routes'
 import { nav, site } from '@/lib/site'
-import { localBusinessStructuredData, websiteStructuredData } from '@/lib/structured-data'
+import { buildPageStructuredData } from '@/lib/structured-data'
+
+const homepageStructuredData = buildPageStructuredData(routesById.home, routesById.home)
 
 export default function Page() {
   return (
     <>
-      <StructuredData data={[localBusinessStructuredData, websiteStructuredData]} />
+      <StructuredData data={homepageStructuredData} />
       <SiteHeader />
 
       <main className="">

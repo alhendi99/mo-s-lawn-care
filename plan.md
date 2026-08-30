@@ -1,16 +1,16 @@
 # Mo's Lawn Care SEO Architecture and Incremental Implementation Plan
 
-> Phase 1 planning document. No implementation task is authorized or started.
+> Phase 1 planning document and incremental implementation record.
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 1 only
+- Phase: Incremental implementation — Task 2 only
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Task 1 completed; Task 2 and later are not authorized
+- Implementation status: Tasks 1–2 completed; Task 3 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
-- Task 1 repository baseline: clean `main` at `858e5c2`
-- Preservation boundary: preserve all existing user work; do not stage, commit, push, deploy, modify production systems, or begin Task 2 or later
+- Task 2 repository baseline: clean `main` at `4b944bc`
+- Preservation boundary: preserve all existing user work; do not stage, commit, push, deploy, modify production systems, or begin Task 3 or later
 
 ## Evidence Labels
 
@@ -22,7 +22,27 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 1 owner-confirmation update complete, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 2 complete, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 2 only — Global Metadata, Canonical, Schema, Sitemap, Robots, and 404 Foundation. Task 3 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 2 began from a clean tracked worktree on `main` at `4b944bc` (`chore(seo): record confirmed business details`), three local commits ahead of `origin/main`. `git status --short` returned no entries before the first edit.
+- **Metadata/canonical implementation:** added one framework-native metadata builder that consumes the 29-route registry for exact title, description, clean absolute canonical, lifecycle-derived robots, Open Graph, and Twitter values. The official 512×512 logo is the conservative shared social image until page-specific imagery is verified. Root metadata now consumes the homepage record, and obsolete `<meta name="keywords">` output is removed.
+- **Hydration discovery:** the existing client language provider overwrote every server title and description after hydration, including the 404. Removed only that stale metadata mutation while preserving the language preference, query parameter, local storage, translated visible content, and document-language update. Browser validation confirmed the route-record title remains intact with `?lang=es` and UTM parameters.
+- **Entity-graph implementation:** replaced the independent unsafe LocalBusiness/WebSite objects with one escaped `@graph` containing stable `#organization`, `#website`, and `#webpage` IDs. The Organization uses approved legal/display names, phone, email, five service areas, and the verified Google Business Profile as its only `sameAs` value. Stable breadcrumb/service/article ID helpers are ready for the page tasks without publishing their schemas early.
+- **Schema restraint:** the company is represented as an addressless Service Area Business through `Organization`; the graph contains no LocalBusiness, public/locality-only address, geo, latitude/longitude, price range, founding/credential facts, offer catalog, review, or `aggregateRating`. Verified hours are intentionally not emitted because `openingHours`/`openingHoursSpecification` are not valid Organization properties and the unchanged pre-Task-3 footer still shows stale visible hours; invalid or visibly inconsistent schema was not created merely to include hours.
+- **Sitemap/robots implementation:** sitemap output now filters the authoritative registry to routes that are simultaneously implemented, published, canonical, and indexable. It currently contains only `/`, has no volatile synthetic date/query/fragment, and a focused test proves the same architecture produces 29 unique clean URLs when all 29 records are legitimately promoted. Robots allows normal public crawling and references the production sitemap.
+- **404 implementation:** added a branded responsive not-found page with a real homepage action, phone action, and links only to homepage sections that exist today; planned pages are not advertised early. Next returns HTTP 404 with no redirect or Location header. The 404 has a useful title/description, one framework-generated `noindex`, no canonical, and no inherited homepage Open Graph/Twitter metadata.
+- **Trailing-slash behavior:** `trailingSlash` remains unset. Local production-server checks confirmed the existing non-trailing convention (`/sitemap.xml/` permanently normalizes once to `/sitemap.xml`) and an unknown clean URL returns 404 rather than redirecting home. The production hosting layer remains a post-deployment verification assumption because deployment was not authorized.
+- **Passed checks:** `pnpm validate:content`; new `pnpm validate:seo`; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; `git diff --check`; rendered homepage metadata/canonical/social checks with UTM and language queries; parsed rendered JSON-LD inspection; rendered sitemap/robots inspection; curl status/header checks for homepage, planned route, unknown route, and slash normalization; Playwright desktop/mobile 404 snapshots, accessibility snapshots, hydrated title/canonical/language checks, and console review. The only 404 browser console entry is the expected failed main-document request representing its 404 status; the homepage produced no browser errors or warnings.
+- **Unavailable check:** `pnpm lint` still exits 1 because the pre-existing script invokes `eslint .` while ESLint is not installed or declared. No lint dependency/config or lockfile churn was introduced under Task 2.
+- **Not run:** no separate pre-existing unit/integration/e2e suite exists; production, deployment, Search Console, Schema.org/Google rich-result web tools, external-account, and live-host redirect/slash checks were not run because deployment/external changes are prohibited. Task 3+ navigation/footer/breadcrumb/page/form/GA4/content checks were not run or started.
+- **Files changed:** `app/layout.tsx`, `app/manifest.ts`, `app/page.tsx`, `app/robots.ts`, `app/sitemap.ts`, new `app/not-found.tsx`, `components/structured-data.tsx`, `lib/i18n.tsx`, new `lib/metadata.ts`, `lib/structured-data.ts`, `package.json`, new `scripts/validate-seo-foundation.mts`, and `plan.md`.
+- **Files intentionally unchanged:** the route/business registries and their lifecycle values, header, footer, homepage content/H1/sections, breadcrumbs/navigation, all 28 planned pages, service/area/blog content, reviews/gallery/form/API/analytics, assets, Next trailing-slash configuration, both lockfiles, production configuration, and external systems.
+- **Task status:** Task 2 is `[x]` Completed. Every Definition of Done item is satisfied within the authorized repository/local-runtime boundary, and the remaining production-host verification assumption is explicitly recorded rather than represented as tested.
+- **No external action:** nothing was staged, committed, pushed, deployed, or changed in production or any account.
+- **Exact next action:** STOP. Do not begin Task 3 without separate authorization.
+
+### Prior checkpoint — Task 1 owner-confirmation update complete, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 1 business-data maintenance only. Task 2 and later remain unauthorized and `[ ]` Not started.
 - **Owner-confirmed hours:** Saturday through Friday, every day, `08:00–18:00`; approved display copy is `Every day, 8:00 AM–6:00 PM`.
@@ -785,7 +805,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 2 — Global Metadata, Canonical, Schema, Sitemap, Robots, and 404 Foundation
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Build the shared technical SEO layer and framework metadata routes that every content task will consume.
 - **Why It Is Needed:** The current site has homepage-only metadata, a volatile one-URL sitemap, unverified LocalBusiness fields, no coherent entity graph, and no branded 404 verification.
 - **Dependencies:** Task 1.
@@ -795,7 +815,21 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Root canonical formatting; Next trailing-slash normalization; query/UTM/lang variants; missing social images; JSON escaping; invalid dynamic slugs; sitemap accidentally including API/drafts/404; hosting-level redirects not visible in code.
 - **Validation:** Inspect rendered head/source for the homepage and fixture records, parse JSON-LD, inspect `/sitemap.xml` and `/robots.txt`, request a missing route for a true 404, and verify the deployed slash convention before launch.
 - **Tests:** Metadata exactness/uniqueness, canonical construction, sitemap exact membership/exclusions, robots sitemap URL, structured-data serialization/stable IDs/forbidden fields, and 404 status smoke test.
-- **Definition of Done:** `[ ]` Shared metadata/schema builders consume Task 1 data; `[ ]` sitemap publication filtering excludes every not-yet-implemented, utility, draft and query URL and is designed to reach exactly 29 after all page tasks; `[ ]` fabricated address/geo and self-serving review schema are absent while verified hours are handled accurately; `[ ]` missing pages return 404; `[ ]` all checks and unresolved hosting assumptions are recorded.
+- **Definition of Done:** `[x]` Shared metadata/schema builders consume Task 1 data; `[x]` sitemap publication filtering excludes every not-yet-implemented, utility, draft and query URL and is designed to reach exactly 29 after all page tasks; `[x]` fabricated address/geo and self-serving review schema are absent while verified hours are handled accurately; `[x]` missing pages return 404; `[x]` all checks and unresolved hosting assumptions are recorded.
+
+#### Task 2 implementation record
+
+- **Completed files:** `app/layout.tsx`, `app/manifest.ts`, `app/page.tsx`, `app/robots.ts`, `app/sitemap.ts`, `app/not-found.tsx`, `components/structured-data.tsx`, `lib/i18n.tsx`, `lib/metadata.ts`, `lib/structured-data.ts`, `package.json`, `scripts/validate-seo-foundation.mts`, and this plan record.
+- **Metadata decision:** `buildRouteMetadata` derives exact title/description/canonical, publication-aware robots, Open Graph, and Twitter metadata for every registered route. The official logo is the conservative verified default social asset, and callers can provide a later verified page-specific image without duplicating route copy. Planned routes resolve to noindex/nofollow metadata if a future page task accidentally consumes them before publication.
+- **Canonical decision:** clean canonicals remain sourced from Task 1 non-trailing paths; root serialization may display the origin without a visible terminal slash, which is the same root resource. UTM, language, fragments, and form context never enter canonical metadata, sitemap URLs, or graph IDs.
+- **Schema decision:** the live graph is Organization-led because the owner confirmed a Service Area Business without a publishable address. Hours remain centralized and verified but are omitted from the selected Organization graph because the schema type does not validly support LocalBusiness opening-hours properties and visible footer correction belongs to later authorized UI work. Google Business Profile is the only external profile; no review/rating schema is present.
+- **Sitemap decision:** `buildSitemapEntries` checks implementation, publication, and indexability together. Current output is one URL; simulated legitimate promotion of all registry records produces exactly 29 unique clean URLs. Synthetic `lastModified`, change frequency, and priority values were removed.
+- **404 decision:** the custom 404 links only to currently working homepage destinations rather than sending users to 28 planned 404s. Special-route metadata explicitly clears inherited canonical/social/robots fields so Next can supply its single automatic `noindex` without a contradictory homepage canonical or `index, follow` tag.
+- **Runtime discovery:** `I18nProvider` was mutating title/description after hydration. That behavior was removed as an absolutely necessary metadata fix; visible translation and `<html lang>` behavior remain intact. No localized SEO routes or hreflang were started.
+- **Validation passed:** content and SEO scripts, typecheck, repeated production builds, rendered head/canonical/social output, escaped and parsed JSON-LD, exact sitemap/robots output, missing/planned route status, no-home redirect behavior, non-trailing normalization, Playwright desktop/mobile 404 rendering, hydrated language-query metadata, whitespace, and scope review.
+- **Validation unavailable:** lint remains unavailable because ESLint is absent from the existing dependency/configuration set.
+- **Validation not run:** production/deployment/account checks, external schema validators, and Task 3+ suites remain outside scope.
+- **Final result:** all five Task 2 Definition of Done checks are satisfied. Task 2 is complete and work stops before Task 3.
 
 ### Task 3 — Global Navigation, Footer, Breadcrumbs, and Shared Page Primitives
 

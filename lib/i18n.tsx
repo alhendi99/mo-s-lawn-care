@@ -38,21 +38,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
-    const updateDocumentLanguage = () => {
-      document.documentElement.lang = locale
-      document.title = locale === 'es'
-        ? "Servicio de cuidado del césped en Des Moines, Iowa | Mo's Lawn Care"
-        : "Lawn Care Service in Des Moines, Iowa | Mo's Lawn Care"
-      const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-      if (description) {
-        description.content = locale === 'es'
-          ? "¿Necesita cuidado del césped en Des Moines, Iowa? Mo's ofrece jardinería, limpieza de hojas y patios, paisajismo y remoción de nieve. Solicite un presupuesto gratis."
-          : "Need a lawn care service in Des Moines, Iowa? Mo's provides lawn care, landscaping, leaf and yard cleanup, and snow removal. Request a free estimate."
-      }
-    }
-    updateDocumentLanguage()
-    const timer = window.setTimeout(updateDocumentLanguage, 250)
-    return () => window.clearTimeout(timer)
+    document.documentElement.lang = locale
   }, [locale])
 
   const t = useCallback(

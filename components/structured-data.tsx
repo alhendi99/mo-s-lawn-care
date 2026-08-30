@@ -1,9 +1,12 @@
+import type { StructuredDataDocument } from '@/lib/structured-data'
+import { serializeStructuredData } from '@/lib/structured-data'
+
 type StructuredDataProps = {
-  data: Record<string, unknown> | Record<string, unknown>[]
+  data: StructuredDataDocument
 }
 
 export function StructuredData({ data }: StructuredDataProps) {
-  const json = JSON.stringify(data).replace(/</g, '\\u003c')
+  const json = serializeStructuredData(data)
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />
 }

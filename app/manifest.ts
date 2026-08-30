@@ -1,10 +1,12 @@
 import type { MetadataRoute } from 'next'
+import { routesById } from '@/content/routes'
+import { approvedBusinessFacts } from '@/lib/site'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Mo's Lawn Care and Snow Removal Services LLC",
-    short_name: "Mo's Lawn Care",
-    description: 'Year-round lawn care and snow removal service in Des Moines, Iowa.',
+    name: approvedBusinessFacts.legalName,
+    short_name: approvedBusinessFacts.displayName,
+    description: routesById.home.description,
     start_url: '/',
     display: 'standalone',
     background_color: '#102019',
