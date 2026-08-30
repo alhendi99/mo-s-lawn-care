@@ -1,0 +1,81 @@
+import { routeRegistry } from '../content/routes.ts'
+import { approvedBusinessFacts, pendingBusinessFacts } from '../lib/site.ts'
+import { SITE_ORIGIN } from '../lib/site-url.ts'
+import { assertTaskOneFoundation } from '../lib/content-validation.ts'
+
+const expectedPaths = [
+  '/',
+  '/services',
+  '/services/lawn-mowing',
+  '/services/aeration-overseeding',
+  '/services/fertilization-weed-control',
+  '/services/landscaping',
+  '/services/flower-bed-maintenance',
+  '/services/yard-cleanup',
+  '/services/spring-cleanup',
+  '/services/fall-cleanup-leaf-removal',
+  '/services/grading',
+  '/services/snow-removal',
+  '/commercial-property-services',
+  '/service-areas',
+  '/service-areas/ankeny-ia',
+  '/service-areas/waukee-ia',
+  '/service-areas/norwalk-ia',
+  '/service-areas/altoona-ia',
+  '/about',
+  '/our-work',
+  '/reviews',
+  '/contact',
+  '/blog',
+  '/blog/when-to-aerate-lawn-iowa',
+  '/blog/best-time-to-overseed-lawn-iowa',
+  '/blog/how-often-to-mow-lawn-iowa',
+  '/blog/spring-lawn-cleanup-des-moines',
+  '/blog/fall-leaf-cleanup-des-moines',
+  '/blog/central-iowa-lawn-care-calendar',
+] as const
+
+const expectedPrimaryKeywords: Readonly<Record<string, string>> = {
+  '/': 'lawn care des moines ia',
+  '/services': 'lawn care services des moines ia',
+  '/services/lawn-mowing': 'lawn mowing des moines ia',
+  '/services/aeration-overseeding': 'lawn aeration des moines ia',
+  '/services/fertilization-weed-control': 'lawn fertilization des moines ia',
+  '/services/landscaping': 'landscaping des moines ia',
+  '/services/flower-bed-maintenance': 'flower bed maintenance des moines',
+  '/services/yard-cleanup': 'yard cleanup des moines ia',
+  '/services/spring-cleanup': 'spring cleanup des moines ia',
+  '/services/fall-cleanup-leaf-removal': 'leaf removal des moines ia',
+  '/services/grading': 'yard grading des moines ia',
+  '/services/snow-removal': 'snow removal des moines ia',
+  '/commercial-property-services': 'commercial lawn care des moines ia',
+  '/service-areas': 'lawn care des moines metro',
+  '/service-areas/ankeny-ia': 'lawn care ankeny ia',
+  '/service-areas/waukee-ia': 'lawn care waukee ia',
+  '/service-areas/norwalk-ia': 'lawn care norwalk ia',
+  '/service-areas/altoona-ia': 'lawn care altoona ia',
+  '/about': "mo's lawn care des moines",
+  '/our-work': 'lawn care projects des moines',
+  '/reviews': "mo's lawn care reviews",
+  '/contact': 'lawn care estimate des moines',
+  '/blog': 'iowa lawn care tips',
+  '/blog/when-to-aerate-lawn-iowa': 'when to aerate lawn in iowa',
+  '/blog/best-time-to-overseed-lawn-iowa': 'best time to overseed lawn in iowa',
+  '/blog/how-often-to-mow-lawn-iowa': 'how often to mow lawn in iowa',
+  '/blog/spring-lawn-cleanup-des-moines': 'spring lawn cleanup checklist des moines',
+  '/blog/fall-leaf-cleanup-des-moines': 'fall leaf cleanup tips des moines',
+  '/blog/central-iowa-lawn-care-calendar': 'central iowa lawn care calendar',
+}
+
+assertTaskOneFoundation({
+  routes: routeRegistry,
+  expectedPaths,
+  expectedPrimaryKeywords,
+  expectedOrigin: SITE_ORIGIN,
+  approvedBusinessFacts,
+  pendingBusinessFacts,
+})
+
+console.log(
+  `Task 1 content validation passed: ${routeRegistry.length} canonical routes and ${approvedBusinessFacts.serviceAreas.length} approved service areas.`,
+)

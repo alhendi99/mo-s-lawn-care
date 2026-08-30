@@ -4,12 +4,12 @@
 
 ## Document Status
 
-- Phase: Phase 1 — repository analysis and planning only
+- Phase: Incremental implementation — Task 1 only
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Not authorized
+- Implementation status: Task 1 completed; Task 2 and later are not authorized
 - Last checkpoint: 2026-08-30 (Asia/Amman)
-- Repository baseline: `main` at `f0f1dc4`, tracking `origin/main`
-- Preservation boundary: preserve all existing user work; do not modify application code, install dependencies, stage, commit, push, deploy, or change production configuration
+- Task 1 repository baseline: clean `main` at `858e5c2`
+- Preservation boundary: preserve all existing user work; do not stage, commit, push, deploy, modify production systems, or begin Task 2 or later
 
 ## Evidence Labels
 
@@ -20,6 +20,29 @@
 - **Manual external action:** requires production, Google, Vercel, or other account access and is not a repository-only change.
 
 ## Live Checkpoint
+
+### Latest checkpoint — Task 1 complete, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 1 only — Approved Business Data, Route Registry, and Validation Foundation.
+- **Final task state:** Task 1 is `[x]` Completed. Tasks 2–39 remain `[ ]` Not started and unauthorized.
+- **Baseline:** the task began from a clean tracked tree at `main` commit `858e5c2` (`docs: add complete SEO implementation plan`). `app/prompt.md` and `plan.md` were both tracked at the task start.
+- **Implemented:** added a repository-approved business-facts source with normalized phone/email/five-area data and provenance; added explicit value-free pending-confirmation records for address, hours, Google review profile/summary, and social profiles; added safe canonical path/URL helpers; added a typed registry containing exactly the 29 planned target routes with clean non-trailing paths, absolute canonical URLs, exact ownership copy, parent/link IDs, lifecycle status, and indexability; added dependency-free route/business validation; added safe Resend-only environment documentation.
+- **Lifecycle safety:** only `/` is recorded as currently implemented/published. The other 28 targets remain `planned`; the registry does not create routes, publish sitemap entries, or change navigation/metadata/schema/UI.
+- **Validation foundation:** `pnpm validate:content` uses Node 22's built-in TypeScript stripping and asserts the exact 29-path allowlist, route/URL/ID/title/H1/primary-keyword uniqueness, exact primary ownership, clean canonicals, hierarchy/link resolution, forbidden route absence, planned lifecycle state, normalized contact values, exact five-city coverage, and omission of unverified optional values from approved facts.
+- **Passed checks:** `pnpm validate:content`; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; manual line-by-line route-record comparison against Section E; no lockfile diff; tracked and untracked whitespace checks; final scoped status/diff review.
+- **Unavailable check:** `pnpm lint` exited 1 because the pre-existing script calls `eslint .` but ESLint is not installed or declared. No lint dependency/config was added because that would be gratuitous Task 1 scope and lockfile churn.
+- **Not run:** no separate unit/e2e test command exists; browser, rendered metadata, sitemap, schema, navigation, page UI, form, analytics, production, deployment, and external-account checks were not run because they are unavailable or belong to Task 2 or later.
+- **Dependency state:** the first pnpm validation populated ignored `node_modules` from the existing frozen lockfile/store; it did not change `package-lock.json` or `pnpm-lock.yaml`. No dependency was added, removed, or upgraded.
+- **Discoveries:** the current pre-Task-2 application still contains disputed hardcoded hours in the homepage/footer and legacy schema, a locality-only schema address, hardcoded `5.0`/`160` review claims, an unverified Google Maps review URL, hardcoded business literals in metadata/manifest/header, and project/copy location claims needing later provenance review. These were inspected and deliberately not migrated because the user prohibited schema, metadata, navigation, page UI, Reviews, and other later-task work.
+- **Owner confirmation still required:** authoritative public hours; whether a legitimate public address is approved for publication; current Google review profile URL plus rating/count display/update policy; approved social URLs; confirmation before any other mutable or disputed fact is promoted into `approvedBusinessFacts`.
+- **Scope decisions:** canonical records follow the plan's Next.js non-trailing-slash assumption while retaining `/` as the root; all six article secondary-keyword arrays remain empty with `pending-research` status because the brief supplied no approved values; `.env.example` documents only the existing Resend variables and explicitly defers analytics configuration.
+- **Files changed:** `.env.example`, `content/types.ts`, `content/routes.ts`, `lib/content-validation.ts`, `scripts/validate-content.mts`, `lib/site.ts`, `lib/site-url.ts`, `package.json`, `tsconfig.json`, and `plan.md`.
+- **Files intentionally unchanged:** all `app/` routes/components, `lib/structured-data.ts`, sitemap, robots, metadata, schema, navigation, page UI, GA4/analytics, Blog/page content, both lockfiles, assets, production configuration, and external systems.
+- **Final `git status --short`:** `M lib/site-url.ts`, `M lib/site.ts`, `M package.json`, `M plan.md`, `M tsconfig.json`, `?? .env.example`, `?? content/`, `?? lib/content-validation.ts`, and `?? scripts/`.
+- **No external action:** nothing was staged, committed, pushed, deployed, or changed in production or any account.
+- **Exact next action:** STOP. Do not begin Task 2 without separate authorization.
+
+The Phase 1 checkpoint below is retained as historical planning evidence and is superseded by the Task 1 checkpoint above where repository state or authorization differs.
 
 ### Work completed
 
@@ -720,7 +743,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 1 — Approved Business Data, Route Registry, and Validation Foundation
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Establish typed, reviewable sources for approved business facts, all 29 canonical routes, ownership metadata, internal-link references, and the smallest repeatable validation foundation.
 - **Why It Is Needed:** Metadata, sitemap, navigation, schema, page content, and analytics will drift or expose disputed facts if they continue to use duplicated literals; later tasks also need one authoritative path inventory.
 - **Dependencies:** None; this is the first implementation task and still requires owner answers for any fact marked unverified.
@@ -730,7 +753,20 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Missing owner confirmations; apostrophe/HTML escaping in the business name; root-path joining; optional facts accidentally rendered as empty strings; duplicate aliases; stale `package-lock.json` versus declared pnpm workflow; no installed dependencies.
 - **Validation:** Review the registry against Section E, count 29 unique indexable paths, confirm exact metadata strings, confirm all parents/references resolve, and inspect consumers for remaining duplicated business literals before migrating them.
 - **Tests:** Add pure-data assertions for route count/uniqueness, valid hierarchy, exact ownership values, clean paths, forbidden-route absence, normalized contact values, and omission of unverified optional fields; run typecheck/build only if dependencies are available under the authorized task.
-- **Definition of Done:** `[ ]` One typed registry contains all and only the 29 targets; `[ ]` approved facts are centralized and unknown address/hours remain omitted; `[ ]` validation is repeatable and its actual pass/fail/not-run results are recorded; `[ ]` no page UI or SEO implementation beyond the foundation is started.
+- **Definition of Done:** `[x]` One typed registry contains all and only the 29 targets; `[x]` approved facts are centralized and unknown address/hours remain omitted from approved data; `[x]` validation is repeatable and its actual pass/fail/unavailable/not-run results are recorded; `[x]` no page UI or SEO implementation beyond the foundation is started.
+
+#### Task 1 implementation record
+
+- **Completed files:** `lib/site.ts`, `lib/site-url.ts`, `content/types.ts`, `content/routes.ts`, `lib/content-validation.ts`, `scripts/validate-content.mts`, `.env.example`, `package.json`, `tsconfig.json`, and this plan record.
+- **Business-data decision:** `approvedBusinessFacts` contains only the legal/display identity, canonical origin, normalized repository-configured phone/email, primary market wording, and the five task-confirmed service areas. Address, hours, Google review profile/summary, and social profiles have no stored candidate value and are explicitly `pending-confirmation`.
+- **Compatibility boundary:** the pre-existing disputed opening-day export remains explicitly deprecated only so the untouched pre-Task-2 structured-data module compiles. The approved-facts object and every new Task 1 consumer reject hours/address/review/social values. Removing unsafe legacy schema/footer/review output belongs to the separately authorized technical SEO/page tasks and was not started here.
+- **Route decision:** the registry contains exactly the homepage, Services hub + 10 services, Commercial, Service Areas hub + four cities, About, Our Work, Reviews, Contact, Blog hub + six articles. It excludes the prohibited Des Moines area page, split consolidated services, service/city permutations, queries, fragments, trailing duplicates, API routes, metadata routes, and utility routes.
+- **Lifecycle decision:** only the existing homepage is `implemented`/`published`; all 28 interior targets are `planned`. Indexability describes intended ownership on publication and does not publish a route.
+- **Validation passed:** `pnpm validate:content` reported `29 canonical routes and 5 approved service areas`; `pnpm exec tsc --noEmit --incremental false` passed with no output; `pnpm build` compiled, typechecked, generated all seven current framework pages, and confirmed only the pre-existing public route set; manual exact metadata/ownership review passed; neither lockfile changed.
+- **Validation unavailable:** `pnpm lint` exited 1 with `eslint: command not found`; this is the pre-existing missing lint dependency/config documented during planning, not an introduced lint finding.
+- **Validation not run:** no standalone unit/e2e suite exists; browser/production/account checks and Task 2+ metadata/schema/sitemap/navigation/page/GA4 checks were outside the authorized scope.
+- **Unresolved owner questions:** public hours, public address, Google review URL/rating/count governance, and social profile URLs remain pending confirmation. No candidate value was selected or invented.
+- **Final result:** all four Task 1 Definition of Done checks are satisfied. Task 1 is complete and work stops before Task 2.
 
 ### Task 2 — Global Metadata, Canonical, Schema, Sitemap, Robots, and 404 Foundation
 

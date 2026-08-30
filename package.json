@@ -3,11 +3,13 @@
   "packageManager": "pnpm@11.20.0",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "validate:content": "node --experimental-strip-types scripts/validate-content.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

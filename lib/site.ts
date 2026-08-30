@@ -1,4 +1,65 @@
-export const serviceAreas = ['Des Moines', 'Ankeny', 'Waukee', 'Norwalk', 'Altoona'] as const
+import { SITE_ORIGIN } from './site-url.ts'
+
+const approvedServiceAreas = [
+  { id: 'des-moines-ia', city: 'Des Moines', region: 'Iowa', regionCode: 'IA', countryCode: 'US' },
+  { id: 'ankeny-ia', city: 'Ankeny', region: 'Iowa', regionCode: 'IA', countryCode: 'US' },
+  { id: 'waukee-ia', city: 'Waukee', region: 'Iowa', regionCode: 'IA', countryCode: 'US' },
+  { id: 'norwalk-ia', city: 'Norwalk', region: 'Iowa', regionCode: 'IA', countryCode: 'US' },
+  { id: 'altoona-ia', city: 'Altoona', region: 'Iowa', regionCode: 'IA', countryCode: 'US' },
+] as const
+
+/**
+ * Repository-approved facts only. These values are confirmed by the task brief or
+ * the site's existing contact configuration; they are not a home for inferred
+ * capabilities, mutable review totals, or disputed profile data.
+ */
+export const approvedBusinessFacts = {
+  verification: {
+    status: 'verified' as const,
+    basis: ['task-brief', 'existing-site-configuration'] as const,
+  },
+  legalName: "Mo's Lawn Care and Snow Removal Services LLC",
+  displayName: "Mo's Lawn Care",
+  shortName: "Mo's",
+  wordmarkLine: 'Lawn Care & Snow Removal',
+  origin: SITE_ORIGIN,
+  phone: {
+    display: '(515) 868-8636',
+    e164: '+15158688636',
+    href: 'tel:+15158688636',
+  },
+  email: {
+    address: 'Moslawncaredsm@gmail.com',
+    href: 'mailto:Moslawncaredsm@gmail.com',
+  },
+  primaryMarket: {
+    city: 'Des Moines',
+    region: 'Iowa',
+    regionCode: 'IA',
+    countryCode: 'US',
+    displayName: 'Des Moines, Iowa',
+  },
+  serviceAreas: approvedServiceAreas,
+} as const
+
+/**
+ * No disputed value is stored here. A later task may promote a field into
+ * `approvedBusinessFacts` only after the owner confirms the public value.
+ */
+export const pendingBusinessFacts = {
+  publicAddress: { status: 'pending-confirmation' as const },
+  openingHours: { status: 'pending-confirmation' as const },
+  googleReviewProfile: { status: 'pending-confirmation' as const },
+  googleReviewSummary: { status: 'pending-confirmation' as const },
+  socialProfiles: { status: 'pending-confirmation' as const },
+} as const
+
+export const serviceAreas = approvedServiceAreas.map(({ city }) => city)
+
+/**
+ * @deprecated Pending owner confirmation. This legacy export exists only so the
+ * current pre-Task-2 schema continues to compile; new consumers must not use it.
+ */
 export const openingDays = [
   'Saturday',
   'Sunday',
@@ -9,15 +70,19 @@ export const openingDays = [
 ] as const
 
 export const site = {
-  companyName: "Mo's Lawn Care and Snow Removal Services LLC",
-  shortName: "Mo's",
-  wordmarkLine: 'Lawn Care & Snow Removal',
-  phone: '(515) 868-8636', // e.g. "(515) 000-0000"
-  phoneHref: 'tel:+15158688636',
-  email: 'Moslawncaredsm@gmail.com',
-  location: 'Des Moines, Iowa',
+  companyName: approvedBusinessFacts.legalName,
+  displayName: approvedBusinessFacts.displayName,
+  shortName: approvedBusinessFacts.shortName,
+  wordmarkLine: approvedBusinessFacts.wordmarkLine,
+  origin: approvedBusinessFacts.origin,
+  phone: approvedBusinessFacts.phone.display,
+  phoneE164: approvedBusinessFacts.phone.e164,
+  phoneHref: approvedBusinessFacts.phone.href,
+  email: approvedBusinessFacts.email.address,
+  emailHref: approvedBusinessFacts.email.href,
+  location: approvedBusinessFacts.primaryMarket.displayName,
   serviceArea: serviceAreas.join(', '),
-  workingHours: 'Saturday–Thursday, 9:00–11:00 PM',
+  /** No social profile URL is approved yet. */
   socialLinks: [] as { label: string; href: string }[],
   formEndpoint: '/api/estimate',
   heroVideo: '/background.mp4',
