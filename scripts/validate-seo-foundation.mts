@@ -75,10 +75,15 @@ assert.equal(new Set(routeMetadata.map(({ description }) => description)).size, 
 assert.equal(DEFAULT_SOCIAL_IMAGE.url, `${approvedBusinessFacts.origin}/logo-512x512.png`)
 
 const publishedRoutes = getPublishedIndexableRoutes()
-assert.deepEqual(publishedRoutes.map(({ id }) => id), ['home', 'services'])
+assert.deepEqual(publishedRoutes.map(({ id }) => id), [
+  'home',
+  'services',
+  'service-lawn-mowing',
+])
 assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.home.canonicalUrl },
   { url: routesById.services.canonicalUrl },
+  { url: routesById['service-lawn-mowing'].canonicalUrl },
 ])
 
 const completedRegistry: CanonicalRoute[] = routeRegistry.map((route) => ({

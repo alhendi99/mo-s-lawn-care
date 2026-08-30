@@ -110,7 +110,9 @@ export const routeRegistry = [
     h1: 'Lawn Mowing Service in Des Moines, IA',
     description:
       "Keep your property sharp with professional lawn mowing in Des Moines, IA. Residential and commercial service available. Request a free estimate from Mo's.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home', 'services', 'article-how-often-to-mow-lawn-iowa'],
     outboundLinkIds: [
       'service-aeration-overseeding',

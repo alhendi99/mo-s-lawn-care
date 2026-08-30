@@ -14,7 +14,8 @@
     "validate:navigation": "node --experimental-strip-types scripts/validate-navigation.mts",
     "validate:analytics": "node --experimental-strip-types scripts/validate-analytics.mts",
     "validate:homepage": "node --experimental-strip-types scripts/validate-homepage.mts",
-    "validate:services": "node --experimental-strip-types scripts/validate-services-index.mts"
+    "validate:services": "node --experimental-strip-types scripts/validate-services-index.mts",
+    "validate:lawn-mowing": "node --experimental-strip-types scripts/validate-lawn-mowing-service.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

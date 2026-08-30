@@ -118,6 +118,37 @@ export function buildBreadcrumbStructuredData(route: CanonicalRoute): Structured
   }
 }
 
+export function buildServiceStructuredData(
+  route: CanonicalRoute,
+  service: Readonly<{
+    name: string
+    serviceType: string
+    description: string
+  }>,
+): StructuredDataNode {
+  if (route.pageType !== 'service') {
+    throw new Error(`Service structured data requires a service route: ${route.id}`)
+  }
+
+  return {
+    '@type': 'Service',
+    '@id': `${route.canonicalUrl}#service`,
+    name: service.name,
+    serviceType: service.serviceType,
+    url: route.canonicalUrl,
+    description: service.description,
+    provider: { '@id': ORGANIZATION_ID },
+    areaServed: approvedBusinessFacts.serviceAreas.map(({ city, region }) => ({
+      '@type': 'City',
+      name: city,
+      containedInPlace: {
+        '@type': 'State',
+        name: region,
+      },
+    })),
+  }
+}
+
 export function buildPageStructuredData(
   route: CanonicalRoute,
   homeRoute: CanonicalRoute,

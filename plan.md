@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 6 complete; Task 7 not started
+- Phase: Incremental implementation — Task 7 complete; Task 8 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–6 completed; Task 7 and later are not authorized
+- Implementation status: Tasks 1–7 completed; Task 8 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -14,7 +14,8 @@
 - Task 4 repository baseline: clean `main` at `abfe88d`
 - Task 5 repository baseline: clean `main` at `7f14caa`
 - Task 6 repository baseline: clean `main` at `710128d`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 7 or later
+- Task 7 repository baseline: clean `main` at `649656b`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 8 or later
 
 ## Evidence Labels
 
@@ -26,7 +27,26 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 6 complete, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 7 complete, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 7 only — Lawn Mowing Service Page. Task 8 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 7 began from clean `main` at `649656b` (`feat(seo): add services index`). `git status --short` returned no entries before the first edit.
+- **Ownership and publication:** `/services/lawn-mowing` now owns `lawn mowing des moines ia` with the exact approved title, description, H1, secondary keywords and clean self-canonical. The route is implemented/published/indexable and is the third sitemap URL after `/` and `/services`; the other nine service-detail records remain planned and absent from the sitemap.
+- **Route isolation:** the shared `app/services/[slug]` route generates static params only from the explicit published-service content list, which contains only `lawn-mowing`. Both metadata and page rendering read that allowlist and call `notFound()` for anything else. All Task 8–16 slugs and an arbitrary invalid slug return the branded HTTP 404. Runtime validation is explicit because Next 16.3 logged internal `NoFallbackError` noise with `dynamicParams=false`; `dynamicParams=true` plus the one-record allowlist preserves isolation without server errors.
+- **Page architecture:** the reusable server service template renders an image-led hero with estimate and native phone actions; problem/decision context; confirmed scope; three contextual related-service paths; residential/commercial and portfolio context; two mowing-specific attributed review excerpts; non-identical five-community area wording; six truthful FAQs; and a final estimate/call CTA. Required Commercial, Our Work and Contact links are ordinary anchors. The future mowing article is not linked.
+- **Truth and claim boundary:** no weekly/biweekly availability, mowing height, clipping handling, edging/blowing inclusion, equipment, crew/capacity, price, contract, response time, guarantee, treatment practice, project count or city-specific completed-work claim is presented as fact. FAQs explicitly leave frequency, inclusions and pricing to the estimate conversation. Residential/commercial availability is used only at the approved level.
+- **Media and review provenance:** the hero uses the existing local property-care gallery image with observable alt text and an explicit visible no-city/no-customer attribution; it is not labeled a Des Moines or completed mowing project. No project block is fabricated. The two review excerpts already present in the verified repository review source explicitly mention mowing, remain verbatim and attributed, link to the approved Google Business Profile, and emit no Review or AggregateRating schema.
+- **Schema and breadcrumbs:** the page emits one coherent graph containing the shared Organization/WebSite references, one WebPage, one Service with the established `#organization` provider and exactly the five approved City/State areas, plus one BreadcrumbList. Visible and schema hierarchy both read Home → Services → Lawn Mowing. No FAQPage, Offer, price, review/rating, address, geo or duplicate business node is emitted.
+- **Design and performance:** the page extends the Bright Lawn editorial system with evergreen/paper section rhythm, existing typography, quiet borders, full-width visual hierarchy and restrained CSS motion. It adds no page-specific client component, form copy, video, fetch, review archive or gallery payload. The single local hero image is eagerly loaded without a preload; this removed the small-viewport unused-preload warning while keeping it non-lazy. Reduced-motion emulation lowers new animation/transition durations to `0.00001s`.
+- **Language, accessibility and analytics:** all new visible strings have explicit Spanish translations. At 320 px the long Spanish H1 and CTAs wrap without overflow; switching from the complete GBP UTM URL changes only `lang`, while the English canonical/title remain stable. The page has exactly one H1, logical headings, visible breadcrumbs, meaningful alt, semantic links, visible focus, working skip-link focus, touch-sized CTAs and preserved mobile-menu Escape/focus return. Native phone activation leaves the route intact. Task 4's exact five-event allowlist and tracking/form implementation are unchanged and pass regression validation.
+- **Browser QA:** production-browser checks passed at `1440×900`, `1280×800`, `390×844` and `320×568` with zero horizontal overflow. Home → Services → Lawn Mowing, breadcrumb return, related 404, Commercial 404, Our Work 404, Contact/free-estimate 404, native phone, language/UTM, mobile drawer, skip link, reduced motion and clean fresh-session console were exercised. Expected main-document 404 console entries appeared only during deliberate unpublished-link checks; the final valid-route production session had zero errors and zero warnings.
+- **Passed checks:** `pnpm validate:lawn-mowing`; `pnpm validate:content`; `pnpm validate:seo`; `pnpm validate:navigation`; `pnpm validate:analytics`; `pnpm validate:homepage`; `pnpm validate:services`; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; production rendered-HTML/schema/status/sitemap assertions; production route-isolation assertions; Playwright navigation/responsive/language/focus/reduced-motion/console checks; and `git diff --check`.
+- **Unavailable check:** `pnpm lint` exits 1 because the existing script invokes `eslint .` while ESLint is not installed or declared. Task 7 adds no dependency or lockfile churn to change that repository-wide condition.
+- **No external action:** no deployment, production/account setting, live estimate delivery, Google Business Profile edit or GA4 activation occurred.
+- **Task status:** Task 7 is `[x]` Completed because all four Definition of Done conditions are satisfied. Task 8 was not started.
+- **Exact next action:** commit the authorized Task 7 changes, report the local result and STOP before Task 8.
+
+### Prior checkpoint — Task 6 complete, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 6 only — Services Index. Task 7 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 6 began from clean `main` at `710128d` (`feat(seo): refactor homepage crawlable architecture`). `git status --short` returned no entries before the first edit.
@@ -990,7 +1010,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 7 — Lawn Mowing Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/lawn-mowing/` as the sole commercial-intent page for Des Moines mowing service.
 - **Why It Is Needed:** Mowing is a primary advertised service with a distinct high-value intent and currently has no dedicated indexable page.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for any embedded form/contact tracking.
@@ -1000,7 +1020,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Unverified recurring schedules, clipping disposal, equipment, pricing/contracts, residential/commercial scope, or city-specific imagery; confusing general lawn maintenance with other service ownership.
 - **Validation:** Editorial fact check against approved business data, rendered metadata/H1/canonical, visible/schema breadcrumb parity, Service schema provider/areas, all CTAs/links, image alt/provenance, and responsive/accessibility review.
 - **Tests:** Route/static-param success, exact metadata, one H1, Service/Breadcrumb schema, required outbound links, no unsupported claims fixture, and invalid service slug 404.
-- **Definition of Done:** `[ ]` Complete truthful service template is populated; `[ ]` exact ownership and required links/schema pass; `[ ]` imagery/reviews are honestly labeled; `[ ]` no unverified process, guarantee, price, or local claim remains.
+- **Definition of Done:** `[x]` Complete truthful service template is populated; `[x]` exact ownership and required links/schema pass; `[x]` imagery/reviews are honestly labeled; `[x]` no unverified process, guarantee, price, or local claim remains.
+
+#### Task 7 implementation record
+
+- **Completed files:** new `app/services/[slug]/page.tsx`, new `components/service-detail-page.tsx`, new `content/services/lawn-mowing.ts`, new `scripts/validate-lawn-mowing-service.mts`, `content/services/index.ts`, `content/routes.ts`, `lib/structured-data.ts`, `lib/es-translations.json`, `app/globals.css`, inherited validation scripts, `package.json`, and this plan record.
+- **Content-model decision:** the service record owns service-specific hero, schema identity, decision/problem copy, confirmed scope, related paths, property context, reviews, area wording, FAQs and CTA copy. The reusable template consumes that record, while `publishedServiceDetails` is a separate explicit publication allowlist containing only Lawn Mowing.
+- **Publishing decision:** only `service-lawn-mowing` was promoted. `generateStaticParams()` returns only `lawn-mowing`; unknown and still-planned registered slugs fail the published-content lookup and call the shared branded `notFound()`. No placeholder or thin generic fallback exists, and the sitemap contains exactly the current three published URLs.
+- **Claim decision:** the page states only the approved mowing plus residential/commercial/free-estimate scope. Fixed schedules, clipping behavior, edging/blowing, equipment, pricing/contracts and guarantees are explicitly not represented as standard facts. Related lawn conditions resolve to the correct Aeration & Seeding, Fertilization & Weed Control or Yard Cleanup owner.
+- **Evidence decision:** the existing local gallery image is used only as a neutral observable property-care visual with a visible provenance caveat. Two exact embedded Google review excerpts were selected because their own wording mentions mowing; attribution is visible and the approved GBP is linked. No work history, city, customer/project context, rating schema or review schema is inferred.
+- **Validation result:** all focused/inherited validators, typecheck, repeated production builds, rendered-source assertions, route/sitemap/schema isolation, production browser flows and final clean-console responsive QA pass. Lint remains unavailable because ESLint is not installed. All four Task 7 Definition of Done checks are satisfied.
+- **Scope boundary:** no Task 8 service content/module, article link, later route promotion, deployment, production configuration or external account change was made. Task 8 remains `[ ]` Not started.
 
 ### Task 8 — Aeration and Seeding Service Page
 

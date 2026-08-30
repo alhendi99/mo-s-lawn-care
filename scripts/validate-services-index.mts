@@ -128,7 +128,7 @@ assert(
 const servicesRouteFiles = fs.readdirSync(path.join(projectRoot, 'app/services'), { recursive: true })
   .map(String)
   .filter((file) => file.endsWith('.tsx') || file.endsWith('.ts'))
-assert.deepEqual(servicesRouteFiles, ['page.tsx'])
+assert.deepEqual(servicesRouteFiles.sort(), ['[slug]/page.tsx', 'page.tsx'])
 
 const pageSource = read('app/services/page.tsx')
 assert.equal(pageSource.match(/<h1\b/g)?.length, 1)
@@ -140,6 +140,7 @@ assert.doesNotMatch(pageSource, /gtag|generate_lead|form_start|form_submit_error
 assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.home.canonicalUrl },
   { url: servicesRoute.canonicalUrl },
+  { url: routesById['service-lawn-mowing'].canonicalUrl },
 ])
 assert.equal(routeLabels.services, 'Services')
 
