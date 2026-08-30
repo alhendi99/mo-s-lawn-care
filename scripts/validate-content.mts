@@ -74,7 +74,12 @@ assertTaskOneFoundation({
   routes: routeRegistry,
   expectedPaths,
   expectedPrimaryKeywords,
-  expectedPublishedRouteIds: ['home', 'services', 'service-lawn-mowing'],
+  expectedPublishedRouteIds: [
+    'home',
+    'services',
+    'service-lawn-mowing',
+    'service-aeration-overseeding',
+  ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,
   expectedReviewDisplayCopy: '170+ Google Reviews',

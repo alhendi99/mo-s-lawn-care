@@ -142,7 +142,9 @@ export const routeRegistry = [
     h1: 'Lawn Aeration & Seeding in Des Moines, IA',
     description:
       "Improve thin or compacted lawns with aeration and seeding services in Des Moines, IA. See how Mo's can help and request a free property estimate.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: [
       'home',
       'services',

@@ -144,10 +144,11 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.home.canonicalUrl },
   { url: routesById.services.canonicalUrl },
   { url: routesById['service-lawn-mowing'].canonicalUrl },
+  { url: routesById['service-aeration-overseeding'].canonicalUrl },
 ])
 assert.deepEqual(
   routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id),
-  ['home', 'services', 'service-lawn-mowing'],
+  ['home', 'services', 'service-lawn-mowing', 'service-aeration-overseeding'],
 )
 assert(
   routeRegistry.every(
@@ -155,6 +156,7 @@ assert(
       route.id === 'home' ||
       route.id === 'services' ||
       route.id === 'service-lawn-mowing' ||
+      route.id === 'service-aeration-overseeding' ||
       route.publicationStatus === 'planned',
   ),
 )

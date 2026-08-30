@@ -79,11 +79,13 @@ assert.deepEqual(publishedRoutes.map(({ id }) => id), [
   'home',
   'services',
   'service-lawn-mowing',
+  'service-aeration-overseeding',
 ])
 assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.home.canonicalUrl },
   { url: routesById.services.canonicalUrl },
   { url: routesById['service-lawn-mowing'].canonicalUrl },
+  { url: routesById['service-aeration-overseeding'].canonicalUrl },
 ])
 
 const completedRegistry: CanonicalRoute[] = routeRegistry.map((route) => ({

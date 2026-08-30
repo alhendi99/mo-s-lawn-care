@@ -1,87 +1,4 @@
-import type { RouteId } from '../types.ts'
-
-type ServiceRouteId = Extract<RouteId, `service-${string}`>
-
-type ServiceDetailLink = Readonly<{
-  routeId: RouteId
-  eyebrow: string
-  description: string
-}>
-
-type ServiceDetailReview = Readonly<{
-  name: string
-  quote: string
-  sourceLabel: 'Google Review'
-}>
-
-export type ServiceDetailContent = Readonly<{
-  slug: string
-  routeId: ServiceRouteId
-  schema: Readonly<{
-    name: string
-    serviceType: string
-  }>
-  hero: Readonly<{
-    eyebrow: string
-    summary: string
-    image: Readonly<{
-      src: string
-      width: number
-      height: number
-      alt: string
-      provenance: 'existing-property-care-gallery'
-    }>
-  }>
-  introduction: Readonly<{
-    eyebrow: string
-    heading: string
-    paragraphs: readonly string[]
-    decisionPoints: readonly Readonly<{
-      number: string
-      title: string
-      description: string
-    }>[]
-  }>
-  scope: Readonly<{
-    eyebrow: string
-    heading: string
-    introduction: string
-    items: readonly Readonly<{
-      title: string
-      description: string
-    }>[]
-  }>
-  relatedServices: readonly ServiceDetailLink[]
-  propertyContext: Readonly<{
-    eyebrow: string
-    heading: string
-    residential: string
-    commercial: string
-    portfolio: string
-  }>
-  reviews: Readonly<{
-    eyebrow: string
-    heading: string
-    introduction: string
-    items: readonly ServiceDetailReview[]
-  }>
-  serviceArea: Readonly<{
-    eyebrow: string
-    heading: string
-    description: string
-    cities: readonly string[]
-    clarification: string
-  }>
-  faqs: readonly Readonly<{
-    question: string
-    answer: string
-  }>[]
-  finalCta: Readonly<{
-    eyebrow: string
-    heading: string
-    description: string
-  }>
-}>
+import type { ServiceDetailContent } from './types.ts'
 
 export const lawnMowingService = {
   slug: 'lawn-mowing',
@@ -99,6 +16,7 @@ export const lawnMowingService = {
       width: 1600,
       height: 1200,
       alt: 'Green lawn with visible mowing lines beside homes and sidewalks',
+      caption: 'Existing property-care gallery image · no city or customer attribution',
       provenance: 'existing-property-care-gallery',
     },
   },
@@ -152,6 +70,11 @@ export const lawnMowingService = {
           "Tell Mo's what the property needs through the Contact page, or call to start the conversation. No price or contract terms are published here.",
       },
     ],
+  },
+  relatedServicesIntro: {
+    eyebrow: 'Related lawn needs',
+    heading: 'When mowing is not the whole question.',
+    description: 'Use the condition you see outside to choose the closest service path.',
   },
   relatedServices: [
     {
@@ -211,6 +134,10 @@ export const lawnMowingService = {
     cities: ['Des Moines', 'Ankeny', 'Waukee', 'Norwalk', 'Altoona'],
     clarification:
       'No image or review on this page is assigned to one of these cities unless the source itself provides that detail.',
+  },
+  faqIntro: {
+    eyebrow: 'Lawn mowing FAQs',
+    heading: 'Useful answers before you request an estimate.',
   },
   faqs: [
     {

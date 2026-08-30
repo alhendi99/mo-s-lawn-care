@@ -3,12 +3,13 @@ import Link from 'next/link'
 import { InteriorPageShell } from '@/components/interior-page-shell'
 import { Tr } from '@/components/tr'
 import { routeLabels, routesById } from '@/content/routes'
-import type { ServiceDetailContent } from '@/content/services/lawn-mowing'
+import type { ServiceDetailContent } from '@/content/services/types'
 import { site } from '@/lib/site'
 import { buildServiceStructuredData } from '@/lib/structured-data'
 
 export function ServiceDetailPage({ content }: { content: ServiceDetailContent }) {
   const route = routesById[content.routeId]
+  const sectionId = (section: string) => `${content.slug}-${section}-heading`
   const serviceStructuredData = buildServiceStructuredData(route, {
     name: content.schema.name,
     serviceType: content.schema.serviceType,
@@ -61,17 +62,17 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
               />
               <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-evergreen/48 via-transparent to-evergreen/15 lg:bg-linear-to-r lg:from-evergreen/30 lg:via-transparent lg:to-transparent" />
               <figcaption className="absolute right-5 bottom-5 left-5 border-t border-paper/30 pt-3 text-[0.68rem] leading-relaxed font-semibold tracking-[0.13em] text-paper/75 uppercase sm:right-8 sm:bottom-8 sm:left-8">
-                <Tr text="Existing property-care gallery image · no city or customer attribution" />
+                <Tr text={content.hero.image.caption} />
               </figcaption>
             </figure>
           </div>
         </section>
 
-        <section aria-labelledby="mowing-start-heading" className="bg-paper py-18 sm:py-26">
+        <section aria-labelledby={sectionId('start')} className="bg-paper py-18 sm:py-26">
           <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(16rem,0.5fr)_minmax(0,1fr)] lg:gap-20">
             <header className="lg:sticky lg:top-28 lg:self-start">
               <p className="eyebrow text-ink-soft"><Tr text={content.introduction.eyebrow} /></p>
-              <h2 id="mowing-start-heading" className="display-md mt-5 max-w-[12ch]">
+              <h2 id={sectionId('start')} className="display-md mt-5 max-w-[12ch]">
                 <Tr text={content.introduction.heading} />
               </h2>
             </header>
@@ -96,12 +97,12 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           </div>
         </section>
 
-        <section aria-labelledby="mowing-scope-heading" className="bg-evergreen py-18 text-paper sm:py-26">
+        <section aria-labelledby={sectionId('scope')} className="bg-evergreen py-18 text-paper sm:py-26">
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <header className="grid gap-7 border-t border-paper/18 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-16">
               <div>
                 <p className="eyebrow text-[#D5EE72]"><Tr text={content.scope.eyebrow} /></p>
-                <h2 id="mowing-scope-heading" className="display-md mt-5 max-w-[13ch] text-paper">
+                <h2 id={sectionId('scope')} className="display-md mt-5 max-w-[13ch] text-paper">
                   <Tr text={content.scope.heading} />
                 </h2>
               </div>
@@ -124,15 +125,15 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           </div>
         </section>
 
-        <section aria-labelledby="related-services-heading" className="bg-paper py-18 sm:py-26">
+        <section aria-labelledby={sectionId('related-services')} className="bg-paper py-18 sm:py-26">
           <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[0.55fr_1fr] lg:gap-20">
             <header>
-              <p className="eyebrow text-ink-soft"><Tr text="Related lawn needs" /></p>
-              <h2 id="related-services-heading" className="display-md mt-5 max-w-[11ch]">
-                <Tr text="When mowing is not the whole question." />
+              <p className="eyebrow text-ink-soft"><Tr text={content.relatedServicesIntro.eyebrow} /></p>
+              <h2 id={sectionId('related-services')} className="display-md mt-5 max-w-[11ch]">
+                <Tr text={content.relatedServicesIntro.heading} />
               </h2>
               <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-ink-soft">
-                <Tr text="Use the condition you see outside to choose the closest service path." />
+                <Tr text={content.relatedServicesIntro.description} />
               </p>
             </header>
 
@@ -162,11 +163,11 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           </div>
         </section>
 
-        <section aria-labelledby="property-context-heading" className="bg-[#e5ecd9] py-18 sm:py-26">
+        <section aria-labelledby={sectionId('property-context')} className="bg-[#e5ecd9] py-18 sm:py-26">
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <header className="max-w-4xl">
               <p className="eyebrow text-[#315b37]"><Tr text={content.propertyContext.eyebrow} /></p>
-              <h2 id="property-context-heading" className="display-md mt-5 max-w-[13ch] text-[#1d2b1f]">
+              <h2 id={sectionId('property-context')} className="display-md mt-5 max-w-[13ch] text-[#1d2b1f]">
                 <Tr text={content.propertyContext.heading} />
               </h2>
             </header>
@@ -194,11 +195,11 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           </div>
         </section>
 
-        <section aria-labelledby="mowing-reviews-heading" className="bg-paper py-18 sm:py-26">
+        <section aria-labelledby={sectionId('reviews')} className="bg-paper py-18 sm:py-26">
           <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.55fr_1fr] lg:gap-20">
             <header>
               <p className="eyebrow text-ink-soft"><Tr text={content.reviews.eyebrow} /></p>
-              <h2 id="mowing-reviews-heading" className="display-md mt-5 max-w-[12ch]">
+              <h2 id={sectionId('reviews')} className="display-md mt-5 max-w-[12ch]">
                 <Tr text={content.reviews.heading} />
               </h2>
               <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-ink-soft">
@@ -230,11 +231,11 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           </div>
         </section>
 
-        <section aria-labelledby="mowing-area-heading" className="bg-evergreen py-18 text-paper sm:py-26">
+        <section aria-labelledby={sectionId('area')} className="bg-evergreen py-18 text-paper sm:py-26">
           <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
             <header>
               <p className="eyebrow text-[#D5EE72]"><Tr text={content.serviceArea.eyebrow} /></p>
-              <h2 id="mowing-area-heading" className="display-md mt-5 max-w-[12ch] text-paper">
+              <h2 id={sectionId('area')} className="display-md mt-5 max-w-[12ch] text-paper">
                 <Tr text={content.serviceArea.heading} />
               </h2>
             </header>
@@ -255,12 +256,12 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           </div>
         </section>
 
-        <section aria-labelledby="mowing-faq-heading" className="bg-paper py-18 sm:py-26">
+        <section aria-labelledby={sectionId('faq')} className="bg-paper py-18 sm:py-26">
           <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[0.48fr_1fr] lg:gap-20">
             <header>
-              <p className="eyebrow text-ink-soft"><Tr text="Lawn mowing FAQs" /></p>
-              <h2 id="mowing-faq-heading" className="display-md mt-5 max-w-[10ch]">
-                <Tr text="Useful answers before you request an estimate." />
+              <p className="eyebrow text-ink-soft"><Tr text={content.faqIntro.eyebrow} /></p>
+              <h2 id={sectionId('faq')} className="display-md mt-5 max-w-[10ch]">
+                <Tr text={content.faqIntro.heading} />
               </h2>
             </header>
             <div className="border-b border-[color:var(--rule)]">

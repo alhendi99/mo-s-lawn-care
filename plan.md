@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 7 complete; Task 8 not started
+- Phase: Incremental implementation — Task 8 complete; Task 9 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–7 completed; Task 8 and later are not authorized
+- Implementation status: Tasks 1–8 completed; Task 9 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -15,7 +15,8 @@
 - Task 5 repository baseline: clean `main` at `7f14caa`
 - Task 6 repository baseline: clean `main` at `710128d`
 - Task 7 repository baseline: clean `main` at `649656b`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 8 or later
+- Task 8 repository baseline: clean `main` at `16c96dd`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 9 or later
 
 ## Evidence Labels
 
@@ -27,7 +28,28 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 7 complete, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 8 complete, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 8 only — Aeration and Seeding Service Page. Task 9 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 8 began from clean `main` at `16c96dd` (`feat(seo): add lawn mowing service page`). `git status --short` returned no entries before the first edit.
+- **Ownership and consolidation:** `/services/aeration-overseeding` now owns `lawn aeration des moines ia` with the exact approved title, description, H1, secondary keywords and clean self-canonical. The search-oriented slug captures overseeding terminology while visible capability copy consistently presents one `Aeration and Seeding` offering. No standalone aeration, seeding, overseeding, core-aeration, lawn-seeding or city/service route was created.
+- **Architecture:** Task 8 adds one typed service content module to the explicit published-service allowlist and reuses the Task 7 dynamic route, metadata builder, breadcrumb system, Service graph builder, server template, visual layout and CSS. The smallest shared generalization extracted the service content type and moved image captions, related-section copy, FAQ intro copy and service-unique heading IDs into the content record; Lawn Mowing retains its exact visible copy and ownership.
+- **Content:** the page renders a neutral image-led hero and estimate/call actions; thin/compacted lawn decision framing; explicitly bounded Aeration and Seeding scope; four contextual service paths; residential/commercial property context; two attributed aeration-related Google review excerpts; distinct five-community coverage wording; six service-specific FAQs; and a final estimate/call CTA.
+- **Claim boundary:** the page does not claim a core machine or method, plug dimensions, pass count, slit/broadcast seeding, seed placement, seed blend/cultivar, soil-preparation method, watering program, fertilizer/weed-control package, fixed timing/date/temperature, germination timeline, establishment result, guarantee, price or contract. `core aeration` and `overseeding` appear as search language with explicit public-fact boundaries, not as invented operating details.
+- **Internal links and future boundary:** ordinary contextual anchors lead to Fertilization & Weed Control, Lawn Mowing, Spring Cleanup, Services and Contact. The Task 28–29 aeration/overseeding articles remain planned, unpublished, absent from the page and absent from the sitemap.
+- **Media and reviews:** no image has verified aeration/seeding provenance, so the hero uses the existing neutral `contact.webp` property image with observable alt text and a visible no-service/no-city/no-customer attribution. The Lori Stiles and Mark McGrew excerpts are verbatim from the approved repository review source and explicitly mention aeration; they are labeled as individual Google review experiences and produce no Review/AggregateRating schema.
+- **Schema and breadcrumbs:** one coherent graph emits the shared Organization/WebSite, one WebPage, one consolidated Service with the existing `#organization` provider and five approved City/State areas, plus one BreadcrumbList. Visible and schema hierarchy both read Home → Services → Aeration & Seeding. No FAQPage, Offer, price, review/rating, address, geo or duplicate service entity is emitted.
+- **Publication and sitemap:** static generation contains only Lawn Mowing and Aeration and Seeding service details. Both return HTTP 200. Tasks 9–16, arbitrary invalid slugs and `/services/aeration`, `/services/seeding`, `/services/overseeding` return branded HTTP 404 without redirects. Sitemap output is exactly `/`, `/services`, `/services/lawn-mowing` and `/services/aeration-overseeding`.
+- **Language, accessibility and responsive QA:** every new visible content string has an explicit Spanish translation. At 320 px the translated H1, breadcrumbs, related links and CTAs wrap without horizontal overflow; the full GBP UTM query survives switching to `lang=es`, while English metadata and the clean canonical remain unchanged. The page has one H1, logical headings, semantic links, visible breadcrumbs/focus, meaningful alt, touch-friendly actions, preserved skip focus, working mobile-menu Escape/focus return and reduced-motion durations of `0.00001s`.
+- **Performance and analytics:** the page stays statically generated and adds no client component, fetch, form, video, gallery archive, review archive, raw `gtag` or analytics event. Its single local hero image uses Task 7's eager-without-preload strategy; the fresh production browser console reported zero errors and zero warnings, including no unused-preload warning. Task 4's exact five-event allowlist and confirmed-delivery lead behavior remain unchanged.
+- **Browser QA:** local production-build browser checks passed at `1440×900`, `1280×800`, `390×844` and `320×568`; checks covered header, Services active context, breadcrumbs, all visible sections, related links, reviews, coverage, FAQs, CTA/footer, English/Spanish, full UTM preservation, mobile drawer, Escape/focus return, skip focus, reduced motion, zero horizontal overflow, no clipping/fixed-control collision and a clean console.
+- **Passed checks:** `pnpm validate:aeration-seeding`; `pnpm validate:lawn-mowing`; `pnpm validate:services`; `pnpm validate:content`; `pnpm validate:seo`; `pnpm validate:navigation`; `pnpm validate:analytics`; `pnpm validate:homepage`; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; `git diff --check`; production rendered-source/schema/sitemap assertions; complete route-isolation assertions; and Playwright responsive/language/focus/reduced-motion/console checks.
+- **Unavailable check:** `pnpm lint` exits 1 because the existing script invokes `eslint .` while ESLint is not installed or declared. Task 8 adds no dependency or lockfile churn to change that repository-wide condition.
+- **No external action:** no deployment, production/account setting, live estimate delivery, Google Business Profile edit or GA4 activation occurred.
+- **Task status:** Task 8 is `[x]` Completed because all four Definition of Done conditions are satisfied. Task 9 was not started.
+- **Exact next action:** commit the authorized Task 8 changes, report the local result and STOP before Task 9.
+
+### Prior checkpoint — Task 7 complete, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 7 only — Lawn Mowing Service Page. Task 8 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 7 began from clean `main` at `649656b` (`feat(seo): add services index`). `git status --short` returned no entries before the first edit.
@@ -1034,7 +1056,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 8 — Aeration and Seeding Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/aeration-overseeding/` for the consolidated aeration plus seeding/overseeding commercial intent.
 - **Why It Is Needed:** The intent is required and must remain consolidated while respecting the company's existing “Aeration and Seeding” terminology.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked conversion components.
@@ -1044,7 +1066,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Implying a particular overseeding machine/method, seed mix, timing guarantee, outcome, treatment package, or service availability that is not confirmed; article/service cannibalization.
 - **Validation:** Exact record comparison, claim approval, visible `Aeration and Seeding` terminology, rendered links/metadata/canonical/schema, honest imagery, and FAQ/source review.
 - **Tests:** Route/metadata/H1, Service/Breadcrumb schema, required related links, consolidated-slug assertion, no separate aeration/seeding page, invalid slug 404.
-- **Definition of Done:** `[ ]` One consolidated accurate page exists; `[ ]` exact ownership and terminology rules pass; `[ ]` no method/result claim is invented; `[ ]` service and eventual article link boundaries are documented.
+- **Definition of Done:** `[x]` One consolidated accurate page exists; `[x]` exact ownership and terminology rules pass; `[x]` no method/result claim is invented; `[x]` service and eventual article link boundaries are documented.
+
+#### Task 8 implementation record
+
+- **Completed files:** new `content/services/aeration-overseeding.ts`, new `content/services/types.ts`, new `scripts/validate-aeration-seeding-service.mts`, `components/service-detail-page.tsx`, `content/services/lawn-mowing.ts`, `content/services/index.ts`, `content/routes.ts`, `lib/es-translations.json`, `package.json`, lifecycle-aware inherited validators and this plan record.
+- **Template decision:** one shared service renderer still owns all service-page markup, metadata/schema integration and presentation. Service-specific captions, related-section copy, FAQ intro copy and heading IDs now come from the typed record so Aeration and Seeding does not inherit mowing language; the Lawn Mowing record supplies its original strings unchanged.
+- **Publication decision:** the explicit published content list contains exactly `lawn-mowing` and `aeration-overseeding`. Static params, lookup, metadata and page rendering continue to use that same allowlist. The route registry lifecycle and sitemap promote only Aeration and Seeding under Task 8.
+- **Terminology and intent decision:** the canonical slug remains `aeration-overseeding` for search language, the exact H1 retains its authorized ampersand form, and business capability copy uses `Aeration and Seeding`. Overseeding, lawn seeding and core-aeration variants are addressed within this one page without creating aliases or separate Service entities.
+- **Evidence decision:** thin/compacted problem framing comes from the exact approved metadata; broad Aeration and Seeding capability comes from established repository service facts. Specific machinery, process, seed, timing, watering, package and outcome details remain unverified and are expressly not presented as standard facts. The image is neutral and the two review excerpts explicitly mention aeration.
+- **Validation result:** the focused Task 8 validator covers ownership, publication, consolidation, secondary terminology, single H1/template, required schemas/provider/breadcrumb parity, links, future article boundary, process/seed/machine/timing/result/package restraint, review provenance, Spanish completeness and sitemap isolation. All focused and inherited validators, typecheck, production build, rendered-source/status/schema/sitemap checks and browser QA pass; lint remains unavailable because ESLint is not installed.
+- **Final result:** all four Task 8 Definition of Done checks are satisfied. Task 8 is complete and work stops before Task 9.
 
 ### Task 9 — Fertilization and Weed Control Service Page
 
