@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 11 complete; Task 12 not started
+- Phase: Incremental implementation — Task 12 complete; Task 13 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–11 completed; Task 12 and later are not authorized
+- Implementation status: Tasks 1–12 completed; Task 13 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -19,7 +19,8 @@
 - Task 9 repository baseline: clean `main` at `b97f138`
 - Task 10 repository baseline: clean `main` at `20337d3`
 - Task 11 repository baseline: clean `main` at `205329c`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 12 or later
+- Task 12 repository baseline: clean `main` at `27ea531`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 13 or later
 
 ## Evidence Labels
 
@@ -31,7 +32,25 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 11 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 12 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 12 only — Yard Cleanup Service Page. Task 13 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 12 began from clean `main` at `27ea531` (`feat(seo): add flower bed maintenance service page`). `git status --short` returned no entries before the first edit.
+- **Ownership and consolidation:** `/services/yard-cleanup` now owns `yard cleanup des moines ia` plus Yard Cleanup, Overgrown Yards Cleanup and Ground Clearance terminology in one useful page. The exact title, description, H1, five secondary keywords and query-free canonical are unchanged from the approved registry; no overgrown-yard, ground-clearance, property-cleanup, overgrown-lawn or city/cleanup alias was created.
+- **Capability boundary:** the visible page stays within ordinary property cleanup and overgrown-property context. Ground Clearance is explicitly a consolidated ordinary property-care label rather than evidence of lot/forestry clearing, heavy equipment, excavation, grading, demolition or land development. No affirmative hauling, disposal, dumping, junk/trash/hazardous-waste handling, construction debris, tree/stump removal, brush/branch hauling, equipment, recurring schedule, turnaround, price, contract or guarantee claim is published.
+- **Ownership separation and links:** crawlable contextual links lead to Lawn Mowing, Spring Cleanup, Fall Cleanup & Leaf Removal, Grading and Landscaping; shared hero/final CTAs lead to Contact and the breadcrumb retains Services. Copy keeps routine mowing, seasonal cleanup, grading and landscaping as separate intents rather than automatic inclusions. Tasks 13–16 destinations remain branded 404s.
+- **Architecture and publication:** one new typed content module reuses the established dynamic service route, server renderer, metadata/schema builders, breadcrumbs, service areas, CTAs, translations and publication lifecycle. Exactly one service was added to the allowlist, bringing the published detail count to six. No page-specific client component, template, dependency, form, analytics event or Task 13 content module was added.
+- **Media provenance:** repository media was audited visually. No asset proves Yard Cleanup, Ground Clearance, overgrown-property work, project authorship, city, customer, timing or before/after provenance. The hero therefore uses the existing neutral `contact.webp` property image with observable alt/caption language, and the optional work preview is absent.
+- **Review provenance:** the Morgan Wentland and Danielle Russell excerpts are verbatim from the approved repository review source and explicitly mention yard cleanup. Surrounding copy identifies them as individual experiences, not proof of a standard process, inclusion, turnaround or guaranteed result. No Review or AggregateRating schema is emitted.
+- **Schema, source and sitemap:** production source contains the exact head data, one H1, visible consolidated copy and required links, Home → Services → Yard Cleanup breadcrumbs, one WebPage, exactly one Service, one BreadcrumbList and the approved Organization/provider reference. JSON-LD contains no hauling, disposal, equipment, excavation, grading, heavy-clearing or hazardous-waste claim. The sitemap contains exactly `/`, `/services` and the six authorized detail URLs.
+- **Route isolation:** production returns 200 for Tasks 7–12 and branded noindex 404s for Tasks 13–16, all five prohibited cleanup aliases and an arbitrary invalid slug. Query parameters do not change the English title or clean canonical.
+- **Browser and accessibility QA:** fresh production contexts pass at `1440×900`, `1280×800`, `390×844` and `320×568`. Checks cover active Services/current Yard Cleanup state, breadcrumb, hero, all content sections, reviews, areas, FAQs, CTA/footer, Spanish and complete UTM preservation, stable title/canonical, skip-link focus, mobile-menu Escape/focus return, reduced-motion durations, image loading, zero horizontal overflow, no clipped translated H1/breadcrumb/CTA, no fixed-control/footer collision and zero application console errors/warnings, including no unused image-preload warning.
+- **Passed checks:** `pnpm validate:yard-cleanup`; Tasks 7–11 focused validators; Services/content/SEO/navigation/analytics/homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; production route/source/schema/sitemap assertions; Playwright responsive/language/focus/reduced-motion/console QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits 1 at `eslint .`; Task 12 does not install ESLint or add dependency/lockfile churn.
+- **Task status:** Task 12 is `[x]` Completed because all four Definition of Done items are satisfied. Task 13 was not started.
+- **Exact next action:** stage and commit only the legitimate Task 12 changes as `feat(seo): add yard cleanup service page`, verify a clean worktree, report the local result and STOP before Task 13.
+
+### Prior checkpoint — Task 11 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 11 only — Flower Bed Maintenance Service Page. Task 12 and later remain unauthorized and `[ ]` Not started.
 - **Baseline and checkpoint:** Task 11 resumed from WIP checkpoint `0186fad` above clean Task 10 commit `205329c` (`feat(seo): add landscaping service page`). The existing implementation was preserved except for one responsive defect proven by the remaining browser QA.
@@ -1193,7 +1212,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 12 — Yard Cleanup Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/yard-cleanup/` as the single owner of general cleanup, overgrown-yard cleanup, and ground-clearance commercial intent.
 - **Why It Is Needed:** Three existing labels must be consolidated to prevent cannibalization and thin pages.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
@@ -1203,7 +1222,16 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Hazardous waste, major clearing, hauling/disposal rules, lot clearing, excavation, city-specific projects, guarantees, or scope beyond ordinary property care.
 - **Validation:** Compare consolidated ownership, fact-check scope, inspect exact head/H1/canonical/schema/breadcrumb, all links/CTAs, media provenance and responsive behavior.
 - **Tests:** Expected route/metadata/H1/schema, required related links, forbidden split-route assertions, and invalid slug 404.
-- **Definition of Done:** `[ ]` One useful consolidated page covers all three approved labels; `[ ]` no thin variants exist; `[ ]` scope/claims/media are approved; `[ ]` metadata/schema/links/tests pass.
+- **Definition of Done:** `[x]` One useful consolidated page covers all three approved labels; `[x]` no thin variants exist; `[x]` scope/claims/media are approved; `[x]` metadata/schema/links/tests pass.
+
+#### Task 12 implementation record
+
+- **Completed files:** new `content/services/yard-cleanup.ts`; new `scripts/validate-yard-cleanup-service.mts`; `content/services/index.ts`; `content/routes.ts`; `lib/content-validation.ts`; `lib/es-translations.json`; `package.json`; lifecycle-aware inherited validators; and this plan record.
+- **Consolidation decision:** the one canonical route owns general Yard Cleanup, Overgrown Yards Cleanup and Ground Clearance plus the approved property-cleanup and overgrown-lawn search variants. Five cleanup aliases are explicitly prohibited and return 404; no separate city/cleanup or Task 13 module exists.
+- **Scope decision:** ordinary property cleanup and overgrown outdoor-area context are the only high-level capability claims. Ground Clearance is qualified as search/business terminology rather than proof of heavy clearing. Hauling, disposal, equipment, excavation, grading, major clearing, tree/stump work, hazardous waste, schedules, guarantees, pricing and contracts are omitted as capabilities and left to a property-specific estimate where a question must be clarified.
+- **Evidence decision:** no verified cleanup image exists, so the neutral existing property image is used and the optional work preview is omitted. Two verbatim cleanup-specific review excerpts are labeled as individual experiences and emit no review/rating schema.
+- **Validation result:** the focused validator covers exact metadata/ownership, one consolidated route, six-service allowlist, Tasks 13–16 isolation, five alias exclusions, one H1/template, WebPage/Service/BreadcrumbList/provider parity, required links, schema restraint, claim boundaries, image/review provenance, Spanish completeness and exact sitemap membership. The full inherited matrix, typecheck, production build, source/status/schema/sitemap assertions and four-viewport browser QA pass; lint remains unavailable because ESLint is not installed.
+- **Final result:** all four Task 12 Definition of Done checks are satisfied. Task 12 is complete and work stops before Task 13.
 
 ### Task 13 — Spring Cleanup Service Page
 

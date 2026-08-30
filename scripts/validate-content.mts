@@ -82,6 +82,7 @@ assertTaskOneFoundation({
     'service-fertilization-weed-control',
     'service-landscaping',
     'service-flower-bed-maintenance',
+    'service-yard-cleanup',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

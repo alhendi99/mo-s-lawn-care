@@ -24,26 +24,24 @@ import {
 
 const projectRoot = process.cwd()
 const read = (relativePath: string) => fs.readFileSync(path.join(projectRoot, relativePath), 'utf8')
-const route = routesById['service-flower-bed-maintenance']
+const route = routesById['service-yard-cleanup']
 
-assert.equal(route.path, '/services/flower-bed-maintenance')
-assert.equal(route.primaryKeyword, 'flower bed maintenance des moines')
+assert.equal(route.path, '/services/yard-cleanup')
+assert.equal(route.primaryKeyword, 'yard cleanup des moines ia')
 assert.deepEqual(route.secondaryKeywords, [
-  'landscape bed maintenance Des Moines',
-  'flower bed cleanup Des Moines',
-  'garden bed maintenance Des Moines',
-  'bed cleanup Des Moines',
+  'yard cleanup service Des Moines',
+  'overgrown yard cleanup Des Moines',
+  'property cleanup Des Moines',
+  'ground clearance Des Moines',
+  'overgrown lawn cleanup Des Moines',
 ])
-assert.equal(route.title, "Flower Bed Maintenance in Des Moines, IA | Mo's Lawn Care")
-assert.equal(route.h1, 'Flower Bed Maintenance in Des Moines, IA')
+assert.equal(route.title, "Yard Cleanup Service in Des Moines, IA | Mo's Lawn Care")
+assert.equal(route.h1, 'Yard Cleanup Service in Des Moines, IA')
 assert.equal(
   route.description,
-  "Keep flower beds clean and maintained with professional bed care in Des Moines, IA. Request a free estimate from Mo's Lawn Care for your property.",
+  "Get overgrown yards and outdoor areas back under control with professional yard cleanup in Des Moines, IA. Contact Mo's for a free property estimate.",
 )
-assert.equal(
-  route.canonicalUrl,
-  'https://www.moslawncaredsm.com/services/flower-bed-maintenance',
-)
+assert.equal(route.canonicalUrl, 'https://www.moslawncaredsm.com/services/yard-cleanup')
 assert.equal(route.implementationStatus, 'implemented')
 assert.equal(route.publicationStatus, 'published')
 assert.equal(route.indexability, 'indexable')
@@ -85,18 +83,20 @@ for (const slug of unpublishedTaskSlugs) {
   assert.equal(routesById[`service-${slug}` as keyof typeof routesById].publicationStatus, 'planned')
 }
 
-for (const alias of [
-  'flower-bed-cleanup',
-  'garden-bed-maintenance',
-  'landscape-bed-maintenance',
-  'bed-cleanup',
-  'garden-cleanup',
-]) {
-  assert.equal(getPublishedServiceDetail(alias), undefined, `Competing bed-service alias resolves: ${alias}`)
+const consolidatedAliases = [
+  'overgrown-yard-cleanup',
+  'overgrown-yards-cleanup',
+  'ground-clearance',
+  'property-cleanup',
+  'overgrown-lawn-cleanup',
+] as const
+
+for (const alias of consolidatedAliases) {
+  assert.equal(getPublishedServiceDetail(alias), undefined, `Competing cleanup alias resolves: ${alias}`)
   assert.equal(
     routeRegistry.some(({ path: routePath }) => routePath === `/services/${alias}`),
     false,
-    `Competing bed-service route is registered: ${alias}`,
+    `Competing cleanup route is registered: ${alias}`,
   )
 }
 assert.equal(getPublishedServiceDetail('not-a-real-service'), undefined)
@@ -115,8 +115,8 @@ assert.deepEqual(
 )
 
 const serviceNode = buildServiceStructuredData(route, {
-  name: flowerBedMaintenanceService.schema.name,
-  serviceType: flowerBedMaintenanceService.schema.serviceType,
+  name: yardCleanupService.schema.name,
+  serviceType: yardCleanupService.schema.serviceType,
   description: route.description,
 })
 const graph = buildPageStructuredData(route, routesById.home, [serviceNode])
@@ -127,8 +127,8 @@ const breadcrumbNodes = graphNodes.filter(({ '@type': type }) => type === 'Bread
 assert.equal(webpageNodes.length, 1)
 assert.equal(serviceNodes.length, 1)
 assert.equal(breadcrumbNodes.length, 1)
-assert.equal(serviceNode.name, 'Flower Bed Maintenance')
-assert.equal(serviceNode.serviceType, 'Flower bed maintenance')
+assert.equal(serviceNode.name, 'Yard Cleanup Service')
+assert.equal(serviceNode.serviceType, 'Yard cleanup')
 assert.equal(serviceNode['@id'], `${route.canonicalUrl}#service`)
 assert.equal(serviceNode.url, route.canonicalUrl)
 assert.equal(serviceNode.description, route.description)
@@ -142,11 +142,7 @@ assert.deepEqual(
 )
 
 const visibleBreadcrumb = getBreadcrumbItems(route.id)
-assert.deepEqual(visibleBreadcrumb.map(({ label }) => label), [
-  'Home',
-  'Services',
-  'Flower Bed Maintenance',
-])
+assert.deepEqual(visibleBreadcrumb.map(({ label }) => label), ['Home', 'Services', 'Yard Cleanup'])
 const schemaBreadcrumb = breadcrumbNodes[0].itemListElement as readonly Record<string, unknown>[]
 assert.deepEqual(schemaBreadcrumb.map(({ name }) => name), visibleBreadcrumb.map(({ label }) => label))
 assert.deepEqual(schemaBreadcrumb.map(({ position }) => position), [1, 2, 3])
@@ -163,59 +159,59 @@ for (const forbiddenSchemaTerm of [
   'address',
   'geo',
   'Product',
-  'Gardener',
-  'Horticulturist',
-  'design',
-  'installation',
-  'planting',
-  'mulch',
-  'pruning',
-  'edging',
   'hauling',
+  'disposal',
+  'equipment',
+  'excavation',
+  'grading',
+  'lot clearing',
+  'tree removal',
+  'stump removal',
+  'hazardous waste',
   'guarantee',
 ]) {
-  assert.equal(serializedGraph.includes(forbiddenSchemaTerm), false, `Forbidden schema: ${forbiddenSchemaTerm}`)
+  assert.equal(serializedGraph.toLowerCase().includes(forbiddenSchemaTerm.toLowerCase()), false, `Forbidden schema: ${forbiddenSchemaTerm}`)
 }
 
 assert.deepEqual(
-  flowerBedMaintenanceService.relatedServices.map(({ routeId }) => routeId),
+  yardCleanupService.relatedServices.map(({ routeId }) => routeId),
   [
-    'service-landscaping',
+    'service-lawn-mowing',
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
-    'service-yard-cleanup',
+    'service-grading',
+    'service-landscaping',
   ],
 )
-assert.deepEqual(flowerBedMaintenanceService.serviceArea.cities, [
+assert.deepEqual(yardCleanupService.serviceArea.cities, [
   'Des Moines',
   'Ankeny',
   'Waukee',
   'Norwalk',
   'Altoona',
 ])
-assert.equal(flowerBedMaintenanceService.hero.image.provenance, 'existing-property-care-gallery')
-assert.equal(flowerBedMaintenanceService.hero.image.src, '/media/gallery7.webp')
-assert.equal(flowerBedMaintenanceService.hero.compactHeading, true)
-assert.equal('workPreview' in flowerBedMaintenanceService, false)
+assert.equal(yardCleanupService.hero.image.provenance, 'existing-neutral-property-image')
+assert.equal(yardCleanupService.hero.image.src, '/contact.webp')
+assert.equal(yardCleanupService.hero.compactHeading, true)
+assert.equal('workPreview' in yardCleanupService, false)
 assert.doesNotMatch(
-  `${flowerBedMaintenanceService.hero.image.alt} ${flowerBedMaintenanceService.hero.image.caption}`,
-  /des moines|ankeny|waukee|norwalk|altoona|flower bed maintenance project|bed cleanup result|maintained by mo|residential bed project/i,
+  `${yardCleanupService.hero.image.alt} ${yardCleanupService.hero.image.caption}`,
+  /des moines|ankeny|waukee|norwalk|altoona|yard cleanup project|ground clearance project|overgrown-yard cleanup|completed by mo/i,
 )
-assert.match(flowerBedMaintenanceService.hero.image.caption, /no service or city attribution/i)
+assert.match(yardCleanupService.hero.image.caption, /no cleanup, result, city or customer attribution/i)
 
 const approvedReviewSource = read('components/testimonials.tsx').replaceAll('\\"', '"')
-assert.deepEqual(flowerBedMaintenanceService.reviews.items.map(({ name }) => name), [
-  'Tony Dugan',
-  'Rick Terrones',
+assert.deepEqual(yardCleanupService.reviews.items.map(({ name }) => name), [
+  'Morgan Wentland',
+  'Danielle Russell',
 ])
-for (const review of flowerBedMaintenanceService.reviews.items) {
+for (const review of yardCleanupService.reviews.items) {
   assert(approvedReviewSource.includes(review.quote), `Review excerpt is not verbatim: ${review.name}`)
+  assert.match(review.quote, /yard (?:clean up|cleaned up)/i)
 }
-assert.match(flowerBedMaintenanceService.reviews.items[0].quote, /landscape beds/i)
-assert.doesNotMatch(flowerBedMaintenanceService.reviews.items[1].quote, /flower|landscape bed|garden bed/i)
-assert.match(flowerBedMaintenanceService.reviews.introduction, /individual experience/i)
-assert.match(flowerBedMaintenanceService.reviews.introduction, /not a standard bed-maintenance process/i)
-assert.match(flowerBedMaintenanceService.reviews.introduction, /general company feedback/i)
+assert.match(yardCleanupService.reviews.introduction, /individual customer experiences/i)
+assert.match(yardCleanupService.reviews.introduction, /not proof of a standard process/i)
+assert.match(yardCleanupService.reviews.introduction, /turnaround or guaranteed result/i)
 
 const componentSource = read('components/service-detail-page.tsx')
 const dynamicRouteSource = read('app/services/[slug]/page.tsx')
@@ -231,67 +227,76 @@ assert.match(dynamicRouteSource, /if \(!service\) notFound\(\)/)
 assert.doesNotMatch(dynamicRouteSource, /serviceNavigationRouteIds|routeRegistry\.find/)
 
 const visibleBusinessCopy = JSON.stringify({
-  hero: flowerBedMaintenanceService.hero,
-  introduction: flowerBedMaintenanceService.introduction,
-  scope: flowerBedMaintenanceService.scope,
-  relatedServices: flowerBedMaintenanceService.relatedServices,
-  propertyContext: flowerBedMaintenanceService.propertyContext,
-  serviceArea: flowerBedMaintenanceService.serviceArea,
-  faqs: flowerBedMaintenanceService.faqs,
-  finalCta: flowerBedMaintenanceService.finalCta,
+  hero: yardCleanupService.hero,
+  introduction: yardCleanupService.introduction,
+  scope: yardCleanupService.scope,
+  relatedServices: yardCleanupService.relatedServices,
+  propertyContext: yardCleanupService.propertyContext,
+  reviewIntroduction: yardCleanupService.reviews.introduction,
+  serviceArea: yardCleanupService.serviceArea,
+  faqs: yardCleanupService.faqs,
+  finalCta: yardCleanupService.finalCta,
 }).toLowerCase()
 
 for (const requiredTerm of [
-  'flower bed maintenance in des moines',
-  'landscape bed maintenance in des moines',
-  'flower bed cleanup in des moines',
-  'garden bed maintenance in des moines',
-  'bed cleanup in des moines',
+  'yard cleanup in des moines, ia',
+  'yard cleanup service in des moines',
+  'overgrown yard cleanup in des moines',
+  'property cleanup in des moines',
+  'ground clearance in des moines',
+  'overgrown lawn cleanup in des moines',
 ]) {
   assert(visibleBusinessCopy.includes(requiredTerm), `Missing approved keyword/term: ${requiredTerm}`)
 }
+assert.match(visibleBusinessCopy, /yard cleanup, overgrown yards cleanup and ground clearance share this one service path/)
+assert.match(visibleBusinessCopy, /ground clearance is an ordinary property-care label/)
+assert.match(visibleBusinessCopy, /not a claim of heavy land-clearing work/)
 
 for (const unsupportedAffirmativeClaim of [
-  'gardening experts',
-  'horticulture specialists',
-  'plant-health experts',
-  'certified gardeners',
-  'master gardeners',
-  'landscape designers',
-  'plant-care professionals',
-  'we plant',
-  'we select plants',
-  'we design',
-  'we redesign',
-  'we install',
-  'includes cutback',
-  'we cut back',
-  'includes pruning',
-  'we prune',
-  'includes trimming',
-  'we trim',
-  'includes edging',
-  'we edge',
-  'includes mulch',
-  'we mulch',
   'we haul',
-  'debris hauling',
-  'weed pulling',
-  'weed treatment',
-  'we apply herbicide',
-  'we apply pesticide',
-  'we fertilize flowers',
-  'diagnose plant disease',
-  'improve plant health',
-  'weekly bed maintenance',
-  'monthly service',
-  'recurring contract',
-  'weed-free beds',
-  'perfect edges',
-  'guaranteed appearance',
+  'debris hauling service',
+  'we dispose',
+  'dump fees',
+  'junk removal',
+  'trash removal',
+  'hazardous waste service',
+  'chemical waste service',
+  'construction cleanup',
+  'construction debris removal',
+  'lot clearing service',
+  'major lot clearing',
+  'forestry clearing',
+  'tree removal service',
+  'stump removal service',
+  'brush hauling',
+  'branch hauling',
+  'skid steer',
+  'excavator',
+  'bulldozer',
+  'dump trailer',
+  'dump truck',
+  'brush cutter',
+  'forestry mower',
+  'chipper',
+  'stump grinder',
+  'we excavate',
+  'excavation service',
+  'we grade',
+  'drainage correction',
+  'site preparation',
+  'land development',
+  'same-day cleanup',
+  'next-day cleanup',
+  'weekly cleanup',
+  'monthly cleanup',
+  'guaranteed turnaround',
+  'guaranteed cleanup',
+  'completely clears your property',
+  'restores any yard',
+  'permanent cleanup',
   'increase property value',
   'starting at $',
-  'deposit required',
+  'contract required',
 ]) {
   assert.equal(
     visibleBusinessCopy.includes(unsupportedAffirmativeClaim),
@@ -300,28 +305,11 @@ for (const unsupportedAffirmativeClaim of [
   )
 }
 
-for (const unsupportedTaskTerm of [
-  'cutback',
-  'pruning',
-  'trimming',
-  'deadheading',
-  'plant division',
-  'transplanting',
-  'soil amendment',
-  'decorative stone',
-  'rock installation',
-  'edging',
-  'hauling',
-  'disposal',
-  'irrigation',
-]) {
-  assert.equal(visibleBusinessCopy.includes(unsupportedTaskTerm), false, `Unverified task term: ${unsupportedTaskTerm}`)
-}
-
-assert.match(visibleBusinessCopy, /do not define a standard gardening process, material package or recurring schedule/)
-assert.match(visibleBusinessCopy, /those phrases describe the need; they do not establish a standard task list or process/)
-assert.match(visibleBusinessCopy, /exact tasks, timing and any materials must be confirmed/)
-assert.match(visibleBusinessCopy, /no image on this page is presented as a flower bed maintenance project/)
+assert.match(visibleBusinessCopy, /do not define a standard task list, equipment list or disposal process/)
+assert.match(visibleBusinessCopy, /no recurring cleanup schedule or standard maintenance agreement/)
+assert.match(visibleBusinessCopy, /does not establish heavy lot clearing, excavation, demolition, grading or land-development work/)
+assert.match(visibleBusinessCopy, /do not publish a standard task list, equipment list, hauling service or disposal process/)
+assert.match(visibleBusinessCopy, /no image on this page is presented as a yard cleanup/)
 
 const spanish = JSON.parse(read('lib/es-translations.json')) as Record<string, string>
 assert(spanish[route.h1], `Missing Spanish translation: ${route.h1}`)
@@ -356,13 +344,14 @@ function collectTranslatableStrings(value: unknown, key = '', strings = new Set<
   return strings
 }
 
-for (const value of collectTranslatableStrings(flowerBedMaintenanceService)) {
+for (const value of collectTranslatableStrings(yardCleanupService)) {
   assert(spanish[value], `Missing service-content Spanish translation: ${value}`)
 }
-assert.match(spanish[route.h1], /mantenimiento de macizos/i)
+assert.match(spanish[route.h1], /limpieza de jardín/i)
+assert.match(spanish[yardCleanupService.scope.items[2].description], /no establece/i)
 assert.doesNotMatch(
-  spanish[flowerBedMaintenanceService.scope.introduction],
-  /ofrecemos poda|instalamos|diseñamos|aplicamos herbicida|incluye acolchado/i,
+  spanish[yardCleanupService.scope.items[2].description],
+  /ofrecemos excavación|incluye nivelación|maquinaria pesada disponible/i,
 )
 
 assert.deepEqual(buildSitemapEntries(), [
@@ -372,15 +361,18 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-aeration-overseeding'].canonicalUrl },
   { url: routesById['service-fertilization-weed-control'].canonicalUrl },
   { url: routesById['service-landscaping'].canonicalUrl },
+  { url: routesById['service-flower-bed-maintenance'].canonicalUrl },
   { url: route.canonicalUrl },
-  { url: routesById['service-yard-cleanup'].canonicalUrl },
 ])
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
 }
+for (const alias of consolidatedAliases) {
+  assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)
+}
 
-assert.equal(routeLabels['service-flower-bed-maintenance'], 'Flower Bed Maintenance')
+assert.equal(routeLabels['service-yard-cleanup'], 'Yard Cleanup')
 
 console.log(
-  'Task 11 Flower Bed Maintenance validation passed: exact consolidated ownership, six-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict gardening/process/material restraint, one neutral hero image without work preview, careful review labeling, Spanish coverage, and sitemap isolation.',
+  'Task 12 Yard Cleanup validation passed: exact consolidated ownership, six-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict ordinary-cleanup boundaries, neutral hero without work preview, cleanup-specific review labeling, Spanish coverage, and sitemap isolation.',
 )

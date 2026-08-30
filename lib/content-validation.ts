@@ -55,7 +55,10 @@ const forbiddenPaths = new Set([
   '/services/fall-cleanup',
   '/services/leaf-removal',
   '/services/overgrown-yard-cleanup',
+  '/services/overgrown-yards-cleanup',
   '/services/ground-clearance',
+  '/services/property-cleanup',
+  '/services/overgrown-lawn-cleanup',
 ])
 
 const forbiddenApprovedFactKeys = [

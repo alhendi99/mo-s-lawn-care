@@ -263,7 +263,9 @@ export const routeRegistry = [
     h1: 'Yard Cleanup Service in Des Moines, IA',
     description:
       "Get overgrown yards and outdoor areas back under control with professional yard cleanup in Des Moines, IA. Contact Mo's for a free property estimate.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: [
       'home',
       'services',
