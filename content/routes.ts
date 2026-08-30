@@ -73,7 +73,9 @@ export const routeRegistry = [
     h1: 'Lawn Care Services for Des Moines Properties',
     description:
       "Explore Mo's Lawn Care services in Des Moines, including mowing, aeration and seeding, weed control, landscaping, cleanups, grading and snow removal.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home'],
     outboundLinkIds: [
       'service-lawn-mowing',

@@ -4,16 +4,17 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 5 complete; Task 6 not started
+- Phase: Incremental implementation — Task 6 complete; Task 7 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–5 completed; Task 6 and later are not authorized
+- Implementation status: Tasks 1–6 completed; Task 7 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
 - Task 3 repository baseline: clean `main` at `e24e7af`
 - Task 4 repository baseline: clean `main` at `abfe88d`
 - Task 5 repository baseline: clean `main` at `7f14caa`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 6 or later
+- Task 6 repository baseline: clean `main` at `710128d`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 7 or later
 
 ## Evidence Labels
 
@@ -25,7 +26,24 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 5 complete, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 6 complete, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 6 only — Services Index. Task 7 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 6 began from clean `main` at `710128d` (`feat(seo): refactor homepage crawlable architecture`). `git status --short` returned no entries before the first edit.
+- **Ownership:** `/services` now owns `lawn care services des moines ia` with the exact Task 2 title, description, H1 and clean canonical. The route registry lifecycle is promoted only for the Services Index; all ten service-detail records remain planned, unpublished and non-indexable.
+- **Architecture and links:** one server-rendered index projects the established service navigation records into exactly ten ordered, unique service links with concise distinct summaries. It also exposes ordinary anchors to Commercial Property Services, Service Areas and Contact, plus native phone and estimate actions. No dynamic service template or service-detail page was created.
+- **Schema and breadcrumb parity:** the shared interior shell now accepts page-specific structured-data nodes. `/services` emits CollectionPage, an ItemList with positions 1–10 matching the visible ordered links, and a two-level BreadcrumbList matching the visible Home → Services trail.
+- **Design and responsive behavior:** the page uses an editorial numbered-list composition, restrained CSS-only entry motion, clear focus states and no page-specific client component or media payload. Production-browser QA passed at `1440×900`, `1280×800`, `390×844` and `320×568` with one H1, all ten links and zero horizontal overflow. The shared elevated-header backdrop was narrowly corrected so the existing fixed mobile drawer fills the viewport on interior routes; long Spanish H1/CTA copy now wraps without overlap. Reduced-motion emulation reduces the page animation and transition durations to `0.00001s`.
+- **Language and analytics regression:** all new visible strings have explicit Spanish translations. Switching language preserves the full GBP UTM query and changes only `lang`, while metadata and canonical remain the English canonical record. Native phone/email behavior and the existing allowlisted analytics architecture are unchanged; `pnpm validate:analytics` passes.
+- **Rendered HTML validation:** the production response is HTTP 200 and contains the exact metadata/canonical, one H1, all ten expected service hrefs, all three supporting hub hrefs, CollectionPage, a ten-entry ItemList with positions 1–10, and the two-entry BreadcrumbList. The final browser console contains zero errors and zero warnings.
+- **Claim and route restraint:** descriptions are navigational and avoid guarantees, prices, schedules, processes, results, credentials, address/geo, local image provenance and review claims. No Ground Clearance, Leaves Removal, residential service variant, city/service combination or competing Des Moines route was added.
+- **Passed checks:** `pnpm validate:services`; `pnpm validate:content`; `pnpm validate:seo`; `pnpm validate:navigation`; `pnpm validate:analytics`; `pnpm validate:homepage`; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; `git diff --check`; production rendered-HTML assertions; and production Playwright navigation, focus, language/UTM, responsive, overflow, reduced-motion, schema/link and console checks.
+- **Unavailable check:** `pnpm lint` exits 1 because the existing script invokes `eslint .` while ESLint is not installed or declared. Task 6 does not add dependency or lockfile churn to change that repository-wide condition.
+- **No external action:** no deployment, production/account setting, live form delivery, Google Business Profile edit or GA4 activation occurred.
+- **Task status:** Task 6 is `[x]` Completed because all four Definition of Done conditions are satisfied. Task 7 was not started.
+- **Exact next action:** commit the authorized Task 6 changes, report the local result and STOP before Task 7.
+
+### Prior checkpoint — Task 5 complete, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 5 only — Homepage SEO Refactor and Crawlable Architecture. Task 6 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 5 began from clean `main` at `7f14caa` (`feat(analytics): add privacy-safe GA4 lead tracking`). `git status --short` returned no entries before the first edit.
@@ -946,7 +964,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 6 — Services Index
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/` as the canonical overview for the ten consolidated Des Moines service intents.
 - **Why It Is Needed:** Users and crawlers need a service hub, and consolidated ownership prevents thin pages for minor variants.
 - **Dependencies:** Tasks 1–3; Task 2 provides metadata/schema; Task 5 provides homepage inbound linking.
@@ -956,7 +974,19 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Duplicate card paths/titles; page deployed before child routes; ItemList order differing from visible cards; terminology `overseeding` versus approved visible `Aeration and Seeding`; excessive keyword repetition.
 - **Validation:** Compare exact metadata and all ten cards to the ownership map, inspect source links/headings/schema, and verify navigation/footer/breadcrumb inbound/outbound paths.
 - **Tests:** Route success, exact metadata/H1/canonical, ten unique expected service hrefs, ItemList/UI parity, one H1, and absence of prohibited thin variants.
-- **Definition of Done:** `[ ]` Hub renders useful non-stuffed content and all ten links; `[ ]` exact metadata/schema/breadcrumbs pass; `[ ]` no extra service intent page is introduced; `[ ]` Contact/commercial/area paths are usable.
+- **Definition of Done:** `[x]` Hub renders useful non-stuffed content and all ten links; `[x]` exact metadata/schema/breadcrumbs pass; `[x]` no extra service intent page is introduced; `[x]` Contact/commercial/area paths are usable.
+
+#### Task 6 implementation record
+
+- **Completed files:** new `app/services/page.tsx`, new `content/services/index.ts`, `content/routes.ts`, `components/interior-page-shell.tsx`, `components/site-header.tsx`, `app/globals.css`, `lib/es-translations.json`, `lib/content-validation.ts`, `scripts/validate-content.mts`, `scripts/validate-navigation.mts`, `scripts/validate-seo-foundation.mts`, new `scripts/validate-services-index.mts`, `package.json`, and this plan record.
+- **Ownership and lifecycle decision:** the Services Index uses the exact registered URL, title, description, H1, canonical and primary intent. Only the `services` record is promoted to implemented/published/indexable, which adds `/services` to the sitemap beside `/`; all ten detail records remain planned and unavailable until their own authorized tasks.
+- **Content and link decision:** the visible ordered list derives its names and hrefs from the single route registry and adds only short, distinct navigational summaries. It contains exactly Lawn Mowing, Aeration & Seeding, Fertilization & Weed Control, Landscaping, Flower Bed Maintenance, Yard Cleanup, Spring Cleanup, Fall Cleanup & Leaf Removal, Grading and Snow Removal. Commercial Property Services, Service Areas and Contact are separate supporting links, not extra service cards.
+- **Schema and breadcrumb decision:** the shared server shell accepts typed page-specific graph nodes without introducing client JavaScript. CollectionPage, ItemList and BreadcrumbList reuse the same canonical route records; the ItemList count, positions, names and URLs match the visible ten-item order, and the visible/schema breadcrumb hierarchy is Home → Services.
+- **Design and payload decision:** the page uses a responsive editorial intro, numbered service rows and three quiet supporting links rather than generic card tiles. Its interaction polish is CSS-only, honors reduced motion, and adds no page-specific image, video, data fetch, client component or analytics event. Existing global navigation, footer, bilingual control, phone/email links and contact tracking remain shared.
+- **Responsive integration decision:** reserving desktop space for the existing fixed phone control and allowing long Spanish text containers/CTA copy to shrink and wrap removes overlap at 1280 px. A narrowly scoped header rule removes the elevated backdrop filter only while the existing mobile dialog is open, preventing that filter from becoming the fixed drawer's containing block; the verified drawer now covers `390×844` and retains close-button focus.
+- **Claim and route decision:** copy describes where each approved route leads and makes no result, price, schedule, process, equipment, availability, guarantee, credential, address/geo, review or media-provenance claim. No Ground Clearance, Leaves Removal, residential variant, city/service standalone page, dynamic service template or competing Des Moines page exists.
+- **Validation result:** focused and inherited validators, type-check, production build, rendered source assertions and production browser QA pass. Browser checks cover desktop/header/breadcrumb navigation, expected planned-child 404 behavior, mobile menu/disclosure/focus, skip-link focus, Spanish coverage, UTM preservation, clean canonical, all ten links, responsive overflow at four viewports, reduced motion and a clean final console. `pnpm lint` remains unavailable because ESLint is not installed.
+- **Scope boundary:** no Task 7 service page/template/content, later hub/page, deployment, production configuration or external account change was made. Task 7 remains `[ ]` Not started.
 
 ### Task 7 — Lawn Mowing Service Page
 

@@ -37,7 +37,7 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300 motion-reduce:transition-none ${
+        className={`site-header fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300 motion-reduce:transition-none ${
           elevated
             ? 'bg-evergreen/97 shadow-[0_8px_35px_rgba(8,20,14,0.22)] backdrop-blur-md'
             : 'bg-transparent'

@@ -37,6 +37,7 @@ type TaskOneValidationInput = Readonly<{
   routes: readonly CanonicalRoute[]
   expectedPaths: readonly string[]
   expectedPrimaryKeywords: Readonly<Record<string, string>>
+  expectedPublishedRouteIds: readonly CanonicalRoute['id'][]
   expectedOrigin: string
   expectedGoogleBusinessProfileUrl: string
   expectedReviewDisplayCopy: string
@@ -164,11 +165,16 @@ export function collectTaskOneValidationErrors(input: TaskOneValidationInput) {
     if (route.publicationStatus === 'published' && route.implementationStatus !== 'implemented') {
       errors.push(`Published route is not implemented: ${route.id}.`)
     }
-    if (route.id === 'home' && (route.implementationStatus !== 'implemented' || route.publicationStatus !== 'published')) {
-      errors.push('Homepage lifecycle state must reflect the existing published route.')
-    }
-    if (route.id !== 'home' && (route.implementationStatus !== 'planned' || route.publicationStatus !== 'planned')) {
-      errors.push(`Task 1 must not mark an interior route implemented or published: ${route.id}.`)
+    const expectedPublished = input.expectedPublishedRouteIds.includes(route.id)
+    const expectedLifecycle = expectedPublished ? 'implemented/published' : 'planned/planned'
+    const actualLifecycle = `${route.implementationStatus}/${route.publicationStatus}`
+    if (
+      (expectedPublished && actualLifecycle !== 'implemented/published') ||
+      (!expectedPublished && actualLifecycle !== 'planned/planned')
+    ) {
+      errors.push(
+        `Route lifecycle mismatch for ${route.id}: expected ${expectedLifecycle}, found ${actualLifecycle}.`,
+      )
     }
     if (route.indexability !== 'indexable') errors.push(`Target route is not marked indexable: ${route.id}.`)
 
