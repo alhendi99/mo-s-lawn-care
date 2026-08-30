@@ -4,15 +4,16 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 4 complete; live GA4 activation blocked pending verified account decisions
+- Phase: Incremental implementation — Task 5 complete; Task 6 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–4 completed; Task 5 and later are not authorized
+- Implementation status: Tasks 1–5 completed; Task 6 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-30 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
 - Task 3 repository baseline: clean `main` at `e24e7af`
 - Task 4 repository baseline: clean `main` at `abfe88d`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 5 or later
+- Task 5 repository baseline: clean `main` at `7f14caa`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 6 or later
 
 ## Evidence Labels
 
@@ -24,7 +25,23 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 4 code complete, activation blocked, 2026-08-30 (Asia/Amman)
+### Latest checkpoint — Task 5 complete, 2026-08-30 (Asia/Amman)
+
+- **Authorized scope:** Task 5 only — Homepage SEO Refactor and Crawlable Architecture. Task 6 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 5 began from clean `main` at `7f14caa` (`feat(analytics): add privacy-safe GA4 lead tracking`). `git status --short` returned no entries before the first edit.
+- **Ownership and architecture:** `/` retains its exact Task 2 metadata/canonical/schema record and now renders the exact H1 `Lawn Care & Snow Removal in Des Moines, IA`. The homepage has the required ordered 12-section architecture: hero, services, seasons, property explorer, residential/commercial, before-and-after, featured work, service areas, reviews, latest tips, problem navigation, and estimate.
+- **Crawlable linking:** all ten registered service routes are exposed in ordinary rendered anchors; seasonal, property and problem references resolve through the same approved consolidated service records. The commercial, Our Work, Reviews, Blog and Contact paths are real anchors. Service-area copy says `Serving Des Moines, Ankeny, Waukee, Norwalk and Altoona`, with Des Moines linked to `/` and the other four cities linked to their registered future routes. Three Latest Tips links use only registered article paths.
+- **Preserved experience:** the existing cinematic video hero, seasonal transition, property hotspots, before-and-after slider, gallery/lightbox, estimate form, bilingual control, responsive header/menu, reduced-motion behavior, phone/email actions and scroll-reactive mobile/desktop contact controls remain in place. Browser interaction checks covered skip navigation, desktop/mobile service disclosure, Escape/focus return, property selection, keyboard slider control, gallery modal, review advance, problem accordion and invalid-form focus/errors.
+- **Payload and claim restraint:** the homepage receives eight gallery items rather than the 79-item archive and five verified verbatim review excerpts rather than the full embedded review collection. Gallery images are lazy below the fold, eliminating the production preload warning. Image labels and operational/problem copy were made neutral where provenance or workflow guarantees were not established. No address, geo, price, guarantee, invented process, fabricated local image attribution, or review schema was introduced.
+- **Responsive and language validation:** production-browser QA passed at `1440×900`, `1280×800`, `390×844` and `320×568`, with zero horizontal overflow. Spanish long labels fit at 320 px; switching `en`/`es` preserved the complete GBP UTM query and added only `lang`. The final clean production session reported zero console errors and zero warnings.
+- **Rendered HTML validation:** exact title/description/root canonical, one exact H1, the ordered 12 markers, required hub/service/area/article/contact hrefs and the existing Organization/WebSite/WebPage graph were confirmed in rendered production HTML. The source contains no forbidden competing Des Moines route, full review archive content or gallery item beyond the curated subset.
+- **Passed checks:** `pnpm validate:homepage`; `pnpm validate:content`; `pnpm validate:seo`; `pnpm validate:navigation`; `pnpm validate:analytics`; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; `git diff --check`; production rendered-HTML assertions; and production Playwright interaction, responsive, language, focus, overflow, payload and console checks.
+- **Unavailable check:** `pnpm lint` exits 1 because the existing script invokes `eslint .` while ESLint is not installed or declared. Task 5 did not introduce dependency or lockfile churn to change that repository-wide condition.
+- **No external action:** no deployment, production/account setting, live form delivery, Google Business Profile edit or GA4 activation occurred.
+- **Task status:** Task 5 is `[x]` Completed because all four Definition of Done conditions are satisfied. Task 6 was not started.
+- **Exact next action:** commit the authorized Task 5 changes, report the local result and STOP before Task 6.
+
+### Prior checkpoint — Task 4 code complete, activation blocked, 2026-08-30 (Asia/Amman)
 
 - **Authorized scope:** Task 4 only — GA4 Foundation and Conversion Measurement. Task 5 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 4 began from clean `main` at `abfe88d` (`feat(seo): add shared navigation and breadcrumbs`). `git status --short` returned no entries before the first edit.
@@ -904,7 +921,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 5 — Homepage SEO Refactor and Crawlable Architecture
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Make `/` own broad Des Moines lawn-care intent while preserving and enhancing the existing branded long-form homepage.
 - **Why It Is Needed:** The current title/H1 differ from the required ownership and core service/area/content routes are not exposed through crawlable links.
 - **Dependencies:** Tasks 1–4; page links may target later registered routes, but deployment must wait until those routes exist.
@@ -914,7 +931,18 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Interactive buttons versus navigational links; duplicated H1; forthcoming routes absent in partial deployments; hero LCP; unverified operational/image/review claims; language query retaining UTM; form event duplication when reused; mobile section density.
 - **Validation:** Compare every visible section and exact metadata to Sections 6 and 18; inspect source for H1 and real links; test all preserved interactions at mobile/desktop/reduced motion; verify curated media payload and Contact flow.
 - **Tests:** Exact homepage metadata/H1/canonical/schema, ten service hrefs, five area hrefs including Des Moines `/`, commercial/work/reviews/blog/contact links, problem mapping, one H1, no forbidden city route, and regression browser tests for key interactions.
-- **Definition of Done:** `[ ]` Exact ownership and all 12 sections are present; `[ ]` preserved experiences remain functional; `[ ]` required links are crawlable in rendered HTML; `[ ]` homepage avoids unverified claims/full archive payloads and passes scoped accessibility/performance checks.
+- **Definition of Done:** `[x]` Exact ownership and all 12 sections are present; `[x]` preserved experiences remain functional; `[x]` required links are crawlable in rendered HTML; `[x]` homepage avoids unverified claims/full archive payloads and passes scoped accessibility/performance checks.
+
+#### Task 5 implementation record
+
+- **Completed files:** `app/page.tsx`, `app/globals.css`, `components/hero.tsx`, `components/cross-section.tsx`, `components/property-hotspots.tsx`, `components/before-after-slider.tsx`, `components/gallery.tsx`, `components/GalleryClient.tsx`, `components/problem-selector.tsx`, `components/estimate-section.tsx`, new `components/homepage-services.tsx`, new `components/homepage-commercial.tsx`, new `components/homepage-service-areas.tsx`, new `components/homepage-testimonials.tsx`, new `components/homepage-tips.tsx`, new `content/homepage.ts`, `lib/site.ts`, `lib/es-translations.json`, `package.json`, new `scripts/validate-homepage.mts`, and this plan record.
+- **Architecture decision:** one homepage content adapter consumes the Task 1 route registry for the exact ten services, five service areas, three featured articles and all consolidated service mappings. The page renders the exact required 12-section order and section markers, while existing interactive components remain responsible for their established visuals and behavior.
+- **Link decision:** navigation is never hidden behind interaction-only controls. Hero, service grid, seasonal references, desktop/mobile property references, commercial, Our Work, service areas, reviews, tips, problem mappings and Contact/estimate paths are ordinary crawlable anchors with registered hrefs. Des Moines intentionally resolves to `/`; no `/des-moines` or `/service-areas/des-moines-ia` route was added.
+- **Payload decision:** `Gallery` slices on the server before client serialization and sends eight items. The homepage review component contains five reviewed excerpts copied verbatim from the existing verified embedded review source, while the legacy full review collection is not imported into the homepage. Below-the-fold gallery images use lazy loading.
+- **Claim decision:** broad verified residential/commercial service scope and the centralized `170+ Google Reviews` display fact are retained. Unsupported rapid-response, workflow, outcome and location-specific image implications were removed or softened; there is no new guarantee, address, geo, price, credential, local image provenance or review-schema claim.
+- **Behavioral validation:** production-browser checks confirmed exact section order/H1, desktop and mobile menus, focus return and skip link, property controls, keyboard before-and-after slider, eight-item gallery/lightbox, five-review carousel, problem accordion/service mappings, form validation/focus, native phone/email destinations, mobile fixed actions, Spanish rendering, UTM preservation and zero horizontal overflow at all four required viewports.
+- **Validation result:** all focused and inherited validators, type-check, production build, rendered HTML assertions and final production console review pass. `pnpm lint` remains unavailable because ESLint is not installed. All four Task 5 Definition of Done checks are satisfied.
+- **Scope boundary:** no route page, metadata record promotion, sitemap addition, schema for an interior page, deployment or account change was made. Task 6 remains `[ ]` Not started.
 
 ### Task 6 — Services Index
 

@@ -3,7 +3,7 @@ import path from 'node:path'
 
 import { GalleryClient } from './GalleryClient'
 
-function getGalleryItems() {
+function getGalleryItems(limit: number) {
   const filePath = path.join(
     process.cwd(),
     'data',
@@ -16,15 +16,16 @@ function getGalleryItems() {
     .split(/\r?\n/)
     .map((url) => url.trim())
     .filter(Boolean)
+    .slice(0, limit)
     .map((src, index) => ({
       src,
-      label: `Project ${String(index + 1).padStart(2, '0')}`,
-      alt: `Landscaping project ${index + 1}`,
+      label: `Gallery image ${String(index + 1).padStart(2, '0')}`,
+      alt: `Property care gallery image ${index + 1}`,
     }))
 }
 
-export function Gallery() {
-  const galleryItems = getGalleryItems()
+export function Gallery({ limit = 8 }: { limit?: number }) {
+  const galleryItems = getGalleryItems(limit)
 
   return <GalleryClient galleryItems={galleryItems} />
 }

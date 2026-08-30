@@ -19,7 +19,7 @@ function Frame({
     return (
       <Image
         src={src}
-        alt={`${t(label)} — ${t("Mo's Lawn Care project")}`}
+        alt={`${t(label)} — ${t('property comparison view')}`}
         fill
         sizes="(min-width: 1536px) 1500px, (min-width: 1024px) 90vw, 100vw"
         loading="lazy"

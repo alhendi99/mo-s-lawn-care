@@ -1,13 +1,17 @@
+import Link from 'next/link'
 import { BeforeAfterSlider } from '@/components/before-after-slider'
 import { CrossSection } from '@/components/cross-section'
 import { EstimateSection } from '@/components/estimate-section'
 import { Gallery } from '@/components/gallery'
 import { Hero } from '@/components/hero'
+import { HomepageCommercial } from '@/components/homepage-commercial'
+import { HomepageServiceAreas } from '@/components/homepage-service-areas'
+import { HomepageServices } from '@/components/homepage-services'
+import { HomepageTestimonials } from '@/components/homepage-testimonials'
+import { HomepageTips } from '@/components/homepage-tips'
 import { ProblemSelector } from '@/components/problem-selector'
 import { PropertyHotspots } from '@/components/property-hotspots'
-import { SeasonDial } from '@/components/season-dial'
 import { StructuredData } from '@/components/structured-data'
-import { Testimonials } from '@/components/testimonials'
 import { Tr } from '@/components/tr'
 import { routesById } from '@/content/routes'
 import { buildPageStructuredData } from '@/lib/structured-data'
@@ -19,12 +23,12 @@ export default function Page() {
     <>
       <StructuredData data={homepageStructuredData} />
 
-      <main className="">
+      <main>
         <Hero />
-
-        {/* <SeasonDial /> */}
+        <HomepageServices />
         <CrossSection />
-      <section id="property" aria-labelledby="property-heading" className="bg-paper py-20 sm:py-28">
+
+        <section id="property" data-home-section="property-explorer" aria-labelledby="property-heading" className="bg-paper py-20 sm:py-28">
           <div className="mx-auto w-full pb-0 max-w-[112rem] px-5 sm:px-8 ">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <h2
@@ -43,41 +47,47 @@ export default function Page() {
           </div>
         </section>
 
+        <HomepageCommercial />
 
-        {/* 4 — INTERACTIVE PROPERTY */}
-  
-
-
-        {/* 6 — THE MO'S EFFECT */}
         <section
           id="work"
+          data-home-section="before-after"
           aria-labelledby="work-heading"
           className="bg-evergreen pt-5 pb-2 sm:pt-5 sm:pb-2"
           style={{ '--accent': '#7FAE68', '--btn-fg': '#102019' } as React.CSSProperties}
         >
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
-            <h2 id="work-heading" className="display-md text-paper">
-              <Tr text="The Mo's effect." />
-            </h2>
-            <p className="eyebrow mt-0" style={{ color: 'var(--accent)' }}>
-              <Tr text="Drag to see the difference" />
-            </p>
-            <br />
+            <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 id="work-heading" className="display-md text-paper">
+                  <Tr text="The Mo's effect." />
+                </h2>
+                <p className="eyebrow mt-2" style={{ color: 'var(--accent)' }}>
+                  <Tr text="Drag to see the difference" />
+                </p>
+              </div>
+              <Link href={routesById['our-work'].path} prefetch={false} className="btn-ghost group w-fit text-paper">
+                <Tr text="See More Before & After Work" />
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
             <BeforeAfterSlider />
           </div>
         </section>
 
+        <Gallery limit={8} />
+        <HomepageServiceAreas />
+        <HomepageTestimonials />
+        <HomepageTips />
 
-        <Gallery />
         <section
           id="problems"
+          data-home-section="problem-navigation"
           aria-labelledby="problems-heading"
           className="bg-evergreen py-20 sm:py-28"
           style={{ '--accent': '#7FAE68', '--btn-fg': '#102019' } as React.CSSProperties}
         >
-          <Testimonials />
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
-<br />
             <h2 id="problems-heading" className="display-md mt-5 max-w-[16ch] text-paper">
               <Tr text="What's going on" />
               <br />
@@ -91,7 +101,6 @@ export default function Page() {
         </section>
         <EstimateSection />
       </main>
-
     </>
   )
 }

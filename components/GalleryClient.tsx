@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   useCallback,
   useEffect,
@@ -8,6 +9,7 @@ import {
   useState,
 } from 'react'
 import { useI18n } from '@/lib/i18n'
+import { routesById } from '@/content/routes'
 
 type GalleryItem = {
   src: string
@@ -121,18 +123,18 @@ export function GalleryClient({
   }, [activeIndex])
 
   return (
-    <section id="gallery" aria-labelledby="gallery-heading" className="overflow-hidden bg-paper pt-20 sm:py-28">
+    <section id="gallery" data-home-section="featured-work" aria-labelledby="gallery-heading" className="overflow-hidden bg-paper py-20 sm:py-28">
       <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
         <header className="grid gap-6 border-t border-[color:var(--rule)] pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)] lg:items-end lg:gap-16">
           <div>
-            <p className="eyebrow text-ink-soft">{t('Service gallery · Illustrative views')}</p>
+            <p className="eyebrow text-ink-soft">{t('Featured Work')}</p>
             <h2 id="gallery-heading" className="display-md mt-5 max-w-[16ch]">
-              {t('Care you can')}<br />
-              <span className="text-accent">{t('see from the curb.')}</span>
+              {t('A closer look at')}<br />
+              <span className="text-accent">{t('the work.')}</span>
             </h2>
           </div>
           <p className="max-w-md text-[1.0625rem] leading-relaxed text-ink-soft lg:pb-2">
-            {t('Examples of the mowing lines, clean edges, open driveways, and planted details that show what each service is designed to achieve.')}
+            {t("A curated selection from Mo's existing property-care gallery.")}
           </p>
         </header>
 
@@ -187,17 +189,17 @@ export function GalleryClient({
               key={item.src}
               ref={(node) => { slideRefs.current[index] = node }}
               aria-roledescription="slide"
-              aria-label={`${index + 1} ${t('of')} ${galleryItems.length}: ${t('Project')} ${String(index + 1).padStart(2, '0')}`}
+              aria-label={`${index + 1} ${t('of')} ${galleryItems.length}: ${t(item.label)}`}
               className="group relative aspect-[4/5] w-[84vw] max-w-[30rem] shrink-0 snap-start overflow-hidden bg-evergreen sm:aspect-[4/3] sm:w-[68vw] sm:max-w-none lg:w-[46vw] xl:w-[40vw]"
             >
-  <Image
-  src={item.src}
-  alt={`${t('Landscaping project')} ${index + 1}`}
-  fill
-  sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 46vw, (min-width: 640px) 68vw, 84vw"
-  loading={index < 2 ? 'eager' : 'lazy'}
-  className="object-contain"
-/>
+              <Image
+                src={item.src}
+                alt={t(item.alt)}
+                fill
+                sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 46vw, (min-width: 640px) 68vw, 84vw"
+                loading="lazy"
+                className="object-contain"
+              />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-evergreen/90 via-evergreen/35 to-transparent px-5 pt-20 pb-5 text-paper sm:px-6 sm:pb-6">
                 <figcaption className="flex items-end justify-between gap-4">
                   <span className="text-[0.6875rem] font-semibold tracking-[0.16em] text-paper/70 uppercase tabular-nums">{String(index + 1).padStart(2, '0')}</span>
@@ -227,11 +229,11 @@ export function GalleryClient({
         </div>
 
         <div className="mt-7 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="eyebrow text-ink-soft">{t('Swipe or use arrow keys to explore')}</p>
-          <a href="#estimate-form" className="btn-ghost group w-fit text-ink">
-            {t('Start with your property')}
+          <p className="eyebrow text-ink-soft">{t('Curated homepage selection')}</p>
+          <Link href={routesById['our-work'].path} prefetch={false} className="btn-ghost group w-fit text-ink">
+            {t('View Our Work')}
             <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -253,7 +255,7 @@ export function GalleryClient({
             </div>
 
             <div className="relative min-h-0 flex-1 py-4 sm:py-6">
-              <Image src={activeItem.src} alt={`${t('Landscaping project')} ${activeIndex + 1}`} fill sizes="100vw" priority className="object-contain" />
+              <Image src={activeItem.src} alt={t(activeItem.alt)} fill sizes="100vw" priority className="object-contain" />
               <button type="button" onClick={() => setActiveIndex((activeIndex - 1 + galleryItems.length) % galleryItems.length)} aria-label={t('Show previous gallery image')} className="absolute top-1/2 left-0 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center bg-evergreen/80 text-2xl transition-colors duration-200 hover:bg-paper hover:text-evergreen sm:left-4">←</button>
               <button type="button" onClick={() => setActiveIndex((activeIndex + 1) % galleryItems.length)} aria-label={t('Show next gallery image')} className="absolute top-1/2 right-0 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center bg-evergreen/80 text-2xl transition-colors duration-200 hover:bg-paper hover:text-evergreen sm:right-4">→</button>
             </div>

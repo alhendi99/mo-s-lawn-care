@@ -247,56 +247,56 @@ export const problems = [
     id: 'grass',
     title: 'The grass is out of control.',
     answer:
-      'We get it back to a maintained height, haul the clippings, then keep it on a schedule so it never gets there again.',
+      'Lawn mowing or yard cleanup may be the right place to start when grass has grown beyond routine care.',
     services: ['Mowing Service', 'Overgrown Yards Cleanup'],
   },
   {
     id: 'weeds',
     title: 'Weeds are taking over.',
     answer:
-      'Targeted treatment plus feeding, so the lawn itself gets thick enough to crowd weeds out on its own.',
+      'Fertilization and weed control is the relevant service path when weeds are the main lawn concern.',
     services: ['Fertilizing and Weed Control'],
   },
   {
     id: 'thin',
     title: 'My lawn has bare / thin spots.',
     answer:
-      'Compacted soil is usually the cause. We pull cores to open the ground, then drop seed straight into the holes.',
+      'Aeration and seeding is the service path to explore for bare or thin areas of a lawn.',
     services: ['Aeration and Seeding'],
   },
   {
     id: 'beds',
     title: 'The flower beds need help.',
     answer:
-      'Beds get weeded, edged and re-defined — and if the layout is the real problem, we redesign it.',
+      'Flower bed maintenance or landscaping may fit, depending on what the beds and surrounding space need.',
     services: ['Flower Beds Maintenance', 'Landscaping'],
   },
   {
     id: 'leaves',
     title: 'Leaves. Everywhere.',
     answer:
-      'Full removal off the lawn, beds and hard surfaces before they mat down and kill the grass underneath.',
+      'Fall cleanup and leaf removal is the consolidated service path for seasonal leaf buildup.',
     services: ['Leaves Removal', 'Fall Cleanup'],
   },
   {
     id: 'reset',
     title: 'The whole yard needs a reset.',
     answer:
-      'A single clearing pass: debris out, growth cut back, edges re-cut. One visit that gives you a starting point again.',
+      'Yard cleanup and the relevant seasonal cleanup are the places to start when several areas need attention.',
     services: ['Spring Cleanup', 'Fall Cleanup', 'Ground Clearance'],
   },
   {
     id: 'uneven',
     title: 'The ground is uneven.',
     answer:
-      'Low spots, ruts and water running the wrong direction get reshaped so the surface drains and mows cleanly.',
+      'Grading is the relevant service path to discuss when outdoor ground is uneven.',
     services: ['Grading'],
   },
   {
     id: 'snow',
     title: 'Snow blocked the way.',
     answer:
-      'Driveways, walkways and entries cleared so the property stays usable through the storm.',
+      'Snow removal is the service path for residential and commercial properties affected by snowfall.',
     services: ['Snow Removal'],
   },
 ] as const

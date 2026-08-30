@@ -1,29 +1,18 @@
  'use client'
 
+import Link from 'next/link'
 import { HeroVideo } from './hero-video'
+import { homepageServiceRoutes } from '@/content/homepage'
+import { routesById } from '@/content/routes'
 import { site } from '@/lib/site'
 import { useI18n } from '@/lib/i18n'
-
-const heroServices = [
-  'Mowing service',
-  'Aeration and seeding',
-  'Leaves removal',
-  'Snow removal',
-  'Fertilizing and weed control',
-  'Flower beds maintenance',
-  'Overgrown yards cleanup',
-  'Spring cleanup',
-  'Fall cleanup',
-  'Ground clearance',
-  'Grading',
-  'Landscaping',
-] as const
 
 export function Hero() {
   const { t } = useI18n()
   return (
     <section
       id="top"
+      data-home-section="hero"
       aria-labelledby="hero-heading"
       className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-evergreen"
       style={
@@ -37,68 +26,46 @@ export function Hero() {
       </div>
 
       <div className="mx-auto flex w-full max-w-[112rem] flex-1 flex-col justify-end px-5 pt-20 sm:px-8 sm:pt-28 lg:pt-32">
-        <div className="hero-content max-w-[34rem] pb-5 sm:max-w-none sm:pb-9 xl:grid xl:grid-cols-[minmax(0,1.45fr)_minmax(19rem,0.65fr)] xl:items-end xl:gap-16 xl:pb-12">
-<div>
-  <h1
-    id="hero-heading"
-    className="hero-reveal hero-display text-[clamp(0.3rem,5.5vw,3.8rem)] sm:text-[clamp(0.3rem,4vw,3.8rem)] leading-[0.95] text-paper [animation-delay:120ms]"
-  >
-    <span className="block">
-      {t('Commercial & Residential')}
-    </span>
-
-    <span className="block text-accent">
-      {t('property services')}
-    </span>
-  </h1>
-</div>
+        <div className="hero-content max-w-[38rem] pb-5 sm:max-w-none sm:pb-9 xl:grid xl:grid-cols-[minmax(0,1.5fr)_minmax(20rem,0.62fr)] xl:items-end xl:gap-16 xl:pb-12">
+          <div>
+            <p className="hero-reveal hero-kicker mb-4 text-paper/68 [animation-delay:60ms]">
+              {t('Residential + Commercial · Des Moines metro')}
+            </p>
+            <h1
+              id="hero-heading"
+              className="hero-reveal hero-display text-paper [animation-delay:120ms]"
+            >
+              <span className="block">{t('Lawn Care & Snow Removal')}</span>
+              <span className="block text-accent">{t('in Des Moines, IA')}</span>
+            </h1>
+          </div>
           <div className="mt-5 max-w-[31rem] sm:mt-8 xl:mt-0 xl:pb-1">
-            <p className="hero-reveal max-w-[30rem] text-[0.775rem] font-black leading-5.5 text-paper/78 [animation-delay:240ms] sm:text-lg sm:leading-relaxed">
-              {t('Mowing, Landscaping, Cleanups, And Snow removal for Des Moines properties')}
+            <p className="hero-reveal max-w-[30rem] text-[0.775rem] font-bold leading-5.5 text-paper/78 [animation-delay:240ms] sm:text-lg sm:leading-relaxed">
+              {t("Lawn care, landscaping, cleanups and snow removal for homes and businesses in the Des Moines metro.")}
             </p>
 
-            <div className="hero-reveal mt-1 border-t border-paper/18  [animation-delay:300ms] sm:mt-6 sm:pt-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-                {/* <a href="#estimate-form" className="btn-solid group w-full sm:w-auto">
-                  Get a free estimate
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
-                    ↗
-                  </span>
-                </a> */}
-
-                <div className="flex flex-col text-paper">
-                  <span className=" font-bold tracking-[0.16em] uppercase text-accent">
-                    {/* Call or email */}
-                    {t('Get a free Estimate')}
-                  </span>
-                  <a
-                    href={site.phoneHref}
-                    className="mt-0.5 text-sm font-semibold underline decoration-[#D5EE72] transition-colors duration-200 hover:text-accent sm:text-base decoration-2 underline-offset-4"
-                  >
-                    {site.phone}
-                  </a>
-
-                  <a
-                    href={`mailto:${site.email}`}
-                    className="text-sm font-semibold underline decoration-[#D5EE72] transition-colors duration-200 hover:text-accent sm:text-base decoration-2 underline-offset-4"
-                  >
-                    {site.email}
-                  </a>
-                </div>
+            <div className="hero-reveal mt-3 border-t border-paper/18 pt-4 [animation-delay:300ms] sm:mt-6 sm:pt-5">
+              <div className="flex flex-wrap items-center gap-3">
+                <a href="#estimate-form" className="btn-solid group bg-[#D5EE72] text-evergreen">
+                  {t('Get a Free Estimate')}
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">→</span>
+                </a>
+                <a
+                  href={site.phoneHref}
+                  className="inline-flex min-h-13 items-center px-1 text-sm font-semibold text-paper underline decoration-[#D5EE72] decoration-2 underline-offset-4 transition-colors hover:text-accent sm:text-base"
+                >
+                  {t('Call')} {site.phone}
+                </a>
               </div>
 
-              <a
-                href="#seasons"
-                className="hero-text-link group mt-2 hidden justify-center sm:inline-flex sm:justify-start"
-              >
-                {t('See what we handle')}
-                <span
-                  className="transition-transform duration-200 group-hover:translate-y-0.5"
-                  aria-hidden="true"
-                >
-                  ↓
-                </span>
-              </a>
+              <div className="mt-2 hidden flex-wrap items-center gap-x-6 sm:flex">
+                <a href="#services" className="hero-text-link group px-0">
+                  {t('Explore services')} <span aria-hidden="true" className="transition-transform group-hover:translate-y-0.5">↓</span>
+                </a>
+                <Link href={routesById['commercial-property-services'].path} prefetch={false} className="hero-text-link group px-0">
+                  {t('Commercial Property Services')} <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">↗</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -116,12 +83,14 @@ export function Hero() {
                   className="hero-marquee-group"
                   aria-hidden={isDuplicate ? true : undefined}
                 >
-                  {heroServices.map((service) => (
+                  {homepageServiceRoutes.map((service) => (
                     <li
-                      key={`${isDuplicate ? "duplicate" : "primary"}-${service}`}
+                      key={`${isDuplicate ? "duplicate" : "primary"}-${service.id}`}
                       className="hero-marquee-item"
                     >
-                      <span>{t(service)}</span>
+                      <Link href={service.href} prefetch={false} tabIndex={isDuplicate ? -1 : undefined}>
+                        {t(service.label)}
+                      </Link>
                       <span className="hero-marquee-dot" aria-hidden="true" />
                     </li>
                   ))}

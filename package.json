@@ -12,7 +12,8 @@
     "validate:content": "node --experimental-strip-types scripts/validate-content.mts",
     "validate:seo": "node --experimental-strip-types scripts/validate-seo-foundation.mts",
     "validate:navigation": "node --experimental-strip-types scripts/validate-navigation.mts",
-    "validate:analytics": "node --experimental-strip-types scripts/validate-analytics.mts"
+    "validate:analytics": "node --experimental-strip-types scripts/validate-analytics.mts",
+    "validate:homepage": "node --experimental-strip-types scripts/validate-homepage.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

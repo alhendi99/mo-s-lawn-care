@@ -1,7 +1,9 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
+import { getUniqueHomepageServiceRoutes } from '@/content/homepage'
 import { propertyHotspots } from '@/lib/site'
 import { useI18n } from '@/lib/i18n'
 
@@ -15,7 +17,7 @@ export function PropertyHotspots() {
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-evergreen">
         <Image
           src="/seasons/summer.png"
-          alt={t('A Des Moines residential property in summer: mowed front lawn, flower beds along the house, mature trees and a concrete driveway')}
+          alt={t('Residential property with a front lawn, flower beds, mature trees and a concrete driveway')}
           fill
           sizes="(min-width: 1280px) 1200px, 100vw"
           loading="lazy"
@@ -58,7 +60,7 @@ export function PropertyHotspots() {
 
         {/* compact readout — desktop / tablet only */}
         <div
-          className="pointer-events-none absolute z-10 hidden w-[min(20rem,38%)] border-t-2 border-accent p-4 transition-[top,left,right,transform] duration-300 sm:block"
+          className="absolute z-10 hidden w-[min(20rem,38%)] border-t-2 border-accent p-4 transition-[top,left,right,transform] duration-300 sm:block"
           style={{
             backgroundColor: 'rgba(16,32,25,0.96)',
             top: `${spot.y}%`,
@@ -76,9 +78,11 @@ export function PropertyHotspots() {
             {t(spot.label)}
           </p>
           <ul className="mt-3 space-y-1">
-            {spot.services.map((s) => (
-              <li key={s} className="text-[0.9375rem] leading-snug text-paper/75">
-                {t(s)}
+            {getUniqueHomepageServiceRoutes(spot.services).map((service) => (
+              <li key={service.id}>
+                <Link href={service.href} prefetch={false} className="inline-flex min-h-8 items-center text-[0.9375rem] leading-snug text-paper/75 underline decoration-paper/20 underline-offset-4 transition-colors hover:text-paper hover:decoration-current">
+                  {t(service.label)}
+                </Link>
               </li>
             ))}
           </ul>
@@ -116,10 +120,19 @@ export function PropertyHotspots() {
                     {t(h.label)}
                   </span>
                   <span className="mt-0.5 block text-[0.9375rem] leading-snug text-ink-soft">
-                    {h.services.map(t).join(' · ')}
+                    {t('Select to highlight this part of the property')}
                   </span>
                 </span>
               </button>
+              <ul className="-mt-2 flex flex-wrap gap-x-4 gap-y-1 pb-4 pl-10">
+                {getUniqueHomepageServiceRoutes(h.services).map((service) => (
+                  <li key={service.id}>
+                    <Link href={service.href} prefetch={false} className="inline-flex min-h-9 items-center text-[0.8125rem] font-bold tracking-[0.06em] text-accent uppercase underline decoration-transparent underline-offset-4 hover:decoration-current">
+                      {t(service.label)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </li>
           )
         })}

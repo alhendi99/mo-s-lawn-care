@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
+import { getUniqueHomepageServiceRoutes } from '@/content/homepage'
 import { problems } from '@/lib/site'
 import { useI18n } from '@/lib/i18n'
 
@@ -44,6 +46,20 @@ export function ProblemSelector() {
               </button>
             </h3>
 
+            <ul className="flex flex-wrap gap-x-5 gap-y-1 pb-4 pl-11 sm:pl-[3.75rem]">
+              {getUniqueHomepageServiceRoutes(p.services).map((service) => (
+                <li key={service.id}>
+                  <Link
+                    href={service.href}
+                    prefetch={false}
+                    className="inline-flex min-h-9 items-center text-[0.75rem] font-bold tracking-[0.12em] text-[color:var(--accent)] uppercase underline decoration-transparent underline-offset-4 hover:decoration-current"
+                  >
+                    {t(service.label)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
             {isOpen && (
               <div
                 id={`answer-${p.id}`}
@@ -53,18 +69,7 @@ export function ProblemSelector() {
                   {t(p.answer)}
                 </p>
                 <div>
-                  <p className="eyebrow text-paper/70">{t("What we'd send out")}</p>
-                  <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-                    {p.services.map((s) => (
-                      <li
-                        key={s}
-                        className="font-display text-lg font-semibold tracking-[-0.01em] uppercase sm:text-xl"
-                        style={{ color: 'var(--accent)' }}
-                      >
-                        {t(s)}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="eyebrow text-paper/70">{t('Ready for the next step?')}</p>
                   <a
                     href="#estimate-form"
                     className="mt-5 inline-flex items-center gap-2 text-[0.8125rem] font-bold tracking-[0.18em] text-paper uppercase underline decoration-paper/30 underline-offset-[6px] transition-colors duration-200 hover:decoration-paper"

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { getHomepageServiceRoute } from "@/content/homepage";
 import { aboveGround, belowGround } from "@/lib/site";
 import { useI18n } from "@/lib/i18n";
 
@@ -65,7 +67,7 @@ const seasonPanorama = [
     key: "winter",
     label: "Winter",
     months: "Dec — Feb",
-    line: "Ready by morning.",
+    line: "Clear the way.",
     serviceNames: ["Snow Removal"],
     background:
       "linear-gradient(155deg, #C8DCE2 0%, #E8F0F1 52%, #F7F7F2 100%)",
@@ -489,13 +491,20 @@ function SurfaceStage() {
                     {services.map((name) => (
                       <li
                         key={name}
-                        className="yard-xray__season-service rounded-full border px-3.5 py-2.5 text-[0.75rem] leading-none font-bold tracking-[0.06em] uppercase backdrop-blur-sm transition-transform duration-300"
-                        style={{
-                          borderColor: `${season.ink}55`,
-                          backgroundColor: `${season.ink}14`,
-                        }}
                       >
-                        {t(name)}
+                        {getHomepageServiceRoute(name) ? (
+                          <Link
+                            href={getHomepageServiceRoute(name)!.href}
+                            prefetch={false}
+                            className="yard-xray__season-service inline-flex min-h-11 items-center rounded-full border px-3.5 py-2.5 text-[0.75rem] leading-none font-bold tracking-[0.06em] uppercase backdrop-blur-sm transition-transform duration-300"
+                            style={{
+                              borderColor: `${season.ink}55`,
+                              backgroundColor: `${season.ink}14`,
+                            }}
+                          >
+                            {t(name)}
+                          </Link>
+                        ) : null}
                       </li>
                     ))}
                   </ul>
@@ -520,6 +529,7 @@ function SurfaceStage() {
 function RootService({ name, index }: { name: string; index: number }) {
   const { t } = useI18n();
   const isLeft = index % 2 === 0;
+  const route = getHomepageServiceRoute(name);
 
   return (
     <li
@@ -534,11 +544,17 @@ function RootService({ name, index }: { name: string; index: number }) {
           {String(index + 1).padStart(2, "0")}
         </span>
         <div className="min-w-0">
-          <p className="font-display text-base leading-[1.05] font-semibold tracking-[-0.02em] text-paper uppercase sm:text-lg">
-            {t(name)}
-          </p>
+          {route && (
+            <Link
+              href={route.href}
+              prefetch={false}
+              className="inline-flex min-h-11 items-center font-display text-base leading-[1.05] font-semibold tracking-[-0.02em] text-paper uppercase underline decoration-transparent underline-offset-4 transition-colors hover:text-[color:var(--accent)] hover:decoration-current sm:text-lg"
+            >
+              {t(name)}
+            </Link>
+          )}
           <p className="mt-2 text-[0.6875rem] leading-relaxed tracking-[0.12em] text-paper/42 uppercase">
-            {t('Foundation work · Root zone')}
+            {t('Property care · Ground level')}
           </p>
         </div>
       </div>
@@ -580,6 +596,7 @@ export function CrossSection() {
   return (
     <section
       id="seasons"
+      data-home-section="seasons"
       aria-labelledby="ground-heading"
       className="yard-xray relative isolate overflow-hidden bg-paper pt-0 pb-0 text-ink sm:pt-0 sm:pb-1 lg:pt-0 lg:pb-0"
     >

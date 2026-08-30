@@ -1,6 +1,8 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
+import { routesById } from '@/content/routes'
 import { EstimateForm } from './estimate-form'
 import { useI18n } from '@/lib/i18n'
 
@@ -9,6 +11,7 @@ export function EstimateSection() {
   return (
     <section
       id="estimate"
+      data-home-section="estimate"
       aria-labelledby="estimate-heading"
       className="bg-evergreen"
     >
@@ -17,7 +20,7 @@ export function EstimateSection() {
           <div className="relative min-h-[28rem] overflow-hidden lg:min-h-[42rem]">
             <Image
               src="/contact.webp"
-              alt={t('Maintained front lawn and landscaped beds along a Des Moines home')}
+              alt={t('Front lawn and landscaped beds beside a home')}
               fill
               sizes="(min-width: 1024px) 44vw, 100vw"
               loading="lazy"
@@ -37,6 +40,13 @@ export function EstimateSection() {
               <p className="mt-5 max-w-[31rem] text-base leading-relaxed text-paper/75 sm:text-lg">
                 {t("Tell us what the property needs. We'll follow up with the right next step.")}
               </p>
+              <Link
+                href={routesById.contact.path}
+                prefetch={false}
+                className="mt-5 inline-flex min-h-11 items-center text-[0.75rem] font-bold tracking-[0.14em] text-paper uppercase underline decoration-[#D5EE72] decoration-2 underline-offset-4"
+              >
+                {t('Visit the Contact page')} <span aria-hidden="true" className="ml-2">→</span>
+              </Link>
             </div>
           </div>
 
