@@ -233,7 +233,9 @@ export const routeRegistry = [
     h1: 'Flower Bed Maintenance in Des Moines, IA',
     description:
       "Keep flower beds clean and maintained with professional bed care in Des Moines, IA. Request a free estimate from Mo's Lawn Care for your property.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home', 'services', 'service-landscaping', 'service-spring-cleanup'],
     outboundLinkIds: [
       'service-landscaping',

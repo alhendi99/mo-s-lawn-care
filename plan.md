@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 10 complete; Task 11 not started
+- Phase: Incremental implementation — Task 11 complete; Task 12 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–10 completed; Task 11 and later are not authorized
+- Implementation status: Tasks 1–11 completed; Task 12 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -18,7 +18,8 @@
 - Task 8 repository baseline: clean `main` at `16c96dd`
 - Task 9 repository baseline: clean `main` at `b97f138`
 - Task 10 repository baseline: clean `main` at `20337d3`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 11 or later
+- Task 11 repository baseline: clean `main` at `205329c`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 12 or later
 
 ## Evidence Labels
 
@@ -30,7 +31,26 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 10 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 11 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 11 only — Flower Bed Maintenance Service Page. Task 12 and later remain unauthorized and `[ ]` Not started.
+- **Baseline and checkpoint:** Task 11 resumed from WIP checkpoint `0186fad` above clean Task 10 commit `205329c` (`feat(seo): add landscaping service page`). The existing implementation was preserved except for one responsive defect proven by the remaining browser QA.
+- **Ownership and publication:** `/services/flower-bed-maintenance` now owns `flower bed maintenance des moines` with the exact approved title, description, H1, secondary search terminology and query-free self-canonical. Exactly one route changed from planned to implemented/published/indexable, and the service publication allowlist now contains exactly five details through Flower Bed Maintenance.
+- **Architecture:** the page reuses the existing dynamic service route, typed content model, metadata/schema builders, breadcrumbs and shared service-detail renderer. No parallel template, page-specific client JavaScript, new dependency, form, analytics event or Task 12 module was introduced. The only shared renderer change is a narrow `min-w-0`/responsive word-wrapping guard on final service CTAs after production QA proved the Spanish Task 11 CTA overflowed at 320 px.
+- **Capability boundary:** Flower Bed Maintenance is the sole approved starting capability. The page does not claim gardening or horticultural expertise, planting or flower selection, cutback/deadheading/pruning/trimming, edging, weed removal or treatment, mulch/rock/material installation, fertilization, pesticide/herbicide use, plant-health treatment, design/redesign, installation, hauling/disposal, recurring or seasonal schedules, guarantees, pricing or contracts. Search terminology identifies the consolidated need without inventing Mo's process.
+- **Intent separation:** ordinary crawlable links lead to Landscaping, Spring Cleanup, Fall Cleanup & Leaf Removal, Yard Cleanup and Contact. Copy explicitly keeps whole-space Landscaping, whole-yard cleanup and broader seasonal cleanup outside the Flower Bed Maintenance scope; all future destinations remain unpublished branded 404s until their own tasks.
+- **Media provenance:** no service-specific Flower Bed Maintenance image provenance was verified. The hero uses only existing `gallery7.webp` with observable outdoor-area alt/caption language and no service, result, project-author, city, customer, property-type, season or date attribution. The optional three-image work preview is absent.
+- **Reviews:** the Tony Dugan excerpt remains verbatim and attributable customer speech that explicitly mentions his landscape beds; the surrounding label states that it is one individual experience, not a standard process, inclusion or result. The Rick Terrones excerpt remains verbatim and clearly labeled general company feedback. No Review or AggregateRating schema is emitted.
+- **Rendered source and schema:** production source contains the exact title, description, one exact H1, clean canonical, required English content and links, visible Home → Services → Flower Bed Maintenance breadcrumb, one WebPage, exactly one Service, one BreadcrumbList and the existing Organization/provider reference. Visible/schema breadcrumbs match, query parameters do not alter title/canonical, and JSON-LD contains no stronger capability than visible copy.
+- **Route and sitemap isolation:** production returns 200 for the five authorized service details and branded noindex 404s for Tasks 12–16, tested bed-service aliases and an arbitrary invalid slug. The sitemap contains exactly `/`, `/services`, and the five authorized service-detail URLs; no Task 12–16 URL appears.
+- **Browser and accessibility QA:** fresh production contexts pass at `1440×900`, `1280×800`, `390×844` and `320×568`. Checks cover header and active Services context, breadcrumb, hero, every Flower Bed Maintenance section, related links, review labeling, service areas, FAQs, CTA, footer, mobile navigation/current service, Spanish and complete UTM preservation, stable title/canonical, visible skip-link focus, Escape/focus return, reduced-motion durations of `0.00001s`, successful hero loading, zero horizontal overflow, no clipped Spanish H1/breadcrumb/CTA, no fixed-control/footer collision and zero application console errors/warnings, including no unused image-preload warning.
+- **Passed checks:** `pnpm validate:flower-bed-maintenance`; Tasks 7–10 focused validators; Services/content/SEO/navigation/analytics/homepage validators; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; production route/source/schema/sitemap assertions; browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits 1 at `eslint .`; Task 11 does not install ESLint or add dependency/lockfile churn.
+- **No external action:** no deployment, production/account change, Google Business Profile edit, indexing request or analytics activation occurred.
+- **Task status:** Task 11 is `[x]` Completed because all four Definition of Done items are satisfied. Task 12 was not started.
+- **Exact next action:** amend the valid WIP checkpoint as `feat(seo): add flower bed maintenance service page`, report the local result and STOP before Task 12.
+
+### Prior checkpoint — Task 10 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 10 only — Landscaping Service Page. Task 11 and later remain unauthorized and `[ ]` Not started.
 - **Baseline and checkpoint:** Task 10 resumed from the existing WIP checkpoint above clean Task 9 commit `20337d3` (`feat(seo): add fertilization and weed control service page`). Accidental Playwright/output artifacts remain removed and are not part of the Task 10 change.
@@ -1159,7 +1179,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 11 — Flower Bed Maintenance Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/flower-bed-maintenance/` for the distinct flower/landscape-bed maintenance intent.
 - **Why It Is Needed:** It is an advertised service and a required target that should not be buried inside general landscaping.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
@@ -1169,7 +1189,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Implying gardening expertise, plant health treatments, design/installation, material hauling, seasonal schedule, or guarantees; confusing decorative images with actual work.
 - **Validation:** Content approval, exact metadata/H1/canonical, Service/Breadcrumb schema, related links, image/review provenance, FAQ truthfulness, and mobile/accessibility checks.
 - **Tests:** Route/static param, exact metadata, one H1, schema, required links, no separate bed-cleanup route, invalid slug 404.
-- **Definition of Done:** `[ ]` Required page and exact intent are complete; `[ ]` confirmed scope is clearly bounded; `[ ]` required links/media/schema pass; `[ ]` unverified gardening/design/process claims are absent.
+- **Definition of Done:** `[x]` Required page and exact intent are complete; `[x]` confirmed scope is clearly bounded; `[x]` required links/media/schema pass; `[x]` unverified gardening/design/process claims are absent.
 
 ### Task 12 — Yard Cleanup Service Page
 

@@ -331,9 +331,9 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
 
         <section className="bg-[#D5EE72] py-16 text-evergreen sm:py-22">
           <div className="mx-auto grid w-full max-w-[112rem] gap-8 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.5fr)] lg:items-end lg:gap-16">
-            <div>
+            <div className="min-w-0">
               <p className="eyebrow text-evergreen/65"><Tr text={content.finalCta.eyebrow} /></p>
-              <h2 className="mt-5 max-w-[15ch] font-display text-[clamp(2.5rem,5.6vw,6rem)] leading-[0.9] font-bold tracking-[-0.05em] uppercase">
+              <h2 className="mt-5 max-w-full break-words font-display text-[clamp(2.5rem,5.6vw,6rem)] leading-[0.9] font-bold tracking-[-0.05em] uppercase sm:max-w-[15ch]">
                 <Tr text={content.finalCta.heading} />
               </h2>
             </div>

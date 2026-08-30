@@ -10,6 +10,7 @@ import {
 } from '../content/services/index.ts'
 import { aerationOverseedingService } from '../content/services/aeration-overseeding.ts'
 import { fertilizationWeedControlService } from '../content/services/fertilization-weed-control.ts'
+import { flowerBedMaintenanceService } from '../content/services/flower-bed-maintenance.ts'
 import { landscapingService } from '../content/services/landscaping.ts'
 import { lawnMowingService } from '../content/services/lawn-mowing.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
@@ -54,8 +55,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'aeration-overseeding',
   'fertilization-weed-control',
   'landscaping',
+  'flower-bed-maintenance',
 ])
-assert.equal(publishedServiceDetails.length, 4)
+assert.equal(publishedServiceDetails.length, 5)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert.equal(
@@ -63,9 +65,9 @@ assert.equal(
   fertilizationWeedControlService,
 )
 assert.equal(getPublishedServiceDetail('landscaping'), landscapingService)
+assert.equal(getPublishedServiceDetail('flower-bed-maintenance'), flowerBedMaintenanceService)
 
 const unpublishedSlugs = [
-  'flower-bed-maintenance',
   'yard-cleanup',
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
@@ -87,6 +89,7 @@ assert.deepEqual(
     'service-aeration-overseeding',
     'service-fertilization-weed-control',
     'service-landscaping',
+    'service-flower-bed-maintenance',
   ],
 )
 
@@ -264,6 +267,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-aeration-overseeding'].canonicalUrl },
   { url: routesById['service-fertilization-weed-control'].canonicalUrl },
   { url: routesById['service-landscaping'].canonicalUrl },
+  { url: routesById['service-flower-bed-maintenance'].canonicalUrl },
 ])
 for (const slug of unpublishedSlugs) {
   assert.equal(
@@ -275,5 +279,5 @@ for (const slug of unpublishedSlugs) {
 assert.equal(routeLabels['service-lawn-mowing'], 'Lawn Mowing')
 
 console.log(
-  'Task 7 Lawn Mowing validation passed: exact ownership within the three-service publication allowlist, WebPage/Service/BreadcrumbList parity, five approved areas, required links, provenance/claim restraint, Spanish coverage, and sitemap isolation.',
+  'Task 7 Lawn Mowing validation passed: exact ownership within the five-service publication allowlist, WebPage/Service/BreadcrumbList parity, five approved areas, required links, provenance/claim restraint, Spanish coverage, and sitemap isolation.',
 )

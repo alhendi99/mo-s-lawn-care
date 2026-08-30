@@ -5,6 +5,7 @@ import path from 'node:path'
 import { getBreadcrumbItems, routeLabels, routeRegistry, routesById } from '../content/routes.ts'
 import { aerationOverseedingService } from '../content/services/aeration-overseeding.ts'
 import { fertilizationWeedControlService } from '../content/services/fertilization-weed-control.ts'
+import { flowerBedMaintenanceService } from '../content/services/flower-bed-maintenance.ts'
 import {
   getPublishedServiceDetail,
   publishedServiceDetails,
@@ -54,8 +55,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'aeration-overseeding',
   'fertilization-weed-control',
   'landscaping',
+  'flower-bed-maintenance',
 ])
-assert.equal(publishedServiceDetails.length, 4)
+assert.equal(publishedServiceDetails.length, 5)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert.equal(
@@ -63,9 +65,9 @@ assert.equal(
   fertilizationWeedControlService,
 )
 assert.equal(getPublishedServiceDetail('landscaping'), landscapingService)
+assert.equal(getPublishedServiceDetail('flower-bed-maintenance'), flowerBedMaintenanceService)
 
 const unpublishedTaskSlugs = [
-  'flower-bed-maintenance',
   'yard-cleanup',
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
@@ -101,6 +103,7 @@ assert.deepEqual(
     'service-aeration-overseeding',
     'service-fertilization-weed-control',
     'service-landscaping',
+    'service-flower-bed-maintenance',
   ],
 )
 
@@ -327,6 +330,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-aeration-overseeding'].canonicalUrl },
   { url: routesById['service-fertilization-weed-control'].canonicalUrl },
   { url: route.canonicalUrl },
+  { url: routesById['service-flower-bed-maintenance'].canonicalUrl },
 ])
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -335,5 +339,5 @@ for (const slug of unpublishedTaskSlugs) {
 assert.equal(routeLabels['service-landscaping'], 'Landscaping')
 
 console.log(
-  'Task 10 Landscaping validation passed: exact ownership, four-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, capability restraint, neutral three-image provenance, general-review labeling, Spanish coverage, and sitemap isolation.',
+  'Task 10 Landscaping validation passed: exact ownership, five-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, capability restraint, neutral three-image provenance, general-review labeling, Spanish coverage, and sitemap isolation.',
 )
