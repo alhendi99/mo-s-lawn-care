@@ -63,8 +63,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'flower-bed-maintenance',
   'yard-cleanup',
   'spring-cleanup',
+  'fall-cleanup-leaf-removal',
 ])
-assert.equal(publishedServiceDetails.length, 7)
+assert.equal(publishedServiceDetails.length, 8)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert.equal(
@@ -77,7 +78,6 @@ assert.equal(getPublishedServiceDetail('yard-cleanup'), yardCleanupService)
 assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 
 const unpublishedTaskSlugs = [
-  'fall-cleanup-leaf-removal',
   'grading',
   'snow-removal',
 ] as const
@@ -114,6 +114,7 @@ assert.deepEqual(
     'service-flower-bed-maintenance',
     'service-yard-cleanup',
     'service-spring-cleanup',
+    'service-fall-cleanup-leaf-removal',
   ],
 )
 
@@ -351,6 +352,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-flower-bed-maintenance'].canonicalUrl },
   { url: routesById['service-yard-cleanup'].canonicalUrl },
   { url: routesById['service-spring-cleanup'].canonicalUrl },
+  { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
 ])
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -359,5 +361,5 @@ for (const slug of unpublishedTaskSlugs) {
 assert.equal(routeLabels['service-fertilization-weed-control'], 'Fertilization & Weed Control')
 
 console.log(
-  'Task 9 Fertilization and Weed Control validation passed: exact consolidated ownership, seven-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, chemical/process/regulatory/safety/result restraint, general review and neutral image provenance, Spanish coverage, and sitemap isolation.',
+  'Task 9 Fertilization and Weed Control validation passed: exact consolidated ownership, eight-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, chemical/process/regulatory/safety/result restraint, general review and neutral image provenance, Spanish coverage, and sitemap isolation.',
 )

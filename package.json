@@ -21,7 +21,8 @@
     "validate:landscaping": "node --experimental-strip-types scripts/validate-landscaping-service.mts",
     "validate:flower-bed-maintenance": "node --experimental-strip-types scripts/validate-flower-bed-maintenance-service.mts",
     "validate:yard-cleanup": "node --experimental-strip-types scripts/validate-yard-cleanup-service.mts",
-    "validate:spring-cleanup": "node --experimental-strip-types scripts/validate-spring-cleanup-service.mts"
+    "validate:spring-cleanup": "node --experimental-strip-types scripts/validate-spring-cleanup-service.mts",
+    "validate:fall-cleanup-leaf-removal": "node --experimental-strip-types scripts/validate-fall-cleanup-leaf-removal-service.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

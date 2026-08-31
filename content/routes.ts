@@ -338,7 +338,9 @@ export const routeRegistry = [
     h1: 'Fall Cleanup & Leaf Removal in Des Moines, IA',
     description:
       "Clear leaves and seasonal debris with fall cleanup and leaf removal in Des Moines, IA. Request a free estimate from Mo's Lawn Care.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: [
       'home',
       'services',

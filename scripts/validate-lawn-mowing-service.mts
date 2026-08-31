@@ -60,8 +60,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'flower-bed-maintenance',
   'yard-cleanup',
   'spring-cleanup',
+  'fall-cleanup-leaf-removal',
 ])
-assert.equal(publishedServiceDetails.length, 7)
+assert.equal(publishedServiceDetails.length, 8)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert.equal(
@@ -74,7 +75,6 @@ assert.equal(getPublishedServiceDetail('yard-cleanup'), yardCleanupService)
 assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 
 const unpublishedSlugs = [
-  'fall-cleanup-leaf-removal',
   'grading',
   'snow-removal',
 ] as const
@@ -96,6 +96,7 @@ assert.deepEqual(
     'service-flower-bed-maintenance',
     'service-yard-cleanup',
     'service-spring-cleanup',
+    'service-fall-cleanup-leaf-removal',
   ],
 )
 
@@ -276,6 +277,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-flower-bed-maintenance'].canonicalUrl },
   { url: routesById['service-yard-cleanup'].canonicalUrl },
   { url: routesById['service-spring-cleanup'].canonicalUrl },
+  { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
 ])
 for (const slug of unpublishedSlugs) {
   assert.equal(
@@ -287,5 +289,5 @@ for (const slug of unpublishedSlugs) {
 assert.equal(routeLabels['service-lawn-mowing'], 'Lawn Mowing')
 
 console.log(
-  'Task 7 Lawn Mowing validation passed: exact ownership within the seven-service publication allowlist, WebPage/Service/BreadcrumbList parity, five approved areas, required links, provenance/claim restraint, Spanish coverage, and sitemap isolation.',
+  'Task 7 Lawn Mowing validation passed: exact ownership within the eight-service publication allowlist, WebPage/Service/BreadcrumbList parity, five approved areas, required links, provenance/claim restraint, Spanish coverage, and sitemap isolation.',
 )

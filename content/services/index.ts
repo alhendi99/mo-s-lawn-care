@@ -5,6 +5,7 @@ import {
 } from '../routes.ts'
 import { aerationOverseedingService } from './aeration-overseeding.ts'
 import { fertilizationWeedControlService } from './fertilization-weed-control.ts'
+import { fallCleanupLeafRemovalService } from './fall-cleanup-leaf-removal.ts'
 import { flowerBedMaintenanceService } from './flower-bed-maintenance.ts'
 import { landscapingService } from './landscaping.ts'
 import { lawnMowingService } from './lawn-mowing.ts'
@@ -88,6 +89,7 @@ export const publishedServiceDetails = [
   flowerBedMaintenanceService,
   yardCleanupService,
   springCleanupService,
+  fallCleanupLeafRemovalService,
 ] as const
 
 export const publishedServiceSlugs = publishedServiceDetails.map(({ slug }) => slug)

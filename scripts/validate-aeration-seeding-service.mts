@@ -63,8 +63,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'flower-bed-maintenance',
   'yard-cleanup',
   'spring-cleanup',
+  'fall-cleanup-leaf-removal',
 ])
-assert.equal(publishedServiceDetails.length, 7)
+assert.equal(publishedServiceDetails.length, 8)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert(getPublishedServiceDetail('lawn-mowing'))
 assert.equal(
@@ -77,7 +78,6 @@ assert.equal(getPublishedServiceDetail('yard-cleanup'), yardCleanupService)
 assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 
 const unpublishedTaskSlugs = [
-  'fall-cleanup-leaf-removal',
   'grading',
   'snow-removal',
 ] as const
@@ -108,6 +108,7 @@ assert.deepEqual(
     'service-flower-bed-maintenance',
     'service-yard-cleanup',
     'service-spring-cleanup',
+    'service-fall-cleanup-leaf-removal',
   ],
 )
 
@@ -306,6 +307,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-flower-bed-maintenance'].canonicalUrl },
   { url: routesById['service-yard-cleanup'].canonicalUrl },
   { url: routesById['service-spring-cleanup'].canonicalUrl },
+  { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
 ])
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -320,5 +322,5 @@ for (const futureArticle of [
 assert.equal(routeLabels['service-aeration-overseeding'], 'Aeration & Seeding')
 
 console.log(
-  'Task 8 Aeration and Seeding validation passed: exact consolidated ownership, seven published service details, WebPage/Service/BreadcrumbList parity, required links, article boundaries, claim restraint, approved aeration reviews, Spanish coverage, and sitemap isolation.',
+  'Task 8 Aeration and Seeding validation passed: exact consolidated ownership, eight published service details, WebPage/Service/BreadcrumbList parity, required links, article boundaries, claim restraint, approved aeration reviews, Spanish coverage, and sitemap isolation.',
 )

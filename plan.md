@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 13 complete; Task 14 not started
+- Phase: Incremental implementation — Task 14 complete; Task 15 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–13 completed; Task 14 and later are not authorized
+- Implementation status: Tasks 1–14 completed; Task 15 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -21,7 +21,8 @@
 - Task 11 repository baseline: clean `main` at `205329c`
 - Task 12 repository baseline: clean `main` at `27ea531`
 - Task 13 repository baseline: clean `main` at `4c3b2fe`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 14 or later
+- Task 14 repository baseline: clean `main` at `4c0dfcb`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 15 or later
 
 ## Evidence Labels
 
@@ -33,7 +34,25 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 13 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 14 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 14 only — Fall Cleanup and Leaf Removal Service Page. Task 15 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 14 began from clean `main` at `4c0dfcb` (`feat(seo): add spring cleanup service page`). `git status --short` returned no entries before the first edit.
+- **Ownership and consolidation:** `/services/fall-cleanup-leaf-removal` now owns commercial `leaf removal des moines ia` intent plus the four exact Fall Cleanup, Fall Yard Cleanup, Leaf Cleanup and Leaf Removal Service secondary phrases. It uses the exact approved title, description, H1 and query-free canonical. No separate fall, leaf, leaves, fall-yard, leaf-cleanup, fall-leaf or seasonal-leaf route was added.
+- **Commercial/article separation:** the service page answers whether Mo's offers Fall Cleanup and Leaf Removal and how to request an estimate. The future `/blog/fall-leaf-cleanup-des-moines` remains planned, unpublished, absent from the page and sitemap, and reserved for researched timing, organization, disposal and municipal informational guidance in Task 32; Task 35 retains future reciprocal-link hardening.
+- **Capability boundary:** visible copy makes only the approved high-level Fall Cleanup, Leaf Removal and seasonal-debris claims. It publishes no affirmative collection, bagging, curb placement, loading, hauling, disposal, composting, recycling, hard-surface clearing/blowing, branch/brush, equipment, mowing inclusion, bed work, landscaping, municipal-rule, fixed-date, weather, guaranteed-removal, price, package or contract claim. Property-specific scope and current availability remain estimate questions.
+- **Ownership separation and links:** contextual anchors lead to Yard Cleanup for broad/non-seasonal cleanup, Lawn Mowing for routine grass cutting, Snow Removal for a separate winter request and Contact through the shared estimate CTAs. Copy does not absorb Spring Cleanup, Flower Bed Maintenance or Landscaping and does not imply a fall/snow bundle. Snow Removal remains a branded 404 until Task 16.
+- **Architecture and publication:** one typed content module reuses the dynamic route, shared server renderer, metadata/schema builders, breadcrumbs, service areas, review/FAQ/CTA structures and translations. Exactly one service was added to the explicit allowlist, bringing published service details to eight and the sitemap to exactly ten URLs. No page-specific route/template, client JavaScript, dependency, Task 15 module or article module was added.
+- **Media provenance:** the autumnal seasonal asset, neutral property image, local gallery and before/after candidates were visually audited separately from filenames. The fall-looking asset does not prove Mo's authorship, service, season date, city, customer or result. The hero therefore uses `contact.webp` with observable neutral alt/caption language, and the optional work preview is omitted.
+- **Review provenance:** all 106 approved review records were searched. No excerpt explicitly mentions Fall Cleanup, Leaf Removal or leaf cleanup; the only word-form hit using “leaves” is a verb and is not leaf-service evidence. Rick Terrones and Zach Ten Haken remain verbatim, clearly labeled general company feedback, not fall-service proof. No Review or AggregateRating schema is emitted.
+- **Schema, source and lifecycle:** production source contains one WebPage, exactly one Service, one BreadcrumbList and the approved Organization/provider reference with matching Home → Services → Fall Cleanup & Leaf Removal breadcrumbs. Production returns 200 for Tasks 7–14 and 404 without redirects for Tasks 15–16, seven fall/leaf aliases, an arbitrary invalid slug and the future article. Query parameters do not change the English title or canonical.
+- **Browser and accessibility QA:** fresh production contexts pass at `1440×900`, `1280×800`, `390×844` and `320×568`. Checks cover the current service state, breadcrumb, all sections, reviews, five areas, FAQs, links, CTAs/footer, complete Spanish translation and UTM preservation, stable metadata/canonical, skip focus, desktop/mobile Escape and focus return, reduced motion, hero loading, zero overflow/clipping, no final/footer fixed-action collision and zero fresh-context console errors/warnings.
+- **Passed checks:** `pnpm validate:fall-cleanup-leaf-removal`; all Tasks 7–13 focused validators; Services/content/SEO/navigation/analytics/homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; production source/schema/query/sitemap and route-isolation assertions; Playwright browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits 1 at `eslint .`; Task 14 does not install ESLint or add dependency/lockfile churn.
+- **Task status:** Task 14 is `[x]` Completed because all four plan Definition of Done groups and all eight user-specified completion conditions pass. Task 15 was not started.
+- **Exact next action:** stage and commit only legitimate Task 14 changes as `feat(seo): add fall cleanup and leaf removal service page`, verify a clean worktree, report the local result and STOP before Task 15.
+
+### Prior checkpoint — Task 13 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 13 only — Spring Cleanup Service Page. Task 14 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 13 began from clean `main` at `4c3b2fe` (`feat(seo): add yard cleanup service page`). `git status --short` returned no entries before the first edit.
@@ -1277,7 +1296,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 14 — Fall Cleanup and Leaf Removal Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/fall-cleanup-leaf-removal/` as the single commercial page for fall cleanup and leaf removal.
 - **Why It Is Needed:** Both high-overlap advertised intents must be consolidated to avoid competing pages.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
@@ -1287,7 +1306,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Disposal/municipal rules, exact timing, weather, guaranteed removal, equipment, city labels, and cannibalization with the advice article.
 - **Validation:** Exact metadata/H1/canonical and intent split; content approval; Service/Breadcrumb schema; required links; media/review provenance; FAQ/CTA/responsive review.
 - **Tests:** Route/metadata/schema, required outbound links, forbidden split-route assertions, commercial-versus-informational ownership assertion, invalid slug 404.
-- **Definition of Done:** `[ ]` One accurate consolidated page exists; `[ ]` no competing seasonal/leaf page is added; `[ ]` article intent remains distinct; `[ ]` facts, links, schema, and metadata pass.
+- **Definition of Done:** `[x]` One accurate consolidated page exists; `[x]` no competing seasonal/leaf page is added; `[x]` article intent remains distinct; `[x]` facts, links, schema, and metadata pass.
 
 ### Task 15 — Grading Service Page
 
