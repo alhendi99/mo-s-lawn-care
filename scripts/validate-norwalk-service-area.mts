@@ -162,9 +162,10 @@ const expectedPublishedIds = [
   'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee',
   'service-area-norwalk',
   'service-area-altoona',
+  'about',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 18)
+assert.equal(buildSitemapEntries().length, 19)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 const pageSource = read('app/service-areas/[city]/page.tsx')
@@ -256,6 +257,6 @@ const task21EnglishStrings = [
 for (const english of new Set(task21EnglishStrings)) assert(spanish[english], `Missing Task 21 Spanish translation: ${english}`)
 
 const planSource = read('plan.md')
-assert.match(planSource, /### Task 23 — About Page[\s\S]*?\*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 23 — About Page[\s\S]*?\*\*Status:\*\* `\[x\]` Completed/)
 
-console.log('Task 21 Norwalk validation passed: exact ownership, independently audited nine-service UI/ItemList parity, three-city anti-doorway comparison, strict claim/provenance boundaries, four-city allowlist stability, Spanish coverage, and exact eighteen-URL sitemap lifecycle.')
+console.log('Task 21 Norwalk validation passed: exact ownership, independently audited nine-service UI/ItemList parity, three-city anti-doorway comparison, strict claim/provenance boundaries, four-city allowlist stability, Spanish coverage, and current nineteen-URL sitemap lifecycle.')

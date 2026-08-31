@@ -660,7 +660,9 @@ export const routeRegistry = [
     h1: "About Mo's Lawn Care",
     description:
       "Learn about Mo's Lawn Care and Snow Removal Services LLC, the team helping residential and commercial properties across the Des Moines metro.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home', 'contact'],
     outboundLinkIds: ['services', 'service-areas', 'our-work', 'reviews', 'contact'],
   }),

@@ -16,7 +16,7 @@ export function SiteFooter() {
   const { t } = useI18n()
 
   return (
-    <footer className="bg-evergreen pt-14 pb-28 text-paper md:pb-14">
+    <footer className="bg-evergreen pt-14 pb-28 text-paper md:pb-24">
       <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
         <div className="grid gap-12 border-t border-paper/15 pt-10 lg:grid-cols-[0.8fr_1.45fr_0.75fr_0.75fr] lg:gap-10">
           <div>

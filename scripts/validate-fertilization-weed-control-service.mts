@@ -118,6 +118,7 @@ assert.deepEqual(
     'service-area-waukee',
     'service-area-norwalk',
     'service-area-altoona',
+    'about',
   ],
 )
 
@@ -364,6 +365,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-waukee'].canonicalUrl },
   { url: routesById['service-area-norwalk'].canonicalUrl },
   { url: routesById['service-area-altoona'].canonicalUrl },
+  { url: routesById.about.canonicalUrl },
 ])
 
 assert.equal(routeLabels['service-fertilization-weed-control'], 'Fertilization & Weed Control')

@@ -18,7 +18,7 @@ export const approvedBusinessFacts = {
     status: 'verified' as const,
     basis: ['task-brief', 'existing-site-configuration', 'owner-confirmation'] as const,
   },
-  legalName: "Mo's Lawn Care and Snow Removal Services LLC",
+  legalName: "Mo's Lawn Care & Snow Removal Services LLC",
   displayName: "Mo's Lawn Care",
   shortName: "Mo's",
   wordmarkLine: 'Lawn Care & Snow Removal',

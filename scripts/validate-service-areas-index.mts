@@ -173,9 +173,10 @@ const expectedPublishedIds = [
   'service-area-waukee',
   'service-area-norwalk',
   'service-area-altoona',
+  'about',
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
-assert.equal(publishedIds.length, 18)
+assert.equal(publishedIds.length, 19)
 assert.deepEqual(
   buildSitemapEntries(),
   expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
@@ -246,7 +247,7 @@ for (const english of task18EnglishStrings) {
 
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 20 — Waukee Service-Area Page\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 23 — About Page\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 23 — About Page\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.equal(routesById.home.title, "Lawn Care & Snow Removal in Des Moines, IA | Mo's Lawn Care")
 assert.equal(routesById.home.h1, 'Lawn Care & Snow Removal in Des Moines, IA')
 assert.equal(routesById.home.canonicalUrl, 'https://www.moslawncaredsm.com/')

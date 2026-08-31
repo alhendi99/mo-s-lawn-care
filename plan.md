@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 22 complete; Task 23 not started
+- Phase: Incremental implementation — Task 23 complete; Task 24 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–22 completed; Task 23 and later are not authorized
+- Implementation status: Tasks 1–23 completed; Task 24 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -30,7 +30,8 @@
 - Task 20 repository baseline: clean `main` at `33ca36d`
 - Task 21 repository baseline: clean `main` at `fd781f6`
 - Task 22 repository baseline: clean `main` at `35710af`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 23 or later
+- Task 23 repository baseline: clean `main` at `b285461`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 24 or later
 
 ## Evidence Labels
 
@@ -42,7 +43,20 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 22 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 23 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 23 only — About Page. Task 24 and all later routes remain unauthorized and `[ ]` Not started.
+- **Ownership and identity:** `/about` now owns `mo's lawn care des moines` with the exact title, H1, description, secondary keywords and query-free canonical. Visible identity uses the owner-approved legal name `Mo's Lawn Care & Snow Removal Services LLC`; the exact approved metadata wording remains unchanged.
+- **Evidence and content boundary:** the page uses only the Service Area Business model, exact five-community coverage, ten published service paths, residential/commercial property context, centralized `170+ Google Reviews`, approved daily hours and established contact routes. It contains no founder/history, ownership, credential, scale, office/address/geo, customer/property/project count, award, guarantee or team-identity claim, and no media is used because identity/project provenance is insufficient.
+- **Architecture and duplication:** one lightweight static route and typed About link/group source reuse the interior shell, navigation/footer, metadata, schema, contact and translation architecture. The page provides company identity, a four-group service overview, five-area directory, trust facts and canonical next paths without duplicating Homepage, Services, Commercial or Service Areas content blocks.
+- **Schema and lifecycle:** the graph contains exactly one AboutPage, the central Organization and WebSite nodes and one BreadcrumbList with Home → About UI/schema parity. It contains no LocalBusiness, Person, PostalAddress, geo, Review, AggregateRating, Offer, Product or price. Exactly `/about` was promoted, producing the exact nineteen-URL sitemap; Our Work, Reviews, Contact and Blog remain branded non-redirecting 404s.
+- **Language, accessibility and performance:** all new visible strings have explicit Spanish translations while English metadata/canonical remain query-independent and full UTMs survive language switching. The page is statically prerendered with no media, fetch, form, dependency, page-specific client component or analytics event. Four required viewports pass one H1, current navigation, breadcrumb, keyboard/skip focus, mobile Escape/focus return, reduced motion, zero overflow, unclipped translated H1/CTAs and fixed-action/footer separation; a minimal shared footer padding correction removes a real desktop phone/email collision.
+- **Validation passed:** About, Altoona, Norwalk, Waukee, Ankeny, Service Areas, Commercial, every Tasks 7–16 focused validator, Services, content, SEO, navigation, analytics and homepage validators; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; production source/status/schema/query/sitemap/future-route assertions; four-viewport browser QA; exact-content duplication audit; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` command still exits at `eslint .`; Task 23 does not install ESLint.
+- **Task status:** Task 23 is `[x]` Completed because every factual claim has approved evidence, exact branded ownership and schema/links/CTA pass, and no fictional history or credential appears. Task 24 was not started.
+- **Exact next action:** commit only legitimate Task 23 changes as `feat(seo): add about page`, verify a clean worktree, report the local result and STOP before Task 24.
+
+### Previous checkpoint — Task 22 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 22 only — Altoona Service-Area Page. Task 23 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and publication:** `/service-areas/altoona-ia` now owns `lawn care altoona ia` with the exact approved title, H1, description, secondary keywords and query-free canonical. The explicit city allowlist contains exactly Ankeny, Waukee, Norwalk and Altoona; Des Moines remains homepage-owned and child paths, aliases, city/service permutations and unknown slugs remain branded 404s without redirects.
@@ -1595,7 +1609,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 23 — About Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/about/` as an accurate company identity and trust page based only on approved facts.
 - **Why It Is Needed:** Users need company context, but the repository lacks sufficient evidence for a fabricated brand story.
 - **Dependencies:** Tasks 1–3; owner confirmation of any company-history facts; Task 4 for contact tracking.
@@ -1605,7 +1619,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Customer reviews treated as company facts; invented founder narrative; unapproved owner portrait/name; disputed hours/address; exact rating/count drift.
 - **Validation:** Fact/evidence review for every company statement, exact metadata/H1/canonical/schema, link and CTA checks, semantic/accessibility review.
 - **Tests:** Route/metadata/H1, AboutPage/Breadcrumb schema with central organization, required links, and absence of prohibited unsupported fact fields.
-- **Definition of Done:** `[ ]` Every factual claim has approved evidence; `[ ]` exact branded ownership passes; `[ ]` schema/links/CTA are correct; `[ ]` no fictional history or credential appears.
+- **Definition of Done:** `[x]` Every factual claim has approved evidence; `[x]` exact branded ownership passes; `[x]` schema/links/CTA are correct; `[x]` no fictional history or credential appears.
 
 ### Task 24 — Our Work and Gallery Page
 

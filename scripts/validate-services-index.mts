@@ -156,6 +156,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-waukee'].canonicalUrl },
   { url: routesById['service-area-norwalk'].canonicalUrl },
   { url: routesById['service-area-altoona'].canonicalUrl },
+  { url: routesById.about.canonicalUrl },
 ])
 assert.equal(routeLabels.services, 'Services')
 

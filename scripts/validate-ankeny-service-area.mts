@@ -170,9 +170,10 @@ const expectedPublishedIds = [
   'service-area-waukee',
   'service-area-norwalk',
   'service-area-altoona',
+  'about',
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 18)
+assert.equal(buildSitemapEntries().length, 19)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 const pageSource = read('app/service-areas/[city]/page.tsx')
@@ -229,6 +230,6 @@ for (const english of new Set(task19EnglishStrings)) assert(spanish[english], `M
 
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 21 — Norwalk Service-Area Page\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 23 — About Page\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 23 — About Page\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
 console.log('Task 19 Ankeny validation passed: exact ownership, nine approved service links with UI/ItemList parity, WebPage/BreadcrumbList schema, four-city publication stability, strict claim boundaries, Spanish coverage, and current sitemap lifecycle.')

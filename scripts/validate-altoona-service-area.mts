@@ -162,12 +162,13 @@ const expectedPublishedIds = [
   'service-fall-cleanup-leaf-removal', 'service-grading', 'service-snow-removal',
   'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee',
   'service-area-norwalk', 'service-area-altoona',
+  'about',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 18)
+assert.equal(buildSitemapEntries().length, 19)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
-assert.equal(routesById.about.implementationStatus, 'planned')
-assert.equal(routesById.about.publicationStatus, 'planned')
+assert.equal(routesById.about.implementationStatus, 'implemented')
+assert.equal(routesById.about.publicationStatus, 'published')
 
 const forbiddenRegisteredPaths = [
   '/service-areas/des-moines-ia', '/service-areas/altoona', '/service-areas/altoona-iowa',
@@ -268,6 +269,6 @@ const task22EnglishStrings = [
 for (const english of new Set(task22EnglishStrings)) assert(spanish[english], `Missing Task 22 Spanish translation: ${english}`)
 
 const planSource = read('plan.md')
-assert.match(planSource, /### Task 23 — About Page[\s\S]*?\*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 23 — About Page[\s\S]*?\*\*Status:\*\* `\[x\]` Completed/)
 
-console.log(`Task 22 Altoona validation passed: exact ownership, independent nine-service audit, four-city UI/ItemList/schema/lifecycle parity, strict claim/provenance boundaries, Spanish coverage, exact eighteen-URL sitemap, and four-city similarities (${similarityResults.join('; ')}).`)
+console.log(`Task 22 Altoona validation passed: exact ownership, independent nine-service audit, four-city UI/ItemList/schema/lifecycle parity, strict claim/provenance boundaries, Spanish coverage, current nineteen-URL sitemap, and four-city similarities (${similarityResults.join('; ')}).`)
