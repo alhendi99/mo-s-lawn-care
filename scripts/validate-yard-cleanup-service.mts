@@ -63,8 +63,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
   'grading',
+  'snow-removal',
 ])
-assert.equal(publishedServiceDetails.length, 9)
+assert.equal(publishedServiceDetails.length, 10)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert.equal(
@@ -77,12 +78,7 @@ assert.equal(getPublishedServiceDetail('yard-cleanup'), yardCleanupService)
 assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 
 assert(getPublishedServiceDetail('grading'))
-const unpublishedTaskSlugs = ['snow-removal'] as const
-
-for (const slug of unpublishedTaskSlugs) {
-  assert.equal(getPublishedServiceDetail(slug), undefined, `Unpublished service leaked: ${slug}`)
-  assert.equal(routesById[`service-${slug}` as keyof typeof routesById].publicationStatus, 'planned')
-}
+assert(getPublishedServiceDetail('snow-removal'))
 
 const consolidatedAliases = [
   'overgrown-yard-cleanup',
@@ -115,6 +111,7 @@ assert.deepEqual(
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
     'service-grading',
+    'service-snow-removal',
   ],
 )
 
@@ -370,10 +367,8 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-spring-cleanup'].canonicalUrl },
   { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
   { url: routesById['service-grading'].canonicalUrl },
+  { url: routesById['service-snow-removal'].canonicalUrl },
 ])
-for (const slug of unpublishedTaskSlugs) {
-  assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
-}
 for (const alias of consolidatedAliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)
 }
@@ -381,5 +376,5 @@ for (const alias of consolidatedAliases) {
 assert.equal(routeLabels['service-yard-cleanup'], 'Yard Cleanup')
 
 console.log(
-  'Task 12 Yard Cleanup validation passed: exact consolidated ownership, nine-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict ordinary-cleanup boundaries, neutral hero without work preview, cleanup-specific review labeling, Spanish coverage, and sitemap isolation.',
+  'Task 12 Yard Cleanup validation passed: exact consolidated ownership, ten-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict ordinary-cleanup boundaries, neutral hero without work preview, cleanup-specific review labeling, Spanish coverage, and sitemap isolation.',
 )

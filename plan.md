@@ -1350,7 +1350,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 16 — Snow Removal Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/snow-removal/` for confirmed residential/commercial snow-removal intent.
 - **Why It Is Needed:** Snow removal is a prominent seasonal service with its own high-intent search demand.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
@@ -1360,7 +1360,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Emergency expectations, weather/availability promises, ice/salt liability, trigger depths, residential/commercial coverage differences, stale seasonal CTAs.
 - **Validation:** Capability approval, exact metadata/H1/canonical, Service/Breadcrumb schema, required links, relevant review/image labeling, native call/estimate behavior and mobile review.
 - **Tests:** Route/metadata/schema, required related links, forbidden-claim assertions/editorial check, invalid slug 404.
-- **Definition of Done:** `[ ]` Accurate snow page exists for approved property types; `[ ]` prohibited claims are absent; `[ ]` exact metadata/schema/links/CTAs pass; `[ ]` media and reviews are appropriately categorized.
+- **Definition of Done:** `[x]` Accurate snow page exists for approved property types; `[x]` prohibited claims are absent; `[x]` exact metadata/schema/links/CTAs pass; `[x]` media and reviews are appropriately categorized.
 
 ### Task 17 — Commercial Property Services Hub
 

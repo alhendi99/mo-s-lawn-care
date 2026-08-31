@@ -396,7 +396,9 @@ export const routeRegistry = [
     h1: 'Snow Removal Service in Des Moines, IA',
     description:
       "Reliable snow removal for residential and commercial properties in Des Moines, IA. Keep driveways and access areas clear with Mo's. Request an estimate.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: [
       'home',
       'services',

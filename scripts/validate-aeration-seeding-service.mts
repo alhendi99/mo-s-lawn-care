@@ -65,8 +65,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
   'grading',
+  'snow-removal',
 ])
-assert.equal(publishedServiceDetails.length, 9)
+assert.equal(publishedServiceDetails.length, 10)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert(getPublishedServiceDetail('lawn-mowing'))
 assert.equal(
@@ -79,12 +80,7 @@ assert.equal(getPublishedServiceDetail('yard-cleanup'), yardCleanupService)
 assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 
 assert(getPublishedServiceDetail('grading'))
-const unpublishedTaskSlugs = ['snow-removal'] as const
-
-for (const slug of unpublishedTaskSlugs) {
-  assert.equal(getPublishedServiceDetail(slug), undefined, `Unpublished service leaked: ${slug}`)
-  assert.equal(routesById[`service-${slug}` as keyof typeof routesById].publicationStatus, 'planned')
-}
+assert(getPublishedServiceDetail('snow-removal'))
 
 for (const alias of ['aeration', 'seeding', 'overseeding', 'core-aeration', 'lawn-seeding']) {
   assert.equal(getPublishedServiceDetail(alias), undefined, `Competing service alias resolves: ${alias}`)
@@ -109,6 +105,7 @@ assert.deepEqual(
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
     'service-grading',
+    'service-snow-removal',
   ],
 )
 
@@ -309,10 +306,8 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-spring-cleanup'].canonicalUrl },
   { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
   { url: routesById['service-grading'].canonicalUrl },
+  { url: routesById['service-snow-removal'].canonicalUrl },
 ])
-for (const slug of unpublishedTaskSlugs) {
-  assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
-}
 for (const futureArticle of [
   routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl,
   routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl,
@@ -323,5 +318,5 @@ for (const futureArticle of [
 assert.equal(routeLabels['service-aeration-overseeding'], 'Aeration & Seeding')
 
 console.log(
-  'Task 8 Aeration and Seeding validation passed: exact consolidated ownership, nine published service details, WebPage/Service/BreadcrumbList parity, required links, article boundaries, claim restraint, approved aeration reviews, Spanish coverage, and sitemap isolation.',
+  'Task 8 Aeration and Seeding validation passed: exact consolidated ownership, ten published service details, WebPage/Service/BreadcrumbList parity, required links, article boundaries, claim restraint, approved aeration reviews, Spanish coverage, and sitemap isolation.',
 )

@@ -232,7 +232,7 @@ export const seasons: Season[] = [
     months: 'Dec — Feb',
     image: '/seasons/winter.png',
     headline: 'Keep the driveway open.',
-    copy: 'When the snow comes, the job is access. Driveways, walks and entries cleared so you can get out and people can get in.',
+    copy: 'Snow Removal keeps the focus on driveways and access areas for residential and commercial properties. Exact property scope is confirmed through an estimate.',
     services: ['Snow Removal'],
 
     // Cold steel blue

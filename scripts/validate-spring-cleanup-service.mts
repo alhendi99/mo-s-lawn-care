@@ -55,8 +55,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
   'grading',
+  'snow-removal',
 ])
-assert.equal(publishedServiceDetails.length, 9)
+assert.equal(publishedServiceDetails.length, 10)
 assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 for (const slug of [
   'lawn-mowing',
@@ -69,11 +70,7 @@ for (const slug of [
   assert(getPublishedServiceDetail(slug), `Previously published service missing: ${slug}`)
 }
 assert(getPublishedServiceDetail('grading'))
-const unpublishedTaskSlugs = ['snow-removal'] as const
-for (const slug of unpublishedTaskSlugs) {
-  assert.equal(getPublishedServiceDetail(slug), undefined, `Unpublished service leaked: ${slug}`)
-  assert.equal(routesById[`service-${slug}`].publicationStatus, 'planned')
-}
+assert(getPublishedServiceDetail('snow-removal'))
 
 const aliases = [
   'spring-yard-cleanup',
@@ -106,6 +103,7 @@ assert.deepEqual(
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
     'service-grading',
+    'service-snow-removal',
   ],
 )
 
@@ -375,10 +373,8 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: route.canonicalUrl },
   { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
   { url: routesById['service-grading'].canonicalUrl },
+  { url: routesById['service-snow-removal'].canonicalUrl },
 ])
-for (const slug of unpublishedTaskSlugs) {
-  assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
-}
 for (const alias of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)
 }
@@ -391,5 +387,5 @@ assert.equal(
 assert.equal(routeLabels['service-spring-cleanup'], 'Spring Cleanup')
 
 console.log(
-  'Task 13 Spring Cleanup validation passed: exact commercial ownership, nine-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, and eleven-URL sitemap isolation.',
+  'Task 13 Spring Cleanup validation passed: exact commercial ownership, ten-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, and twelve-URL sitemap isolation.',
 )

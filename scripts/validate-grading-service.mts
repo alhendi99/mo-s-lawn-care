@@ -56,16 +56,17 @@ const expectedPublishedSlugs = [
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
   'grading',
+  'snow-removal',
 ] as const
 assert.deepEqual(publishedServiceSlugs, expectedPublishedSlugs)
-assert.equal(publishedServiceDetails.length, 9)
+assert.equal(publishedServiceDetails.length, 10)
 assert.equal(getPublishedServiceDetail('grading'), gradingService)
-for (const slug of expectedPublishedSlugs.slice(0, -1)) {
+for (const slug of expectedPublishedSlugs.filter((slug) => slug !== 'grading')) {
   assert(getPublishedServiceDetail(slug), `Previously published service missing: ${slug}`)
 }
-assert.equal(getPublishedServiceDetail('snow-removal'), undefined)
-assert.equal(routesById['service-snow-removal'].publicationStatus, 'planned')
-assert.equal(fs.existsSync(path.join(projectRoot, 'content/services/snow-removal.ts')), false)
+assert(getPublishedServiceDetail('snow-removal'))
+assert.equal(routesById['service-snow-removal'].publicationStatus, 'published')
+assert.equal(fs.existsSync(path.join(projectRoot, 'content/services/snow-removal.ts')), true)
 
 const aliases = [
   'yard-grading',
@@ -104,6 +105,7 @@ assert.deepEqual(
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
     'service-grading',
+    'service-snow-removal',
   ],
 )
 
@@ -355,11 +357,12 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-spring-cleanup'].canonicalUrl },
   { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
   { url: route.canonicalUrl },
+  { url: routesById['service-snow-removal'].canonicalUrl },
 ])
-assert.equal(buildSitemapEntries().length, 11)
+assert.equal(buildSitemapEntries().length, 12)
 assert.equal(
   buildSitemapEntries().some(({ url }) => url === routesById['service-snow-removal'].canonicalUrl),
-  false,
+  true,
 )
 for (const alias of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)
@@ -367,5 +370,5 @@ for (const alias of aliases) {
 assert.equal(routeLabels['service-grading'], 'Grading')
 
 console.log(
-  'Task 15 Grading validation passed: exact nine-service publication ownership, WebPage/Service/BreadcrumbList parity, required links, strict engineering/drainage/foundation/excavation/outcome boundaries, neutral media without work preview, general-review labeling, Spanish coverage, alias isolation, and exact eleven-URL sitemap lifecycle.',
+  'Task 15 Grading validation passed: exact ten-service publication ownership, WebPage/Service/BreadcrumbList parity, required links, strict engineering/drainage/foundation/excavation/outcome boundaries, neutral media without work preview, general-review labeling, Spanish coverage, alias isolation, and exact twelve-URL sitemap lifecycle.',
 )
