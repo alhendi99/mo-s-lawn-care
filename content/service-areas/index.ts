@@ -1,7 +1,8 @@
 import { ankenyServiceAreaContent } from './ankeny-ia.ts'
+import { waukeeServiceAreaContent } from './waukee-ia.ts'
 
 /** Only records in this explicit list may render through the city route. */
-export const publishedCityServiceAreas = [ankenyServiceAreaContent] as const
+export const publishedCityServiceAreas = [ankenyServiceAreaContent, waukeeServiceAreaContent] as const
 
 export const publishedCityServiceAreaSlugs = publishedCityServiceAreas.map(({ slug }) => slug)
 

@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 19 complete; Task 20 not started
+- Phase: Incremental implementation — Task 20 complete; Task 21 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–19 completed; Task 20 and later are not authorized
+- Implementation status: Tasks 1–20 completed; Task 21 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -27,7 +27,8 @@
 - Task 17 repository baseline: clean `main` at `158ded7`
 - Task 18 repository baseline: clean `main` at `b8bda37`
 - Task 19 repository baseline: clean `main` at `feebb9d` (guidance-only commit above product baseline `bcff35b`)
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 20 or later
+- Task 20 repository baseline: clean `main` at `33ca36d`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 21 or later
 
 ## Evidence Labels
 
@@ -39,7 +40,22 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 19 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 20 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 20 only — Waukee Service-Area Page. Task 21 and all later routes remain unauthorized and `[ ]` Not started.
+- **Ownership and publication:** `/service-areas/waukee-ia` now owns `lawn care waukee ia` with the exact approved title, H1, description, secondary keywords and query-free canonical. The explicit published-city allowlist contains exactly Ankeny and Waukee; unknown slugs plus Norwalk, Altoona and Des Moines child paths remain branded 404s without redirects.
+- **Approved service set:** an independent Waukee audit supports Spring Cleanup, Lawn Mowing, Aeration & Seeding, Fertilization & Weed Control, Landscaping, Yard Cleanup, Grading, Fall Cleanup & Leaf Removal and Snow Removal. Every canonical record explicitly lists Waukee in its approved service-area cities. Flower Bed Maintenance remains intentionally omitted as the narrower landscaping-adjacent intent outside Task 20’s selected mix.
+- **Anti-doorway decision:** the shared renderer now consumes a typed discriminated city-content model. Ankeny preserves its property-decision sequence; Waukee begins with a four-part year-spanning orientation, uses a different nine-service order with no identical summaries, then separates residential/commercial framing and supporting paths. A lightweight five-word-shingle guard reports about 11% shared visible phrasing, primarily unavoidable service/capability language, and manual side-by-side review confirms no city-name substitution pattern.
+- **Content and claim boundary:** Waukee copy describes only approved coverage, service selection, high-level residential/commercial context and estimate guidance. It adds no neighborhood, customer, project, crew, office/branch, address/geo, growth, property-count, proximity, response-time, contract, recurring schedule or guaranteed availability claim. No media or review appears because no approved source proves Waukee provenance.
+- **Schema and lifecycle:** the graph contains central Organization/WebSite references plus exactly one WebPage, one nine-entry ItemList and one BreadcrumbList with visible/schema parity. It contains no LocalBusiness, Waukee Organization, address, geo, Service, Offer, Product, Review, AggregateRating or price. Exactly Waukee was promoted, producing the exact sixteen-URL sitemap.
+- **Architecture, language and performance:** the existing dynamic city route and renderer remain the only city implementation path. Typed Ankeny/Waukee records select distinct editorial variants while sharing metadata, schema, breadcrumbs, navigation, footer, phone and translation architecture. Both routes statically prerender; Task 20 adds no dependency, media, form, fetch, page-specific client JavaScript or analytics event.
+- **Production/browser QA:** production checks passed for sixteen valid HTTP 200 routes, six required branded 404 routes, exact Waukee metadata/canonical/H1/schema/query behavior, Ankeny regression and the sixteen-URL sitemap. Fresh contexts at `1440×900`, `1280×800`, `390×844` and `320×568` passed English/Spanish, UTM preservation, stable SEO, breadcrumb, all service/supporting/area links, Ankeny 200 behavior, skip focus, mobile Escape/focus return, reduced motion, zero page overflow, footer/fixed-action separation, unclipped Spanish and clean valid-route consoles.
+- **Passed checks:** `pnpm validate:waukee`; Ankeny, Service Areas and Commercial validators; every Tasks 7–16 focused validator; Services, content, SEO, navigation, analytics and homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; production route/source/schema/sitemap checks; four-viewport browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits at `eslint .`; Task 20 does not install ESLint.
+- **Task status:** Task 20 is `[x]` Completed because the exact Definition of Done and expanded uniqueness, evidence, provenance, schema, lifecycle, responsive, regression and scope requirements pass. Task 21 was not started.
+- **Exact next action:** commit only legitimate Task 20 changes as `feat(seo): add waukee service area page`, verify a clean worktree, report the local result and STOP before Task 21.
+
+### Prior checkpoint — Task 19 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 19 only — Ankeny Service-Area Page. Task 20 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and publication:** `/service-areas/ankeny-ia` now owns `lawn care ankeny ia` with the exact approved title, H1, description, secondary keywords and query-free canonical. One explicit published-city allowlist entry renders Ankeny; unknown slugs and the Waukee, Norwalk, Altoona and Des Moines child paths remain branded 404s without redirects.
@@ -1484,7 +1500,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 20 — Waukee Service-Area Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/service-areas/waukee-ia/` as a factual, independently useful Waukee-wide service page.
 - **Why It Is Needed:** Waukee is confirmed, but unique intent coverage cannot rely on mechanical city substitution.
 - **Dependencies:** Tasks 1–19; verified service availability and Task 4 conversion tracking.
@@ -1494,7 +1510,18 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Same wording/order as Ankeny with city replacement; fake neighborhoods/projects/reviews/address/crew; unverified service coverage; cross-city duplicate canonicals.
 - **Validation:** Four-city comparative editorial review, exact head/H1/canonical, item/schema parity, approved links, CTA event context, responsive/accessibility and no local-fact fabrication.
 - **Tests:** Static-param route, exact metadata/schema, no LocalBusiness/address, required links, content uniqueness heuristic/editorial fixture, invalid city 404.
-- **Definition of Done:** `[ ]` Waukee page stands alone without doorway patterns; `[ ]` all facts/services are approved; `[ ]` exact metadata/schema/links/CTA pass; `[ ]` no false location attribution exists.
+- **Definition of Done:** `[x]` Waukee page stands alone without doorway patterns; `[x]` all facts/services are approved; `[x]` exact metadata/schema/links/CTA pass; `[x]` no false location attribution exists.
+
+#### Task 20 implementation record
+
+- **Completed files:** new `content/service-areas/waukee-ia.ts`, new `content/service-areas/types.ts`, new `scripts/validate-waukee-service-area.mts`, shared city renderer/content-model extension, Waukee allowlist and lifecycle/link additions, complete Spanish strings, package validator command, lifecycle-only inherited validator updates and this plan record.
+- **Ownership/content decision:** Waukee uses a year-spanning service-orientation section before a differently ordered service directory, followed by a two-context property scope gate, supporting-path directory, neutral related areas and Waukee estimate CTA. This sequence remains useful without relying on invented Waukee facts.
+- **Availability decision:** each of the nine displayed services has explicit Waukee support in its approved canonical service record. Flower Bed Maintenance is intentionally omitted because its narrower landscaping-adjacent intent is outside Task 20’s selected service mix, although its canonical page remains published and supports Waukee estimate requests.
+- **Uniqueness decision:** Ankeny and Waukee share one renderer but use different discriminated editorial modes. Waukee changes section order, headings, service order, service summaries, property framing, supporting links and CTA copy; no service summary is identical and the focused shingle heuristic stays below its 20% ceiling at about 11%.
+- **Provenance decision:** no media or review is displayed because no approved record establishes Waukee-specific provenance. No city availability, service capability, response, project or presence claim is inferred from images, reviews, filenames or general practice.
+- **Schema/lifecycle decision:** the same typed nine-service source drives visible rows and ItemList, while shared breadcrumbs provide Home → Service Areas → Waukee. Exactly Waukee was promoted; Ankeny remains published; Norwalk and Altoona remain planned; the sitemap contains exactly sixteen canonical URLs.
+- **Validation result:** the focused Waukee validator, Ankeny/Service Areas/Commercial regressions, Tasks 7–16 and shared validators, typecheck, production build, source/route/schema/sitemap assertions and four-viewport browser QA pass. Lint remains unavailable because ESLint is not installed. All four exact Task 20 Definition of Done checks are satisfied.
+- **Final result:** Task 20 is complete and work stops before Task 21.
 
 ### Task 21 — Norwalk Service-Area Page
 

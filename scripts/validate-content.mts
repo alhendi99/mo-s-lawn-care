@@ -90,6 +90,7 @@ assertTaskOneFoundation({
     'commercial-property-services',
     'service-areas',
     'service-area-ankeny',
+    'service-area-waukee',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

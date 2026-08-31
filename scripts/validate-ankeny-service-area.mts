@@ -45,10 +45,11 @@ assert.equal(metadata.description, route.description)
 assert.equal(metadata.alternates?.canonical, route.canonicalUrl)
 assert.equal((metadata.robots as { index?: boolean }).index, true)
 
-assert.deepEqual(publishedCityServiceAreaSlugs, ['ankeny-ia'])
-assert.equal(publishedCityServiceAreas.length, 1)
+assert.deepEqual(publishedCityServiceAreaSlugs, ['ankeny-ia', 'waukee-ia'])
+assert.equal(publishedCityServiceAreas.length, 2)
 assert.equal(getPublishedCityServiceArea('ankeny-ia'), ankenyServiceAreaContent)
-for (const invalid of ['waukee-ia', 'norwalk-ia', 'altoona-ia', 'des-moines-ia', 'ankeny', 'ankeny-iowa', 'invalid-city']) {
+assert(getPublishedCityServiceArea('waukee-ia'))
+for (const invalid of ['norwalk-ia', 'altoona-ia', 'des-moines-ia', 'ankeny', 'ankeny-iowa', 'invalid-city']) {
   assert.equal(getPublishedCityServiceArea(invalid), undefined)
 }
 
@@ -137,7 +138,9 @@ assert.deepEqual(ankenyRelatedAreaLinks.map(({ routeId, href }) => [routeId, hre
   ['service-area-norwalk', '/service-areas/norwalk-ia'],
   ['service-area-altoona', '/service-areas/altoona-ia'],
 ])
-for (const futureId of ['service-area-waukee', 'service-area-norwalk', 'service-area-altoona'] as const) {
+assert.equal(routesById['service-area-waukee'].implementationStatus, 'implemented')
+assert.equal(routesById['service-area-waukee'].publicationStatus, 'published')
+for (const futureId of ['service-area-norwalk', 'service-area-altoona'] as const) {
   assert.equal(routesById[futureId].implementationStatus, 'planned')
   assert.equal(routesById[futureId].publicationStatus, 'planned')
 }
@@ -162,9 +165,10 @@ const expectedPublishedIds = [
   'commercial-property-services',
   'service-areas',
   'service-area-ankeny',
+  'service-area-waukee',
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 15)
+assert.equal(buildSitemapEntries().length, 16)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 const pageSource = read('app/service-areas/[city]/page.tsx')
@@ -220,6 +224,6 @@ const task19EnglishStrings = [
 for (const english of new Set(task19EnglishStrings)) assert(spanish[english], `Missing Task 19 Spanish translation: ${english}`)
 
 const planSource = read('plan.md')
-assert.match(planSource, /### Task 20 — Waukee Service-Area Page[\s\S]*?\*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 21 — Norwalk Service-Area Page[\s\S]*?\*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Task 19 Ankeny validation passed: exact ownership, nine approved service links with UI/ItemList parity, WebPage/BreadcrumbList schema, explicit one-city allowlist, strict claim boundaries, future-city isolation, Spanish coverage, and exact fifteen-URL sitemap lifecycle.')
+console.log('Task 19 Ankeny validation passed: exact ownership, nine approved service links with UI/ItemList parity, WebPage/BreadcrumbList schema, explicit two-city allowlist with Ankeny preserved, strict claim boundaries, future-city isolation, Spanish coverage, and exact sixteen-URL sitemap lifecycle.')

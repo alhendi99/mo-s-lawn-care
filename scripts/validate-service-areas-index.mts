@@ -70,7 +70,10 @@ assert.equal(serviceAreaHubItems.slice(1).length, 4)
 assert.equal(routesById['service-area-ankeny'].implementationStatus, 'implemented')
 assert.equal(routesById['service-area-ankeny'].publicationStatus, 'published')
 assert.equal(routesById['service-area-ankeny'].indexability, 'indexable')
-for (const cityId of expectedAreaIds.slice(2)) {
+assert.equal(routesById['service-area-waukee'].implementationStatus, 'implemented')
+assert.equal(routesById['service-area-waukee'].publicationStatus, 'published')
+assert.equal(routesById['service-area-waukee'].indexability, 'indexable')
+for (const cityId of expectedAreaIds.slice(3)) {
   assert.equal(routesById[cityId].implementationStatus, 'planned')
   assert.equal(routesById[cityId].publicationStatus, 'planned')
   assert.equal(routesById[cityId].indexability, 'indexable')
@@ -166,9 +169,10 @@ const expectedPublishedIds = [
   'commercial-property-services',
   'service-areas',
   'service-area-ankeny',
+  'service-area-waukee',
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
-assert.equal(publishedIds.length, 15)
+assert.equal(publishedIds.length, 16)
 assert.deepEqual(
   buildSitemapEntries(),
   expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
@@ -244,5 +248,5 @@ assert.equal(routesById.home.h1, 'Lawn Care & Snow Removal in Des Moines, IA')
 assert.equal(routesById.home.canonicalUrl, 'https://www.moslawncaredsm.com/')
 
 console.log(
-  'Task 18 Service Areas validation passed: exact five-area UI/ItemList parity, homepage-owned Des Moines path, CollectionPage/BreadcrumbList graph, Ankeny published with three future child routes unpublished, strict geographic/schema/alias boundaries, and exact fifteen-URL sitemap lifecycle.',
+  'Task 18 Service Areas validation passed: exact five-area UI/ItemList parity, homepage-owned Des Moines path, CollectionPage/BreadcrumbList graph, Ankeny and Waukee published with two future child routes unpublished, strict geographic/schema/alias boundaries, and exact sixteen-URL sitemap lifecycle.',
 )

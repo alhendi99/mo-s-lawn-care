@@ -115,6 +115,7 @@ assert.deepEqual(
     'commercial-property-services',
     'service-areas',
     'service-area-ankeny',
+    'service-area-waukee',
   ],
 )
 
@@ -374,6 +375,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['commercial-property-services'].canonicalUrl },
   { url: routesById['service-areas'].canonicalUrl },
   { url: routesById['service-area-ankeny'].canonicalUrl },
+  { url: routesById['service-area-waukee'].canonicalUrl },
 ])
 for (const alias of consolidatedAliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)

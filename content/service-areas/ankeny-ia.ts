@@ -1,5 +1,6 @@
 import { routeLabels, routesById } from '../routes.ts'
 import type { RouteId } from '../types.ts'
+import type { CityServiceAreaContent } from './types.ts'
 
 type AnkenyServiceRouteId = Extract<RouteId, `service-${string}`>
 
@@ -124,7 +125,48 @@ export const ankenyRelatedAreaLinks = ankenyRelatedAreas.map((area) => ({
 
 export const ankenyServiceAreaContent = {
   slug: 'ankeny-ia',
+  cityName: 'Ankeny',
   routeId: 'service-area-ankeny',
+  schemaItemListName: 'Lawn care services available for Ankeny estimate requests',
+  hero: {
+    eyebrow: 'Ankeny property care',
+    summary: 'Use this Ankeny lawn service guide to compare mowing, lawn-condition care, landscaping, yard cleanup and seasonal options before requesting a property-specific estimate.',
+    cta: 'Request a Free Estimate in Ankeny',
+  },
+  servicesSection: {
+    eyebrow: 'Choose by property need',
+    heading: 'Nine clear service paths for Ankeny.',
+    introduction: 'Lawn mowing in Ankeny, landscaping in Ankeny, yard cleanup in Ankeny and snow removal in Ankeny each retain their own service details. The links below help keep those choices distinct.',
+    allServicesLabel: 'Explore all Services',
+  },
   services: ankenyServiceItems,
+  editorial: {
+    kind: 'property-decision',
+    careSection: {
+      eyebrow: 'A practical way to choose',
+      heading: 'Build the request around the property.',
+      introduction: 'The useful distinction is the work to discuss—not a city-wide package or a promise that every property follows the same plan.',
+      items: ankenyCareSteps,
+    },
+    estimateSection: {
+      eyebrow: 'Residential and commercial context',
+      heading: 'What helps frame an estimate request.',
+      introduction: 'Mo’s approved service records support residential and commercial property conversations. These three details help establish the starting point without inventing a standard package.',
+      items: ankenyEstimateDetails,
+      supportingRouteId: 'commercial-property-services',
+    },
+  },
+  relatedSection: {
+    eyebrow: 'Coverage hierarchy',
+    heading: 'Other service areas.',
+    introduction: 'Use the Service Areas hub to review the full five-community directory. These links do not imply proximity, an office or a response time.',
+    hubLabel: 'View Service Areas',
+  },
   relatedAreas: ankenyRelatedAreaLinks,
-} as const
+  finalCta: {
+    eyebrow: 'Ankeny estimate path',
+    heading: 'Request a Free Estimate in Ankeny',
+    description: 'Share the property area and main service concern through Mo’s established contact path.',
+    buttonLabel: 'Start an Estimate Request',
+  },
+} as const satisfies CityServiceAreaContent
