@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 20 complete; Task 21 not started
+- Phase: Incremental implementation — Task 21 complete; Task 22 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–20 completed; Task 21 and later are not authorized
+- Implementation status: Tasks 1–21 completed; Task 22 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -28,7 +28,8 @@
 - Task 18 repository baseline: clean `main` at `b8bda37`
 - Task 19 repository baseline: clean `main` at `feebb9d` (guidance-only commit above product baseline `bcff35b`)
 - Task 20 repository baseline: clean `main` at `33ca36d`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 21 or later
+- Task 21 repository baseline: clean `main` at `fd781f6`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 22 or later
 
 ## Evidence Labels
 
@@ -40,7 +41,22 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 20 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 21 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 21 only — Norwalk Service-Area Page. Task 22 and all later routes remain unauthorized and `[ ]` Not started.
+- **Ownership and publication:** `/service-areas/norwalk-ia` now owns `lawn care norwalk ia` with the exact approved title, H1, description, secondary keywords and query-free canonical. The explicit city allowlist contains exactly Ankeny, Waukee and Norwalk; Altoona, Des Moines child paths, aliases and unknown slugs remain branded 404s without redirects.
+- **Approved service set:** an independent Norwalk audit supports Lawn Mowing, Aeration & Seeding, Landscaping, Grading, Yard Cleanup, Spring Cleanup, Fertilization & Weed Control, Fall Cleanup & Leaf Removal and Snow Removal. Every canonical record explicitly lists Norwalk and is published. Flower Bed Maintenance remains intentionally omitted because its narrower existing-bed intent falls outside this city guide’s selected service mix.
+- **Anti-doorway decision:** Norwalk uses a third typed editorial mode: immediate priority framing precedes a uniquely ordered service directory, then ongoing-versus-time-specific guidance and estimate-preparation paths. No summary is copied from Ankeny or Waukee. Five-word-shingle comparison reports 11.2% for Ankeny/Waukee, 8.8% for Ankeny/Norwalk and 5.4% for Waukee/Norwalk; manual comparison confirms independently written section sequence, openings, summaries, related-area copy and CTA.
+- **Content and provenance boundary:** Norwalk copy adds no neighborhood, subdivision, landmark, local weather, project, customer, crew, office/branch, address/geo, proximity, response, price, contract, schedule, bundle, availability or guarantee claim. No media or review appears because no approved source establishes Norwalk provenance.
+- **Schema and lifecycle:** the graph contains central Organization/WebSite references plus exactly one WebPage, one nine-entry ItemList and one BreadcrumbList with exact visible/schema parity. It contains no LocalBusiness, city Organization, address, geo, Place, Service, Offer, Product, Review, AggregateRating or price. Exactly Norwalk was promoted, producing the exact seventeen-URL sitemap; Altoona remains planned.
+- **Architecture, language and performance:** the existing dynamic city route remains the only renderer. One minimal `priority-map` discriminant extends the shared typed content model without adding dependencies, media, forms, fetches, page-specific client JavaScript or analytics events. All new visible strings have Spanish translations while metadata and canonical remain English/query-independent.
+- **Production/browser QA:** all seventeen published routes return HTTP 200; Altoona, the Des Moines child, two Norwalk aliases and an arbitrary city return branded non-redirecting 404s. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` contexts passed English/Spanish, UTM preservation, stable SEO, current navigation, breadcrumb, service/supporting/area links, native phone/email, skip focus, mobile Escape/focus return, reduced motion, zero overflow, unclipped translated headings, footer/fixed-action separation and clean valid-route consoles.
+- **Passed checks:** Norwalk, Waukee, Ankeny, Service Areas and Commercial validators; every Tasks 7–16 focused validator; Services, content, SEO, navigation, analytics and homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; production source/route/schema/query/sitemap assertions; four-viewport browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` command still exits at `eslint .`; Task 21 does not install ESLint.
+- **Task status:** Task 21 is `[x]` Completed because its exact Definition of Done and the expanded uniqueness, evidence, provenance, schema, lifecycle, responsive, regression and scope requirements pass. Task 22 was not started.
+- **Exact next action:** commit only legitimate Task 21 changes as `feat(seo): add norwalk service area page`, verify a clean worktree, report the local result and STOP before Task 22.
+
+### Prior checkpoint — Task 20 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 20 only — Waukee Service-Area Page. Task 21 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and publication:** `/service-areas/waukee-ia` now owns `lawn care waukee ia` with the exact approved title, H1, description, secondary keywords and query-free canonical. The explicit published-city allowlist contains exactly Ankeny and Waukee; unknown slugs plus Norwalk, Altoona and Des Moines child paths remain branded 404s without redirects.
@@ -1525,7 +1541,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 21 — Norwalk Service-Area Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/service-areas/norwalk-ia/` as a distinct, truthful Norwalk-wide lawn-care page.
 - **Why It Is Needed:** Norwalk is confirmed and requires a city-intent owner within the anti-doorway rules.
 - **Dependencies:** Tasks 1–20; verified service availability and Task 4 conversion tracking.
@@ -1535,7 +1551,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Fabricated neighborhoods, customer scale, jobs, local team/address, response times; reused city paragraphs; false image/review locations; non-approved services.
 - **Validation:** Comparative uniqueness and factual review, exact metadata/canonical/H1, visible/schema service parity, link graph, CTA context, responsive/keyboard review.
 - **Tests:** Static route/metadata/schema, no city business/address, required links, uniqueness guard/editorial check, invalid city 404.
-- **Definition of Done:** `[ ]` Norwalk page is independently readable and factual; `[ ]` exact ownership and verified service set pass; `[ ]` schema/links/CTA work; `[ ]` no unverified local attribution appears.
+- **Definition of Done:** `[x]` Norwalk page is independently readable and factual; `[x]` exact ownership and verified service set pass; `[x]` schema/links/CTA work; `[x]` no unverified local attribution appears.
+
+#### Task 21 implementation record
+
+- **Completed files:** new `content/service-areas/norwalk-ia.ts`, new `scripts/validate-norwalk-service-area.mts`, minimal shared `priority-map` type/renderer extension, Norwalk allowlist and lifecycle/link additions, complete Spanish strings, package validator command, lifecycle-only inherited validator updates and this plan record.
+- **Editorial decision:** Norwalk begins with immediate property-question priorities, uses its own nine-service sequence, separates ongoing from time-specific needs without implying a program, and closes with estimate-preparation and supporting paths. The shared renderer still permits a different Altoona structure when Task 22 is separately authorized.
+- **Availability decision:** each displayed service independently has explicit Norwalk coverage in its published canonical record. Flower Bed Maintenance remains intentionally omitted as the narrower existing-bed path outside the selected city-guide mix.
+- **Provenance decision:** no image or review appears; nothing is labeled as Norwalk work, feedback, customer property or project. Coverage is not used to infer local facts, business presence, response or service results.
+- **Schema/lifecycle decision:** the nine-service source drives both UI and ItemList; shared breadcrumbs provide Home → Service Areas → Norwalk. Exactly Norwalk was promoted, Ankeny/Waukee remain published, Altoona remains planned, and the sitemap contains exactly seventeen canonical URLs.
+- **Validation result:** the focused validator, three-city automated/manual uniqueness audit, Tasks 7–20 regressions, typecheck, production build, source/route/schema/sitemap checks and four-viewport browser QA pass. Lint remains unavailable because ESLint is not installed.
+- **Final result:** Task 21 is complete and work stops before Task 22.
 
 ### Task 22 — Altoona Service-Area Page
 

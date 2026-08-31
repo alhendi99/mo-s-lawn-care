@@ -91,6 +91,7 @@ assertTaskOneFoundation({
     'service-areas',
     'service-area-ankeny',
     'service-area-waukee',
+    'service-area-norwalk',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

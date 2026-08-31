@@ -73,11 +73,12 @@ assert.equal(routesById['service-area-ankeny'].indexability, 'indexable')
 assert.equal(routesById['service-area-waukee'].implementationStatus, 'implemented')
 assert.equal(routesById['service-area-waukee'].publicationStatus, 'published')
 assert.equal(routesById['service-area-waukee'].indexability, 'indexable')
-for (const cityId of expectedAreaIds.slice(3)) {
-  assert.equal(routesById[cityId].implementationStatus, 'planned')
-  assert.equal(routesById[cityId].publicationStatus, 'planned')
-  assert.equal(routesById[cityId].indexability, 'indexable')
-}
+assert.equal(routesById['service-area-norwalk'].implementationStatus, 'implemented')
+assert.equal(routesById['service-area-norwalk'].publicationStatus, 'published')
+assert.equal(routesById['service-area-norwalk'].indexability, 'indexable')
+assert.equal(routesById['service-area-altoona'].implementationStatus, 'planned')
+assert.equal(routesById['service-area-altoona'].publicationStatus, 'planned')
+assert.equal(routesById['service-area-altoona'].indexability, 'indexable')
 assert.equal(routesById.contact.implementationStatus, 'planned')
 assert.equal(routesById.contact.publicationStatus, 'planned')
 assert.deepEqual(serviceAreaSupportingRouteLinks.map(({ routeId, href }) => [routeId, href]), [
@@ -170,9 +171,10 @@ const expectedPublishedIds = [
   'service-areas',
   'service-area-ankeny',
   'service-area-waukee',
+  'service-area-norwalk',
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
-assert.equal(publishedIds.length, 16)
+assert.equal(publishedIds.length, 17)
 assert.deepEqual(
   buildSitemapEntries(),
   expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
@@ -242,11 +244,12 @@ for (const english of task18EnglishStrings) {
 }
 
 const planSource = read('plan.md')
-assert.match(planSource, /### Task 20 — Waukee Service-Area Page[\s\S]*?\*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 20 — Waukee Service-Area Page\n\n- \*\*Status:\*\* `\[x\]` Completed/)
+assert.match(planSource, /### Task 22 — Altoona Service-Area Page\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 assert.equal(routesById.home.title, "Lawn Care & Snow Removal in Des Moines, IA | Mo's Lawn Care")
 assert.equal(routesById.home.h1, 'Lawn Care & Snow Removal in Des Moines, IA')
 assert.equal(routesById.home.canonicalUrl, 'https://www.moslawncaredsm.com/')
 
 console.log(
-  'Task 18 Service Areas validation passed: exact five-area UI/ItemList parity, homepage-owned Des Moines path, CollectionPage/BreadcrumbList graph, Ankeny and Waukee published with two future child routes unpublished, strict geographic/schema/alias boundaries, and exact sixteen-URL sitemap lifecycle.',
+  'Task 18 Service Areas validation passed: exact five-area UI/ItemList parity, homepage-owned Des Moines path, CollectionPage/BreadcrumbList graph, Ankeny, Waukee and Norwalk published with Altoona unpublished, strict geographic/schema/alias boundaries, and current sitemap lifecycle.',
 )

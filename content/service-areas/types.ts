@@ -68,6 +68,36 @@ type YearSpanningEditorial = Readonly<{
   }>
 }>
 
+type PriorityMapEditorial = Readonly<{
+  kind: 'priority-map'
+  prioritySection: Readonly<{
+    eyebrow: string
+    heading: string
+    introduction: string
+    items: readonly Readonly<{ number: string; title: string; description: string }>[]
+  }>
+  timingSection: Readonly<{
+    eyebrow: string
+    heading: string
+    introduction: string
+    ongoing: Readonly<{ heading: string; description: string }>
+    timeSpecific: Readonly<{ heading: string; description: string }>
+    note: string
+  }>
+  estimateSection: Readonly<{
+    eyebrow: string
+    heading: string
+    introduction: string
+    items: readonly Readonly<{ title: string; description: string }>[]
+    links: readonly Readonly<{
+      routeId: Extract<RouteId, 'services' | 'service-areas' | 'commercial-property-services'>
+      name: string
+      href: string
+      description: string
+    }>[]
+  }>
+}>
+
 export type CityServiceAreaContent = Readonly<{
   slug: string
   cityName: string
@@ -85,7 +115,7 @@ export type CityServiceAreaContent = Readonly<{
     allServicesLabel: string
   }>
   services: readonly CityServiceItem[]
-  editorial: PropertyDecisionEditorial | YearSpanningEditorial
+  editorial: PropertyDecisionEditorial | YearSpanningEditorial | PriorityMapEditorial
   relatedSection: Readonly<{
     eyebrow: string
     heading: string

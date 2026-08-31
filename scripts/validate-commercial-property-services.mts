@@ -170,11 +170,11 @@ for (const id of ['our-work', 'reviews', 'contact'] as const) {
 const publishedIds = routeRegistry
   .filter(({ publicationStatus }) => publicationStatus === 'published')
   .map(({ id }) => id)
-assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee'])
-assert.equal(publishedIds.length, 16)
-assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 16)
+assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk'])
+assert.equal(publishedIds.length, 17)
+assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 17)
 
-const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee'] as const
+const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk'] as const
 assert.deepEqual(buildSitemapEntries(), expectedSitemap.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 for (const alias of [
@@ -268,5 +268,5 @@ for (const source of [route.h1, ...commercialServiceItems.flatMap(({ group, summ
 }
 
 console.log(
-  `Task 17 Commercial Property Services validation passed: ${commercialServiceItems.length} evidence-backed services, exact WebPage/ItemList/BreadcrumbList parity, 16 sitemap URLs, Service Areas, Ankeny and Waukee published, and three later supporting routes left unpublished.`,
+  `Task 17 Commercial Property Services validation passed: ${commercialServiceItems.length} evidence-backed services, exact WebPage/ItemList/BreadcrumbList parity, current sitemap lifecycle, and published city routes preserved.`,
 )

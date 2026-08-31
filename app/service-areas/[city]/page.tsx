@@ -98,6 +98,27 @@ export default async function CityServiceAreaPage({ params }: CityServiceAreaPag
           </section>
         ) : null}
 
+        {content.editorial.kind === 'priority-map' ? (
+          <section aria-labelledby={sectionId('priority')} className="bg-[#e5ecd9] py-18 sm:py-26">
+            <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.52fr_1fr] lg:gap-20">
+              <header>
+                <p className="eyebrow text-[#315b37]"><Tr text={content.editorial.prioritySection.eyebrow} /></p>
+                <h2 id={sectionId('priority')} className="display-md mt-5 max-w-[12ch] text-[#1d2b1f]"><Tr text={content.editorial.prioritySection.heading} /></h2>
+                <p className="mt-6 max-w-lg text-[1.0625rem] leading-relaxed text-[#354139]"><Tr text={content.editorial.prioritySection.introduction} /></p>
+              </header>
+              <ol className="border-b border-[#315b37]/22">
+                {content.editorial.prioritySection.items.map((item) => (
+                  <li key={item.number} className="grid gap-4 border-t border-[#315b37]/22 py-8 sm:grid-cols-[3rem_minmax(0,0.7fr)_minmax(0,1fr)] sm:gap-8">
+                    <p className="pt-1 text-[0.68rem] font-bold tracking-[0.16em] text-[#315b37] tabular-nums">{item.number}</p>
+                    <h3 className="text-2xl text-[#1d2b1f] uppercase"><Tr text={item.title} /></h3>
+                    <p className="text-sm leading-relaxed text-[#354139] sm:text-[0.98rem]"><Tr text={item.description} /></p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        ) : null}
+
         <section aria-labelledby={sectionId('services')} className="bg-paper py-18 sm:py-26">
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <header className="grid gap-7 border-t border-[color:var(--rule)] pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-16">
@@ -173,7 +194,7 @@ export default async function CityServiceAreaPage({ params }: CityServiceAreaPag
               </div>
             </section>
           </>
-        ) : (
+        ) : content.editorial.kind === 'year-spanning' ? (
           <>
             <section aria-labelledby={sectionId('property')} className="bg-evergreen py-18 text-paper sm:py-26">
               <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.62fr_1fr] lg:gap-20">
@@ -224,7 +245,63 @@ export default async function CityServiceAreaPage({ params }: CityServiceAreaPag
               </div>
             </section>
           </>
-        )}
+        ) : null}
+
+        {content.editorial.kind === 'priority-map' ? (
+          <>
+            <section aria-labelledby={sectionId('timing')} className="bg-evergreen py-18 text-paper sm:py-26">
+              <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.52fr_1fr] lg:gap-20">
+                <header>
+                  <p className="eyebrow text-[#D5EE72]"><Tr text={content.editorial.timingSection.eyebrow} /></p>
+                  <h2 id={sectionId('timing')} className="display-md mt-5 max-w-[12ch] text-paper"><Tr text={content.editorial.timingSection.heading} /></h2>
+                  <p className="mt-6 max-w-lg text-[1.0625rem] leading-relaxed text-paper/65"><Tr text={content.editorial.timingSection.introduction} /></p>
+                </header>
+                <div>
+                  <div className="grid border-b border-paper/18 md:grid-cols-2">
+                    {[content.editorial.timingSection.ongoing, content.editorial.timingSection.timeSpecific].map((item) => (
+                      <article key={item.heading} className="border-t border-paper/18 py-8 md:px-8 md:first:pl-0 md:not-last:border-r md:last:pr-0">
+                        <h3 className="text-2xl text-paper uppercase"><Tr text={item.heading} /></h3>
+                        <p className="mt-6 text-sm leading-relaxed text-paper/68 sm:text-[0.98rem]"><Tr text={item.description} /></p>
+                      </article>
+                    ))}
+                  </div>
+                  <p className="mt-7 max-w-3xl border-l border-[#D5EE72]/55 pl-5 text-sm leading-relaxed text-paper/68"><Tr text={content.editorial.timingSection.note} /></p>
+                </div>
+              </div>
+            </section>
+
+            <section aria-labelledby={sectionId('estimate')} className="bg-paper py-18 sm:py-26">
+              <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
+                <header className="grid gap-7 border-t border-[color:var(--rule)] pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-16">
+                  <div>
+                    <p className="eyebrow text-ink-soft"><Tr text={content.editorial.estimateSection.eyebrow} /></p>
+                    <h2 id={sectionId('estimate')} className="display-md mt-5 max-w-[13ch]"><Tr text={content.editorial.estimateSection.heading} /></h2>
+                  </div>
+                  <p className="max-w-[35rem] text-[1.0625rem] leading-relaxed text-ink-soft lg:pb-2"><Tr text={content.editorial.estimateSection.introduction} /></p>
+                </header>
+                <div className="mt-12 grid border-b border-[color:var(--rule)] lg:grid-cols-3">
+                  {content.editorial.estimateSection.items.map((item, index) => (
+                    <article key={item.title} className="border-t border-[color:var(--rule)] py-8 lg:px-7 lg:not-last:border-r lg:first:pl-0 lg:last:pr-0">
+                      <p className="text-[0.68rem] font-bold tracking-[0.16em] text-ink-soft tabular-nums">0{index + 1}</p>
+                      <h3 className="mt-8 text-3xl text-ink uppercase"><Tr text={item.title} /></h3>
+                      <p className="mt-5 text-sm leading-relaxed text-ink-soft sm:text-[0.98rem]"><Tr text={item.description} /></p>
+                    </article>
+                  ))}
+                </div>
+                <ul className="mt-10 grid border-b border-[color:var(--rule)] lg:grid-cols-3">
+                  {content.editorial.estimateSection.links.map((link) => (
+                    <li key={link.routeId} className="border-t border-[color:var(--rule)] py-7 lg:px-7 lg:not-last:border-r lg:first:pl-0 lg:last:pr-0">
+                      <Link href={link.href} prefetch={false} className="group block">
+                        <span className="font-display text-2xl font-bold tracking-[-0.03em] text-ink uppercase"><Tr text={link.name} /> <span aria-hidden="true" className="text-accent">↗</span></span>
+                        <span className="mt-4 block text-sm leading-relaxed text-ink-soft"><Tr text={link.description} /></span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </>
+        ) : null}
 
         <section aria-labelledby={sectionId('related')} className="bg-paper py-18 sm:py-26">
           <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[0.52fr_1fr] lg:gap-20">
