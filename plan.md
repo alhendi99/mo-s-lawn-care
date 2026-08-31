@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 18 complete; Task 19 not started
+- Phase: Incremental implementation — Task 19 complete; Task 20 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–18 completed; Task 19 and later are not authorized
+- Implementation status: Tasks 1–19 completed; Task 20 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -26,7 +26,8 @@
 - Task 16 repository baseline: clean `main` at `158ded7`
 - Task 17 repository baseline: clean `main` at `158ded7`
 - Task 18 repository baseline: clean `main` at `b8bda37`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 19 or later
+- Task 19 repository baseline: clean `main` at `feebb9d` (guidance-only commit above product baseline `bcff35b`)
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 20 or later
 
 ## Evidence Labels
 
@@ -38,7 +39,21 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 18 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 19 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 19 only — Ankeny Service-Area Page. Task 20 and all later routes remain unauthorized and `[ ]` Not started.
+- **Ownership and publication:** `/service-areas/ankeny-ia` now owns `lawn care ankeny ia` with the exact approved title, H1, description, secondary keywords and query-free canonical. One explicit published-city allowlist entry renders Ankeny; unknown slugs and the Waukee, Norwalk, Altoona and Des Moines child paths remain branded 404s without redirects.
+- **Approved service set:** one typed nine-item source links Lawn Mowing, Aeration & Seeding, Fertilization & Weed Control, Landscaping, Yard Cleanup, Spring Cleanup, Fall Cleanup & Leaf Removal, Grading and Snow Removal. Every canonical service record explicitly includes Ankeny in its approved service-area cities. Flower Bed Maintenance remains published but is intentionally omitted because Task 19 does not call for that narrower landscaping-adjacent intent.
+- **Content and claim boundary:** the page uses original property-care decision framing, seasonal grouping, residential/commercial estimate guidance, neutral related-area links and the established contact/phone paths. It publishes no neighborhood, customer, project, crew, office/branch, address/geo, property-count, proximity or response-time claim. No media or review appears because no approved source establishes Ankeny provenance and the later Work/Reviews routes remain unpublished.
+- **Schema and lifecycle:** the graph contains the central Organization/WebSite references plus exactly one WebPage, one nine-entry ItemList and one BreadcrumbList. UI/schema names, positions and URLs match exactly; no LocalBusiness, city Organization, address, geo, Service, Offer, Product, Review, AggregateRating or price is emitted. Exactly Ankeny was promoted, producing the exact fifteen-URL sitemap.
+- **Architecture, language and performance:** one server-rendered dynamic city route consumes the explicit allowlist and typed Ankeny record, shared metadata/schema/breadcrumb/interior-shell/navigation/footer architecture, and complete Spanish translations. The page is statically prerendered and adds no image, review, form, dependency, fetch, page-specific client JavaScript or analytics event.
+- **Production/browser QA:** production-source checks passed for fifteen valid HTTP 200 routes, seven required branded 404 routes, exact metadata/canonical/H1/schema/query behavior and the fifteen-URL sitemap. Fresh Playwright contexts at `1440×900`, `1280×800`, `390×844` and `320×568` passed English/Spanish, UTM preservation, stable SEO, Service Areas context, breadcrumb, service links, estimate/phone paths, skip focus, mobile Escape/focus return, reduced motion, zero overflow, footer/fixed-action separation, unclipped Spanish and clean valid-route consoles.
+- **Passed checks:** `pnpm validate:ankeny`; Service Areas and Commercial validators; every Tasks 7–16 focused validator; Services, content, SEO, navigation, analytics and homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; production route/source/schema/sitemap checks; four-viewport browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits at `eslint .`; Task 19 does not install ESLint.
+- **Task status:** Task 19 is `[x]` Completed because the exact Definition of Done and expanded ownership, availability, anti-doorway, provenance, schema, lifecycle, responsive, regression and scope requirements pass. Task 20 was not started.
+- **Exact next action:** commit only legitimate Task 19 changes as `feat(seo): add ankeny service area page`, verify a clean worktree, report the local result and STOP before Task 20.
+
+### Prior checkpoint — Task 18 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 18 only — Service Areas Index. Tasks 19–22 city pages and all later work remain unauthorized and `[ ]` Not started.
 - **Baseline and ownership:** Task 18 began from clean `main` at `b8bda37` (`feat(seo): add commercial property services hub`). `/service-areas` now owns `lawn care des moines metro` with the exact approved title, H1, description, keyword set and query-free canonical; homepage `/` remains the sole Des Moines city-intent owner.
@@ -1445,7 +1460,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 19 — Ankeny Service-Area Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/service-areas/ankeny-ia/` as a useful, independently readable Ankeny-wide lawn-care page.
 - **Why It Is Needed:** Ankeny is a confirmed service area with distinct city-wide intent, but the page must not become a city-name-swapped doorway page.
 - **Dependencies:** Tasks 1–18; verified service availability facts and Task 4 conversion tracking.
@@ -1455,7 +1470,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Fabricated neighborhoods, customers, local crews, addresses, job examples, testimonials, response times, or proximity claims; unverified city image/review labels; templated parity with other cities.
 - **Validation:** Side-by-side uniqueness/fact review against all city drafts, exact metadata/canonical/H1, approved service availability, schema/UI parity, links/CTA/tracking and mobile/accessibility.
 - **Tests:** Valid city static param, exact metadata, one H1, no LocalBusiness/address, required service/area links, and invalid city 404.
-- **Definition of Done:** `[ ]` Ankeny page is distinct and useful without invented local facts; `[ ]` exact ownership and approved services pass; `[ ]` schema/links/CTA are correct; `[ ]` media/reviews remain general unless provenance proves Ankeny.
+- **Definition of Done:** `[x]` Ankeny page is distinct and useful without invented local facts; `[x]` exact ownership and approved services pass; `[x]` schema/links/CTA are correct; `[x]` media/reviews remain general unless provenance proves Ankeny.
+
+#### Task 19 implementation record
+
+- **Completed files:** new `app/service-areas/[city]/page.tsx`, new `content/service-areas/ankeny-ia.ts`, new `content/service-areas/index.ts`, new `scripts/validate-ankeny-service-area.mts`, exact Ankeny lifecycle/link updates in `content/routes.ts`, complete Task 19 Spanish strings, package script, lifecycle-only inherited validator updates and this plan record.
+- **Ownership/content decision:** Ankeny owns city-wide lawn-care discovery without duplicating the homepage, Service Areas hub or service-detail bodies. The page organizes nine canonical services through property need, seasonal selection and estimate-context guidance; it adds no unsupported local specificity.
+- **Availability decision:** each displayed service has explicit Ankeny coverage in its approved canonical service record. Flower Bed Maintenance is intentionally omitted from the city page because its narrower landscaping-adjacent intent is outside the Task 19 selected service mix, even though its canonical page remains published and supports Ankeny estimate requests.
+- **Provenance decision:** no image or review is displayed because no approved record establishes Ankeny-specific media or review provenance. No claim is inferred from filenames, imagery, reviews or general practice.
+- **Schema/lifecycle decision:** the visible nine-service source also generates the exact ItemList; breadcrumbs share the Home → Service Areas → Ankeny hierarchy; the shared builder emits one WebPage and central identity references. Exactly Ankeny was promoted and the sitemap contains exactly fifteen canonical URLs.
+- **Validation result:** the focused validator, Service Areas/Commercial and Tasks 7–16 regressions, shared validators, typecheck, production build, production route/source/schema/sitemap assertions and four-viewport browser QA pass. Lint remains unavailable because ESLint is not installed. All four exact Task 19 Definition of Done checks are satisfied.
+- **Final result:** Task 19 is complete and work stops before Task 20.
 
 ### Task 20 — Waukee Service-Area Page
 

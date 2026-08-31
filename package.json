@@ -26,7 +26,8 @@
     "validate:grading": "node --experimental-strip-types scripts/validate-grading-service.mts",
     "validate:snow-removal": "node --experimental-strip-types scripts/validate-snow-removal-service.mts",
     "validate:commercial": "node --experimental-strip-types scripts/validate-commercial-property-services.mts",
-    "validate:service-areas": "node --experimental-strip-types scripts/validate-service-areas-index.mts"
+    "validate:service-areas": "node --experimental-strip-types scripts/validate-service-areas-index.mts",
+    "validate:ankeny": "node --experimental-strip-types scripts/validate-ankeny-service-area.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

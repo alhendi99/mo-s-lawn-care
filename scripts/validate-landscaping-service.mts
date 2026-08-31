@@ -110,6 +110,7 @@ assert.deepEqual(
     'service-snow-removal',
     'commercial-property-services',
     'service-areas',
+    'service-area-ankeny',
   ],
 )
 
@@ -344,6 +345,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-snow-removal'].canonicalUrl },
   { url: routesById['commercial-property-services'].canonicalUrl },
   { url: routesById['service-areas'].canonicalUrl },
+  { url: routesById['service-area-ankeny'].canonicalUrl },
 ])
 
 assert.equal(routeLabels['service-landscaping'], 'Landscaping')

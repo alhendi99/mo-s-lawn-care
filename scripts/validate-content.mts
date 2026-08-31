@@ -89,6 +89,7 @@ assertTaskOneFoundation({
     'service-snow-removal',
     'commercial-property-services',
     'service-areas',
+    'service-area-ankeny',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

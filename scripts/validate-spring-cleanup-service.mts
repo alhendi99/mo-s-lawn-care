@@ -106,6 +106,7 @@ assert.deepEqual(
     'service-snow-removal',
     'commercial-property-services',
     'service-areas',
+    'service-area-ankeny',
   ],
 )
 
@@ -378,6 +379,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-snow-removal'].canonicalUrl },
   { url: routesById['commercial-property-services'].canonicalUrl },
   { url: routesById['service-areas'].canonicalUrl },
+  { url: routesById['service-area-ankeny'].canonicalUrl },
 ])
 for (const alias of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)
@@ -391,5 +393,5 @@ assert.equal(
 assert.equal(routeLabels['service-spring-cleanup'], 'Spring Cleanup')
 
 console.log(
-  'Task 13 Spring Cleanup validation passed: exact commercial ownership, ten-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, and fourteen-URL sitemap isolation.',
+  'Task 13 Spring Cleanup validation passed: exact commercial ownership, ten-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, and fifteen-URL sitemap isolation.',
 )
