@@ -13,6 +13,7 @@ import {
 } from '../content/services/index.ts'
 import { landscapingService } from '../content/services/landscaping.ts'
 import { lawnMowingService } from '../content/services/lawn-mowing.ts'
+import { springCleanupService } from '../content/services/spring-cleanup.ts'
 import { yardCleanupService } from '../content/services/yard-cleanup.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
 import { approvedBusinessFacts } from '../lib/site.ts'
@@ -59,8 +60,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'landscaping',
   'flower-bed-maintenance',
   'yard-cleanup',
+  'spring-cleanup',
 ])
-assert.equal(publishedServiceDetails.length, 6)
+assert.equal(publishedServiceDetails.length, 7)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert.equal(
@@ -70,9 +72,9 @@ assert.equal(
 assert.equal(getPublishedServiceDetail('landscaping'), landscapingService)
 assert.equal(getPublishedServiceDetail('flower-bed-maintenance'), flowerBedMaintenanceService)
 assert.equal(getPublishedServiceDetail('yard-cleanup'), yardCleanupService)
+assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 
 const unpublishedTaskSlugs = [
-  'spring-cleanup',
   'fall-cleanup-leaf-removal',
   'grading',
   'snow-removal',
@@ -111,6 +113,7 @@ assert.deepEqual(
     'service-landscaping',
     'service-flower-bed-maintenance',
     'service-yard-cleanup',
+    'service-spring-cleanup',
   ],
 )
 
@@ -363,6 +366,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-landscaping'].canonicalUrl },
   { url: routesById['service-flower-bed-maintenance'].canonicalUrl },
   { url: route.canonicalUrl },
+  { url: routesById['service-spring-cleanup'].canonicalUrl },
 ])
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -374,5 +378,5 @@ for (const alias of consolidatedAliases) {
 assert.equal(routeLabels['service-yard-cleanup'], 'Yard Cleanup')
 
 console.log(
-  'Task 12 Yard Cleanup validation passed: exact consolidated ownership, six-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict ordinary-cleanup boundaries, neutral hero without work preview, cleanup-specific review labeling, Spanish coverage, and sitemap isolation.',
+  'Task 12 Yard Cleanup validation passed: exact consolidated ownership, seven-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict ordinary-cleanup boundaries, neutral hero without work preview, cleanup-specific review labeling, Spanish coverage, and sitemap isolation.',
 )

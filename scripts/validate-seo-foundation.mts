@@ -84,6 +84,7 @@ assert.deepEqual(publishedRoutes.map(({ id }) => id), [
   'service-landscaping',
   'service-flower-bed-maintenance',
   'service-yard-cleanup',
+  'service-spring-cleanup',
 ])
 assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.home.canonicalUrl },
@@ -94,6 +95,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-landscaping'].canonicalUrl },
   { url: routesById['service-flower-bed-maintenance'].canonicalUrl },
   { url: routesById['service-yard-cleanup'].canonicalUrl },
+  { url: routesById['service-spring-cleanup'].canonicalUrl },
 ])
 
 const completedRegistry: CanonicalRoute[] = routeRegistry.map((route) => ({

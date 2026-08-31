@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 12 complete; Task 13 not started
+- Phase: Incremental implementation — Task 13 complete; Task 14 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–12 completed; Task 13 and later are not authorized
+- Implementation status: Tasks 1–13 completed; Task 14 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -20,7 +20,8 @@
 - Task 10 repository baseline: clean `main` at `20337d3`
 - Task 11 repository baseline: clean `main` at `205329c`
 - Task 12 repository baseline: clean `main` at `27ea531`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 13 or later
+- Task 13 repository baseline: clean `main` at `4c3b2fe`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 14 or later
 
 ## Evidence Labels
 
@@ -32,7 +33,25 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 12 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 13 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 13 only — Spring Cleanup Service Page. Task 14 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 13 began from clean `main` at `4c3b2fe` (`feat(seo): add yard cleanup service page`). `git status --short` returned no entries before the first edit.
+- **Ownership and intent:** `/services/spring-cleanup` now owns commercial `spring cleanup des moines ia` intent with the exact title, description, H1, three secondary phrases and query-free canonical. The future `/blog/spring-lawn-cleanup-des-moines` remains planned, unpublished, unlinked from this page and responsible for informational checklist intent in Task 31/35.
+- **Capability boundary:** the page states only the advertised high-level Spring Cleanup service, approved residential/commercial context, five communities and free-estimate path. It publishes no affirmative debris, leaf/branch, hauling, disposal, pruning/cutback, edging, mowing-inclusion, bed-work, mulch, weeds/treatments, fertilization, aeration/seeding, fixed-date, weather, municipal-rule, price, contract or guarantee claim.
+- **Ownership separation and links:** crawlable contextual links lead to Lawn Mowing, Flower Bed Maintenance, Yard Cleanup and Landscaping; shared hero/final CTAs lead to Contact and the breadcrumb retains Services. Copy keeps each neighboring service distinct rather than treating it as included.
+- **Architecture and publication:** one new typed content module reuses the dynamic route, server renderer, metadata/schema builders, breadcrumbs, service areas, CTAs and translations. Exactly one service was added to the explicit allowlist, bringing the published detail count to seven and the sitemap to exactly nine URLs. Tasks 14–16 remain planned branded 404s.
+- **Media provenance:** the seasonal and local property-care assets were inspected visually. None proves Spring Cleanup work, Mo’s authorship, capture season/date, city, customer or result. The hero therefore uses the existing neutral `contact.webp` property image with observable alt/caption language, and the optional work preview is omitted.
+- **Review provenance:** no approved excerpt explicitly confirms Spring Cleanup. The Rick Terrones and Zach Ten Haken excerpts remain verbatim and are labeled as general company feedback, not Spring Cleanup task, process, timing or result proof. No Review or AggregateRating schema is emitted.
+- **Schema and source:** production source contains one WebPage, exactly one Service, one BreadcrumbList, the approved Organization/provider reference and matching Home → Services → Spring Cleanup breadcrumbs. Service schema contains no hidden task list, debris/hauling/disposal, fertilizer, aeration/seeding, fixed schedule, price or guarantee.
+- **Route and article isolation:** production returns 200 for Tasks 7–13 and branded 404s without redirects for Tasks 14–16, five Spring Cleanup aliases, an arbitrary invalid slug and the future Spring Cleanup article. Query parameters do not change the English title or clean canonical.
+- **Browser and accessibility QA:** fresh production contexts pass at `1440×900`, `1280×800`, `390×844` and `320×568`. Checks cover active/current service navigation, breadcrumb, all content, related links, reviews, areas, FAQs, CTAs/footer, complete Spanish translations and UTM preservation, stable metadata/canonical, skip focus, mobile-menu Escape/focus return, reduced motion, image loading, zero overflow/clipping, no final-CTA/fixed-action collision and zero fresh-context console errors/warnings.
+- **Passed checks:** `pnpm validate:spring-cleanup`; all Tasks 7–12 focused validators; Services/content/SEO/navigation/analytics/homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; production route/source/schema/sitemap assertions; Playwright browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits 1 at `eslint .`; Task 13 does not install ESLint or add dependency/lockfile churn.
+- **Task status:** Task 13 is `[x]` Completed because all three Definition of Done items are satisfied. Task 14 was not started.
+- **Exact next action:** stage and commit only legitimate Task 13 changes as `feat(seo): add spring cleanup service page`, verify a clean worktree, report the local result and STOP before Task 14.
+
+### Prior checkpoint — Task 12 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 12 only — Yard Cleanup Service Page. Task 13 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 12 began from clean `main` at `27ea531` (`feat(seo): add flower bed maintenance service page`). `git status --short` returned no entries before the first edit.
@@ -1235,7 +1254,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 13 — Spring Cleanup Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/spring-cleanup/` for commercial spring cleanup intent, distinct from the later informational checklist.
 - **Why It Is Needed:** Seasonal commercial demand needs a dedicated conversion page and careful separation from blog advice intent.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
@@ -1245,7 +1264,16 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Rigid annual dates, weather promises, disposal/hauling, included tasks, fertilizer advice, and article CTA duplication.
 - **Validation:** Exact metadata/keyword-intent distinction, approved capability review, Service/Breadcrumb schema, required links, imagery, FAQ, responsive and CTA checks.
 - **Tests:** Route/metadata/H1/schema, required service links, commercial-versus-informational ownership assertion, invalid slug 404.
-- **Definition of Done:** `[ ]` Commercial spring page is accurate and conversion-oriented; `[ ]` informational intent remains assigned to the article; `[ ]` all exact metadata/schema/link/fact checks pass.
+- **Definition of Done:** `[x]` Commercial spring page is accurate and conversion-oriented; `[x]` informational intent remains assigned to the article; `[x]` all exact metadata/schema/link/fact checks pass.
+
+#### Task 13 implementation record
+
+- **Completed files:** new `content/services/spring-cleanup.ts`; new `scripts/validate-spring-cleanup-service.mts`; `content/services/index.ts`; `content/routes.ts`; `lib/es-translations.json`; `package.json`; lifecycle-aware inherited validators; and this plan record.
+- **Intent decision:** the service page is a concise commercial decision-and-estimate path. It does not implement a checklist, how-to guide, local disposal advice, lawn-care calendar, Helpful Resources backlink or article content. The registered future article remains planned and absent from static params, rendered links and sitemap.
+- **Scope decision:** Spring Cleanup remains a verified high-level service with property-specific details confirmed through an estimate. Adjacent mowing, bed maintenance, Landscaping and general Yard Cleanup are linked as separate services, not inclusions. Fixed dates, weather-independent scheduling and guaranteed outcomes are explicitly not published.
+- **Evidence decision:** no verified Spring Cleanup image or review exists. The page uses one neutral property image, no work preview and two clearly labeled general company-review excerpts; schema contains no review/rating markup.
+- **Validation result:** the focused validator covers exact ownership, seven-service allowlist, Tasks 14–16 and alias isolation, one H1/template, WebPage/Service/BreadcrumbList/provider parity, required links, article separation, capability restraint, media/review provenance, Spanish completeness and exact nine-URL sitemap membership. The full inherited matrix, typecheck, production build, rendered source/status/schema/sitemap checks and four-viewport browser QA pass; lint remains unavailable because ESLint is not installed.
+- **Final result:** all three Task 13 Definition of Done checks are satisfied. Task 13 is complete and work stops before Task 14.
 
 ### Task 14 — Fall Cleanup and Leaf Removal Service Page
 
