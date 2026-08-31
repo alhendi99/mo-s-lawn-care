@@ -462,7 +462,9 @@ export const routeRegistry = [
     h1: 'Lawn Care Across the Des Moines Metro',
     description:
       "Mo's Lawn Care serves Des Moines, Ankeny, Waukee, Norwalk and Altoona with lawn care, landscaping, seasonal cleanups and snow removal.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home', 'services', 'service-snow-removal', 'commercial-property-services'],
     outboundLinkIds: [
       'home',

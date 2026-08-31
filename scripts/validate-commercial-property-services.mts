@@ -160,7 +160,9 @@ assert.deepEqual(commercialSupportingRouteLinks.map(({ routeId, href }) => [rout
   ['reviews', '/reviews'],
   ['contact', '/contact'],
 ])
-for (const id of ['service-areas', 'our-work', 'reviews', 'contact'] as const) {
+assert.equal(routesById['service-areas'].implementationStatus, 'implemented')
+assert.equal(routesById['service-areas'].publicationStatus, 'published')
+for (const id of ['our-work', 'reviews', 'contact'] as const) {
   assert.equal(routesById[id].implementationStatus, 'planned')
   assert.equal(routesById[id].publicationStatus, 'planned')
 }
@@ -168,11 +170,11 @@ for (const id of ['service-areas', 'our-work', 'reviews', 'contact'] as const) {
 const publishedIds = routeRegistry
   .filter(({ publicationStatus }) => publicationStatus === 'published')
   .map(({ id }) => id)
-assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services'])
-assert.equal(publishedIds.length, 13)
-assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 13)
+assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas'])
+assert.equal(publishedIds.length, 14)
+assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 14)
 
-const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services'] as const
+const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas'] as const
 assert.deepEqual(buildSitemapEntries(), expectedSitemap.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 for (const alias of [
@@ -266,5 +268,5 @@ for (const source of [route.h1, ...commercialServiceItems.flatMap(({ group, summ
 }
 
 console.log(
-  `Task 17 Commercial Property Services validation passed: ${commercialServiceItems.length} evidence-backed services, exact WebPage/ItemList/BreadcrumbList parity, 13 sitemap URLs, and four future supporting routes left unpublished.`,
+  `Task 17 Commercial Property Services validation passed: ${commercialServiceItems.length} evidence-backed services, exact WebPage/ItemList/BreadcrumbList parity, 14 sitemap URLs, Service Areas published, and three later supporting routes left unpublished.`,
 )

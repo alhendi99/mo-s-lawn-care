@@ -88,6 +88,7 @@ assertTaskOneFoundation({
     'service-grading',
     'service-snow-removal',
     'commercial-property-services',
+    'service-areas',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

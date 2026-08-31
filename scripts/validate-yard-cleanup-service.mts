@@ -113,6 +113,7 @@ assert.deepEqual(
     'service-grading',
     'service-snow-removal',
     'commercial-property-services',
+    'service-areas',
   ],
 )
 
@@ -370,6 +371,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-grading'].canonicalUrl },
   { url: routesById['service-snow-removal'].canonicalUrl },
   { url: routesById['commercial-property-services'].canonicalUrl },
+  { url: routesById['service-areas'].canonicalUrl },
 ])
 for (const alias of consolidatedAliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)

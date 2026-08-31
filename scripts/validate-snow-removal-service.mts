@@ -81,10 +81,12 @@ assert.deepEqual(
     'service-grading',
     'service-snow-removal',
     'commercial-property-services',
+    'service-areas',
   ],
 )
+assert.equal(routesById['service-areas'].implementationStatus, 'implemented')
+assert.equal(routesById['service-areas'].publicationStatus, 'published')
 for (const futureRouteId of [
-  'service-areas',
   'reviews',
   'contact',
 ] as const) {
@@ -400,10 +402,10 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-grading'].canonicalUrl },
   { url: route.canonicalUrl },
   { url: routesById['commercial-property-services'].canonicalUrl },
+  { url: routesById['service-areas'].canonicalUrl },
 ])
-assert.equal(buildSitemapEntries().length, 13)
+assert.equal(buildSitemapEntries().length, 14)
 for (const futureRouteId of [
-  'service-areas',
   'reviews',
   'contact',
 ] as const) {
@@ -418,5 +420,5 @@ for (const alias of aliases) {
 assert.equal(routeLabels['service-snow-removal'], 'Snow Removal')
 
 console.log(
-  'Task 16 Snow Removal validation passed: exact tenth-service publication ownership, residential/commercial driveway and access-area scope, WebPage/Service/BreadcrumbList parity, required supporting links with later routes still unpublished, strict operational and safety boundaries, seasonal image without work-preview attribution, snow-specific individual-review framing, Spanish coverage, alias isolation, and exact thirteen-URL sitemap lifecycle.',
+  'Task 16 Snow Removal validation passed: exact tenth-service publication ownership, residential/commercial driveway and access-area scope, WebPage/Service/BreadcrumbList parity, required supporting links with later routes lifecycle-correct, strict operational and safety boundaries, seasonal image without work-preview attribution, snow-specific individual-review framing, Spanish coverage, alias isolation, and exact fourteen-URL sitemap lifecycle.',
 )

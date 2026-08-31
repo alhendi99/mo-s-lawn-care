@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 17 complete; Task 18 not started
+- Phase: Incremental implementation — Task 18 complete; Task 19 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–17 completed; Task 18 and later are not authorized
+- Implementation status: Tasks 1–18 completed; Task 19 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -25,7 +25,8 @@
 - Task 15 repository baseline: clean `main` at `aeee077`
 - Task 16 repository baseline: clean `main` at `158ded7`
 - Task 17 repository baseline: clean `main` at `158ded7`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 18 or later
+- Task 18 repository baseline: clean `main` at `b8bda37`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 19 or later
 
 ## Evidence Labels
 
@@ -37,7 +38,21 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 17 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 18 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 18 only — Service Areas Index. Tasks 19–22 city pages and all later work remain unauthorized and `[ ]` Not started.
+- **Baseline and ownership:** Task 18 began from clean `main` at `b8bda37` (`feat(seo): add commercial property services hub`). `/service-areas` now owns `lawn care des moines metro` with the exact approved title, H1, description, keyword set and query-free canonical; homepage `/` remains the sole Des Moines city-intent owner.
+- **Five-area hierarchy:** one server-rendered ordered directory contains exactly Des Moines → `/`, Ankeny, Waukee, Norwalk and Altoona in the approved order. The four non-Des Moines links use their registered future canonical paths while remaining branded 404s without redirects; no Des Moines child, alias, dynamic city route or sixth city exists.
+- **Content and claim boundary:** concise metro framing, five distinct navigational descriptions, a coverage-scope explainer and Services/Contact paths make the hub useful without prewriting city pages. Copy stays at the approved lawn care, landscaping, seasonal-cleanup and snow-removal category level and adds no city/service matrix, radius, county, neighboring-city, project, review, map, address, geo or branch claim.
+- **Schema and lifecycle:** the graph contains exactly one CollectionPage, one five-entry ItemList and one BreadcrumbList with visible/schema name, position and URL parity plus central Organization/WebSite references. It contains no LocalBusiness, Service, Offer, address/geo, Review, AggregateRating or price. Exactly `/service-areas` was promoted, producing the exact fourteen-URL sitemap; Tasks 19–22 and Contact remain planned and absent.
+- **Architecture, language and performance:** one static page and typed area content record reuse the shared interior shell, breadcrumb, navigation/footer, metadata/schema, phone and contact paths. All new visible strings have explicit Spanish translations. No image, map, video, client component, fetch, geolocation, dependency, form or analytics event was added.
+- **Responsive/browser QA:** fresh production contexts at `1440×900`, `1280×800`, `390×844` and `320×568` passed English/Spanish, full UTM preservation, stable English metadata/canonical, exact area links, mobile menu Escape/focus return, skip-link focus, reduced motion, zero overflow, footer/fixed-action separation and clean valid-route consoles. Visual review caught and corrected Spanish H1 overlap at 1280 and mid-word wrapping at 320.
+- **Passed checks:** `pnpm validate:service-areas`; every Tasks 7–16 focused validator; Commercial, Services, content, SEO, navigation, analytics and homepage validators; `pnpm exec tsc --noEmit --incremental false`; repeated `pnpm build`; production route/source/schema/query/sitemap/inbound-link assertions; Playwright browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits at `eslint .`; Task 18 does not install ESLint.
+- **Task status:** Task 18 is `[x]` Completed because the exact Definition of Done and expanded lifecycle, schema, geographic, responsive, regression and scope requirements pass. Task 19 was not started.
+- **Exact next action:** commit only legitimate Task 18 changes as `feat(seo): add service areas hub`, verify a clean worktree, report the local result and STOP before Task 19.
+
+### Prior checkpoint — Task 17 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 17 only — Commercial Property Services Hub. Task 18 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 17 began from clean `main` at `158ded7` (`feat(seo): add snow removal service page`). `git status --short` returned no entries before the first edit.
@@ -1406,7 +1421,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 18 — Service Areas Index
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/service-areas/` as the canonical five-city metro coverage hub.
 - **Why It Is Needed:** Coverage information needs a crawlable hierarchy while the homepage remains the sole Des Moines city-intent owner.
 - **Dependencies:** Tasks 1–3, 5–17; Task 4 for tracked CTA/contact links.
@@ -1416,7 +1431,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Accidental `/service-areas/des-moines-ia/`; unconfirmed nearby cities; ItemList/copy mismatch; duplicate metro copy; child routes unavailable during partial rollout.
 - **Validation:** Exact metadata and five links, schema/UI order parity, clean canonical, breadcrumb, homepage/service/footer inbound links, and rendered HTML inspection.
 - **Tests:** Route/metadata/H1, expected area link set, Des Moines path equals `/`, exactly four child city paths, no unconfirmed/forbidden area routes.
-- **Definition of Done:** `[ ]` Hub lists exactly five approved areas; `[ ]` Des Moines resolves to homepage and no competing page exists; `[ ]` exact metadata/schema/links pass; `[ ]` copy is useful and non-stuffed.
+- **Definition of Done:** `[x]` Hub lists exactly five approved areas; `[x]` Des Moines resolves to homepage and no competing page exists; `[x]` exact metadata/schema/links pass; `[x]` copy is useful and non-stuffed.
+
+#### Task 18 implementation record
+
+- **Completed files:** new `app/service-areas/page.tsx`, new `content/service-areas.ts`, new `scripts/validate-service-areas-index.mts`, `content/routes.ts`, `lib/es-translations.json`, `package.json`, lifecycle-aware inherited validators and this plan record.
+- **Ownership decision:** the hub owns metro discovery only. Its Des Moines UI and ItemList entry both resolve to homepage `/`; no Des Moines route, redirect or alias was added. The other four entries use the future route registry without creating a dynamic city page or changing child lifecycle.
+- **Content/design decision:** a lightweight cardless editorial directory uses one exact H1, five large ordered area rows, a three-part scope explainer and Services/Contact supporting paths. No media or map is used because no asset proves geography and no approved boundary data supports pins, coordinates, radius or polygons.
+- **Schema/lifecycle decision:** CollectionPage comes from the existing page-type builder; one page-owned ItemList consumes the same five-item record as the UI; BreadcrumbList consumes the shared Home → Service Areas hierarchy. Exactly one route was promoted, making `/service-areas` the fourteenth sitemap URL while all city children remain unpublished.
+- **Language/performance decision:** all Task 18 visible strings have explicit Spanish translations and a Task 18-only fluid H1 treatment prevents the long translation from overlapping or splitting at required viewports. The route is statically prerendered and adds no page-specific client JavaScript, dependency, media, network request or analytics event.
+- **Validation result:** the focused 48-boundary validator, all inherited validators, typecheck, repeated production builds, production HTML/status/schema/sitemap/inbound-link assertions and four-viewport browser QA pass. Lint remains unavailable because ESLint is not installed. All four exact Task 18 Definition of Done checks are satisfied.
+- **Final result:** Task 18 is complete and work stops before Task 19.
 
 ### Task 19 — Ankeny Service-Area Page
 
