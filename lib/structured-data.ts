@@ -36,7 +36,6 @@ function getWebPageType(route: CanonicalRoute) {
     case 'contact':
       return 'ContactPage'
     case 'services-index':
-    case 'commercial-index':
     case 'service-areas-index':
     case 'work-index':
     case 'reviews-index':

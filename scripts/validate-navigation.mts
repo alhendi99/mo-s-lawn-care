@@ -153,6 +153,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
   { url: routesById['service-grading'].canonicalUrl },
   { url: routesById['service-snow-removal'].canonicalUrl },
+  { url: routesById['commercial-property-services'].canonicalUrl },
 ])
 assert.deepEqual(
   routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id),
@@ -169,6 +170,7 @@ assert.deepEqual(
     'service-fall-cleanup-leaf-removal',
     'service-grading',
     'service-snow-removal',
+    'commercial-property-services',
   ],
 )
 assert(
@@ -186,6 +188,7 @@ assert(
       route.id === 'service-fall-cleanup-leaf-removal' ||
       route.id === 'service-grading' ||
       route.id === 'service-snow-removal' ||
+      route.id === 'commercial-property-services' ||
       route.publicationStatus === 'planned',
   ),
 )

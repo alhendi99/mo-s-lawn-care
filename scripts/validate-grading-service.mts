@@ -106,6 +106,7 @@ assert.deepEqual(
     'service-fall-cleanup-leaf-removal',
     'service-grading',
     'service-snow-removal',
+    'commercial-property-services',
   ],
 )
 
@@ -358,8 +359,9 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
   { url: route.canonicalUrl },
   { url: routesById['service-snow-removal'].canonicalUrl },
+  { url: routesById['commercial-property-services'].canonicalUrl },
 ])
-assert.equal(buildSitemapEntries().length, 12)
+assert.equal(buildSitemapEntries().length, 13)
 assert.equal(
   buildSitemapEntries().some(({ url }) => url === routesById['service-snow-removal'].canonicalUrl),
   true,
@@ -370,5 +372,5 @@ for (const alias of aliases) {
 assert.equal(routeLabels['service-grading'], 'Grading')
 
 console.log(
-  'Task 15 Grading validation passed: exact ten-service publication ownership, WebPage/Service/BreadcrumbList parity, required links, strict engineering/drainage/foundation/excavation/outcome boundaries, neutral media without work preview, general-review labeling, Spanish coverage, alias isolation, and exact twelve-URL sitemap lifecycle.',
+  'Task 15 Grading validation passed: exact ten-service publication ownership, WebPage/Service/BreadcrumbList parity, required links, strict engineering/drainage/foundation/excavation/outcome boundaries, neutral media without work preview, general-review labeling, Spanish coverage, alias isolation, and exact thirteen-URL sitemap lifecycle.',
 )

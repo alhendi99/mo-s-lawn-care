@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 15 complete; Task 16 not started
+- Phase: Incremental implementation — Task 17 complete; Task 18 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–15 completed; Task 16 and later are not authorized
+- Implementation status: Tasks 1–17 completed; Task 18 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -23,7 +23,9 @@
 - Task 13 repository baseline: clean `main` at `4c3b2fe`
 - Task 14 repository baseline: clean `main` at `4c0dfcb`
 - Task 15 repository baseline: clean `main` at `aeee077`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 16 or later
+- Task 16 repository baseline: clean `main` at `158ded7`
+- Task 17 repository baseline: clean `main` at `158ded7`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 18 or later
 
 ## Evidence Labels
 
@@ -35,7 +37,23 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 15 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 17 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 17 only — Commercial Property Services Hub. Task 18 and later remain unauthorized and `[ ]` Not started.
+- **Baseline:** Task 17 began from clean `main` at `158ded7` (`feat(seo): add snow removal service page`). `git status --short` returned no entries before the first edit.
+- **Ownership and publication:** `/commercial-property-services` now owns `commercial lawn care des moines ia` with the exact approved title, H1, description, four secondary phrases and query-free canonical. Exactly one planned route was promoted, bringing the sitemap to thirteen URLs while all ten service pages remain published.
+- **Capability audit:** every published service record was inspected independently. Each contains approved visible commercial-property language; Lawn Mowing, Landscaping and Snow Removal are additionally supported by approved metadata. The evidence-backed hub therefore contains all ten services, with evidence notes stored beside each item rather than inferred from publication, reviews or imagery.
+- **Hub boundary:** concise cards group Lawn Care, Outdoor Spaces, Cleanup and Winter needs and route to canonical service pages. No service-detail body, FAQ, process, review framing or area paragraph is duplicated; a five-word-phrase comparison found only limited necessary service terminology after the Snow summary was rewritten.
+- **Claims and provenance:** visible copy treats selection as an estimate conversation, not a formal maintenance product, contract, subscription, schedule, bundle or SLA. It adds no crew, equipment, response, price, count, subtype, client, portfolio, result or guarantee claim. The page displays no image or review excerpt, so neither becomes commercial-capability evidence.
+- **Schema and links:** the graph contains one WebPage, one ten-entry ItemList and one BreadcrumbList, with sequential UI/schema parity and Home → Commercial Property Services breadcrumbs. It contains no Service, OfferCatalog, Offer, Product, Review, AggregateRating, LocalBusiness, address or geo. Required links lead to Service Areas, Our Work, Reviews and Contact while those routes remain planned 404s.
+- **Architecture, language and performance:** one lightweight static route and typed commercial content record reuse the shared interior shell, metadata, breadcrumbs, contact paths and existing CSS. All visible strings have Spanish translations; no image, video, client component, fetch, dependency, form or analytics event was added.
+- **Route and browser QA:** production returns 200 for the hub and all ten services, and non-redirecting branded 404s for required future routes and eight commercial aliases. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` contexts passed English/Spanish, full UTM preservation, stable metadata/canonical, sequential cards, focus/Escape, reduced motion, overflow/clipping, fixed-action/footer separation and clean-console checks.
+- **Passed checks:** `pnpm validate:commercial`; all Tasks 7–16 focused validators; Services/content/SEO/navigation/analytics/homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; final production source/status/schema/query/sitemap/inbound-link assertions; Playwright browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits at `eslint .`; Task 17 does not install ESLint.
+- **Task status:** Task 17 is `[x]` Completed because all four exact Definition of Done items and the expanded capability, parity, lifecycle, provenance, responsive and regression requirements pass. Task 18 was not started.
+- **Exact next action:** commit only legitimate Task 17 changes as `feat(seo): add commercial property services hub`, verify a clean worktree, report the local result and STOP before Task 18.
+
+### Prior checkpoint — Task 15 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 15 only — Grading Service Page. Task 16 and later remain unauthorized and `[ ]` Not started.
 - **Baseline and checkpoint:** Task 15 began from clean `main` at `aeee077` (`feat(seo): add fall cleanup and leaf removal service page`) and resumed from clean WIP checkpoint `d9b0152` without discarding its implementation.
@@ -1364,7 +1382,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 17 — Commercial Property Services Hub
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/commercial-property-services/` as a concise commercial service hub rather than a duplicate of ten service pages.
 - **Why It Is Needed:** Commercial property intent is required and currently appears only in broad homepage claims.
 - **Dependencies:** Tasks 1–16 so only verified applicable services are linked; Task 4 for tracked conversion paths; Task 5 for homepage inbound link.
@@ -1374,7 +1392,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Some services may not be commercial; review quotes do not prove business-wide capability; repeated service copy; unsupported maintenance-plan/contract promises; exact client/project claims.
 - **Validation:** Owner confirmation of each listed commercial service, exact head/H1/canonical, schema matching visible ItemList, inbound/outbound links, content duplication review, CTA/tracking and responsive accessibility.
 - **Tests:** Route success, exact metadata, one H1, Breadcrumb/ItemList parity, only approved service links, and no unsupported contract/response claims.
-- **Definition of Done:** `[ ]` Hub uniquely serves commercial intent; `[ ]` every listed capability is verified and linked; `[ ]` it does not duplicate service-page bodies; `[ ]` metadata/schema/CTA/link checks pass.
+- **Definition of Done:** `[x]` Hub uniquely serves commercial intent; `[x]` every listed capability is verified and linked; `[x]` it does not duplicate service-page bodies; `[x]` metadata/schema/CTA/link checks pass.
+
+#### Task 17 implementation record
+
+- **Completed files:** new `app/commercial-property-services/page.tsx`, new `content/commercial-property-services.ts`, new `scripts/validate-commercial-property-services.mts`, `content/routes.ts`, `lib/structured-data.ts`, `lib/es-translations.json`, `package.json`, lifecycle-aware inherited validators and this plan record.
+- **Commercial-set decision:** the approved visible `propertyContext.commercial` records support all ten published services independently. The hub list is generated from an explicit evidence-bearing commercial record, not from the generic service index or review/image inference.
+- **Schema decision:** Commercial uses WebPage rather than the CollectionPage default used by other index types because Task 17 explicitly requires WebPage + ItemList + BreadcrumbList. The ItemList consumes the same ordered ten-item record used by visible cards and emits no Service entities.
+- **Content decision:** the page organizes short navigational summaries into four need-based groups and explains service selection through the estimate conversation. It includes the exact four keyword concepts naturally, while avoiding a named plan product or any contract, schedule, crew, equipment, response, client, property subtype, portfolio or guarantee claim.
+- **Provenance decision:** no image or review is displayed. Service evidence comes only from approved service/business copy; Our Work and Reviews are restrained supporting links and remain unpublished until Tasks 24 and 25.
+- **Validation result:** the focused validator, all Tasks 7–16 validators, shared validators, typecheck, production build, production route/source/schema/sitemap/inbound-link assertions and four-viewport browser QA pass. Lint remains unavailable because ESLint is not installed. All four Task 17 Definition of Done checks are satisfied.
+- **Final result:** Task 17 is complete and work stops before Task 18.
 
 ### Task 18 — Service Areas Index
 

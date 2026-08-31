@@ -24,7 +24,8 @@
     "validate:spring-cleanup": "node --experimental-strip-types scripts/validate-spring-cleanup-service.mts",
     "validate:fall-cleanup-leaf-removal": "node --experimental-strip-types scripts/validate-fall-cleanup-leaf-removal-service.mts",
     "validate:grading": "node --experimental-strip-types scripts/validate-grading-service.mts",
-    "validate:snow-removal": "node --experimental-strip-types scripts/validate-snow-removal-service.mts"
+    "validate:snow-removal": "node --experimental-strip-types scripts/validate-snow-removal-service.mts",
+    "validate:commercial": "node --experimental-strip-types scripts/validate-commercial-property-services.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

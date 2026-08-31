@@ -105,6 +105,7 @@ assert.deepEqual(
     'service-fall-cleanup-leaf-removal',
     'service-grading',
     'service-snow-removal',
+    'commercial-property-services',
   ],
 )
 
@@ -351,6 +352,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: route.canonicalUrl },
   { url: routesById['service-grading'].canonicalUrl },
   { url: routesById['service-snow-removal'].canonicalUrl },
+  { url: routesById['commercial-property-services'].canonicalUrl },
 ])
 for (const slug of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -364,5 +366,5 @@ assert.equal(
 assert.equal(routeLabels['service-fall-cleanup-leaf-removal'], 'Fall Cleanup & Leaf Removal')
 
 console.log(
-  'Task 14 Fall Cleanup & Leaf Removal validation passed: exact consolidated commercial ownership, ten-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links with Snow Removal published separately, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, alias isolation, and twelve-URL sitemap isolation.',
+  'Task 14 Fall Cleanup & Leaf Removal validation passed: exact consolidated commercial ownership, ten-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links with Snow Removal published separately, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, alias isolation, and thirteen-URL sitemap isolation.',
 )
