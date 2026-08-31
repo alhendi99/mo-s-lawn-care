@@ -48,12 +48,13 @@ assert.equal(metadata.description, route.description)
 assert.equal(metadata.alternates?.canonical, route.canonicalUrl)
 assert.equal((metadata.robots as { index?: boolean }).index, true)
 
-assert.deepEqual(publishedCityServiceAreaSlugs, ['ankeny-ia', 'waukee-ia', 'norwalk-ia'])
-assert.equal(publishedCityServiceAreas.length, 3)
+assert.deepEqual(publishedCityServiceAreaSlugs, ['ankeny-ia', 'waukee-ia', 'norwalk-ia', 'altoona-ia'])
+assert.equal(publishedCityServiceAreas.length, 4)
 assert.equal(getPublishedCityServiceArea('ankeny-ia'), ankenyServiceAreaContent)
 assert.equal(getPublishedCityServiceArea('waukee-ia'), waukeeServiceAreaContent)
 assert.equal(getPublishedCityServiceArea('norwalk-ia'), norwalkServiceAreaContent)
-for (const invalid of ['altoona-ia', 'des-moines-ia', 'waukee', 'waukee-iowa', 'invalid-city']) {
+assert(getPublishedCityServiceArea('altoona-ia'))
+for (const invalid of ['des-moines-ia', 'waukee', 'waukee-iowa', 'invalid-city']) {
   assert.equal(getPublishedCityServiceArea(invalid), undefined)
 }
 
@@ -145,8 +146,8 @@ assert.deepEqual(waukeeRelatedAreaLinks.map(({ routeId, href }) => [routeId, hre
 assert.equal(routesById['service-area-ankeny'].publicationStatus, 'published')
 assert.equal(routesById['service-area-norwalk'].implementationStatus, 'implemented')
 assert.equal(routesById['service-area-norwalk'].publicationStatus, 'published')
-assert.equal(routesById['service-area-altoona'].implementationStatus, 'planned')
-assert.equal(routesById['service-area-altoona'].publicationStatus, 'planned')
+assert.equal(routesById['service-area-altoona'].implementationStatus, 'implemented')
+assert.equal(routesById['service-area-altoona'].publicationStatus, 'published')
 assert.equal(routeRegistry.some(({ path: routePath }) => routePath === '/service-areas/des-moines-ia'), false)
 assert.deepEqual(waukeeSupportingLinks.map(({ routeId, href }) => [routeId, href]), [
   ['services', '/services'],
@@ -161,9 +162,10 @@ const expectedPublishedIds = [
   'service-fall-cleanup-leaf-removal', 'service-grading', 'service-snow-removal',
   'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee',
   'service-area-norwalk',
+  'service-area-altoona',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 17)
+assert.equal(buildSitemapEntries().length, 18)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 const pageSource = read('app/service-areas/[city]/page.tsx')
@@ -246,6 +248,6 @@ for (const english of new Set(task20EnglishStrings)) assert(spanish[english], `M
 
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 21 — Norwalk Service-Area Page\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 22 — Altoona Service-Area Page\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 23 — About Page\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Task 20 Waukee validation passed: exact ownership, independently audited nine-service UI/ItemList parity, distinct year-spanning editorial structure, strict claim/provenance boundaries, published-city stability, future-city isolation, Spanish coverage, and current sitemap lifecycle.')
+console.log('Task 20 Waukee validation passed: exact ownership, independently audited nine-service UI/ItemList parity, distinct year-spanning editorial structure, strict claim/provenance boundaries, four-city publication stability, Spanish coverage, and current sitemap lifecycle.')

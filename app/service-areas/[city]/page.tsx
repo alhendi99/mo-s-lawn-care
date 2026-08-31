@@ -119,6 +119,29 @@ export default async function CityServiceAreaPage({ params }: CityServiceAreaPag
           </section>
         ) : null}
 
+        {content.editorial.kind === 'scope-builder' ? (
+          <section aria-labelledby={sectionId('scope')} className="bg-[#e5ecd9] py-18 sm:py-26">
+            <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
+              <header className="grid gap-7 border-t border-[#315b37]/22 pt-6 lg:grid-cols-[minmax(0,0.72fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-16">
+                <div>
+                  <p className="eyebrow text-[#315b37]"><Tr text={content.editorial.scopeSection.eyebrow} /></p>
+                  <h2 id={sectionId('scope')} className="display-md mt-5 max-w-[12ch] text-[#1d2b1f]"><Tr text={content.editorial.scopeSection.heading} /></h2>
+                </div>
+                <p className="max-w-[36rem] text-[1.0625rem] leading-relaxed text-[#354139] lg:pb-2"><Tr text={content.editorial.scopeSection.introduction} /></p>
+              </header>
+              <ol className="mt-12 grid border-b border-[#315b37]/22 lg:grid-cols-3">
+                {content.editorial.scopeSection.items.map((item) => (
+                  <li key={item.number} className="border-t border-[#315b37]/22 py-8 lg:px-8 lg:not-last:border-r lg:first:pl-0 lg:last:pr-0">
+                    <p className="text-[0.68rem] font-bold tracking-[0.16em] text-[#315b37] tabular-nums">{item.number}</p>
+                    <h3 className="mt-8 text-3xl text-[#1d2b1f] uppercase"><Tr text={item.title} /></h3>
+                    <p className="mt-5 text-sm leading-relaxed text-[#354139] sm:text-[0.98rem]"><Tr text={item.description} /></p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        ) : null}
+
         <section aria-labelledby={sectionId('services')} className="bg-paper py-18 sm:py-26">
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <header className="grid gap-7 border-t border-[color:var(--rule)] pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-16">
@@ -301,6 +324,56 @@ export default async function CityServiceAreaPage({ params }: CityServiceAreaPag
               </div>
             </section>
           </>
+        ) : null}
+
+        {content.editorial.kind === 'scope-builder' ? (
+          <section aria-labelledby={sectionId('readiness')} className="bg-evergreen py-18 text-paper sm:py-26">
+            <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
+              <header className="grid gap-7 border-t border-paper/18 pt-6 lg:grid-cols-[minmax(0,0.72fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-16">
+                <div>
+                  <p className="eyebrow text-[#D5EE72]"><Tr text={content.editorial.readinessSection.eyebrow} /></p>
+                  <h2 id={sectionId('readiness')} className="display-md mt-5 max-w-[13ch] text-paper"><Tr text={content.editorial.readinessSection.heading} /></h2>
+                </div>
+                <p className="max-w-[36rem] text-[1.0625rem] leading-relaxed text-paper/65 lg:pb-2"><Tr text={content.editorial.readinessSection.introduction} /></p>
+              </header>
+
+              <div className="mt-12 grid border-b border-paper/18 lg:grid-cols-3">
+                {content.editorial.readinessSection.contexts.map((context) => (
+                  <article key={context.title} className="border-t border-paper/18 py-8 lg:px-8 lg:not-last:border-r lg:first:pl-0 lg:last:pr-0">
+                    <h3 className="text-2xl text-paper uppercase"><Tr text={context.title} /></h3>
+                    <p className="mt-6 text-sm leading-relaxed text-paper/68 sm:text-[0.98rem]"><Tr text={context.description} /></p>
+                  </article>
+                ))}
+              </div>
+
+              <div className="mt-14 grid gap-10 lg:grid-cols-[0.52fr_1fr] lg:gap-20">
+                <header>
+                  <h3 className="display-sm max-w-[11ch] text-paper"><Tr text={content.editorial.readinessSection.requestHeading} /></h3>
+                  <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-paper/65"><Tr text={content.editorial.readinessSection.requestIntroduction} /></p>
+                </header>
+                <ol className="border-b border-paper/18">
+                  {content.editorial.readinessSection.items.map((item) => (
+                    <li key={item.number} className="grid gap-4 border-t border-paper/18 py-7 sm:grid-cols-[3rem_minmax(0,0.62fr)_minmax(0,1fr)] sm:gap-8">
+                      <p className="pt-1 text-[0.68rem] font-bold tracking-[0.16em] text-[#D5EE72] tabular-nums">{item.number}</p>
+                      <h4 className="text-xl text-paper uppercase"><Tr text={item.title} /></h4>
+                      <p className="text-sm leading-relaxed text-paper/68"><Tr text={item.description} /></p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <ul className="mt-12 grid border-b border-paper/18 lg:grid-cols-3">
+                {content.editorial.readinessSection.links.map((link) => (
+                  <li key={link.routeId} className="border-t border-paper/18 py-7 lg:px-8 lg:not-last:border-r lg:first:pl-0 lg:last:pr-0">
+                    <Link href={link.href} prefetch={false} className="group block">
+                      <span className="font-display text-2xl font-bold tracking-[-0.03em] text-paper uppercase"><Tr text={link.name} /> <span aria-hidden="true" className="text-[#D5EE72]">↗</span></span>
+                      <span className="mt-4 block text-sm leading-relaxed text-paper/65"><Tr text={link.description} /></span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
         ) : null}
 
         <section aria-labelledby={sectionId('related')} className="bg-paper py-18 sm:py-26">

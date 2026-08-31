@@ -76,8 +76,8 @@ assert.equal(routesById['service-area-waukee'].indexability, 'indexable')
 assert.equal(routesById['service-area-norwalk'].implementationStatus, 'implemented')
 assert.equal(routesById['service-area-norwalk'].publicationStatus, 'published')
 assert.equal(routesById['service-area-norwalk'].indexability, 'indexable')
-assert.equal(routesById['service-area-altoona'].implementationStatus, 'planned')
-assert.equal(routesById['service-area-altoona'].publicationStatus, 'planned')
+assert.equal(routesById['service-area-altoona'].implementationStatus, 'implemented')
+assert.equal(routesById['service-area-altoona'].publicationStatus, 'published')
 assert.equal(routesById['service-area-altoona'].indexability, 'indexable')
 assert.equal(routesById.contact.implementationStatus, 'planned')
 assert.equal(routesById.contact.publicationStatus, 'planned')
@@ -172,9 +172,10 @@ const expectedPublishedIds = [
   'service-area-ankeny',
   'service-area-waukee',
   'service-area-norwalk',
+  'service-area-altoona',
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
-assert.equal(publishedIds.length, 17)
+assert.equal(publishedIds.length, 18)
 assert.deepEqual(
   buildSitemapEntries(),
   expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
@@ -245,11 +246,11 @@ for (const english of task18EnglishStrings) {
 
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 20 — Waukee Service-Area Page\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 22 — Altoona Service-Area Page\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 23 — About Page\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 assert.equal(routesById.home.title, "Lawn Care & Snow Removal in Des Moines, IA | Mo's Lawn Care")
 assert.equal(routesById.home.h1, 'Lawn Care & Snow Removal in Des Moines, IA')
 assert.equal(routesById.home.canonicalUrl, 'https://www.moslawncaredsm.com/')
 
 console.log(
-  'Task 18 Service Areas validation passed: exact five-area UI/ItemList parity, homepage-owned Des Moines path, CollectionPage/BreadcrumbList graph, Ankeny, Waukee and Norwalk published with Altoona unpublished, strict geographic/schema/alias boundaries, and current sitemap lifecycle.',
+  'Task 18 Service Areas validation passed: exact five-area UI/ItemList parity, homepage-owned Des Moines path, CollectionPage/BreadcrumbList graph, all four non-Des Moines cities published, strict geographic/schema/alias boundaries, and current sitemap lifecycle.',
 )

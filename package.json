@@ -29,7 +29,8 @@
     "validate:service-areas": "node --experimental-strip-types scripts/validate-service-areas-index.mts",
     "validate:ankeny": "node --experimental-strip-types scripts/validate-ankeny-service-area.mts",
     "validate:waukee": "node --experimental-strip-types scripts/validate-waukee-service-area.mts",
-    "validate:norwalk": "node --experimental-strip-types scripts/validate-norwalk-service-area.mts"
+    "validate:norwalk": "node --experimental-strip-types scripts/validate-norwalk-service-area.mts",
+    "validate:altoona": "node --experimental-strip-types scripts/validate-altoona-service-area.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 21 complete; Task 22 not started
+- Phase: Incremental implementation — Task 22 complete; Task 23 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–21 completed; Task 22 and later are not authorized
+- Implementation status: Tasks 1–22 completed; Task 23 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -29,7 +29,8 @@
 - Task 19 repository baseline: clean `main` at `feebb9d` (guidance-only commit above product baseline `bcff35b`)
 - Task 20 repository baseline: clean `main` at `33ca36d`
 - Task 21 repository baseline: clean `main` at `fd781f6`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 22 or later
+- Task 22 repository baseline: clean `main` at `35710af`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 23 or later
 
 ## Evidence Labels
 
@@ -41,7 +42,22 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 21 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 22 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 22 only — Altoona Service-Area Page. Task 23 and all later routes remain unauthorized and `[ ]` Not started.
+- **Ownership and publication:** `/service-areas/altoona-ia` now owns `lawn care altoona ia` with the exact approved title, H1, description, secondary keywords and query-free canonical. The explicit city allowlist contains exactly Ankeny, Waukee, Norwalk and Altoona; Des Moines remains homepage-owned and child paths, aliases, city/service permutations and unknown slugs remain branded 404s without redirects.
+- **Approved service set:** an independent Altoona audit supports Landscaping, Grading, Yard Cleanup, Lawn Mowing, Fertilization & Weed Control, Aeration & Seeding, Spring Cleanup, Fall Cleanup & Leaf Removal and Snow Removal. Every canonical record explicitly lists Altoona and is published. Flower Bed Maintenance remains intentionally omitted because its narrower existing-bed intent falls outside this city guide’s selected service mix.
+- **Anti-doorway decision:** Altoona uses a fourth typed editorial mode centered on scope building: affected area and leading need precede a uniquely ordered service directory, followed by residential/commercial/service-range context and an estimate-ready outline. No summary is copied from Ankeny, Waukee or Norwalk. Five-word-shingle comparisons report 10.9% for Ankeny/Waukee, 8.9% for Ankeny/Norwalk, 6.0% for Ankeny/Altoona, 5.4% for Waukee/Norwalk, 3.3% for Waukee/Altoona and 7.7% for Norwalk/Altoona. Manual section-by-section review confirms distinct headings, sequence, service order, summaries, openings, property/timing/decision framing, CTA and related-area wording; no pair is mechanically interchangeable after city-name replacement.
+- **Content and provenance boundary:** Altoona copy adds no neighborhood, subdivision, landmark, local weather, regulation, project, customer, crew, office/branch, address/geo, proximity, response, price, contract, schedule, program, availability or guarantee claim. No media or review appears because no approved source establishes Altoona provenance.
+- **Schema and lifecycle:** the graph contains central Organization/WebSite references plus exactly one WebPage, one nine-entry ItemList and one BreadcrumbList with exact visible/schema parity. It contains no LocalBusiness, city Organization, address, geo, Place, Service, Offer, Product, Review, AggregateRating or price. Exactly Altoona was promoted, producing the exact eighteen-URL sitemap and completing the five-owner city hierarchy.
+- **Architecture, language and performance:** the existing dynamic city route remains the only renderer. One minimal `scope-builder` discriminant extends the shared typed content model without city-specific conditional sprawl, dependencies, media, forms, fetches, page-specific client JavaScript or analytics events. All new visible strings have Spanish translations while metadata and canonical remain English/query-independent.
+- **Production/browser QA:** all eighteen published routes return HTTP 200; the Des Moines child, two Altoona aliases, an arbitrary city and representative city/service permutations return branded non-redirecting 404s. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` contexts passed English/Spanish, full UTM preservation, stable SEO, current navigation, breadcrumb, service/supporting/area links, native phone/email, skip focus, mobile Escape/focus return, reduced motion, zero overflow, unclipped translated headings/labels/CTAs, footer/fixed-action separation and clean valid-route consoles. Ankeny, Waukee and Norwalk shared-renderer spot-checks also pass.
+- **Passed checks:** Altoona, Norwalk, Waukee, Ankeny, Service Areas and Commercial validators; every Tasks 7–16 focused validator; Services, content, SEO, navigation, analytics and homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; production source/route/schema/query/sitemap assertions; four-viewport browser QA; shared-renderer visual regression; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` command still exits at `eslint .`; Task 22 does not install ESLint.
+- **Task status:** Task 22 is `[x]` Completed because its exact Definition of Done and the expanded uniqueness, evidence, provenance, schema, lifecycle, responsive, regression and scope requirements pass. Task 23 was not started.
+- **Exact next action:** commit only legitimate Task 22 changes as `feat(seo): add altoona service area page`, verify a clean worktree, report the local result and STOP before Task 23.
+
+### Prior checkpoint — Task 21 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 21 only — Norwalk Service-Area Page. Task 22 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and publication:** `/service-areas/norwalk-ia` now owns `lawn care norwalk ia` with the exact approved title, H1, description, secondary keywords and query-free canonical. The explicit city allowlist contains exactly Ankeny, Waukee and Norwalk; Altoona, Des Moines child paths, aliases and unknown slugs remain branded 404s without redirects.
@@ -1565,7 +1581,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 22 — Altoona Service-Area Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/service-areas/altoona-ia/` as a distinct, truthful Altoona-wide lawn-care page.
 - **Why It Is Needed:** Altoona is the fourth confirmed non-Des Moines city and needs a single anti-doorway intent owner.
 - **Dependencies:** Tasks 1–21; verified service availability and Task 4 conversion tracking.
@@ -1575,7 +1591,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Doorway-template substitution, fake local facts/address/crew/projects/reviews, city-specific alt stuffing, unverified capability scope, duplicate text/canonical.
 - **Validation:** Compare all four pages line by line for substantive uniqueness and factual safety; inspect exact metadata/schema/links; validate CTA/tracking, mobile and accessibility.
 - **Tests:** Static route/metadata/schema, no LocalBusiness/address, expected links, four-city uniqueness guard/editorial review, invalid city 404.
-- **Definition of Done:** `[ ]` Altoona page is useful and unique; `[ ]` no invented local evidence appears; `[ ]` exact ownership/schema/service links/CTA pass; `[ ]` four-city anti-doorway review is complete.
+- **Definition of Done:** `[x]` Altoona page is useful and unique; `[x]` no invented local evidence appears; `[x]` exact ownership/schema/service links/CTA pass; `[x]` four-city anti-doorway review is complete.
 
 ### Task 23 — About Page
 

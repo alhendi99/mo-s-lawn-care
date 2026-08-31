@@ -98,6 +98,31 @@ type PriorityMapEditorial = Readonly<{
   }>
 }>
 
+type ScopeBuilderEditorial = Readonly<{
+  kind: 'scope-builder'
+  scopeSection: Readonly<{
+    eyebrow: string
+    heading: string
+    introduction: string
+    items: readonly Readonly<{ number: string; title: string; description: string }>[]
+  }>
+  readinessSection: Readonly<{
+    eyebrow: string
+    heading: string
+    introduction: string
+    contexts: readonly Readonly<{ title: string; description: string }>[]
+    requestHeading: string
+    requestIntroduction: string
+    items: readonly Readonly<{ number: string; title: string; description: string }>[]
+    links: readonly Readonly<{
+      routeId: Extract<RouteId, 'services' | 'service-areas' | 'commercial-property-services'>
+      name: string
+      href: string
+      description: string
+    }>[]
+  }>
+}>
+
 export type CityServiceAreaContent = Readonly<{
   slug: string
   cityName: string
@@ -115,7 +140,7 @@ export type CityServiceAreaContent = Readonly<{
     allServicesLabel: string
   }>
   services: readonly CityServiceItem[]
-  editorial: PropertyDecisionEditorial | YearSpanningEditorial | PriorityMapEditorial
+  editorial: PropertyDecisionEditorial | YearSpanningEditorial | PriorityMapEditorial | ScopeBuilderEditorial
   relatedSection: Readonly<{
     eyebrow: string
     heading: string

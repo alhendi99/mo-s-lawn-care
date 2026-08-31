@@ -158,6 +158,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-ankeny'].canonicalUrl },
   { url: routesById['service-area-waukee'].canonicalUrl },
   { url: routesById['service-area-norwalk'].canonicalUrl },
+  { url: routesById['service-area-altoona'].canonicalUrl },
 ])
 assert.deepEqual(
   routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id),
@@ -179,6 +180,7 @@ assert.deepEqual(
     'service-area-ankeny',
     'service-area-waukee',
     'service-area-norwalk',
+    'service-area-altoona',
   ],
 )
 assert(
@@ -201,6 +203,7 @@ assert(
       route.id === 'service-area-ankeny' ||
       route.id === 'service-area-waukee' ||
       route.id === 'service-area-norwalk' ||
+      route.id === 'service-area-altoona' ||
       route.publicationStatus === 'planned',
   ),
 )
