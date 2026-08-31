@@ -373,7 +373,9 @@ export const routeRegistry = [
     h1: 'Yard Grading Services in Des Moines, IA',
     description:
       "Improve uneven ground and prepare outdoor areas with yard grading services in Des Moines, IA. Tell Mo's what your property needs and get a free estimate.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home', 'services', 'service-landscaping', 'service-yard-cleanup'],
     outboundLinkIds: ['service-yard-cleanup', 'service-landscaping', 'our-work', 'contact'],
   }),

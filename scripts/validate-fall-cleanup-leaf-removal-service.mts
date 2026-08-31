@@ -58,18 +58,19 @@ const expectedPublishedSlugs = [
   'yard-cleanup',
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
+  'grading',
 ] as const
 assert.deepEqual(publishedServiceSlugs, expectedPublishedSlugs)
-assert.equal(publishedServiceDetails.length, 8)
+assert.equal(publishedServiceDetails.length, 9)
 assert.equal(
   getPublishedServiceDetail('fall-cleanup-leaf-removal'),
   fallCleanupLeafRemovalService,
 )
-for (const slug of expectedPublishedSlugs.slice(0, -1)) {
+for (const slug of expectedPublishedSlugs.filter((slug) => slug !== 'fall-cleanup-leaf-removal')) {
   assert(getPublishedServiceDetail(slug), `Previously published service missing: ${slug}`)
 }
 
-const unpublishedTaskSlugs = ['grading', 'snow-removal'] as const
+const unpublishedTaskSlugs = ['snow-removal'] as const
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(getPublishedServiceDetail(slug), undefined, `Unpublished service leaked: ${slug}`)
   assert.equal(routesById[`service-${slug}`].publicationStatus, 'planned')
@@ -107,6 +108,7 @@ assert.deepEqual(
     'service-yard-cleanup',
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
+    'service-grading',
   ],
 )
 
@@ -351,6 +353,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-yard-cleanup'].canonicalUrl },
   { url: routesById['service-spring-cleanup'].canonicalUrl },
   { url: route.canonicalUrl },
+  { url: routesById['service-grading'].canonicalUrl },
 ])
 for (const slug of [...unpublishedTaskSlugs, ...aliases]) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -364,5 +367,5 @@ assert.equal(
 assert.equal(routeLabels['service-fall-cleanup-leaf-removal'], 'Fall Cleanup & Leaf Removal')
 
 console.log(
-  'Task 14 Fall Cleanup & Leaf Removal validation passed: exact consolidated commercial ownership, eight-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links with Snow Removal still planned, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, alias isolation, and ten-URL sitemap isolation.',
+  'Task 14 Fall Cleanup & Leaf Removal validation passed: exact consolidated commercial ownership, nine-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links with Snow Removal still planned, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, alias isolation, and eleven-URL sitemap isolation.',
 )

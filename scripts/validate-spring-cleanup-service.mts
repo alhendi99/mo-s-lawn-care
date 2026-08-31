@@ -54,8 +54,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'yard-cleanup',
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
+  'grading',
 ])
-assert.equal(publishedServiceDetails.length, 8)
+assert.equal(publishedServiceDetails.length, 9)
 assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 for (const slug of [
   'lawn-mowing',
@@ -67,7 +68,8 @@ for (const slug of [
 ]) {
   assert(getPublishedServiceDetail(slug), `Previously published service missing: ${slug}`)
 }
-const unpublishedTaskSlugs = ['grading', 'snow-removal'] as const
+assert(getPublishedServiceDetail('grading'))
+const unpublishedTaskSlugs = ['snow-removal'] as const
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(getPublishedServiceDetail(slug), undefined, `Unpublished service leaked: ${slug}`)
   assert.equal(routesById[`service-${slug}`].publicationStatus, 'planned')
@@ -103,6 +105,7 @@ assert.deepEqual(
     'service-yard-cleanup',
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
+    'service-grading',
   ],
 )
 
@@ -371,6 +374,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-yard-cleanup'].canonicalUrl },
   { url: route.canonicalUrl },
   { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
+  { url: routesById['service-grading'].canonicalUrl },
 ])
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -387,5 +391,5 @@ assert.equal(
 assert.equal(routeLabels['service-spring-cleanup'], 'Spring Cleanup')
 
 console.log(
-  'Task 13 Spring Cleanup validation passed: exact commercial ownership, eight-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, and ten-URL sitemap isolation.',
+  'Task 13 Spring Cleanup validation passed: exact commercial ownership, nine-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, and eleven-URL sitemap isolation.',
 )

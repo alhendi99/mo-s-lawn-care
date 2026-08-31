@@ -42,6 +42,7 @@ export type ServiceDetailContent = Readonly<{
       height: number
       alt: string
       caption: string
+      loading?: 'eager' | 'lazy'
       provenance: 'existing-property-care-gallery' | 'existing-neutral-property-image'
     }>
   }>

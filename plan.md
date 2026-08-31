@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 14 complete; Task 15 not started
+- Phase: Incremental implementation — Task 15 complete; Task 16 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–14 completed; Task 15 and later are not authorized
+- Implementation status: Tasks 1–15 completed; Task 16 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-08-31 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -22,7 +22,8 @@
 - Task 12 repository baseline: clean `main` at `27ea531`
 - Task 13 repository baseline: clean `main` at `4c3b2fe`
 - Task 14 repository baseline: clean `main` at `4c0dfcb`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 15 or later
+- Task 15 repository baseline: clean `main` at `aeee077`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 16 or later
 
 ## Evidence Labels
 
@@ -34,7 +35,23 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 14 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 15 complete, 2026-08-31 (Asia/Amman)
+
+- **Authorized scope:** Task 15 only — Grading Service Page. Task 16 and later remain unauthorized and `[ ]` Not started.
+- **Baseline and checkpoint:** Task 15 began from clean `main` at `aeee077` (`feat(seo): add fall cleanup and leaf removal service page`) and resumed from clean WIP checkpoint `d9b0152` without discarding its implementation.
+- **Ownership and publication:** `/services/grading` now owns `yard grading des moines ia` plus the four exact lawn-, service-, property- and uneven-yard grading secondary phrases. It uses the exact singular-`Service` title, plural-`Services` H1, approved description and query-free canonical. Exactly one service was promoted, bringing published service details to nine and the sitemap to exactly eleven URLs; Snow Removal remains planned and unpublished.
+- **Capability boundary:** visible English and Spanish copy advertise only high-level Yard Grading for uneven ground and outdoor-area preparation. The page does not claim drainage engineering/correction, water or runoff outcomes, foundation work/protection, excavation, engineered erosion control, credentials, exact slopes, equipment, permits, utilities, soil/material inclusions, specialized project uses, price, contract or guarantee. The unsupported orphaned drainage-reshaping translation was removed.
+- **Ownership separation and links:** contextual links keep Yard Cleanup/Ground Clearance, Landscaping and drainage-specific intent separate. Required crawlable paths lead to Yard Cleanup, Landscaping, Our Work and Contact without claiming Our Work contains verified Grading projects.
+- **Media and review provenance:** every plausible local gallery and before/after candidate was visually audited. None proves Grading, drainage, excavation, Mo's authorship, city, customer or result. The page therefore uses neutral `contact.webp` with observable labeling and no work preview. No review confirms Grading; Rick Terrones and Zach Ten Haken remain verbatim, explicitly general company feedback with no Review/AggregateRating schema.
+- **Architecture and performance:** one typed content module reuses the dynamic route, shared server renderer, metadata/schema builders, breadcrumbs, five-area architecture, reviews, FAQs, CTAs and translations. No page-specific client JavaScript or dependency was added. A narrow optional hero-loading field lets the long Grading hero image lazy-load below the initial mobile viewport, eliminating an observed unused-preload warning while preserving Tasks 7–14 defaults.
+- **Schema and source:** production source contains one WebPage, exactly one Service, one BreadcrumbList and the approved Organization/provider reference with matching Home → Services → Grading breadcrumbs. JSON-LD contains none of the specialized or outcome claims prohibited above; query parameters leave the exact English title and canonical stable.
+- **Route/browser QA:** production returns 200 for Tasks 7–15 and branded 404s without redirects for Snow Removal, ten Grading/drainage aliases and an arbitrary invalid slug. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` contexts passed current-state, all sections, Spanish/UTM, focus/Escape, reduced-motion, image, overflow/clipping, fixed-action/footer and zero-console-warning/error checks.
+- **Passed checks:** `pnpm validate:grading`; all Tasks 7–14 focused validators; Services/content/SEO/navigation/analytics/homepage validators; `pnpm exec tsc --noEmit --incremental false`; `pnpm build`; production source/schema/query/sitemap and route-isolation assertions; Playwright browser QA; and `git diff --check`.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. The existing `pnpm lint` script exits at `eslint .`; Task 15 does not install ESLint.
+- **Task status:** Task 15 is `[x]` Completed because the exact plan DoD and all user-specified scope, ownership, provenance, lifecycle and QA conditions pass. Task 16 was not started.
+- **Exact next action:** amend the clean WIP checkpoint as `feat(seo): add grading service page`, verify a clean worktree, report the local result and STOP before Task 16.
+
+### Prior checkpoint — Task 14 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 14 only — Fall Cleanup and Leaf Removal Service Page. Task 15 and later remain unauthorized and `[ ]` Not started.
 - **Baseline:** Task 14 began from clean `main` at `4c0dfcb` (`feat(seo): add spring cleanup service page`). `git status --short` returned no entries before the first edit.
@@ -1310,7 +1327,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 15 — Grading Service Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/services/grading/` for verified yard-grading commercial intent with tightly bounded claims.
 - **Why It Is Needed:** Grading is advertised and required, but current wording risks implying specialized engineering work.
 - **Dependencies:** Tasks 1–3 and 6; Task 4 for tracked CTAs.
@@ -1320,7 +1337,16 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Drainage/foundation safety claims, permit implications, heavy excavation, exact slope specifications, false before/after locations, and user expectations beyond scope.
 - **Validation:** Owner/scope approval, exact metadata/H1/canonical, Service/Breadcrumb schema, related links, project provenance, FAQ/CTA/accessibility review.
 - **Tests:** Route/metadata/schema, required links, prohibited-engineering-claim review, invalid slug 404.
-- **Definition of Done:** `[ ]` Page scope is accurate and visibly bounded; `[ ]` exact ownership/links/schema pass; `[ ]` no engineering, foundation, excavation, or outcome claim appears without evidence.
+- **Definition of Done:** `[x]` Page scope is accurate and visibly bounded; `[x]` exact ownership/links/schema pass; `[x]` no engineering, foundation, excavation, or outcome claim appears without evidence.
+
+#### Task 15 implementation record
+
+- **Completed files:** new `content/services/grading.ts`; new `scripts/validate-grading-service.mts`; `content/services/index.ts`; `content/routes.ts`; `content/services/types.ts`; `components/service-detail-page.tsx`; `lib/es-translations.json`; `package.json`; lifecycle-aware inherited validators; and this plan record.
+- **Scope decision:** Yard Grading remains a high-level commercial service for uneven-ground concerns and preparing outdoor areas. Drainage, water/runoff, foundations, erosion, excavation, credentials, exact slopes, equipment, permits, utilities, soil/materials, specialized project uses and outcomes are either explicitly not advertised or left as property-specific questions without implied inclusion or guarantee.
+- **Evidence decision:** the neutral property hero is not characterized as Grading work, and no work preview or before/after pair is used. Two verbatim reviews are explicitly labeled general company feedback because no approved excerpt confirms Grading.
+- **Lifecycle decision:** the explicit service allowlist contains exactly nine details through Grading; the route registry and sitemap promote only `/services/grading`. Snow Removal, all Grading/leveling/drainage aliases and arbitrary slugs remain branded 404s without redirects.
+- **Validation result:** the focused validator, full Tasks 7–14 regression matrix, shared validators, typecheck, production build, rendered production assertions and four-viewport browser QA pass. Lint remains unavailable because ESLint is not installed. All three Task 15 Definition of Done checks are satisfied.
+- **Final result:** Task 15 is complete and work stops before Task 16.
 
 ### Task 16 — Snow Removal Service Page
 

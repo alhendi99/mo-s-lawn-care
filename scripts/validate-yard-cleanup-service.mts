@@ -62,8 +62,9 @@ assert.deepEqual(publishedServiceSlugs, [
   'yard-cleanup',
   'spring-cleanup',
   'fall-cleanup-leaf-removal',
+  'grading',
 ])
-assert.equal(publishedServiceDetails.length, 8)
+assert.equal(publishedServiceDetails.length, 9)
 assert.equal(getPublishedServiceDetail('lawn-mowing'), lawnMowingService)
 assert.equal(getPublishedServiceDetail('aeration-overseeding'), aerationOverseedingService)
 assert.equal(
@@ -75,10 +76,8 @@ assert.equal(getPublishedServiceDetail('flower-bed-maintenance'), flowerBedMaint
 assert.equal(getPublishedServiceDetail('yard-cleanup'), yardCleanupService)
 assert.equal(getPublishedServiceDetail('spring-cleanup'), springCleanupService)
 
-const unpublishedTaskSlugs = [
-  'grading',
-  'snow-removal',
-] as const
+assert(getPublishedServiceDetail('grading'))
+const unpublishedTaskSlugs = ['snow-removal'] as const
 
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(getPublishedServiceDetail(slug), undefined, `Unpublished service leaked: ${slug}`)
@@ -115,6 +114,7 @@ assert.deepEqual(
     'service-yard-cleanup',
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
+    'service-grading',
   ],
 )
 
@@ -369,6 +369,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: route.canonicalUrl },
   { url: routesById['service-spring-cleanup'].canonicalUrl },
   { url: routesById['service-fall-cleanup-leaf-removal'].canonicalUrl },
+  { url: routesById['service-grading'].canonicalUrl },
 ])
 for (const slug of unpublishedTaskSlugs) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -380,5 +381,5 @@ for (const alias of consolidatedAliases) {
 assert.equal(routeLabels['service-yard-cleanup'], 'Yard Cleanup')
 
 console.log(
-  'Task 12 Yard Cleanup validation passed: exact consolidated ownership, eight-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict ordinary-cleanup boundaries, neutral hero without work preview, cleanup-specific review labeling, Spanish coverage, and sitemap isolation.',
+  'Task 12 Yard Cleanup validation passed: exact consolidated ownership, nine-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links, strict ordinary-cleanup boundaries, neutral hero without work preview, cleanup-specific review labeling, Spanish coverage, and sitemap isolation.',
 )

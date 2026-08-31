@@ -62,7 +62,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
                 src={content.hero.image.src}
                 alt={content.hero.image.alt}
                 fill
-                loading="eager"
+                loading={content.hero.image.loading ?? 'eager'}
                 sizes="(min-width: 1024px) 52vw, 100vw"
                 className="object-cover"
               />

@@ -85,6 +85,7 @@ assertTaskOneFoundation({
     'service-yard-cleanup',
     'service-spring-cleanup',
     'service-fall-cleanup-leaf-removal',
+    'service-grading',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

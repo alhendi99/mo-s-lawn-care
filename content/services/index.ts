@@ -7,6 +7,7 @@ import { aerationOverseedingService } from './aeration-overseeding.ts'
 import { fertilizationWeedControlService } from './fertilization-weed-control.ts'
 import { fallCleanupLeafRemovalService } from './fall-cleanup-leaf-removal.ts'
 import { flowerBedMaintenanceService } from './flower-bed-maintenance.ts'
+import { gradingService } from './grading.ts'
 import { landscapingService } from './landscaping.ts'
 import { lawnMowingService } from './lawn-mowing.ts'
 import { springCleanupService } from './spring-cleanup.ts'
@@ -90,6 +91,7 @@ export const publishedServiceDetails = [
   yardCleanupService,
   springCleanupService,
   fallCleanupLeafRemovalService,
+  gradingService,
 ] as const
 
 export const publishedServiceSlugs = publishedServiceDetails.map(({ slug }) => slug)
