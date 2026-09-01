@@ -123,44 +123,19 @@ const expectedOwnership = [
 assert.equal(blogArticles.length, 6)
 assert.equal(new Set(blogArticles.map(({ slug }) => slug)).size, 6)
 assert.deepEqual(blogArticles.map(({ slug, title, h1, description, primaryKeyword }) => ({ slug, title, h1, description, primaryKeyword })), expectedOwnership)
-assert(blogArticles.every(({ status }) => status === 'planned'))
-assert(blogArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
-assert(blogArticles.every((article) => !('excerpt' in article) && !('content' in article) && !('sources' in article) && !('claimNotes' in article)))
-assert.deepEqual(getPublishedArticles(), [])
-assert.equal(getPublishedArticleBySlug('when-to-aerate-lawn-iowa'), undefined)
+const publishedArticle = blogArticles[0]
+const plannedArticles = blogArticles.slice(1)
+assert.equal(publishedArticle.status, 'published')
+assert(plannedArticles.every(({ status }) => status === 'planned'))
+assert(plannedArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
+assert(plannedArticles.every((article) => !('excerpt' in article) && !('content' in article) && !('sources' in article) && !('claimNotes' in article)))
+assert.deepEqual(getPublishedArticles(), [publishedArticle])
+assert.equal(getPublishedArticleBySlug('when-to-aerate-lawn-iowa'), publishedArticle)
 assert.equal(getPublishedArticleBySlug('not-a-real-article'), undefined)
 validateBlogArticles()
 
-const plannedFixture = blogArticles[0]
-const publishedFixture: PublishedBlogArticle = {
-  ...plannedFixture,
-  status: 'published',
-  secondaryKeywords: ['publication gate fixture'],
-  excerpt: 'Fixture excerpt used only to validate the publication gate.',
-  content: [{
-    type: 'paragraph',
-    content: [{ text: 'Fixture statement used only for validation.', sourceId: 'fixture-source' }],
-  }],
-  sources: [{
-    id: 'fixture-source',
-    title: 'Fixture source record',
-    publisher: 'Validator fixture',
-    url: 'https://example.test/source',
-    reviewedOn: '2026-01-01',
-    supportedClaimIds: ['fixture-claim'],
-    scope: 'Test data only',
-  }],
-  claimNotes: [{
-    id: 'fixture-claim',
-    summary: 'Fixture mapping used only to validate source requirements.',
-    sourceIds: ['fixture-source'],
-  }],
-  editorialReview: { owner: 'Validator fixture', reviewedOn: '2026-01-01' },
-}
-const publishedFixtureRegistry: readonly BlogArticle[] = [
-  publishedFixture,
-  ...blogArticles.slice(1),
-]
+const publishedFixture = publishedArticle
+const publishedFixtureRegistry: readonly BlogArticle[] = blogArticles
 validateBlogArticles(publishedFixtureRegistry)
 assert.deepEqual(getPublishedArticles(publishedFixtureRegistry), [publishedFixture])
 assert.equal(getPublishedArticleBySlug(publishedFixture.slug, publishedFixtureRegistry), publishedFixture)
@@ -182,6 +157,7 @@ for (const omitted of ['author', 'datePublished', 'dateModified', 'image']) asse
 
 const reviewedFixture = { ...publishedFixture, status: 'reviewed' } as const
 const reviewedFixtureRegistry: readonly BlogArticle[] = [reviewedFixture, ...blogArticles.slice(1)]
+validateBlogArticles(reviewedFixtureRegistry)
 assert.deepEqual(getPublishedArticles(reviewedFixtureRegistry), [])
 assert.equal(buildSitemapEntries(routeRegistry, reviewedFixtureRegistry).length, 23)
 assert.equal(buildSitemapEntries(routeRegistry, publishedFixtureRegistry).length, 24)
@@ -194,10 +170,11 @@ assert.throws(
 )
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 23)
-assert.equal(sitemap.at(-1)?.url, route.canonicalUrl)
+assert.equal(sitemap.length, 24)
+assert.equal(sitemap.at(-1)?.url, routesById[publishedArticle.routeId].canonicalUrl)
 assert.equal(sitemap.filter(({ url }) => url === route.canonicalUrl).length, 1)
-for (const article of blogArticles) {
+assert.equal(sitemap.filter(({ url }) => url === routesById[publishedArticle.routeId].canonicalUrl).length, 1)
+for (const article of plannedArticles) {
   assert.equal(sitemap.some(({ url }) => url === routesById[article.routeId].canonicalUrl), false)
 }
 assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 23)
@@ -305,6 +282,7 @@ for (const required of [
 
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 27 — Blog Foundation, Article Template, Publishing Workflow, and Hub\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 28 — “When to Aerate a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 28 — “When to Aerate a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
+assert.match(planSource, /### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Task 27 Blog validation passed: exact hub ownership, six planned article records, one published-only gate, source/schema safeguards, zero draft leakage, and exact 23-URL lifecycle.')
+console.log('Blog validation passed: exact hub ownership, one published and five planned article records, one publication gate, source/schema safeguards, zero future-draft leakage, and exact 24-URL lifecycle.')

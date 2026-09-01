@@ -206,8 +206,11 @@ assert.deepEqual(
   routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id),
   expectedPublishedIds,
 )
-assert.equal(buildSitemapEntries().length, 23)
-assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
+assert.equal(buildSitemapEntries().length, 24)
+assert.deepEqual(buildSitemapEntries(), [
+  ...expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
+  { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
+])
 
 const pageSource = read('app/about/page.tsx')
 const contentSource = read('content/about.ts')

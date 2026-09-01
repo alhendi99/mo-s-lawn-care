@@ -784,8 +784,12 @@ export const routeRegistry = [
     pageType: 'blog-article',
     parentId: 'blog',
     primaryKeyword: 'when to aerate lawn in iowa',
-    secondaryKeywords: [],
-    secondaryKeywordStatus: 'pending-research',
+    secondaryKeywords: [
+      'best time to aerate lawn in Iowa',
+      'core aeration Iowa',
+      'aerate lawn in spring or fall Iowa',
+    ],
+    secondaryKeywordStatus: 'defined',
     title: "When to Aerate Your Lawn in Iowa | Mo's Lawn Care",
     h1: 'When Is the Best Time to Aerate a Lawn in Iowa?',
     description:

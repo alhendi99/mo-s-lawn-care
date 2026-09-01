@@ -329,9 +329,9 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.reviews.canonicalUrl },
   { url: routesById.contact.canonicalUrl },
   { url: routesById.blog.canonicalUrl },
+  { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
 ])
 for (const futureArticle of [
-  routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl,
   routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl,
 ]) {
   assert.equal(buildSitemapEntries().some(({ url }) => url === futureArticle), false)

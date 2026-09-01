@@ -380,8 +380,9 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.reviews.canonicalUrl },
   { url: routesById.contact.canonicalUrl },
   { url: routesById.blog.canonicalUrl },
+  { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
 ])
-assert.equal(buildSitemapEntries().length, 23)
+assert.equal(buildSitemapEntries().length, 24)
 assert.equal(
   buildSitemapEntries().some(({ url }) => url === routesById['service-snow-removal'].canonicalUrl),
   true,

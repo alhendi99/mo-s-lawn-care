@@ -169,8 +169,11 @@ const expectedPublishedIds = [
   'blog',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 23)
-assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
+assert.equal(buildSitemapEntries().length, 24)
+assert.deepEqual(buildSitemapEntries(), [
+  ...expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
+  { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
+])
 assert.equal(routesById.about.implementationStatus, 'implemented')
 assert.equal(routesById.about.publicationStatus, 'published')
 

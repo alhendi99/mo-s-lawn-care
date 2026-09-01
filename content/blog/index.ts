@@ -82,6 +82,16 @@ export function validateBlogArticles(articles: readonly BlogArticle[] = blogArti
         throw new Error(`Blog ownership mismatch for ${article.slug}: ${field}`)
       }
     }
+    if (
+      article.secondaryKeywords.length !== route.secondaryKeywords.length ||
+      article.secondaryKeywords.some((keyword, index) => keyword !== route.secondaryKeywords[index])
+    ) {
+      throw new Error(`Blog ownership mismatch for ${article.slug}: secondaryKeywords`)
+    }
+    const expectedKeywordStatus = article.status === 'planned' ? 'pending-research' : 'defined'
+    if (route.secondaryKeywordStatus !== expectedKeywordStatus) {
+      throw new Error(`Blog ownership mismatch for ${article.slug}: secondaryKeywordStatus`)
+    }
     if (article.publisher !== 'organization') {
       throw new Error(`Blog article ${article.slug} must use the central Organization publisher`)
     }
@@ -162,7 +172,19 @@ export function validateBlogArticles(articles: readonly BlogArticle[] = blogArti
           if (inline.sourceId && !sourceIds.has(inline.sourceId)) {
             throw new Error(`Unknown inline source ${inline.sourceId} in ${article.slug}`)
           }
-          if (inline.href) new URL(inline.href)
+          if (inline.href) {
+            if (inline.href.startsWith('/')) {
+              const internalRoute = Object.values(routesById).find(({ path }) => path === inline.href)
+              if (!internalRoute) {
+                throw new Error(`Unknown internal article link in ${article.slug}: ${inline.href}`)
+              }
+            } else {
+              const inlineUrl = new URL(inline.href)
+              if (!['http:', 'https:'].includes(inlineUrl.protocol)) {
+                throw new Error(`Blog article link must use HTTP(S): ${inline.href}`)
+              }
+            }
+          }
         }
       }
       if (block.type === 'list' && block.items.length === 0) {

@@ -124,6 +124,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.reviews.canonicalUrl },
   { url: routesById.contact.canonicalUrl },
   { url: routesById.blog.canonicalUrl },
+  { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
 ])
 
 const completedRegistry: CanonicalRoute[] = routeRegistry.map((route) => ({
@@ -132,10 +133,13 @@ const completedRegistry: CanonicalRoute[] = routeRegistry.map((route) => ({
   publicationStatus: 'published',
 }))
 const completedSitemap = buildSitemapEntries(completedRegistry)
-assert.equal(completedSitemap.length, 23)
-assert.equal(new Set(completedSitemap.map(({ url }) => url)).size, 23)
+assert.equal(completedSitemap.length, 24)
+assert.equal(new Set(completedSitemap.map(({ url }) => url)).size, 24)
 for (const articleRoute of routeRegistry.filter(({ pageType }) => pageType === 'blog-article')) {
-  assert.equal(completedSitemap.some(({ url }) => url === articleRoute.canonicalUrl), false)
+  assert.equal(
+    completedSitemap.some(({ url }) => url === articleRoute.canonicalUrl),
+    articleRoute.id === 'article-when-to-aerate-lawn-iowa',
+  )
 }
 for (const { url } of completedSitemap) {
   assert.equal(new URL(url).origin, approvedBusinessFacts.origin)
@@ -207,5 +211,5 @@ assert(!escapedSerialization.includes('<'))
 assert.deepEqual(JSON.parse(escapedSerialization), escapedGraph)
 
 console.log(
-  `Task 2 SEO validation passed: ${routeMetadata.length} route metadata records, ${publishedRoutes.length} current sitemap URLs, article routes remain registry-gated, and ${homepageGraph['@graph'].length} linked JSON-LD nodes.`,
+  `Task 2 SEO validation passed: ${routeMetadata.length} route metadata records, ${buildSitemapEntries().length} current sitemap URLs, article routes remain selector-gated, and ${homepageGraph['@graph'].length} linked JSON-LD nodes.`,
 )

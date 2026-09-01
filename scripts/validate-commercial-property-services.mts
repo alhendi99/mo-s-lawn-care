@@ -172,7 +172,7 @@ assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'comm
 assert.equal(publishedIds.length, 23)
 assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 23)
 
-const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact', 'blog'] as const
+const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact', 'blog', 'article-when-to-aerate-lawn-iowa'] as const
 assert.deepEqual(buildSitemapEntries(), expectedSitemap.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 for (const alias of [

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Fragment } from 'react'
 import { getPublishedRelatedArticles } from '@/content/blog'
 import { routeLabels, routesById } from '@/content/routes'
 import type { BlogArticleInline, PublishedBlogArticle } from '@/content/types'
@@ -15,36 +16,48 @@ function ArticleInlineContent({
   sourceNumbers: ReadonlyMap<string, number>
 }) {
   return content.map((inline, index) => {
+    const separator = index === 0 ? null : ' '
+
     if (inline.sourceId) {
       const number = sourceNumbers.get(inline.sourceId)
       return (
-        <span key={`${inline.text}-${index}`}>
-          <Tr text={inline.text} />{' '}
-          <a
-            href={`#source-${inline.sourceId}`}
-            className="font-semibold text-[#2f6c3a] underline decoration-[#2f6c3a]/35 underline-offset-4 hover:decoration-current"
-          >
-            [{number ?? '?'}]
-          </a>
-        </span>
+        <Fragment key={`${inline.text}-${index}`}>
+          {separator}
+          <span>
+            <Tr text={inline.text} />{' '}
+            <a
+              href={`#source-${inline.sourceId}`}
+              className="font-semibold text-[#2f6c3a] underline decoration-[#2f6c3a]/35 underline-offset-4 hover:decoration-current"
+            >
+              [{number ?? '?'}]
+            </a>
+          </span>
+        </Fragment>
       )
     }
 
     if (inline.href) {
       const external = /^https?:\/\//.test(inline.href)
       return (
-        <a
-          key={`${inline.text}-${index}`}
-          href={inline.href}
-          className="font-semibold text-[#2f6c3a] underline decoration-[#2f6c3a]/35 underline-offset-4 hover:decoration-current"
-          {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
-        >
-          <Tr text={inline.text} />
-        </a>
+        <Fragment key={`${inline.text}-${index}`}>
+          {separator}
+          <a
+            href={inline.href}
+            className="font-semibold text-[#2f6c3a] underline decoration-[#2f6c3a]/35 underline-offset-4 hover:decoration-current"
+            {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+          >
+            <Tr text={inline.text} />
+          </a>
+        </Fragment>
       )
     }
 
-    return <Tr key={`${inline.text}-${index}`} text={inline.text} />
+    return (
+      <Fragment key={`${inline.text}-${index}`}>
+        {separator}
+        <Tr text={inline.text} />
+      </Fragment>
+    )
   })
 }
 
@@ -141,6 +154,7 @@ export function BlogArticle({
                   <Heading
                     key={block.id}
                     id={block.id}
+                    tabIndex={-1}
                     className={block.level === 2
                       ? 'scroll-mt-32 pt-10 font-display text-[clamp(2rem,1.3rem+2.5vw,3.6rem)] leading-[1.02] font-bold tracking-[-0.04em] text-ink uppercase first:pt-0'
                       : 'scroll-mt-32 pt-8 font-display text-[clamp(1.4rem,1.1rem+1vw,2rem)] leading-tight font-bold tracking-[-0.025em] text-ink uppercase'}
