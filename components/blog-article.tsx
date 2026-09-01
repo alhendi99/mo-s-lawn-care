@@ -87,7 +87,7 @@ export function BlogArticle({
           <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.55fr)] lg:items-end lg:gap-20">
             <div className="services-index-reveal min-w-0">
               <p className="eyebrow text-[#3e7a45]"><Tr text="Lawn care guide" /></p>
-              <h1 className="display-lg mt-5 max-w-[15ch] text-balance">
+              <h1 className="display-lg mt-5 max-w-[15ch] break-words text-balance">
                 <Tr text={article.h1} />
               </h1>
             </div>
@@ -219,7 +219,11 @@ export function BlogArticle({
                   <a href={source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-base font-semibold text-[#2f6c3a] underline decoration-[#2f6c3a]/35 underline-offset-4 hover:decoration-current">
                     {source.title}
                   </a>
-                  <p className="mt-2 text-sm text-ink-soft"><Tr text="Reviewed" /> {source.reviewedOn}{source.jurisdiction ? ` · ${source.jurisdiction}` : ''}{source.scope ? ` · ${source.scope}` : ''}</p>
+                  <p className="mt-2 text-sm text-ink-soft">
+                    <Tr text="Reviewed" /> {source.reviewedOn}
+                    {source.jurisdiction ? <> · <Tr text={source.jurisdiction} /></> : null}
+                    {source.scope ? <> · <Tr text={source.scope} /></> : null}
+                  </p>
                 </li>
               ))}
             </ol>

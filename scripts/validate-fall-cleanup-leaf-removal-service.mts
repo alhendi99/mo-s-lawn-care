@@ -375,6 +375,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.blog.canonicalUrl },
   { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
   { url: routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl },
+  { url: routesById['article-fall-leaf-cleanup-des-moines'].canonicalUrl },
 ])
 for (const slug of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)
@@ -383,10 +384,10 @@ assert.equal(
   buildSitemapEntries().some(
     ({ url }) => url === routesById['article-fall-leaf-cleanup-des-moines'].canonicalUrl,
   ),
-  false,
+  true,
 )
 assert.equal(routeLabels['service-fall-cleanup-leaf-removal'], 'Fall Cleanup & Leaf Removal')
 
 console.log(
-  'Task 14 Fall Cleanup & Leaf Removal validation passed: exact consolidated commercial ownership, ten-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links with Snow Removal published separately, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, alias isolation, and current sitemap isolation.',
+  'Task 14 Fall Cleanup & Leaf Removal validation passed: exact consolidated commercial ownership, ten-service publication allowlist, WebPage/Service/BreadcrumbList parity, required links with Snow Removal published separately, strict capability and article-intent boundaries, neutral hero without work preview, general-review labeling, Spanish coverage, alias isolation, and current article lifecycle.',
 )

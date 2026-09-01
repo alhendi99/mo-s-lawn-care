@@ -125,8 +125,9 @@ assert.equal(new Set(blogArticles.map(({ slug }) => slug)).size, 6)
 assert.deepEqual(blogArticles.map(({ slug, title, h1, description, primaryKeyword }) => ({ slug, title, h1, description, primaryKeyword })), expectedOwnership)
 const publishedArticle = blogArticles[0]
 const overseedingArticle = blogArticles[1]
-const publishedArticles = [publishedArticle, overseedingArticle] as const
-const plannedArticles = blogArticles.slice(2)
+const fallLeafArticle = blogArticles[4]
+const publishedArticles = [publishedArticle, overseedingArticle, fallLeafArticle] as const
+const plannedArticles = [blogArticles[2], blogArticles[3], blogArticles[5]] as const
 assert(publishedArticles.every(({ status }) => status === 'published'))
 assert(plannedArticles.every(({ status }) => status === 'planned'))
 assert(plannedArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
@@ -134,6 +135,7 @@ assert(plannedArticles.every((article) => !('excerpt' in article) && !('content'
 assert.deepEqual(getPublishedArticles(), publishedArticles)
 assert.equal(getPublishedArticleBySlug('when-to-aerate-lawn-iowa'), publishedArticle)
 assert.equal(getPublishedArticleBySlug('best-time-to-overseed-lawn-iowa'), overseedingArticle)
+assert.equal(getPublishedArticleBySlug('fall-leaf-cleanup-des-moines'), fallLeafArticle)
 assert.equal(getPublishedArticleBySlug('not-a-real-article'), undefined)
 validateBlogArticles()
 
@@ -146,7 +148,7 @@ assert.deepEqual(getPublishedRelatedArticles(publishedFixture, publishedFixtureR
 assert.equal(getPublishedArticleRoute(publishedFixture).publicationStatus, 'published')
 
 const fixtureItemList = buildArticleItemListStructuredData(route, publishedArticles)
-assert.equal(fixtureItemList.numberOfItems, 2)
+assert.equal(fixtureItemList.numberOfItems, 3)
 assert.deepEqual(fixtureItemList.itemListElement, publishedArticles.map((article, index) => ({
   '@type': 'ListItem',
   position: index + 1,
@@ -161,9 +163,9 @@ for (const omitted of ['author', 'datePublished', 'dateModified', 'image']) asse
 const reviewedFixture = { ...publishedFixture, status: 'reviewed' } as const
 const reviewedFixtureRegistry: readonly BlogArticle[] = [reviewedFixture, ...blogArticles.slice(1)]
 validateBlogArticles(reviewedFixtureRegistry)
-assert.deepEqual(getPublishedArticles(reviewedFixtureRegistry), [overseedingArticle])
-assert.equal(buildSitemapEntries(routeRegistry, reviewedFixtureRegistry).length, 24)
-assert.equal(buildSitemapEntries(routeRegistry, publishedFixtureRegistry).length, 25)
+assert.deepEqual(getPublishedArticles(reviewedFixtureRegistry), [overseedingArticle, fallLeafArticle])
+assert.equal(buildSitemapEntries(routeRegistry, reviewedFixtureRegistry).length, 25)
+assert.equal(buildSitemapEntries(routeRegistry, publishedFixtureRegistry).length, 26)
 assert.throws(
   () => validateBlogArticles([
     { ...publishedFixture, sources: [] } as unknown as PublishedBlogArticle,
@@ -173,8 +175,8 @@ assert.throws(
 )
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 25)
-assert.equal(sitemap.at(-1)?.url, routesById[overseedingArticle.routeId].canonicalUrl)
+assert.equal(sitemap.length, 26)
+assert.equal(sitemap.at(-1)?.url, routesById[fallLeafArticle.routeId].canonicalUrl)
 assert.equal(sitemap.filter(({ url }) => url === route.canonicalUrl).length, 1)
 for (const article of publishedArticles) {
   assert.equal(sitemap.filter(({ url }) => url === routesById[article.routeId].canonicalUrl).length, 1)
@@ -291,4 +293,4 @@ assert.match(planSource, /### Task 28 — “When to Aerate a Lawn in Iowa” Ar
 assert.match(planSource, /### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 30 — “How Often to Mow a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Blog validation passed: exact hub ownership, two published and four planned article records, one publication gate, source/schema safeguards, zero future-draft leakage, and exact 25-URL lifecycle.')
+console.log('Blog validation passed: exact hub ownership, three published and three planned article records, one publication gate, source/schema safeguards, zero future-draft leakage, and exact 26-URL lifecycle.')

@@ -206,11 +206,12 @@ assert.deepEqual(
   routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id),
   expectedPublishedIds,
 )
-assert.equal(buildSitemapEntries().length, 25)
+assert.equal(buildSitemapEntries().length, 26)
 assert.deepEqual(buildSitemapEntries(), [
   ...expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
   { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
   { url: routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl },
+  { url: routesById['article-fall-leaf-cleanup-des-moines'].canonicalUrl },
 ])
 
 const pageSource = read('app/about/page.tsx')

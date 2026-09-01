@@ -94,7 +94,7 @@ for (const required of [
 ]) assert(researchBrief.includes(required), `Research brief missing ${required}`)
 
 const published = getPublishedArticles()
-assert.equal(published.length, 2)
+assert.equal(published.length, 3)
 assert.equal(published[0], article)
 const overseedingArticle = published.find(({ slug }) => slug === 'best-time-to-overseed-lawn-iowa')
 assert(overseedingArticle)
@@ -102,7 +102,7 @@ assert.equal(getPublishedArticleBySlug(article.slug), article)
 assert.deepEqual(getPublishedRelatedArticles(article), [overseedingArticle])
 assert.equal(blogArticles.length, 6)
 const futureArticles = blogArticles.filter(({ status }) => status === 'planned')
-assert.equal(futureArticles.length, 4)
+assert.equal(futureArticles.length, 3)
 assert(futureArticles.every(({ status }) => status === 'planned'))
 assert(futureArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
 assert(futureArticles.every((candidate) => !('content' in candidate) && !('sources' in candidate)))
@@ -118,7 +118,7 @@ assert.equal((metadata.robots as { index?: boolean }).index, true)
 assert.equal((metadata.robots as { follow?: boolean }).follow, true)
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 25)
+assert.equal(sitemap.length, 26)
 assert.equal(sitemap.filter(({ url }) => url === ownershipRoute.canonicalUrl).length, 1)
 for (const future of futureArticles) {
   assert.equal(sitemap.some(({ url }) => url === routesById[future.routeId].canonicalUrl), false)
@@ -126,7 +126,7 @@ for (const future of futureArticles) {
 assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 23)
 
 const itemList = buildArticleItemListStructuredData(routesById.blog, published)
-assert.equal(itemList.numberOfItems, 2)
+assert.equal(itemList.numberOfItems, 3)
 assert.deepEqual(itemList.itemListElement, published.map((candidate, index) => ({
   '@type': 'ListItem',
   position: index + 1,
@@ -213,4 +213,4 @@ assert.match(planSource, /### Task 28 — “When to Aerate a Lawn in Iowa” Ar
 assert.match(planSource, /### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 30 — “How Often to Mow a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Task 28 aeration article validation passed: exact ownership, six sourced claim groups, three editorial gates, two published articles, truthful schema, four isolated future 404 owners, and exact 25-URL lifecycle.')
+console.log('Task 28 aeration article validation passed: exact ownership, six sourced claim groups, three editorial gates, three published articles, truthful schema, three isolated future 404 owners, and exact 26-URL lifecycle.')

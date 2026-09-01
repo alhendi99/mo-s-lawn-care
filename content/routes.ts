@@ -864,8 +864,12 @@ export const routeRegistry = [
     pageType: 'blog-article',
     parentId: 'blog',
     primaryKeyword: 'fall leaf cleanup tips des moines',
-    secondaryKeywords: [],
-    secondaryKeywordStatus: 'pending-research',
+    secondaryKeywords: [
+      'when to remove leaves from lawn',
+      'how to manage leaves on lawn',
+      'Des Moines yard waste leaves',
+    ],
+    secondaryKeywordStatus: 'defined',
     title: "Fall Leaf Cleanup Tips for Des Moines Properties | Mo's",
     h1: 'Fall Leaf Cleanup Tips for Des Moines Properties',
     description:
@@ -946,7 +950,7 @@ export const routeLabels = {
   'article-best-time-to-overseed-lawn-iowa': 'When to Overseed a Lawn in Iowa',
   'article-how-often-to-mow-lawn-iowa': 'How Often to Mow a Lawn in Iowa',
   'article-spring-lawn-cleanup-des-moines': 'Spring Lawn Cleanup Checklist',
-  'article-fall-leaf-cleanup-des-moines': 'Fall Leaf Cleanup Tips',
+  'article-fall-leaf-cleanup-des-moines': 'Fall Leaf Cleanup Tips for Des Moines Properties',
   'article-central-iowa-lawn-care-calendar': 'Central Iowa Lawn Care Calendar',
 } as const satisfies Readonly<Record<RouteId, string>>
 

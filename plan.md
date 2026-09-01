@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 29 complete; Task 32 is next by seasonal execution priority
+- Phase: Incremental implementation — Tasks 1–29 and Task 32 complete; Task 30 is next by seasonal execution priority
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–29 completed; Task 32 is the next authorized implementation target by seasonal priority; Tasks 30–31 and 33+ remain not started until explicitly authorized.
+- Implementation status: Tasks 1–29 and Task 32 completed; Tasks 30–31 and 33+ remain not started until explicitly authorized. Task 30 is next under the approved September 2026 seasonal sequence.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-01 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -37,7 +37,8 @@
 - Task 27 repository baseline: clean `main` at `852f9ed`
 - Task 28 repository baseline: clean `main` at `9320da0` (guidance-only commit above product baseline `b807d05`)
 - Task 29 repository baseline: clean `main` at `9f05475`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 30 or later
+- Task 32 repository baseline: clean `main` at `7e1d579` (seasonal-priority documentation commit above product baseline `e88a81f`)
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 30 until explicitly authorized
 
 ## Evidence Labels
 
@@ -49,7 +50,24 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 29 complete, 2026-09-01 (Asia/Amman)
+### Latest checkpoint — Task 32 complete, 2026-09-01 (Asia/Amman)
+
+- **Authorized seasonal scope:** Task 32 only — research, review and publication of `/blog/fall-leaf-cleanup-des-moines` ahead of Tasks 30–31 under the approved September 2026 sequence. Work began from clean `7e1d579`, preserving the seasonal-priority documentation commit above product baseline `e88a81f`. Tasks 30–31 and Task 33+ remain `[ ]` Not started.
+- **Exact ownership:** the article owns informational `fall leaf cleanup tips des moines` with exact title `Fall Leaf Cleanup Tips for Des Moines Properties | Mo's`, H1 `Fall Leaf Cleanup Tips for Des Moines Properties`, supplied description and query-free canonical. Current same-intent research retained `when to remove leaves from lawn`, `how to manage leaves on lawn` and `Des Moines yard waste leaves` without search-volume or density claims.
+- **Research and evidence:** Iowa State University Extension's `Do I need to remove the leaves on my lawn?` FAQ (updated October 10, 2025), the City of Des Moines Public Works 2026 SCRUB calendar, Metro Waste Authority's February 2, 2026 yard-waste notice and current Des Moines collection reference were opened and reverified on 2026-09-01. Seven publishable claim groups cover visible leaf-cover threshold, turf light/food context, thin/dry mowing-in-place conditions, visible result and repeated-pass logic, current 2026 City program scope, the annual City-resident SCRUB resource and the City-versus-metro boundary. The inaccessible general City Yard Waste page was removed rather than used as evidence.
+- **Jurisdiction and freshness:** the year-round collection statement is visibly limited to the City of Des Moines and labeled as current 2026 program information. SCRUB is visibly a dated 2026 City-resident program, not an evergreen rule. Ankeny, Waukee, Norwalk and Altoona receive no Des Moines rule; exact bags, prices, setout details, fixed dates and other-city programs were omitted in favor of current official verification.
+- **Differentiation and editorial gates:** Research, Differentiation, Tasks 28–29 Anti-Repetition, Jurisdiction, Cannibalization and Editorial Quality gates pass. The article uses a visible-cover trigger, a result check after each pass and a jurisdiction table rather than a generic tips list, Task 28's aeration factor framework or Task 29's establishment-readiness structure. Compression removed scenic fall copy, fixed dates/frequency, generic benefits, broad how-to instructions, repeated disposal warnings, forced FAQ, “why hire” filler and recap padding.
+- **Capability and cluster boundaries:** Iowa State and municipal guidance remains separate from Mo's business evidence. The article links to the canonical Fall Cleanup & Leaf Removal service only for its approved high-level commercial offering and explicitly publishes no Mo's bagging, curb placement, hauling, disposal, equipment, checklist, schedule or turnaround claim. Yard Cleanup retains broad non-seasonal intent; Task 31 retains spring-checklist intent; Task 33 retains the year-round calendar.
+- **Author, date and image decisions:** author, `datePublished`, `dateModified` and image are omitted. No approved public author or real publication-date policy was established, and no verified article image was available.
+- **Language and accessibility:** explicit Spanish translations preserve City-only, 2026-program, annual-SCRUB and service-scope qualifications. Source jurisdiction/freshness scopes now use the shared translation layer. A narrow Spanish H1 overflow found at 320px was corrected with resilient article-heading wrapping. TOC and skip focus, mobile Escape/focus return, reduced motion, table containment, zero overflow, unclipped H1/source scopes and fixed-action/footer clearance pass.
+- **Schema, links and analytics:** the route emits central Organization/WebSite references, one WebPage, one BreadcrumbList with Home → Blog → Fall Leaf Cleanup Tips for Des Moines Properties parity, and one BlogPosting with source citations. It omits author, public dates, image, FAQ, Review, AggregateRating, LocalBusiness, address, geo and Offer. Public links include Blog, Fall Cleanup & Leaf Removal, Contact and the verified sources; no unpublished article link renders. The exact five-event analytics allowlist remains unchanged.
+- **Publication and isolation:** `getPublishedArticles()` returns exactly Tasks 28, 29 and 32 and remains the sole publication gate for static params/rendering, Blog hub, three-item Blog ItemList, Homepage Latest Tips and sitemap. Those three article routes return 200. Tasks 30, 31 and 33 remain branded non-redirecting 404s and absent from public selectors and sitemap. Sitemap contains exactly twenty-six canonical URLs.
+- **QA and regression:** production source checks passed exact metadata/canonical under plain, Spanish, UTM and arbitrary queries, one H1, visible sources/links, truthful schema and future-route isolation. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` browser QA passed English/Spanish, UTM preservation, Blog active state, breadcrumb, source/jurisdiction copy, TOC/skip focus, mobile focus return, reduced motion, responsive table, zero overflow, footer/fixed-action clearance and clean console. The Task 32 validator, Fall service, Tasks 28–29/Blog contracts, complete Tasks 7–29 regression matrix, shared validators, TypeScript, production build and diff check pass.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. No lint dependency or configuration was added.
+- **Task status:** Task 32 is `[x]` Completed because all evidence, jurisdiction, differentiation, editorial, ownership, schema, lifecycle, accessibility and regression gates pass without fabricated business facts or temporary freshness theater.
+- **Exact next action:** commit as `feat(seo): add Des Moines fall leaf cleanup article`, verify a clean worktree and STOP. Task 30 is next by approved seasonal order but remains not started.
+
+### Previous checkpoint — Task 29 complete, 2026-09-01 (Asia/Amman)
 
 - **Authorized scope:** Task 29 only — research, review and publication of `/blog/best-time-to-overseed-lawn-iowa`. Work began from the required clean `9f05475` Task 28 baseline. Task 30 and all later article/media work remain unauthorized and `[ ]` Not started.
 - **Exact ownership:** the article owns `best time to overseed lawn in iowa` with exact title `Best Time to Overseed a Lawn in Iowa | Mo's Lawn Care`, H1 `What Is the Best Time to Overseed a Lawn in Iowa?`, supplied description and query-free canonical. Current same-intent research retained `when to overseed lawn in Iowa`, `overseed lawn in fall Iowa` and `Iowa lawn overseeding timing` without search-volume or density claims.
@@ -1861,7 +1879,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 32 — Des Moines Fall Leaf Cleanup Tips Article
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Research, author, review, and publish `/blog/fall-leaf-cleanup-des-moines/` for fall leaf-cleanup advice intent, prioritizing it now because September 2026 begins the relevant fall-demand window.
 - **Why It Is Needed:** It is a required seasonal supporting guide and a natural bridge to the consolidated fall service page. It is intentionally promoted ahead of Tasks 30–31 in execution order so the article can be researched, published, crawled, and established before fall leaf-cleanup demand peaks.
 - **Seasonal Execution Priority:** Execute Task 32 immediately after Task 29 for the September 2026 publishing sequence. This is an execution-priority change only; Task numbering, URL ownership, scope, and the long-term cluster architecture remain unchanged. After Task 32, return to Task 30, then Task 31, then Task 33.
@@ -1872,7 +1890,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Changing collection/disposal rules, city versus metro jurisdiction, weather variability, fake “right now” or current-leaf-condition claims, sales-heavy duplication, unverified season/location image, artificial freshness, or language implying a municipal rule applies outside its verified jurisdiction.
 - **Validation:** Claim/jurisdiction/source audit, exact metadata/H1/canonical, informational/commercial intent split, seasonal relevance without fake current-condition claims, related links, article schema parity, image provenance and responsive review. Confirm municipal guidance is current and scoped to the exact jurisdiction it governs.
 - **Tests:** Required sources/fields, route/sitemap, exact metadata/schema, Fall service link, no unsupported municipal/service/date/current-condition assertions, and no dependency on unpublished Tasks 30–31.
-- **Definition of Done:** `[ ]` Tips and any rule references are authoritative/current/scoped; `[ ]` exact informational ownership passes; `[ ]` service/cluster links and schema pass; `[ ]` no fabricated capability or local rule remains; `[ ]` the article is published in the fall-priority window without fake urgency or temporary current-condition copy.
+- **Definition of Done:** `[x]` Tips and any rule references are authoritative/current/scoped; `[x]` exact informational ownership passes; `[x]` service/cluster links and schema pass; `[x]` no fabricated capability or local rule remains; `[x]` the article is published in the fall-priority window without fake urgency or temporary current-condition copy.
+
+#### Task 32 implementation record
+
+- **Research record:** `docs/research/task-32-fall-leaf-cleanup-brief.md` records user intent, research questions, authoritative source inventory, seven reciprocal claim groups, a separate municipal/jurisdiction ledger, current secondary-intent research, representative content-gap analysis, differentiation and all final publication gates. Iowa State establishes the turf threshold and thin/dry/result conditions; current Metro Waste Authority resources and the official City 2026 SCRUB document establish only the precisely scoped local program statements.
+- **Editorial decision:** the article answers with a condition-led visible-cover threshold, then a pass/result check, then a City-limits disposal split. It avoids generic listicle structure, fixed dates/frequency, competitor facts, temporary September copy, Tasks 28–29 template repetition, and commercial service-page duplication.
+- **Truth and jurisdiction boundary:** current 2026 collection language is limited to City of Des Moines; the annual SCRUB resource is labeled as dated and resident-specific; other approved communities are told to verify their own municipality. No external source is used to infer Mo's bagging, hauling, disposal, equipment, timing or result.
+- **Publication result:** exactly Tasks 28, 29 and 32 are published through `getPublishedArticles()`. Blog hub, Blog ItemList, Homepage Latest Tips, static params and sitemap remain selector-driven; sitemap contains 26 URLs. Tasks 30, 31 and 33 remain planned, unpublished and branded non-redirecting 404s.
+- **Schema/media/date restraint:** BlogPosting, WebPage and BreadcrumbList reuse the central Organization/WebSite graph and expose source citations; author, public dates, image, FAQ, Review, AggregateRating, LocalBusiness, address, geo and Offer remain absent.
+- **Validation result:** focused Task 32, canonical Fall service, Tasks 28–29, Blog and complete Tasks 7–29/shared regressions pass with TypeScript, production build, production route/source checks and four-viewport English/Spanish browser QA. The narrow Spanish H1 wrap fix and translated source scopes pass at 320px. `Unavailable — ESLint is not installed` remains the unchanged lint status.
+- **Final result:** all five Task 32 Definition of Done checks and mandatory Research, Differentiation, Jurisdiction, Tasks 28–29 Anti-Repetition, Cannibalization and Editorial Quality gates pass. Task 32 completes ahead of Tasks 30–31 exactly as authorized; Task 30 is next but was not started.
 
 ### Task 33 — Central Iowa Lawn Care Calendar Pillar Article
 
