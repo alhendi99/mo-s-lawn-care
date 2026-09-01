@@ -32,14 +32,24 @@ const labelClass =
 
 export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: EstimatePlacement }) {
   const { locale, t } = useI18n()
+  const controlledPlacement: EstimatePlacement = placement === 'contact_page'
+    ? 'contact_page'
+    : 'homepage_estimate'
+  const idPrefix = controlledPlacement === 'contact_page' ? 'contact-estimate' : 'homepage-estimate'
+  const fieldId = (field: string) => `${idPrefix}-${field}`
   const [status, setStatus] = useState<Status>('idle')
   const [errors, setErrors] = useState<FieldErrors>({})
   const submissionInFlight = useRef(new SubmissionInFlightGuard())
   const formStartGuard = useRef(new FormStartGuard())
+  const statusRef = useRef<HTMLParagraphElement>(null)
 
   function analyticsContext() {
     const pagePath = typeof window === 'undefined' ? '/' : window.location.pathname
-    return createFormAnalyticsContext(placement, locale, pagePath)
+    return createFormAnalyticsContext(controlledPlacement, locale, pagePath)
+  }
+
+  function focusStatusMessage() {
+    requestAnimationFrame(() => statusRef.current?.focus())
   }
 
   function handleMeaningfulInteraction(
@@ -133,6 +143,7 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
           : 'unexpected_response'
         analytics.formSubmitError(analyticsContext(), errorType)
         setStatus('error')
+        focusStatusMessage()
         return
       }
 
@@ -140,8 +151,10 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
       setStatus('sent')
       setErrors({})
       form.reset()
+      focusStatusMessage()
     } catch {
       setStatus('error')
+      focusStatusMessage()
     } finally {
       submissionInFlight.current.release()
     }
@@ -149,6 +162,8 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
 
   return (
     <form
+      id={fieldId('form')}
+      data-estimate-placement={controlledPlacement}
       onSubmit={handleSubmit}
       onChange={handleChange}
       onPointerDownCapture={handleMeaningfulInteraction}
@@ -158,13 +173,13 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
       className="relative"
     >
       <div className="pointer-events-none absolute -left-[9999px]" aria-hidden="true">
-        <label htmlFor="website">{t('Website')}</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        <label htmlFor={fieldId('website')}>{t('Website')}</label>
+        <input id={fieldId('website')} name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
       <div className="flex items-end justify-between gap-5 border-b border-[color:var(--rule)] pb-5">
         <div>
           <p className="eyebrow text-accent">{t('Start here')}</p>
-          <h3 className="mt-3 font-display text-2xl leading-none font-bold tracking-[-0.035em] text-ink uppercase sm:text-3xl">
+          <h3 id={fieldId('heading')} className="mt-3 font-display text-2xl leading-none font-bold tracking-[-0.035em] text-ink uppercase sm:text-3xl">
             {t('Request an estimate')}
           </h3>
         </div>
@@ -175,32 +190,32 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
 
       <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5">
         <div className="col-span-2 sm:col-span-1">
-          <label className={labelClass} htmlFor="name">
+          <label className={labelClass} htmlFor={fieldId('name')}>
             {t('Name')} <span className="text-accent">*</span>
           </label>
           <input
-            id="name"
+            id={fieldId('name')}
             name="name"
             required
             autoComplete="name"
             placeholder={t('Your name')}
             className={fieldClass}
             aria-invalid={Boolean(errors.name)}
-            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-describedby={errors.name ? fieldId('name-error') : undefined}
           />
           {errors.name && (
-            <p id="name-error" role="alert" className="mt-2 text-sm font-medium text-red-700">
+            <p id={fieldId('name-error')} role="alert" className="mt-2 text-sm font-medium text-red-700">
               {errors.name}
             </p>
           )}
         </div>
 
         <div className="col-span-2 sm:col-span-1">
-          <label className={labelClass} htmlFor="phone">
+          <label className={labelClass} htmlFor={fieldId('phone')}>
             {t('Phone')} <span className="text-accent">*</span>
           </label>
           <input
-            id="phone"
+            id={fieldId('phone')}
             name="phone"
             type="tel"
             required
@@ -208,43 +223,43 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
             placeholder={t('Your phone number')}
             className={fieldClass}
             aria-invalid={Boolean(errors.phone)}
-            aria-describedby={errors.phone ? 'phone-error' : undefined}
+            aria-describedby={errors.phone ? fieldId('phone-error') : undefined}
           />
           {errors.phone && (
-            <p id="phone-error" role="alert" className="mt-2 text-sm font-medium text-red-700">
+            <p id={fieldId('phone-error')} role="alert" className="mt-2 text-sm font-medium text-red-700">
               {errors.phone}
             </p>
           )}
         </div>
 
         <div className="col-span-2">
-          <label className={labelClass} htmlFor="email">
+          <label className={labelClass} htmlFor={fieldId('email')}>
             {t('Email')} <span className="font-normal tracking-normal normal-case">({t('optional')})</span>
           </label>
           <input
-            id="email"
+            id={fieldId('email')}
             name="email"
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
             className={fieldClass}
             aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-describedby={errors.email ? fieldId('email-error') : undefined}
           />
           {errors.email && (
-            <p id="email-error" role="alert" className="mt-2 text-sm font-medium text-red-700">
+            <p id={fieldId('email-error')} role="alert" className="mt-2 text-sm font-medium text-red-700">
               {errors.email}
             </p>
           )}
         </div>
 
         <div className="col-span-2">
-          <label className={labelClass} htmlFor="service">
+          <label className={labelClass} htmlFor={fieldId('service')}>
             {t('What do you need help with?')}
           </label>
           <div className="relative">
             <select
-              id="service"
+              id={fieldId('service')}
               name="service"
               defaultValue=""
               className={`${fieldClass} appearance-none pr-10`}
@@ -269,11 +284,11 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
         </div>
 
         <div className="col-span-2">
-          <label className={labelClass} htmlFor="message">
+          <label className={labelClass} htmlFor={fieldId('message')}>
             {t("Tell us what's going on")}
           </label>
           <textarea
-            id="message"
+            id={fieldId('message')}
             name="message"
             rows={2}
             className={`${fieldClass} min-h-20 resize-y py-2 leading-relaxed`}
@@ -296,7 +311,14 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
         </button>
 
         <div className="col-span-2 flex flex-col gap-1.5 text-xs text-ink-soft sm:flex-row sm:items-start sm:justify-between">
-          <p aria-live="polite" className="min-h-4 sm:max-w-[17rem] sm:text-right">
+          <p
+            ref={statusRef}
+            id={fieldId('status')}
+            role="status"
+            aria-live="polite"
+            tabIndex={-1}
+            className="min-h-4 outline-none sm:max-w-[17rem] sm:text-right"
+          >
             {status === 'sent' && (
               <span className="font-semibold text-accent">{t("Thanks — we'll be in touch.")}</span>
             )}

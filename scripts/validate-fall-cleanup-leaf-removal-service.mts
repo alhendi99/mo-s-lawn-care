@@ -114,6 +114,7 @@ assert.deepEqual(
   'about',
   'our-work',
   'reviews',
+  'contact',
   ],
 )
 
@@ -369,6 +370,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
   { url: routesById.reviews.canonicalUrl },
+  { url: routesById.contact.canonicalUrl },
 ])
 for (const slug of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)

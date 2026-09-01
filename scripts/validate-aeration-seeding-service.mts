@@ -115,6 +115,7 @@ assert.deepEqual(
   'about',
   'our-work',
   'reviews',
+  'contact',
   ],
 )
 
@@ -325,6 +326,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
   { url: routesById.reviews.canonicalUrl },
+  { url: routesById.contact.canonicalUrl },
 ])
 for (const futureArticle of [
   routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl,

@@ -1,6 +1,7 @@
 import { Resend } from 'resend'
 import { EstimateRequestEmail } from '@/components/estimate-request-email'
 import type { EstimateErrorCode, EstimateRequestInput } from '@/lib/estimate-contract'
+import { services } from '@/lib/site'
 
 export const runtime = 'nodejs'
 
@@ -29,7 +30,11 @@ export async function POST(request: Request) {
   const name = textValue(payload.name, 120)
   const phone = textValue(payload.phone, 40)
   const email = textValue(payload.email, 254)
-  const service = textValue(payload.service, 120)
+  const requestedService = textValue(payload.service, 120)
+  const service = (
+    services.some((approvedService) => approvedService === requestedService)
+    || requestedService === 'Not sure yet'
+  ) ? requestedService : ''
   const message = textValue(payload.message, 2000)
   const phoneDigits = phone.replace(/\D/g, '')
 
@@ -54,7 +59,7 @@ export async function POST(request: Request) {
       to: [to],
       replyTo: email || undefined,
       subject: `New estimate request from ${name}`,
-      react: EstimateRequestEmail({ name, phone, email, service, message }),
+      html: EstimateRequestEmail({ name, phone, email, service, message }),
       tags: [
         { name: 'source', value: 'estimate-form' },
         { name: 'submission_id', value: submissionId },

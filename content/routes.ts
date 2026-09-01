@@ -733,7 +733,9 @@ export const routeRegistry = [
     h1: 'Request a Free Property Estimate',
     description:
       "Tell Mo's Lawn Care what your Des Moines-area property needs. Request a free estimate for mowing, landscaping, cleanup, lawn treatments or snow removal.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: [
       'home',
       'services',

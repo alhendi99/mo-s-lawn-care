@@ -33,7 +33,8 @@
     "validate:altoona": "node --experimental-strip-types scripts/validate-altoona-service-area.mts",
     "validate:about": "node --experimental-strip-types scripts/validate-about.mts",
     "validate:our-work": "node --experimental-strip-types scripts/validate-our-work.mts",
-    "validate:reviews": "node --experimental-strip-types scripts/validate-reviews.mts"
+    "validate:reviews": "node --experimental-strip-types scripts/validate-reviews.mts",
+    "validate:contact": "node --experimental-strip-types scripts/validate-contact.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

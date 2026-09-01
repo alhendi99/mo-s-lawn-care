@@ -162,19 +162,17 @@ assert.deepEqual(commercialSupportingRouteLinks.map(({ routeId, href }) => [rout
 ])
 assert.equal(routesById['service-areas'].implementationStatus, 'implemented')
 assert.equal(routesById['service-areas'].publicationStatus, 'published')
-for (const id of ['contact'] as const) {
-  assert.equal(routesById[id].implementationStatus, 'planned')
-  assert.equal(routesById[id].publicationStatus, 'planned')
-}
+assert.equal(routesById.contact.implementationStatus, 'implemented')
+assert.equal(routesById.contact.publicationStatus, 'published')
 
 const publishedIds = routeRegistry
   .filter(({ publicationStatus }) => publicationStatus === 'published')
   .map(({ id }) => id)
-assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews'])
-assert.equal(publishedIds.length, 21)
-assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 21)
+assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact'])
+assert.equal(publishedIds.length, 22)
+assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 22)
 
-const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews'] as const
+const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact'] as const
 assert.deepEqual(buildSitemapEntries(), expectedSitemap.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 for (const alias of [

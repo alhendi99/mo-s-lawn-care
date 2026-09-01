@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 25 complete; Task 26 not started
+- Phase: Incremental implementation — Task 26 complete; Task 27 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–25 completed; Task 26 and later are not authorized
+- Implementation status: Tasks 1–26 completed; Task 27 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-01 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -33,7 +33,8 @@
 - Task 23 repository baseline: clean `main` at `b285461`
 - Task 24 repository baseline: clean `main` at `a88cf9a`; finalization resumed from WIP checkpoint `80779ff`
 - Task 25 repository baseline: clean `main` at `3050e5b`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 26 or later
+- Task 26 repository baseline: clean `main` at `247de1d`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 27 or later
 
 ## Evidence Labels
 
@@ -45,7 +46,20 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 25 complete, 2026-09-01 (Asia/Amman)
+### Latest checkpoint — Task 26 complete, 2026-09-01 (Asia/Amman)
+
+- **Authorized scope:** Task 26 only — Contact Page and Estimate Integration. Work began from the clean `247de1d` Task 25 baseline. Task 27 and all later routes remain unauthorized and `[ ]` Not started.
+- **Ownership and publication:** `/contact` now owns `lawn care estimate des moines` with the exact title `Contact Mo's Lawn Care | Free Estimate in Des Moines, IA`, H1 `Request a Free Property Estimate`, approved description, secondary keywords and query-free canonical `https://www.moslawncaredsm.com/contact`. Exactly one H1 renders and English metadata/canonical remain stable under Spanish, UTM and arbitrary service/city/form query values.
+- **One form and one backend:** the existing `EstimateForm` remains the sole form implementation and powers both Homepage and Contact through controlled `homepage_estimate` and `contact_page` placements. Deterministic placement-prefixed DOM IDs prevent collisions while field names, labels, validation, honeypot, `/api/estimate` payload and success/error UI remain shared. `/api/estimate` remains the sole Resend endpoint; controlled service values are allowlisted server-side and arbitrary query context is never read or forwarded.
+- **Delivery and analytics:** Task 4's exact five-event allowlist is unchanged. Mocked provider failure produced one bounded `form_submit_error` and no lead; confirmed sent responses produced exactly one `generate_lead` on each placement; duplicate delivery IDs and suppressed honeypot responses produced no additional lead. Analytics payloads contain only the controlled placement, fixed form dimensions, sanitized path, language and bounded error type—no name, email, phone, message, service, submission ID or query values. The Resend email body now uses bounded escaped HTML through the same endpoint/provider, avoiding the missing optional React-email renderer without adding a dependency or second workflow.
+- **Page, schema and lifecycle:** the server-rendered page uses one ContactPage, one BreadcrumbList with Home → Contact UI/schema parity and the central Organization/WebSite references. Native centralized `tel:` and `mailto:` paths plus crawlable Services and Service Areas links render. No address, LocalBusiness, Place, geo, Review, AggregateRating, Offer or pricing/scheduling/availability claim was added. Exactly `/contact` was promoted, producing exactly twenty-two sitemap URLs; Blog remains a branded non-redirecting 404.
+- **Accessibility, language and browser QA:** validation focuses the first invalid field, provider success/failure focuses the shared live status, submit busy/disabled state is exposed, input/error/status IDs are placement-isolated, and the honeypot stays outside normal interaction. Fresh production contexts at `1440×900`, `1280×800`, `390×844` and `320×568` passed English/Spanish, UTM preservation, current navigation, breadcrumb, exact SEO, mobile Escape/focus return, skip focus, reduced motion, translated wrapping, zero H1/page overflow, footer/fixed-action clearance and clean valid-route consoles. Homepage desktop/mobile regression preserved its form, metadata, layout, validation, analytics and unique IDs.
+- **API and regression:** safe local API checks passed malformed JSON, empty/invalid contact data and honeypot suppression without a production lead send. Mocked browser transport covered provider failure, confirmed success, duplicate-success and suppression paths. The focused Contact validator, complete Tasks 7–25 focused matrix, shared content/SEO/navigation/analytics/Homepage validators, TypeScript, production build and diff check passed.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. No lint dependency or configuration was added.
+- **Task status:** Task 26 is `[x]` Completed because Contact reuses the sole form/backend and analytics contract, exact metadata/schema/contact paths pass, confirmed-success semantics match Homepage, and no PII or arbitrary query data reaches GA4.
+- **Exact next action:** commit as `feat(seo): add contact page`, verify a clean worktree and STOP before Task 27.
+
+### Previous checkpoint — Task 25 complete, 2026-09-01 (Asia/Amman)
 
 - **Authorized scope:** Task 25 only — Reviews Page and Review Data Governance. Work began from the clean `3050e5b` Task 24 baseline. Task 26 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and publication:** `/reviews` now owns `mo's lawn care reviews` with the exact title `Mo's Lawn Care Reviews | Des Moines, IA`, H1 `What Customers Say About Mo's Lawn Care`, approved description, secondary keywords and query-free canonical `https://www.moslawncaredsm.com/reviews`. Exactly one H1 renders and English metadata/canonical remain stable under Spanish, UTM, filter and arbitrary query parameters.
@@ -1681,7 +1695,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 26 — Contact Page and Estimate Integration
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/contact/` as the canonical estimate page using the existing validated Resend workflow and Task 4 event contract.
 - **Why It Is Needed:** Every major page needs an obvious conversion destination, but duplicate form/backends would fragment behavior and lead measurement.
 - **Dependencies:** Tasks 1–4; related route architecture through Task 25.
@@ -1691,7 +1705,14 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Duplicate homepage/contact form IDs, preselected query spoofing, honeypot suppression, provider failure, validation focus, repeated submission, PII leakage, no JS, tel/mailto regression.
 - **Validation:** Exact metadata/H1/canonical/schema, success/error/suppression/manual form flows, native phone/email, page-context payload allowlist, mobile/keyboard/screen-reader messaging, and no second backend.
 - **Tests:** Contact route/metadata, form validation and focus, API response cases, exact once-per-delivery lead event, PII-free payload, native contact destinations, homepage/contact instance isolation.
-- **Definition of Done:** `[ ]` Contact page reuses the sole form/backend; `[ ]` exact metadata/schema and accessible conversion paths pass; `[ ]` confirmed-success analytics semantics pass on both placements; `[ ]` no PII or arbitrary query data reaches GA4.
+- **Definition of Done:** `[x]` Contact page reuses the sole form/backend; `[x]` exact metadata/schema and accessible conversion paths pass; `[x]` confirmed-success analytics semantics pass on both placements; `[x]` no PII or arbitrary query data reaches GA4.
+
+#### Task 26 implementation record
+
+- **Completed files:** new `app/contact/page.tsx`, `components/estimate-form.tsx`, `components/estimate-request-email.tsx`, `app/api/estimate/route.ts`, `content/routes.ts`, `lib/es-translations.json`, `package.json`, new `scripts/validate-contact.mts`, lifecycle-only updates to inherited validators, and this plan record.
+- **Integration decision:** one controlled placement prop selects `homepage_estimate` or `contact_page`, derives deterministic placement-prefixed DOM IDs, and feeds the existing sanitized Task 4 analytics context. Form state remains instance-local, the analytics form identity remains fixed, and no URL/query preselection or arbitrary form identity is implemented.
+- **Backend decision:** `/api/estimate` and Resend remain the sole backend/provider. Existing field, validation, suppression and response contracts remain intact; submitted service values are constrained to the existing form vocabulary, and escaped bounded HTML preserves the email content without the unavailable React-email renderer or a new dependency.
+- **Final result:** all four Task 26 Definition of Done checks are satisfied. `/contact` is the only promoted route, the sitemap contains exactly twenty-two canonical URLs, Blog remains unpublished, and work stops before Task 27.
 
 ### Task 27 — Blog Foundation, Article Template, Publishing Workflow, and Hub
 

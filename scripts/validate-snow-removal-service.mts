@@ -89,16 +89,13 @@ assert.deepEqual(
   'about',
   'our-work',
   'reviews',
+  'contact',
   ],
 )
 assert.equal(routesById['service-areas'].implementationStatus, 'implemented')
 assert.equal(routesById['service-areas'].publicationStatus, 'published')
-for (const futureRouteId of [
-  'contact',
-] as const) {
-  assert.equal(routesById[futureRouteId].implementationStatus, 'planned')
-  assert.equal(routesById[futureRouteId].publicationStatus, 'planned')
-}
+assert.equal(routesById.contact.implementationStatus, 'implemented')
+assert.equal(routesById.contact.publicationStatus, 'published')
 
 const aliases = [
   'snow-plowing',
@@ -416,16 +413,9 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
   { url: routesById.reviews.canonicalUrl },
+  { url: routesById.contact.canonicalUrl },
 ])
-assert.equal(buildSitemapEntries().length, 21)
-for (const futureRouteId of [
-  'contact',
-] as const) {
-  assert.equal(
-    buildSitemapEntries().some(({ url }) => url === routesById[futureRouteId].canonicalUrl),
-    false,
-  )
-}
+assert.equal(buildSitemapEntries().length, 22)
 for (const alias of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)
 }

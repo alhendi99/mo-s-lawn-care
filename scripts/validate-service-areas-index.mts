@@ -79,8 +79,8 @@ assert.equal(routesById['service-area-norwalk'].indexability, 'indexable')
 assert.equal(routesById['service-area-altoona'].implementationStatus, 'implemented')
 assert.equal(routesById['service-area-altoona'].publicationStatus, 'published')
 assert.equal(routesById['service-area-altoona'].indexability, 'indexable')
-assert.equal(routesById.contact.implementationStatus, 'planned')
-assert.equal(routesById.contact.publicationStatus, 'planned')
+assert.equal(routesById.contact.implementationStatus, 'implemented')
+assert.equal(routesById.contact.publicationStatus, 'published')
 assert.deepEqual(serviceAreaSupportingRouteLinks.map(({ routeId, href }) => [routeId, href]), [
   ['services', '/services'],
   ['contact', '/contact'],
@@ -176,9 +176,10 @@ const expectedPublishedIds = [
   'about',
   'our-work',
   'reviews',
+  'contact',
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
-assert.equal(publishedIds.length, 21)
+assert.equal(publishedIds.length, 22)
 assert.deepEqual(
   buildSitemapEntries(),
   expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
