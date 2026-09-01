@@ -1,6 +1,7 @@
 import type { Metadata, MetadataRoute } from 'next'
+import { blogArticles, getPublishedArticleRoute, getPublishedArticles } from '../content/blog/index.ts'
 import { routeRegistry } from '../content/routes.ts'
-import type { CanonicalRoute } from '../content/types.ts'
+import type { BlogArticle, CanonicalRoute } from '../content/types.ts'
 import { approvedBusinessFacts } from './site.ts'
 import { SITE_ORIGIN } from './site-url.ts'
 
@@ -100,10 +101,18 @@ export function buildRouteMetadata(
 
 export function buildSitemapEntries(
   routes: readonly CanonicalRoute[] = routeRegistry,
+  articles: readonly BlogArticle[] = blogArticles,
 ): MetadataRoute.Sitemap {
-  return getPublishedIndexableRoutes(routes).map((route) => ({
-    url: route.canonicalUrl,
+  const routeEntries = getPublishedIndexableRoutes(routes)
+    .filter(({ pageType }) => pageType !== 'blog-article')
+    .map((route) => ({
+      url: route.canonicalUrl,
+    }))
+  const articleEntries = getPublishedArticles(articles).map((article) => ({
+    url: getPublishedArticleRoute(article).canonicalUrl,
   }))
+
+  return [...routeEntries, ...articleEntries]
 }
 
 export function buildRobotsFile(): MetadataRoute.Robots {

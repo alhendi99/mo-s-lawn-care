@@ -116,6 +116,7 @@ assert.deepEqual(
   'our-work',
   'reviews',
   'contact',
+  'blog',
   ],
 )
 
@@ -378,8 +379,9 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['our-work'].canonicalUrl },
   { url: routesById.reviews.canonicalUrl },
   { url: routesById.contact.canonicalUrl },
+  { url: routesById.blog.canonicalUrl },
 ])
-assert.equal(buildSitemapEntries().length, 22)
+assert.equal(buildSitemapEntries().length, 23)
 assert.equal(
   buildSitemapEntries().some(({ url }) => url === routesById['service-snow-removal'].canonicalUrl),
   true,

@@ -167,9 +167,10 @@ const expectedPublishedIds = [
   'our-work',
   'reviews',
   'contact',
+  'blog',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 22)
+assert.equal(buildSitemapEntries().length, 23)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 const pageSource = read('app/service-areas/[city]/page.tsx')

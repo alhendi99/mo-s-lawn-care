@@ -72,3 +72,114 @@ export type CanonicalRoute = Readonly<{
 }>
 
 export type CanonicalRouteInput = Omit<CanonicalRoute, 'canonicalUrl'>
+
+export type BlogArticleRouteId = Extract<RouteId, `article-${string}`>
+export type BlogArticleStatus = 'planned' | 'reviewed' | 'published'
+
+export type BlogArticleInline = Readonly<{
+  text: string
+  sourceId?: string
+  href?: string
+}>
+
+export type BlogArticleBlock =
+  | Readonly<{
+      type: 'paragraph'
+      content: readonly BlogArticleInline[]
+    }>
+  | Readonly<{
+      type: 'heading'
+      level: 2 | 3
+      id: string
+      text: string
+    }>
+  | Readonly<{
+      type: 'list'
+      style: 'unordered' | 'ordered' | 'checklist'
+      items: readonly string[]
+    }>
+  | Readonly<{
+      type: 'table'
+      caption?: string
+      headers: readonly string[]
+      rows: readonly (readonly string[])[]
+    }>
+
+export type BlogSource = Readonly<{
+  id: string
+  title: string
+  publisher: string
+  url: string
+  reviewedOn: string
+  supportedClaimIds: readonly string[]
+  jurisdiction?: string
+  scope?: string
+}>
+
+export type BlogClaimNote = Readonly<{
+  id: string
+  summary: string
+  sourceIds: readonly string[]
+  reviewNote?: string
+}>
+
+export type BlogEditorialReview = Readonly<{
+  owner: string
+  reviewedOn: string
+}>
+
+export type BlogAuthor = Readonly<{
+  name: string
+  approval: 'owner-confirmed'
+}>
+
+export type BlogArticleImage = Readonly<{
+  src: string
+  alt: string
+  width: number
+  height: number
+  provenance: string
+  approval: 'verified'
+}>
+
+type BlogArticleOwnership = Readonly<{
+  routeId: BlogArticleRouteId
+  slug: string
+  path: CanonicalPath
+  title: string
+  h1: string
+  description: string
+  primaryKeyword: string
+  publisher: 'organization'
+  relatedServicePaths: readonly CanonicalPath[]
+  relatedArticlePaths: readonly CanonicalPath[]
+}>
+
+export type PlannedBlogArticle = BlogArticleOwnership & Readonly<{
+  status: 'planned'
+  secondaryKeywords: readonly []
+}>
+
+type ReviewedBlogArticleFields = Readonly<{
+  secondaryKeywords: readonly string[]
+  excerpt: string
+  content: readonly [BlogArticleBlock, ...BlogArticleBlock[]]
+  sources: readonly [BlogSource, ...BlogSource[]]
+  claimNotes: readonly BlogClaimNote[]
+  editorialReview: BlogEditorialReview
+  author?: BlogAuthor
+  publishedOn?: string
+  modifiedOn?: string
+  image?: BlogArticleImage
+  showTableOfContents?: boolean
+}>
+
+export type ReviewedBlogArticle = BlogArticleOwnership & ReviewedBlogArticleFields & Readonly<{
+  status: 'reviewed'
+}>
+
+export type PublishedBlogArticle = BlogArticleOwnership & ReviewedBlogArticleFields & Readonly<{
+  status: 'published'
+}>
+
+export type BlogArticle = PlannedBlogArticle | ReviewedBlogArticle | PublishedBlogArticle

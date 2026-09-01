@@ -122,6 +122,7 @@ assert.deepEqual(
   'our-work',
   'reviews',
   'contact',
+  'blog',
   ],
 )
 
@@ -372,6 +373,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['our-work'].canonicalUrl },
   { url: routesById.reviews.canonicalUrl },
   { url: routesById.contact.canonicalUrl },
+  { url: routesById.blog.canonicalUrl },
 ])
 
 assert.equal(routeLabels['service-fertilization-weed-control'], 'Fertilization & Weed Control')

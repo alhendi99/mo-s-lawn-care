@@ -142,13 +142,14 @@ assert.equal(routesById.reviews.implementationStatus, 'implemented')
 assert.equal(routesById.reviews.publicationStatus, 'published')
 assert.equal(routesById.contact.implementationStatus, 'implemented')
 assert.equal(routesById.contact.publicationStatus, 'published')
-assert.equal(routesById.blog.implementationStatus, 'planned')
+assert.equal(routesById.blog.implementationStatus, 'implemented')
+assert.equal(routesById.blog.publicationStatus, 'published')
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 22)
+assert.equal(sitemap.length, 23)
 assert.equal(sitemap.some(({ url }) => url.endsWith('/reviews')), true)
 assert.equal(sitemap.some(({ url }) => url.endsWith('/contact')), true)
-assert.equal(sitemap.some(({ url }) => url.endsWith('/blog')), false)
+assert.equal(sitemap.some(({ url }) => url.endsWith('/blog')), true)
 
 for (const phrase of ['landscaping projects in des moines', 'lawn care gallery in des moines', 'yard cleanup before-and-after']) {
   assert(pageSource.toLowerCase().includes(phrase), `Missing natural secondary coverage: ${phrase}`)
@@ -173,4 +174,4 @@ for (const english of [
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 25 — Reviews Page and Review Data Governance\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
-console.log(`Task 24 Our Work validation passed: exact ownership, ${workRecords.length} governed records, ${fullRecords.length} display-eligible images, ${workComparisons.length} verified pairs, bounded ${OUR_WORK_INITIAL_COUNT}-item SSR, zero ImageObjects, and current 22-URL lifecycle.`)
+console.log(`Task 24 Our Work validation passed: exact ownership, ${workRecords.length} governed records, ${fullRecords.length} display-eligible images, ${workComparisons.length} verified pairs, bounded ${OUR_WORK_INITIAL_COUNT}-item SSR, zero ImageObjects, and current 23-URL lifecycle.`)

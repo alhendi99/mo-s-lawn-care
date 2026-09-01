@@ -1,5 +1,5 @@
 import { getBreadcrumbItems } from '../content/routes.ts'
-import type { CanonicalRoute } from '../content/types.ts'
+import type { CanonicalRoute, PublishedBlogArticle } from '../content/types.ts'
 import { approvedBusinessFacts } from './site.ts'
 import { SITE_ORIGIN } from './site-url.ts'
 
@@ -41,9 +41,78 @@ function getWebPageType(route: CanonicalRoute) {
     case 'reviews-index':
       return 'CollectionPage'
     case 'blog-index':
-      return ['Blog', 'CollectionPage'] as const
+      return 'Blog'
     default:
       return 'WebPage'
+  }
+}
+
+export function buildArticleItemListStructuredData(
+  blogRoute: CanonicalRoute,
+  articles: readonly PublishedBlogArticle[],
+): StructuredDataNode {
+  if (blogRoute.pageType !== 'blog-index') {
+    throw new Error(`Article ItemList requires the Blog route: ${blogRoute.id}`)
+  }
+  if (articles.length === 0) {
+    throw new Error('Empty article ItemLists must be omitted')
+  }
+  if (articles.some(({ status }) => status !== 'published')) {
+    throw new Error('Article ItemList accepts published records only')
+  }
+
+  return {
+    '@type': 'ItemList',
+    '@id': `${blogRoute.canonicalUrl}#published-guides`,
+    name: 'Published lawn care guides',
+    numberOfItems: articles.length,
+    itemListElement: articles.map((article, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: article.h1,
+      url: new URL(article.path, SITE_ORIGIN).toString(),
+    })),
+  }
+}
+
+export function buildBlogPostingStructuredData(
+  route: CanonicalRoute,
+  article: PublishedBlogArticle,
+): StructuredDataNode {
+  if (route.pageType !== 'blog-article' || route.id !== article.routeId) {
+    throw new Error(`BlogPosting route mismatch: ${article.slug}`)
+  }
+  if (article.status !== 'published') {
+    throw new Error(`BlogPosting requires a published article: ${article.slug}`)
+  }
+
+  return {
+    '@type': 'BlogPosting',
+    '@id': `${route.canonicalUrl}#article`,
+    url: route.canonicalUrl,
+    headline: article.h1,
+    description: article.description,
+    inLanguage: 'en-US',
+    mainEntityOfPage: { '@id': `${route.canonicalUrl}#webpage` },
+    isPartOf: { '@id': WEBSITE_ID },
+    publisher: { '@id': ORGANIZATION_ID },
+    citation: article.sources.map(({ url }) => url),
+    ...(article.author
+      ? { author: { '@type': 'Person', name: article.author.name } }
+      : {}),
+    ...(article.publishedOn ? { datePublished: article.publishedOn } : {}),
+    ...(article.modifiedOn ? { dateModified: article.modifiedOn } : {}),
+    ...(article.image
+      ? {
+          image: {
+            '@type': 'ImageObject',
+            url: new URL(article.image.src, SITE_ORIGIN).toString(),
+            width: article.image.width,
+            height: article.image.height,
+            caption: article.image.alt,
+          },
+        }
+      : {}),
   }
 }
 

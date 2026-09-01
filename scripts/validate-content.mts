@@ -97,6 +97,7 @@ assertTaskOneFoundation({
   'our-work',
   'reviews',
   'contact',
+  'blog',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

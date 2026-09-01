@@ -168,11 +168,11 @@ assert.equal(routesById.contact.publicationStatus, 'published')
 const publishedIds = routeRegistry
   .filter(({ publicationStatus }) => publicationStatus === 'published')
   .map(({ id }) => id)
-assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact'])
-assert.equal(publishedIds.length, 22)
-assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 22)
+assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact', 'blog'])
+assert.equal(publishedIds.length, 23)
+assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 23)
 
-const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact'] as const
+const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact', 'blog'] as const
 assert.deepEqual(buildSitemapEntries(), expectedSitemap.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 for (const alias of [

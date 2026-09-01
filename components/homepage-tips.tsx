@@ -1,9 +1,11 @@
 import Link from 'next/link'
-import { homepageTipRoutes } from '@/content/homepage'
+import { getPublishedArticles } from '@/content/blog'
 import { routesById } from '@/content/routes'
 import { Tr } from './tr'
 
 export function HomepageTips() {
+  const homepageTipArticles = getPublishedArticles().slice(0, 3)
+
   return (
     <section
       data-home-section="latest-tips"
@@ -24,26 +26,34 @@ export function HomepageTips() {
           </Link>
         </header>
 
-        <ol className="mt-12 grid border-b border-[color:var(--rule)] lg:grid-cols-3">
-          {homepageTipRoutes.map((tip, index) => (
-            <li key={tip.id} className="border-t border-[color:var(--rule)] lg:border-r lg:last:border-r-0">
-              <Link href={tip.href} prefetch={false} className="group flex h-full min-h-72 flex-col p-6 sm:p-8">
-                <span className="text-[0.68rem] font-bold tracking-[0.16em] text-ink-soft tabular-nums">
-                  GUIDE {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="mt-8 text-[clamp(1.45rem,1.1rem+1vw,2.2rem)] leading-[1.02] font-bold tracking-[-0.035em] uppercase">
-                  <Tr text={tip.title} />
-                </h3>
-                <p className="mt-5 text-[0.95rem] leading-relaxed text-ink-soft">
-                  <Tr text={tip.description} />
-                </p>
-                <span className="mt-auto pt-8 text-[0.75rem] font-bold tracking-[0.14em] text-accent uppercase">
-                  <Tr text="Read the guide" /> <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        {homepageTipArticles.length > 0 ? (
+          <ol className="mt-12 grid border-b border-[color:var(--rule)] lg:grid-cols-3">
+            {homepageTipArticles.map((article, index) => (
+              <li key={article.routeId} className="border-t border-[color:var(--rule)] lg:border-r lg:last:border-r-0">
+                <Link href={article.path} prefetch={false} className="group flex h-full min-h-72 flex-col p-6 sm:p-8">
+                  <span className="text-[0.68rem] font-bold tracking-[0.16em] text-ink-soft tabular-nums">
+                    <Tr text="Guide" /> {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="mt-8 text-[clamp(1.45rem,1.1rem+1vw,2.2rem)] leading-[1.02] font-bold tracking-[-0.035em] uppercase">
+                    <Tr text={article.h1} />
+                  </h3>
+                  <p className="mt-5 text-[0.95rem] leading-relaxed text-ink-soft">
+                    <Tr text={article.excerpt} />
+                  </p>
+                  <span className="mt-auto pt-8 text-[0.75rem] font-bold tracking-[0.14em] text-accent uppercase">
+                    <Tr text="Read the guide" /> <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div className="mt-12 border-y border-[color:var(--rule)] py-10 sm:py-12">
+            <p className="max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+              <Tr text="Published guides will appear here after source and editorial review." />
+            </p>
+          </div>
+        )}
       </div>
     </section>
   )

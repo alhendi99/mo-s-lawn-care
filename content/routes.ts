@@ -765,7 +765,9 @@ export const routeRegistry = [
     h1: 'Lawn Care Tips for Des Moines & Central Iowa',
     description:
       'Practical lawn care and seasonal property tips for Des Moines and Central Iowa, including mowing, aeration, overseeding, cleanup and year-round planning.',
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: ['home'],
     outboundLinkIds: [
       'article-when-to-aerate-lawn-iowa',
@@ -931,7 +933,7 @@ export const routeLabels = {
   'our-work': 'Our Work',
   reviews: 'Reviews',
   contact: 'Contact',
-  blog: 'Lawn Care Tips',
+  blog: 'Blog',
   'article-when-to-aerate-lawn-iowa': 'When to Aerate a Lawn in Iowa',
   'article-best-time-to-overseed-lawn-iowa': 'When to Overseed a Lawn in Iowa',
   'article-how-often-to-mow-lawn-iowa': 'How Often to Mow a Lawn in Iowa',

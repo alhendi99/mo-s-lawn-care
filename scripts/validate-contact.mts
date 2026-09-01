@@ -248,13 +248,13 @@ assert.deepEqual(services, [
 ])
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 22)
-assert.equal(sitemap.at(-1)?.url, route.canonicalUrl)
+assert.equal(sitemap.length, 23)
+assert.equal(sitemap.at(-1)?.url, routesById.blog.canonicalUrl)
 assert.equal(sitemap.filter(({ url }) => url === route.canonicalUrl).length, 1)
-assert.equal(routesById.blog.implementationStatus, 'planned')
-assert.equal(routesById.blog.publicationStatus, 'planned')
-assert.equal(sitemap.some(({ url }) => url === routesById.blog.canonicalUrl), false)
-assert.equal(fs.existsSync(path.join(projectRoot, 'app/blog/page.tsx')), false)
+assert.equal(routesById.blog.implementationStatus, 'implemented')
+assert.equal(routesById.blog.publicationStatus, 'published')
+assert.equal(sitemap.some(({ url }) => url === routesById.blog.canonicalUrl), true)
+assert.equal(fs.existsSync(path.join(projectRoot, 'app/blog/page.tsx')), true)
 
 const translations = JSON.parse(read('lib/es-translations.json')) as Record<string, string>
 for (const english of [
@@ -276,4 +276,4 @@ for (const english of [
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 27 — Blog Foundation, Article Template, Publishing Workflow, and Hub\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Task 26 Contact validation passed: exact ownership/schema, one shared form/backend, controlled placements and services, query/PII boundaries, exact-once leads, native contact paths, and exact 22-URL lifecycle.')
+console.log('Task 26 Contact validation passed: exact ownership/schema, one shared form/backend, controlled placements and services, query/PII boundaries, exact-once leads, native contact paths, and exact 23-URL lifecycle.')

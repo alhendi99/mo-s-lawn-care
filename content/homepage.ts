@@ -18,19 +18,6 @@ export const homepageServiceAreaRoutes = serviceAreaNavigationRouteIds.map((id) 
   href: routesById[id].path,
 }))
 
-export const homepageTipRouteIds = [
-  'article-central-iowa-lawn-care-calendar',
-  'article-how-often-to-mow-lawn-iowa',
-  'article-when-to-aerate-lawn-iowa',
-] as const satisfies readonly RouteId[]
-
-export const homepageTipRoutes = homepageTipRouteIds.map((id) => ({
-  id,
-  href: routesById[id].path,
-  title: routesById[id].h1,
-  description: routesById[id].description,
-}))
-
 const serviceRouteIdsByLegacyName = {
   'Mowing Service': 'service-lawn-mowing',
   'Aeration and Seeding': 'service-aeration-overseeding',

@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 26 complete; Task 27 not started
+- Phase: Incremental implementation — Task 27 complete; Task 28 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–26 completed; Task 27 and later are not authorized
+- Implementation status: Tasks 1–27 completed; Task 28 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-01 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -34,7 +34,8 @@
 - Task 24 repository baseline: clean `main` at `a88cf9a`; finalization resumed from WIP checkpoint `80779ff`
 - Task 25 repository baseline: clean `main` at `3050e5b`
 - Task 26 repository baseline: clean `main` at `247de1d`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 27 or later
+- Task 27 repository baseline: clean `main` at `852f9ed`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 28 or later
 
 ## Evidence Labels
 
@@ -46,7 +47,21 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 26 complete, 2026-09-01 (Asia/Amman)
+### Latest checkpoint — Task 27 complete, 2026-09-01 (Asia/Amman)
+
+- **Authorized scope:** Task 27 only — Blog Foundation, Article Template, Publishing Workflow, and Hub. Work began from the clean `852f9ed` Task 26 baseline. Task 28 and all later article/media work remain unauthorized and `[ ]` Not started.
+- **Ownership and publication:** `/blog` now owns `iowa lawn care tips` with the exact supplied title, H1, description, four secondary keywords and query-free canonical. It is the sole lifecycle promotion, producing exactly twenty-three sitemap URLs. All six planned article owners retain exact approved title/H1/description/primary keyword records, empty secondary-keyword arrays and `planned` status; no article body, research source, author, date or image was added.
+- **Single publication gate:** one discriminated `BlogArticle` registry supports `planned`, `reviewed` and `published`. `getPublishedArticles()` is the sole public selector used by the hub, dynamic static params/renderer, sitemap, Homepage Latest Tips, ItemList and public related-article resolution. A fixture-only lifecycle test proves one status transition adds/removes an article consistently without changing separate allowlists. All six real article records remain excluded and return branded non-redirecting 404s.
+- **Hub and template:** the server-rendered green/cream hub uses one H1, an honest zero-guide state, broad non-advice topic orientation, visible editorial/source method, four already-published service paths and Contact. The shared server-rendered article template supports paragraphs, H2/H3 anchors, ordered/unordered/check lists, restrained tables, optional real TOC, inline citations, visible Sources, published related services/articles and one CTA without a parser, CMS, database, runtime fetch or article-specific client bundle.
+- **Evidence safeguards:** structured sources capture stable ID, title, publisher, canonical URL, real review date, claim mapping and optional jurisdiction/scope. Internal claim notes enforce traceability. Published/reviewed records allow only researched secondary keywords and require content, sources, claim notes and editorial review; optional author must be owner-confirmed, optional dates must be real/ordered, and optional images require verified provenance, honest alt and dimensions. The publishing workflow is documented in `docs/content-publishing.md`.
+- **Schema and breadcrumb:** `/blog` emits one `Blog` page node, one BreadcrumbList with exact Home → Blog UI/schema parity, and central Organization/WebSite references. With zero visible published articles, ItemList is deliberately omitted rather than emitting an empty or hidden draft list. Future BlogPosting fields are record-backed and omit absent author, dates and images.
+- **Homepage, language, performance and analytics:** Homepage Latest Tips now consumes the published selector, shows zero fake cards and preserves the `/blog` CTA without serializing planned slugs. New Blog UI copy has explicit Spanish translations; metadata/canonical remain English and query-independent, including full UTM preservation. No dependency, runtime article fetch, third-party script, new analytics event or Task 4 behavior change was introduced.
+- **QA and regression:** production source/route checks passed `/blog` 200, six planned articles and representative unknown/category/tag/author/page paths as actual non-redirecting 404s, exact metadata/schema, zero draft payload and a twenty-three-URL sitemap. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` contexts passed navigation, breadcrumb, English/Spanish, UTM preservation, skip focus, mobile Escape/focus return, reduced motion, translated wrapping, zero overflow, footer/fixed-action separation and clean consoles. The focused Blog validator, complete Tasks 7–26 matrix, shared validators, TypeScript, production build and diff check passed.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. No lint dependency or configuration was added.
+- **Task status:** Task 27 is `[x]` Completed because the hub/template/model/workflow are maintainable and dependency-light; one status controls publication; exact ownership/schema/lifecycle pass; and source/date/author/image/archive safeguards are enforced without publishing or drafting an article.
+- **Exact next action:** commit as `feat(seo): add blog foundation and hub`, verify a clean worktree and STOP before Task 28.
+
+### Previous checkpoint — Task 26 complete, 2026-09-01 (Asia/Amman)
 
 - **Authorized scope:** Task 26 only — Contact Page and Estimate Integration. Work began from the clean `247de1d` Task 25 baseline. Task 27 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and publication:** `/contact` now owns `lawn care estimate des moines` with the exact title `Contact Mo's Lawn Care | Free Estimate in Des Moines, IA`, H1 `Request a Free Property Estimate`, approved description, secondary keywords and query-free canonical `https://www.moslawncaredsm.com/contact`. Exactly one H1 renders and English metadata/canonical remain stable under Spanish, UTM and arbitrary service/city/form query values.
@@ -1716,7 +1731,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 27 — Blog Foundation, Article Template, Publishing Workflow, and Hub
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/blog/`, the typed six-article publishing model, one maintainable server-rendered article template, source governance, and editorial documentation.
 - **Why It Is Needed:** The required content cluster has no route, content system, citation model, or workflow, and must be added without a CMS or thin archive sprawl.
 - **Dependencies:** Tasks 1–26; specifically the technical foundation and core commercial architecture must be complete before blog work begins.
@@ -1726,7 +1741,14 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Draft leakage, duplicate slugs, article without sources, dates invented for schema, unsupported author, broken related paths, full images on cards, article keyword cannibalization, stale source claims.
 - **Validation:** Inspect hub source/cards/metadata/schema, draft and invalid 404s, registry/sitemap status behavior, template semantics, source visibility, publishing doc completeness and no archive-route creation.
 - **Tests:** Hub exact metadata/H1, six expected published-route contracts once content is approved, field/source/link validation, unique article metadata/canonicals, schema omission rules, draft exclusion and invalid slug 404.
-- **Definition of Done:** `[ ]` Hub/template/model/workflow are maintainable and dependency-light; `[ ]` publishing state controls routes/hub/sitemap consistently; `[ ]` exact hub ownership/schema pass; `[ ]` source/date/author/image safeguards and no-thin-archive rules are enforced.
+- **Definition of Done:** `[x]` Hub/template/model/workflow are maintainable and dependency-light; `[x]` publishing state controls routes/hub/sitemap consistently; `[x]` exact hub ownership/schema pass; `[x]` source/date/author/image safeguards and no-thin-archive rules are enforced.
+
+#### Task 27 implementation record
+
+- **Completed files:** new `/blog` hub and dynamic article route, one shared Blog article renderer, the typed six-record Blog registry and skeleton modules, lifecycle/source/claim/author/date/image types and validators, source/schema/sitemap/Homepage publication wiring, explicit Spanish Blog UI translations, new `docs/content-publishing.md`, new `validate:blog`, lifecycle-only inherited-validator updates, and this plan checkpoint.
+- **Lifecycle decision:** canonical route records retain approved article ownership while the discriminated Blog record owns article publication. Sitemap explicitly excludes article route-registry lifecycle values and admits article URLs only through `getPublishedArticles()`, preventing a second publication allowlist or an accidental route-registry-only release.
+- **Schema restraint:** the hub uses one `Blog` node rather than competing Blog/CollectionPage types. ItemList is omitted at zero published guides and will be generated from the exact visible selector once publication is legitimate. Planned/reviewed records cannot emit metadata, BlogPosting or public related-article links.
+- **Final result:** all four Task 27 Definition of Done checks are satisfied. `/blog` is the only promoted route, the sitemap contains exactly twenty-three canonical URLs, all six article routes remain actual 404s, no secondary keywords or researched article copy were invented, and work stops before Task 28.
 
 ### Task 28 — “When to Aerate a Lawn in Iowa” Article
 

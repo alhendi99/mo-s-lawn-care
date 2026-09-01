@@ -115,6 +115,7 @@ assert.deepEqual(
   'our-work',
   'reviews',
   'contact',
+  'blog',
   ],
 )
 
@@ -230,8 +231,8 @@ assert.doesNotMatch(dynamicRouteSource, /serviceNavigationRouteIds|routeRegistry
 const futureArticleSlug = 'fall-leaf-cleanup-des-moines'
 assert.doesNotMatch(componentSource, /Helpful Resources|fall-leaf-cleanup-des-moines/)
 assert.doesNotMatch(contentSource, /Helpful Resources|fall-leaf-cleanup-des-moines/i)
-assert.equal(fs.existsSync(path.join(projectRoot, `content/blog/${futureArticleSlug}.ts`)), false)
-assert.equal(fs.existsSync(path.join(projectRoot, 'app/blog/[slug]/page.tsx')), false)
+assert.equal(fs.existsSync(path.join(projectRoot, `content/blog/${futureArticleSlug}.ts`)), true)
+assert.equal(fs.existsSync(path.join(projectRoot, 'app/blog/[slug]/page.tsx')), true)
 assert.equal(routesById['article-fall-leaf-cleanup-des-moines'].publicationStatus, 'planned')
 
 const visibleBusinessCopy = JSON.stringify({
@@ -371,6 +372,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['our-work'].canonicalUrl },
   { url: routesById.reviews.canonicalUrl },
   { url: routesById.contact.canonicalUrl },
+  { url: routesById.blog.canonicalUrl },
 ])
 for (const slug of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)

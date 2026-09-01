@@ -122,6 +122,7 @@ assert.deepEqual(
   'our-work',
   'reviews',
   'contact',
+  'blog',
   ],
 )
 
@@ -388,6 +389,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['our-work'].canonicalUrl },
   { url: routesById.reviews.canonicalUrl },
   { url: routesById.contact.canonicalUrl },
+  { url: routesById.blog.canonicalUrl },
 ])
 for (const alias of consolidatedAliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)

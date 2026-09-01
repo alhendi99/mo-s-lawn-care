@@ -2,11 +2,11 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
 
+import { getPublishedArticles } from '../content/blog/index.ts'
 import {
   getUniqueHomepageServiceRoutes,
   homepageServiceAreaRoutes,
   homepageServiceRoutes,
-  homepageTipRoutes,
 } from '../content/homepage.ts'
 import {
   routesById,
@@ -46,8 +46,9 @@ assert.deepEqual(
   ],
 )
 
-assert.equal(homepageTipRoutes.length, 3)
-assert.equal(new Set(homepageTipRoutes.map(({ href }) => href)).size, 3)
+const homepageTipArticles = getPublishedArticles().slice(0, 3)
+assert.equal(homepageTipArticles.length, 0)
+assert.equal(new Set(homepageTipArticles.map(({ path: articlePath }) => articlePath)).size, 0)
 
 const expectedProblemRoutes = {
   grass: ['/services/lawn-mowing', '/services/yard-cleanup'],
@@ -135,5 +136,5 @@ for (const routeId of ['commercial-property-services', 'our-work', 'reviews', 'b
 }
 
 console.log(
-  `Homepage validation passed: ${requiredSections.length} sections, ${homepageServiceRoutes.length} service links, ${homepageServiceAreaRoutes.length} area links, ${homepageTipRoutes.length} featured tips, and ${problems.length} problem mappings.`,
+  `Homepage validation passed: ${requiredSections.length} sections, ${homepageServiceRoutes.length} service links, ${homepageServiceAreaRoutes.length} area links, ${homepageTipArticles.length} published tips, and ${problems.length} problem mappings.`,
 )

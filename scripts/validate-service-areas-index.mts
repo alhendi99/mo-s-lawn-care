@@ -177,9 +177,10 @@ const expectedPublishedIds = [
   'our-work',
   'reviews',
   'contact',
+  'blog',
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
-assert.equal(publishedIds.length, 22)
+assert.equal(publishedIds.length, 23)
 assert.deepEqual(
   buildSitemapEntries(),
   expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),

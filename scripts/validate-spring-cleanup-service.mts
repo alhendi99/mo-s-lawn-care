@@ -114,6 +114,7 @@ assert.deepEqual(
   'our-work',
   'reviews',
   'contact',
+  'blog',
   ],
 )
 
@@ -235,8 +236,8 @@ assert.match(dynamicRouteSource, /if \(!service\) notFound\(\)/)
 assert.doesNotMatch(dynamicRouteSource, /serviceNavigationRouteIds|routeRegistry\.find/)
 assert.doesNotMatch(componentSource, /Helpful Resources|spring-lawn-cleanup-des-moines/)
 assert.doesNotMatch(contentSource, /Helpful Resources|spring-lawn-cleanup-des-moines|checklist/i)
-assert.equal(fs.existsSync(path.join(projectRoot, 'content/blog/spring-lawn-cleanup-des-moines.ts')), false)
-assert.equal(fs.existsSync(path.join(projectRoot, 'app/blog/[slug]/page.tsx')), false)
+assert.equal(fs.existsSync(path.join(projectRoot, 'content/blog/spring-lawn-cleanup-des-moines.ts')), true)
+assert.equal(fs.existsSync(path.join(projectRoot, 'app/blog/[slug]/page.tsx')), true)
 assert.equal(routesById['article-spring-lawn-cleanup-des-moines'].publicationStatus, 'planned')
 
 const visibleBusinessCopy = JSON.stringify({
@@ -394,6 +395,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['our-work'].canonicalUrl },
   { url: routesById.reviews.canonicalUrl },
   { url: routesById.contact.canonicalUrl },
+  { url: routesById.blog.canonicalUrl },
 ])
 for (const alias of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)

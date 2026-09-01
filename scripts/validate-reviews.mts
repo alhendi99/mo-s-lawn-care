@@ -144,14 +144,14 @@ assert.doesNotMatch(pageSource, /Des Moines customer review|Ankeny review|Waukee
 
 assert.equal(routesById.contact.implementationStatus, 'implemented')
 assert.equal(routesById.contact.publicationStatus, 'published')
-assert.equal(routesById.blog.implementationStatus, 'planned')
-assert.equal(routesById.blog.publicationStatus, 'planned')
+assert.equal(routesById.blog.implementationStatus, 'implemented')
+assert.equal(routesById.blog.publicationStatus, 'published')
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 22)
-assert.equal(sitemap.at(-1)?.url, routesById.contact.canonicalUrl)
+assert.equal(sitemap.length, 23)
+assert.equal(sitemap.at(-1)?.url, routesById.blog.canonicalUrl)
 assert.equal(sitemap.filter(({ url }) => url === route.canonicalUrl).length, 1)
 assert.equal(sitemap.filter(({ url }) => url === routesById.contact.canonicalUrl).length, 1)
-assert.equal(sitemap.some(({ url }) => url.endsWith('/blog')), false)
+assert.equal(sitemap.some(({ url }) => url.endsWith('/blog')), true)
 
 const translations = JSON.parse(read('lib/es-translations.json')) as Record<string, string>
 for (const english of [route.h1, 'Customer feedback · governed collection', 'View more reviews on Google', 'Browse by established theme', 'Customer voices, in their own words.', 'Filter customer feedback', 'All feedback', 'Load more reviews', 'Use service pages for approved scope.', 'See the work, then discuss what you need.']) assert(translations[english], `Missing Reviews Spanish translation: ${english}`)
@@ -160,4 +160,4 @@ const planSource = read('plan.md')
 assert.match(planSource, /### Task 25 — Reviews Page and Review Data Governance\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 26 — Contact Page and Estimate Integration\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
-console.log(`Task 25 Reviews validation passed: exact ownership, ${reviewRecords.length} governed/display-eligible records, ${HOME_REVIEW_LIMIT} Homepage records, bounded ${REVIEWS_INITIAL_COUNT}-item SSR, ${REVIEW_CATEGORIES.length} governed categories, rating/count restraint, and exact 22-URL lifecycle.`)
+console.log(`Task 25 Reviews validation passed: exact ownership, ${reviewRecords.length} governed/display-eligible records, ${HOME_REVIEW_LIMIT} Homepage records, bounded ${REVIEWS_INITIAL_COUNT}-item SSR, ${REVIEW_CATEGORIES.length} governed categories, rating/count restraint, and exact 23-URL lifecycle.`)

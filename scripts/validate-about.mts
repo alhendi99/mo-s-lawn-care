@@ -183,8 +183,8 @@ assert.deepEqual(resolvedAboutSupportingLinks.map(({ routeId, href }) => [routeI
 ])
 assert.equal(routesById.contact.implementationStatus, 'implemented')
 assert.equal(routesById.contact.publicationStatus, 'published')
-assert.equal(routesById.blog.implementationStatus, 'planned')
-assert.equal(routesById.blog.publicationStatus, 'planned')
+assert.equal(routesById.blog.implementationStatus, 'implemented')
+assert.equal(routesById.blog.publicationStatus, 'published')
 
 const expectedPublishedIds = [
   'home',
@@ -200,12 +200,13 @@ const expectedPublishedIds = [
   'our-work',
   'reviews',
   'contact',
+  'blog',
 ] as const
 assert.deepEqual(
   routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id),
   expectedPublishedIds,
 )
-assert.equal(buildSitemapEntries().length, 22)
+assert.equal(buildSitemapEntries().length, 23)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 const pageSource = read('app/about/page.tsx')
