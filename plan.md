@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 29 complete; Task 30 not started
+- Phase: Incremental implementation — Task 29 complete; Task 32 is next by seasonal execution priority
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–29 completed; Task 30 and later are not authorized
+- Implementation status: Tasks 1–29 completed; Task 32 is the next authorized implementation target by seasonal priority; Tasks 30–31 and 33+ remain not started until explicitly authorized.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-01 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -63,7 +63,7 @@
 - **QA and regression:** production source checks passed exact metadata/canonical under plain, Spanish, UTM and arbitrary queries, one H1, visible sources/links, truthful schema and future-route isolation. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` browser contexts passed English/Spanish, UTM preservation, navigation/breadcrumb, source and related links, TOC/skip focus, mobile menu focus return, reduced motion, zero overflow, footer/fixed-action clearance and clean consoles. The Task 29 focused validator, Task 28/Blog/Contact contracts, complete Tasks 7–28 regression matrix, shared content/SEO/navigation/analytics/Homepage validators, TypeScript, production build and diff check pass.
 - **Unavailable check:** `Unavailable — ESLint is not installed`. No lint dependency or configuration was added.
 - **Task status:** Task 29 is `[x]` Completed because the sourced Iowa timing is accurate and conditional, exact informational ownership and all editorial gates pass, visible/schema/link parity is truthful, only Task 29 was promoted and all unsupported business/image/date facts are omitted.
-- **Exact next action:** commit as `feat(seo): add Iowa overseeding timing article`, verify a clean worktree and STOP before Task 30.
+- **Exact next action:** commit as `feat(seo): add Iowa overseeding timing article`, verify a clean worktree and STOP. Per the approved September 2026 seasonal execution order, Task 32 is next; Task 30 remains not started.
 
 ### Previous checkpoint — Task 28 complete, 2026-09-01 (Asia/Amman)
 
@@ -1847,44 +1847,47 @@ The order below follows the required priorities while using the prompt's reviewa
 ### Task 31 — Des Moines Spring Cleanup Checklist Article
 
 - **Status:** `[ ]` Not started
-- **Objective:** Research, author, review, and publish `/blog/spring-lawn-cleanup-des-moines/` as a practical informational checklist.
-- **Why It Is Needed:** It is a mandatory seasonal guide and must remain distinct from the Spring Cleanup commercial page.
-- **Dependencies:** Tasks 27–30; current authoritative/municipal sources as applicable and approved CTA/image facts.
+- **Objective:** Research, author, review, and publish `/blog/spring-lawn-cleanup-des-moines/` as a practical evergreen informational checklist for the next spring demand cycle.
+- **Why It Is Needed:** It remains a mandatory seasonal guide and must stay distinct from the Spring Cleanup commercial page, but it is intentionally deprioritized behind the currently relevant fall-content opportunity. The goal is to have the guide researched, published, crawled, and established before spring demand rises rather than publishing it during an out-of-season window merely to preserve task-number order.
+- **Seasonal Execution Priority:** Do **not** execute Task 31 immediately after Task 30 solely because of numbering. For the September 2026 publishing sequence, Task 32 is intentionally executed first, followed by Task 30 and then Task 31. This changes execution priority only; it does not change Task 31's URL, keyword ownership, scope, or long-term importance.
+- **Dependencies:** Tasks 27–30 **and Task 32**; current authoritative/municipal sources as applicable and approved CTA/image facts. Task 32's seasonal-priority execution is intentionally allowed before this task.
 - **Files Involved:** new/finalized `content/blog/spring-lawn-cleanup-des-moines.ts`, approved image record, related-link data, tests.
-- **Implementation Details:** Apply exact metadata/H1/primary keyword. Build a useful checklist from current Iowa extension guidance and official municipal sources only for any local disposal/rule claims; record and display sources, paraphrase and state property/weather dependencies. Do not invent legal rules, fixed dates, chemical programs, service inclusions or outcomes. Link Spring Cleanup and the calendar guide, related articles as useful, and use a varied restrained CTA.
-- **SEO Impact:** Owns `spring lawn cleanup checklist des moines`, supporting but not replacing `spring cleanup des moines ia` commercial ownership.
-- **Edge Cases:** City-specific disposal rules that vary or change, rigid dates, service checklist presented as guaranteed inclusions, duplicated service copy, false seasonal/city image label.
-- **Validation:** Source freshness and municipality scope, exact metadata/canonical/H1, checklist usefulness, service/article intent separation, links/schema/image and mobile readability.
-- **Tests:** Sources/fields, route/sitemap, exact metadata/schema, Spring Cleanup link, no unverified legal/date/service claims.
-- **Definition of Done:** `[ ]` Checklist facts are sourced and scoped; `[ ]` exact informational ownership is preserved; `[ ]` commercial link and schema/sitemap pass; `[ ]` no local rule or service inclusion is invented.
+- **Implementation Details:** Apply exact metadata/H1/primary keyword. Build a useful evergreen checklist from current Iowa extension guidance and official municipal sources only for any local disposal/rule claims; record and display sources, paraphrase and state property/weather dependencies. Do not manufacture freshness, publish date-driven filler, or imply that the article is being written because spring conditions are currently present. Do not invent legal rules, fixed dates, chemical programs, service inclusions or outcomes. Link Spring Cleanup and, once published, the calendar guide and other genuinely useful related articles; use a varied restrained CTA.
+- **SEO Impact:** Owns `spring lawn cleanup checklist des moines`, supporting but not replacing `spring cleanup des moines ia` commercial ownership. Its value is evergreen and seasonal: publish sufficiently ahead of the next spring demand cycle so Google can crawl, index, understand, and rank the guide before search interest peaks.
+- **Edge Cases:** Publishing out-of-season copy that falsely sounds current, city-specific disposal rules that vary or change, rigid dates, service checklist presented as guaranteed inclusions, duplicated service copy, false seasonal/city image label, or artificial freshness/date changes made only for SEO.
+- **Validation:** Source freshness and municipality scope, exact metadata/canonical/H1, checklist usefulness, service/article intent separation, evergreen wording, links/schema/image and mobile readability. Confirm the article does not depend on false current-season language and that its publication does not alter Task 32's already-established fall ownership.
+- **Tests:** Sources/fields, route/sitemap, exact metadata/schema, Spring Cleanup link, no unverified legal/date/service/current-season claims, and no regression to the published fall guide.
+- **Definition of Done:** `[ ]` Checklist facts are sourced and scoped; `[ ]` exact informational ownership is preserved; `[ ]` commercial link and schema/sitemap pass; `[ ]` no local rule or service inclusion is invented; `[ ]` the article remains evergreen and ready ahead of the next spring demand cycle without fake current-season framing.
 
 ### Task 32 — Des Moines Fall Leaf Cleanup Tips Article
 
 - **Status:** `[ ]` Not started
-- **Objective:** Research, author, review, and publish `/blog/fall-leaf-cleanup-des-moines/` for fall leaf-cleanup advice intent.
-- **Why It Is Needed:** It is a required seasonal supporting guide and a natural bridge to the consolidated fall service page.
-- **Dependencies:** Tasks 27–31; current authoritative/municipal sources as applicable and approved CTA/image facts.
+- **Objective:** Research, author, review, and publish `/blog/fall-leaf-cleanup-des-moines/` for fall leaf-cleanup advice intent, prioritizing it now because September 2026 begins the relevant fall-demand window.
+- **Why It Is Needed:** It is a required seasonal supporting guide and a natural bridge to the consolidated fall service page. It is intentionally promoted ahead of Tasks 30–31 in execution order so the article can be researched, published, crawled, and established before fall leaf-cleanup demand peaks.
+- **Seasonal Execution Priority:** Execute Task 32 immediately after Task 29 for the September 2026 publishing sequence. This is an execution-priority change only; Task numbering, URL ownership, scope, and the long-term cluster architecture remain unchanged. After Task 32, return to Task 30, then Task 31, then Task 33.
+- **Dependencies:** Tasks 27–29; current authoritative/municipal sources as applicable and approved CTA/image facts. Tasks 30–31 are **not** prerequisites for Task 32 under the approved seasonal-priority sequence.
 - **Files Involved:** new/finalized `content/blog/fall-leaf-cleanup-des-moines.ts`, approved image record, related-link data, tests.
-- **Implementation Details:** Use exact metadata/H1/primary keyword. Research timing, organization and disposal considerations from extension/official municipal sources, clearly identify jurisdiction and source freshness, paraphrase and avoid fixed annual dates. Do not claim unsupported Mo's disposal/process capabilities or make legal/seasonal guarantees. Link Fall Cleanup & Leaf Removal, calendar pillar and relevant guides; include visible sources and a unique restrained CTA.
-- **SEO Impact:** Owns `fall leaf cleanup tips des moines` without competing for commercial `leaf removal des moines ia` intent.
-- **Edge Cases:** Changing collection/disposal rules, city versus metro jurisdiction, weather variability, sales-heavy duplication, unverified season/location image.
-- **Validation:** Claim/jurisdiction/source audit, exact metadata/H1/canonical, intent split, related links, article schema parity, image and responsive review.
-- **Tests:** Required sources/fields, route/sitemap, exact metadata/schema, Fall service link, and no unsupported municipal/service/date assertions.
-- **Definition of Done:** `[ ]` Tips and any rule references are authoritative/current/scoped; `[ ]` exact informational ownership passes; `[ ]` service/cluster links and schema pass; `[ ]` no fabricated capability or local rule remains.
+- **Implementation Details:** Use exact metadata/H1/primary keyword. Research timing, organization and disposal considerations from Iowa Extension and official municipal sources, clearly identify jurisdiction and source freshness, paraphrase and avoid fixed annual dates. Prioritize evergreen fall decision support that is useful before and during leaf season without manufacturing urgency or claiming that specific local conditions are currently occurring. Do not claim unsupported Mo's disposal/process capabilities or make legal/seasonal guarantees. Link Fall Cleanup & Leaf Removal and already-published relevant guides naturally; link the calendar pillar only once it is published. Include visible sources and a unique restrained CTA.
+- **SEO Impact:** Owns `fall leaf cleanup tips des moines` without competing for commercial `leaf removal des moines ia` intent. Publishing ahead of the fall demand peak gives Google time to crawl, index, understand, and rank the informational guide while preserving the commercial service page as the conversion owner.
+- **Edge Cases:** Changing collection/disposal rules, city versus metro jurisdiction, weather variability, fake “right now” or current-leaf-condition claims, sales-heavy duplication, unverified season/location image, artificial freshness, or language implying a municipal rule applies outside its verified jurisdiction.
+- **Validation:** Claim/jurisdiction/source audit, exact metadata/H1/canonical, informational/commercial intent split, seasonal relevance without fake current-condition claims, related links, article schema parity, image provenance and responsive review. Confirm municipal guidance is current and scoped to the exact jurisdiction it governs.
+- **Tests:** Required sources/fields, route/sitemap, exact metadata/schema, Fall service link, no unsupported municipal/service/date/current-condition assertions, and no dependency on unpublished Tasks 30–31.
+- **Definition of Done:** `[ ]` Tips and any rule references are authoritative/current/scoped; `[ ]` exact informational ownership passes; `[ ]` service/cluster links and schema pass; `[ ]` no fabricated capability or local rule remains; `[ ]` the article is published in the fall-priority window without fake urgency or temporary current-condition copy.
 
 ### Task 33 — Central Iowa Lawn Care Calendar Pillar Article
 
 - **Status:** `[ ]` Not started
 - **Objective:** Research, author, review, and publish `/blog/central-iowa-lawn-care-calendar/` as the cluster pillar linking all five supporting guides and relevant services.
-- **Why It Is Needed:** The required pillar organizes seasonal informational demand and strengthens the entire service/content graph.
-- **Dependencies:** Tasks 27–32 so every supporting article exists and can be linked; authoritative source review and approved image/CTA facts.
+- **Why It Is Needed:** The required pillar organizes year-round seasonal informational demand and strengthens the entire service/content graph after the supporting guides have been published. It should synthesize the completed cluster rather than dictate the order in which seasonal supporting articles must be released.
+- **Dependencies:** Tasks 27–32 must all be complete so every supporting article exists and can be linked, regardless of execution-number order; authoritative source review and approved image/CTA facts.
+- **Seasonal Execution Order Note:** For the September 2026 remaining article sequence, use **Task 29 → Task 32 → Task 30 → Task 31 → Task 33**. Task 33 remains last because its value depends on all five supporting guides being published and available for bidirectional linking.
 - **Files Involved:** new/finalized `content/blog/central-iowa-lawn-care-calendar.ts`, approved image record, all cluster link data, tests.
-- **Implementation Details:** Apply exact metadata/H1/primary keyword. Research season-by-season decision guidance through Iowa State Extension and other authoritative primary sources, express timing as conditional rather than fixed guarantees, and record visible sources/claim notes. Link all five articles plus relevant mowing, aeration/seeding, spring/fall cleanup and other verified services naturally. Use a restrained pillar CTA and accurate Article/BlogPosting fields only; avoid chemical prescriptions and mass duplication of supporting articles.
-- **SEO Impact:** Owns `central iowa lawn care calendar`, becomes the informational cluster hub, and distributes authority bidirectionally to five guides and commercial pages.
-- **Edge Cases:** Over-specific dates, advice varying by turf/soil/weather/property, repeating full child articles, missing reciprocal links, stale source/date metadata, unsupported author/image season.
-- **Validation:** Full source/claim audit, exact head/H1/canonical, all five bidirectional links, relevant service links, duplication/content quality review, schema/sitemap/image/accessibility.
-- **Tests:** Required sources/fields, route/sitemap, exact metadata/schema, exact five-article link set, valid service links, no unsupported dates/author.
-- **Definition of Done:** `[ ]` Sourced pillar is useful without duplicating child guides; `[ ]` all five article relationships and relevant services are linked; `[ ]` exact ownership/schema/sitemap pass; `[ ]` conditional guidance and review workflow are explicit.
+- **Implementation Details:** Apply exact metadata/H1/primary keyword. Research season-by-season decision guidance through Iowa State Extension and other authoritative primary sources, express timing as conditional rather than fixed guarantees, and record visible sources/claim notes. Link all five published articles plus relevant mowing, aeration/seeding, spring/fall cleanup and other verified services naturally. Reflect seasonality without turning the pillar into a temporary “current month” article. Use a restrained pillar CTA and accurate Article/BlogPosting fields only; avoid chemical prescriptions, fake freshness and mass duplication of supporting articles.
+- **SEO Impact:** Owns `central iowa lawn care calendar`, becomes the evergreen informational cluster hub, and distributes authority bidirectionally to all five guides and relevant commercial pages. The seasonal execution change improves near-term publishing relevance without changing this pillar's long-term ownership or hub role.
+- **Edge Cases:** Over-specific dates, advice varying by turf/soil/weather/property, repeating full child articles, missing reciprocal links, stale source/date metadata, fake freshness, unsupported author/image season, or encoding the September 2026 execution order into permanent user-facing copy.
+- **Validation:** Full source/claim audit, exact head/H1/canonical, all five bidirectional article links, relevant service links, duplication/content-quality review, schema/sitemap/image/accessibility, and confirmation that the pillar remains evergreen rather than tied to the temporary implementation sequence.
+- **Tests:** Required sources/fields, route/sitemap, exact metadata/schema, exact five-article link set, valid service links, no unsupported dates/author, and no dependency on temporary seasonal-priority wording in public content.
+- **Definition of Done:** `[ ]` Sourced pillar is useful without duplicating child guides; `[ ]` all five article relationships and relevant services are linked; `[ ]` exact ownership/schema/sitemap pass; `[ ]` conditional guidance and review workflow are explicit; `[ ]` temporary execution priority does not leak into evergreen public copy.
 
 ### Task 34 — Gallery, Image SEO, and Media Performance Optimization
 
