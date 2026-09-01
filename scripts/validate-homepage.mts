@@ -51,7 +51,7 @@ assert.equal(homepageTipArticles.length, 3)
 assert.deepEqual(homepageTipArticles.map(({ path: articlePath }) => articlePath), [
   '/blog/when-to-aerate-lawn-iowa',
   '/blog/best-time-to-overseed-lawn-iowa',
-  '/blog/fall-leaf-cleanup-des-moines',
+  '/blog/how-often-to-mow-lawn-iowa',
 ])
 assert.equal(new Set(homepageTipArticles.map(({ path: articlePath }) => articlePath)).size, 3)
 

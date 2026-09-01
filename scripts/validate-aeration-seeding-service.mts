@@ -331,10 +331,12 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.blog.canonicalUrl },
   { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
   { url: routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl },
+  { url: routesById['article-how-often-to-mow-lawn-iowa'].canonicalUrl },
   { url: routesById['article-fall-leaf-cleanup-des-moines'].canonicalUrl },
 ])
 for (const futureArticle of [
-  routesById['article-how-often-to-mow-lawn-iowa'].canonicalUrl,
+  routesById['article-spring-lawn-cleanup-des-moines'].canonicalUrl,
+  routesById['article-central-iowa-lawn-care-calendar'].canonicalUrl,
 ]) {
   assert.equal(buildSitemapEntries().some(({ url }) => url === futureArticle), false)
 }

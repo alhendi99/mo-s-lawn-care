@@ -4,11 +4,11 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Tasks 1–29 and Task 32 complete; Task 30 is next by seasonal execution priority
+- Phase: Incremental implementation — Tasks 1–30 and Task 32 complete; Task 31 is next by seasonal execution priority
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–29 and Task 32 completed; Tasks 30–31 and 33+ remain not started until explicitly authorized. Task 30 is next under the approved September 2026 seasonal sequence.
+- Implementation status: Tasks 1–30 and Task 32 completed; Task 31 and Tasks 33+ remain not started until explicitly authorized. Task 31 is next under the approved September 2026 seasonal sequence.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
-- Last checkpoint: 2026-09-01 (Asia/Amman)
+- Last checkpoint: 2026-09-02 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
 - Task 3 repository baseline: clean `main` at `e24e7af`
 - Task 4 repository baseline: clean `main` at `abfe88d`
@@ -38,7 +38,8 @@
 - Task 28 repository baseline: clean `main` at `9320da0` (guidance-only commit above product baseline `b807d05`)
 - Task 29 repository baseline: clean `main` at `9f05475`
 - Task 32 repository baseline: clean `main` at `7e1d579` (seasonal-priority documentation commit above product baseline `e88a81f`)
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 30 until explicitly authorized
+- Task 30 repository baseline: clean `main` at `929c2f1`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 31 until explicitly authorized
 
 ## Evidence Labels
 
@@ -50,7 +51,23 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 32 complete, 2026-09-01 (Asia/Amman)
+### Latest checkpoint — Task 30 complete, 2026-09-02 (Asia/Amman)
+
+- **Authorized scope and baseline:** Task 30 only began from clean `929c2f1`, preserving completed Tasks 28, 29 and 32. Task 31 and Task 33+ remain not started; no deployment or external-account action occurred.
+- **Exact ownership and secondary intent:** `/blog/how-often-to-mow-lawn-iowa` owns informational `how often to mow lawn in iowa` with the exact title, H1, description and query-free canonical. Current same-intent review retained `how often should I mow my lawn in Iowa`, `mowing frequency Iowa` and `how often to cut grass in Iowa`, without volume, density or opportunity claims.
+- **Research and claim ledger:** six reopened Iowa State University Extension and Outreach resources support eight reciprocal claim groups covering growth/height frequency, the one-third removal relationship, a conditional 3 → 4½-inch example, bluegrass summer-height scope, changing cool-season growth, dormant-turf pause, dry/cooler mowing opportunity and the fall growth endpoint. The 2026-09-02 brief records source dates, geographic/turf scope, freshness checks and conflicts. Rigid schedules, universal heights, unscoped species advice, color-only dormancy diagnosis, wet-grass pathology, clipping/equipment guidance and stale 2010 interval advice were removed or softened.
+- **Decision model and differentiation:** the reader selects an evidence-appropriate finished height, observes standing growth and uses the one-third relationship to decide whether another cut is due. Growth changes the gap; rain/dew can delay a due cut; dormancy removes active mowing demand; a missed cut does not relax the removal limit. This connected numerical/observation explanation is distinct from Task 28's factor table, Task 29's readiness checklist and Task 32's leaf/jurisdiction model. Research, Differentiation, Tasks 28/29/32 Anti-Repetition, Cannibalization and Editorial Quality gates pass.
+- **Municipal/legal decision:** no municipal/legal detail was necessary for mowing-frequency intent and none was published. The drought-source title is not used to claim an actual local restriction. Current weather, September 2026 conditions and legal-height rules are absent.
+- **Capability and cluster boundaries:** Iowa State guidance establishes lawn-care principles only. Mo's capability remains the canonical high-level residential/commercial Lawn Mowing offering and estimate path; the article claims no weekly/biweekly program, operating height, clipping policy, edging/blowing, equipment, drought/wet policy, fixed availability or result. Task 33 retains the annual calendar; Task 32 retains leaf management.
+- **Editorial, author/date/image:** the direct answer appears first; three decision-led H2s, no table/checklist/FAQ, no generic benefits/mistakes/conclusion, no artificial word count, one restrained service transition and the inherited Contact CTA remain after compression. No approved author, publication/modification date or verified image exists, so all are omitted.
+- **Language, links and accessibility:** explicit Spanish copy preserves species scope, all three inch values, the one-third limit, conditional stress, dormancy, dry-grass and possible-midday-stress wording. Public paths include Blog through the breadcrumb, Lawn Mowing in body/Related Reading, Contact through the restrained CTA and six visible Iowa State sources; no unpublished article link renders. The mobile menu now exposes the same route-aware active Blog state as desktop on article children.
+- **Schema and analytics:** central Organization/WebSite references, one WebPage, one BreadcrumbList with Home → Blog → exact H1 parity, and one BlogPosting with six citations render. Author, dates, image, FAQ, Review, AggregateRating, LocalBusiness, address, geo and Offer remain absent. The exact five-event analytics allowlist is unchanged; no article, source, keyword, query or frequency value enters analytics.
+- **Publication and isolation:** `getPublishedArticles()` remains the sole gate and returns exactly Tasks 28, 29, 30 and 32. Static params, Blog hub, four-item ItemList and 27-URL sitemap follow that selector; Homepage Latest Tips remains selector-driven and displays the first three published guides. Task 31 and Task 33 remain planned, branded non-redirecting 404s and absent from cards, static params, sitemap and public related links.
+- **Production and browser QA:** production source checks passed four article 200s, two future 404s, exact title/meta/canonical/robots/one-H1 under plain, Spanish, UTM and arbitrary queries, server body, six Sources, Lawn Mowing link, graph parity, hub/ItemList/Homepage behavior and exact sitemap. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` contexts passed English/Spanish, UTM preservation, exact H1/numeric/conditional parity, Blog current state, breadcrumb, six sources, TOC/skip focus, mobile Escape/focus return, reduced motion, zero overflow/clipping, H1/source wrapping, fixed-action/footer clearance and clean consoles.
+- **Validation status:** the focused Task 30 validator, Lawn Mowing, Tasks 28/29/32/Blog, every established Task 7–29 focused validator, shared Services/content/SEO/navigation/analytics/Homepage validators, TypeScript, production build and diff check pass. `Unavailable — ESLint is not installed` remains the exact lint status.
+- **Task status and next boundary:** Task 30 is `[x]` Completed because every evidence, differentiation, ownership, service-boundary, schema, lifecycle, accessibility and exact Definition of Done gate passes. Task 31 is next by the approved seasonal sequence and remains `[ ]` Not started.
+
+### Previous checkpoint — Task 32 complete, 2026-09-01 (Asia/Amman)
 
 - **Authorized seasonal scope:** Task 32 only — research, review and publication of `/blog/fall-leaf-cleanup-des-moines` ahead of Tasks 30–31 under the approved September 2026 sequence. Work began from clean `7e1d579`, preserving the seasonal-priority documentation commit above product baseline `e88a81f`. Tasks 30–31 and Task 33+ remain `[ ]` Not started.
 - **Exact ownership:** the article owns informational `fall leaf cleanup tips des moines` with exact title `Fall Leaf Cleanup Tips for Des Moines Properties | Mo's`, H1 `Fall Leaf Cleanup Tips for Des Moines Properties`, supplied description and query-free canonical. Current same-intent research retained `when to remove leaves from lawn`, `how to manage leaves on lawn` and `Des Moines yard waste leaves` without search-volume or density claims.
@@ -1850,7 +1867,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 30 — “How Often to Mow a Lawn in Iowa” Article
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Research, author, review, and publish `/blog/how-often-to-mow-lawn-iowa/` for Iowa mowing-frequency questions.
 - **Why It Is Needed:** This mandatory guide answers a common informational query and supports the Lawn Mowing conversion page.
 - **Dependencies:** Tasks 27–29; current authoritative sources and approved CTA/image data.
@@ -1860,7 +1877,15 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Universal weekly claims, unsafe height/pattern prescriptions, drought/weather variability, confusing advice with service schedule, unsupported author/date/image.
 - **Validation:** Claim/source review, exact metadata/H1/canonical, service/informational separation, source and internal links, schema/image parity and readability.
 - **Tests:** Published fields/sources, route/sitemap, exact metadata/schema, Lawn Mowing link, no rigid schedule/unsupported dates/author.
-- **Definition of Done:** `[ ]` Frequency guidance is sourced and condition-aware; `[ ]` exact informational ownership passes; `[ ]` service/related links and schema are correct; `[ ]` no invented schedule or service promise remains.
+- **Definition of Done:** `[x]` Frequency guidance is sourced and condition-aware; `[x]` exact informational ownership passes; `[x]` service/related links and schema are correct; `[x]` no invented schedule or service promise remains.
+
+#### Task 30 implementation record
+
+- **Research record:** `docs/research/task-30-mowing-frequency-brief.md` contains the user decision, research questions, six-source inventory, eight reciprocal claim groups, source-freshness/conflict review, removed/softened claims, same-intent terminology, representative SERP gaps, differentiation, anti-repetition, municipal and cannibalization decisions, Spanish parity, source re-verification and all mandatory publication gates.
+- **Article and lifecycle:** one typed published record adds researched keywords, direct condition-aware copy, six visible sources, eight internal claim notes, Lawn Mowing relationship and complete translations without extending the shared content architecture. The selector now returns Tasks 28, 29, 30 and 32; exactly one lifecycle promotion produces 27 sitemap URLs while Tasks 31 and 33 stay planned 404s.
+- **Evidence and restraint:** growth and a suitable finished height determine frequency; the one-third relationship and 3 → 4½-inch worked example are explicit and qualified. Weather, season and dormancy change either growth or the opportunity to cut without becoming a schedule. Municipal content, current weather, Mo's operating methods, author, public dates and image are omitted.
+- **Validation result:** focused and complete inherited validators, TypeScript, production build, production source/status/query/schema/sitemap assertions and four-viewport bilingual browser QA pass. The one shared UI correction gives mobile article routes a visible parent Blog current state. Lint remains unavailable because ESLint is not installed.
+- **Final result:** all four exact Task 30 Definition of Done checks and every expanded evidence/editorial/lifecycle gate pass. Work stops before Task 31.
 
 ### Task 31 — Des Moines Spring Cleanup Checklist Article
 

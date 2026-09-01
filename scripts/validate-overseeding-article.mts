@@ -13,6 +13,7 @@ import {
 import { bestTimeToOverseedLawnIowa } from '../content/blog/best-time-to-overseed-lawn-iowa.ts'
 import { fallLeafCleanupDesMoines } from '../content/blog/fall-leaf-cleanup-des-moines.ts'
 import { whenToAerateLawnIowa } from '../content/blog/when-to-aerate-lawn-iowa.ts'
+import { howOftenToMowLawnIowa } from '../content/blog/how-often-to-mow-lawn-iowa.ts'
 import { getBreadcrumbItems, routeRegistry, routesById } from '../content/routes.ts'
 import type { BlogArticleBlock, BlogClaimNote, BlogSource } from '../content/types.ts'
 import { analyticsEventNames } from '../lib/analytics.ts'
@@ -107,14 +108,14 @@ for (const required of [
 ]) assert(researchBrief.includes(required), `Research brief missing ${required}`)
 
 const published = getPublishedArticles()
-assert.deepEqual(published, [whenToAerateLawnIowa, article, fallLeafCleanupDesMoines])
+assert.deepEqual(published, [whenToAerateLawnIowa, article, howOftenToMowLawnIowa, fallLeafCleanupDesMoines])
 assert.equal(getPublishedArticleBySlug(article.slug), article)
 assert.deepEqual(getPublishedRelatedArticles(article), [whenToAerateLawnIowa])
 assert.deepEqual(getPublishedRelatedArticles(whenToAerateLawnIowa), [article])
 assert.equal(blogArticles.length, 6)
-const publishedSlugs = new Set<string>([article.slug, whenToAerateLawnIowa.slug, fallLeafCleanupDesMoines.slug])
+const publishedSlugs = new Set<string>([article.slug, whenToAerateLawnIowa.slug, howOftenToMowLawnIowa.slug, fallLeafCleanupDesMoines.slug])
 const futureArticles = blogArticles.filter(({ slug }) => !publishedSlugs.has(slug))
-assert.equal(futureArticles.length, 3)
+assert.equal(futureArticles.length, 2)
 assert(futureArticles.every(({ status }) => status === 'planned'))
 assert(futureArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
 assert(futureArticles.every((candidate) => !('content' in candidate) && !('sources' in candidate)))
@@ -130,7 +131,7 @@ assert.equal((metadata.robots as { index?: boolean }).index, true)
 assert.equal((metadata.robots as { follow?: boolean }).follow, true)
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 26)
+assert.equal(sitemap.length, 27)
 assert.equal(sitemap.filter(({ url }) => url === ownershipRoute.canonicalUrl).length, 1)
 assert.equal(sitemap.filter(({ url }) => url === routesById[whenToAerateLawnIowa.routeId].canonicalUrl).length, 1)
 for (const future of futureArticles) {
@@ -139,7 +140,7 @@ for (const future of futureArticles) {
 assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 23)
 
 const itemList = buildArticleItemListStructuredData(routesById.blog, published)
-assert.equal(itemList.numberOfItems, 3)
+assert.equal(itemList.numberOfItems, 4)
 assert.deepEqual(itemList.itemListElement, published.map((candidate, index) => ({
   '@type': 'ListItem',
   position: index + 1,
@@ -242,6 +243,6 @@ for (const forbiddenEvent of ['article_view', 'source_click', 'blog_click', 'toc
 
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 30 — “How Often to Mow a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 31 — Des Moines Spring Cleanup Checklist Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Task 29 overseeding article validation passed: exact ownership, seven sourced claim groups, five editorial gates, three published articles, truthful schema, three isolated future owners, and exact 26-URL lifecycle.')
+console.log('Task 29 overseeding article validation passed: exact ownership, seven sourced claim groups, five editorial gates, four published articles, truthful schema, two isolated future owners, and exact 27-URL lifecycle.')

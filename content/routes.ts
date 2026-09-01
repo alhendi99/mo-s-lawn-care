@@ -832,8 +832,12 @@ export const routeRegistry = [
     pageType: 'blog-article',
     parentId: 'blog',
     primaryKeyword: 'how often to mow lawn in iowa',
-    secondaryKeywords: [],
-    secondaryKeywordStatus: 'pending-research',
+    secondaryKeywords: [
+      'how often should I mow my lawn in Iowa',
+      'mowing frequency Iowa',
+      'how often to cut grass in Iowa',
+    ],
+    secondaryKeywordStatus: 'defined',
     title: "How Often Should You Mow a Lawn in Iowa? | Mo's Lawn Care",
     h1: 'How Often Should You Mow Your Lawn in Iowa?',
     description:
@@ -948,7 +952,7 @@ export const routeLabels = {
   blog: 'Blog',
   'article-when-to-aerate-lawn-iowa': 'When to Aerate a Lawn in Iowa',
   'article-best-time-to-overseed-lawn-iowa': 'When to Overseed a Lawn in Iowa',
-  'article-how-often-to-mow-lawn-iowa': 'How Often to Mow a Lawn in Iowa',
+  'article-how-often-to-mow-lawn-iowa': 'How Often Should You Mow Your Lawn in Iowa?',
   'article-spring-lawn-cleanup-des-moines': 'Spring Lawn Cleanup Checklist',
   'article-fall-leaf-cleanup-des-moines': 'Fall Leaf Cleanup Tips for Des Moines Properties',
   'article-central-iowa-lawn-care-calendar': 'Central Iowa Lawn Care Calendar',

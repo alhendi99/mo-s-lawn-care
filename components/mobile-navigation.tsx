@@ -12,6 +12,10 @@ import {
 import { site } from '@/lib/site'
 import { useI18n } from '@/lib/i18n'
 
+function routeIsActive(pathname: string, href: string) {
+  return pathname === href || (href !== '/' && pathname.startsWith(`${href}/`))
+}
+
 const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
 export function MobileNavigation() {
@@ -165,19 +169,23 @@ export function MobileNavigation() {
                 ))}
               </ul>
             </li>
-            {primaryNavigationRoutes.slice(1).map((route) => (
-              <li key={route.id} className="rule border-[color:var(--rule-dark)]">
-                <Link
-                  href={route.href}
-                  prefetch={false}
-                  tabIndex={open ? undefined : -1}
-                  aria-current={pathname === route.href ? 'page' : undefined}
-                  className="flex min-h-16 items-center py-3 font-display text-[clamp(1.7rem,8vw,2.5rem)] font-bold tracking-[-0.02em] text-paper uppercase"
-                >
-                  {t(route.label)}
-                </Link>
-              </li>
-            ))}
+            {primaryNavigationRoutes.slice(1).map((route) => {
+              const active = routeIsActive(pathname, route.href)
+              return (
+                <li key={route.id} className="rule border-[color:var(--rule-dark)]">
+                  <Link
+                    href={route.href}
+                    prefetch={false}
+                    tabIndex={open ? undefined : -1}
+                    aria-current={pathname === route.href ? 'page' : undefined}
+                    data-active={active || undefined}
+                    className={`flex min-h-16 items-center py-3 font-display text-[clamp(1.7rem,8vw,2.5rem)] font-bold tracking-[-0.02em] uppercase ${active ? 'text-[#D5EE72]' : 'text-paper'}`}
+                  >
+                    {t(route.label)}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </nav>
         <a

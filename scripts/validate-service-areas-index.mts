@@ -185,6 +185,7 @@ const expectedSitemapIds = [
   ...expectedPublishedIds,
   'article-when-to-aerate-lawn-iowa',
   'article-best-time-to-overseed-lawn-iowa',
+  'article-how-often-to-mow-lawn-iowa',
   'article-fall-leaf-cleanup-des-moines',
 ] as const
 assert.deepEqual(
