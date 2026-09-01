@@ -42,6 +42,14 @@ For a normal task, read completely:
 6. directly affected architecture/files
 7. any exact governing section needed to resolve a dependency
 
+For any task that researches, drafts, edits, validates, or publishes blog/article content (including Tasks 28–33 and future article work), also:
+
+8. locate and read `blog-writing-guidance.md` completely before article research or drafting;
+9. read `docs/content-publishing.md` when the task changes article publishing state or workflow;
+10. read the relevant canonical service/content owner when the article links to or discusses a Mo's capability.
+
+The blog guidance is mandatory for article-quality decisions, but it does not override the exact task scope, route ownership, metadata, or Definition of Done in `plan.md`.
+
 Search or read other `plan.md` sections only when necessary.
 
 Do not print entire large files to the terminal when targeted bounded reads, `rg`, `sed`, or equivalent focused inspection is sufficient.
@@ -809,6 +817,50 @@ Do not over-componentize trivial markup.
 
 ---
 
+# 22A. Mandatory blog/article research and writing guidance
+
+For every task that researches, drafts, edits, validates, reviews, or publishes blog/article content, `blog-writing-guidance.md` is mandatory. This includes Tasks 28–33 and any future article work.
+
+Before article research or drafting:
+
+1. read this `AGENTS.md` completely;
+2. read the exact current task and SEO ownership in `plan.md`;
+3. locate and read `blog-writing-guidance.md` completely;
+4. read `docs/content-publishing.md` when publication workflow/state is relevant;
+5. inspect the relevant canonical service/content owner before making any Mo's capability statement.
+
+`plan.md` remains authoritative for exact task scope, route ownership, title, H1, metadata, lifecycle, and Definition of Done.
+
+`blog-writing-guidance.md` governs article research quality, source discipline, differentiation, originality, writing quality, anti-AI-slop review, and the editorial publication gate.
+
+Treat all of its following gates as mandatory:
+
+* Research Gate;
+* Differentiation Gate;
+* Editorial Quality Gate;
+* STOP Rule.
+
+Do not begin the article body until the Research Gate and Differentiation Gate pass.
+
+For factual Iowa/local/time-sensitive claims, use the authoritative-source and claim-ledger rules in `blog-writing-guidance.md`. Competitor/SEO articles may be used for SERP or content-gap analysis only, never as factual authority.
+
+Never fabricate first-hand experience, business capability, author/editor identity, credentials, publication/modified dates, image provenance, local rules, or certainty merely to make an article appear authoritative.
+
+Technical success is not editorial approval. A passing validator, typecheck, build, metadata check, schema check, sitemap check, or browser QA does NOT by itself authorize changing an article to `published`.
+
+If research quality, source support, differentiation, cannibalization safety, or the Editorial Quality Gate fails:
+
+* keep the article unpublished;
+* do not mark the article task complete;
+* report the blocker honestly;
+* STOP rather than filling the gap with generic AI-generated prose.
+
+For article tasks, the final report must include the Required Article Implementation Record defined in `blog-writing-guidance.md`, including research scope, authoritative sources, claim-ledger result, user intent, differentiation/value-add, uncertainty, business-capability boundary, cannibalization review, anti-slop pass, visible sources, author/date/image decisions, internal links, schema restraint, and final publication status.
+
+Do not duplicate the full guidance rules into individual article files or prompts when a reference to the repository guidance is sufficient; keep `blog-writing-guidance.md` as the persistent editorial policy.
+
+---
+
 # 23. Validation requirements
 
 Every task should have a focused validator following established repository naming conventions.
@@ -938,6 +990,8 @@ Do not mark a task `[x]` simply because:
 * validator partially passes,
 * or the route returns HTTP 200.
 
+For blog/article tasks, do not mark the task complete or the article `published` unless the mandatory Research Gate, Differentiation Gate, and Editorial Quality Gate in `blog-writing-guidance.md` also pass. Technical SEO/build success can never override a failed editorial gate.
+
 Only after the complete DoD passes:
 
 * mark the current task completed,
@@ -971,6 +1025,8 @@ Report:
 * final worktree status,
 * confirmation that the next task was not started.
 
+For blog/article tasks, also include the Required Article Implementation Record from `blog-writing-guidance.md`; keep it concise, but do not omit research/source/differentiation/editorial-gate evidence.
+
 Do not reproduce huge terminal logs.
 
 Do not repeat the entire task prompt.
@@ -985,7 +1041,9 @@ When requirements conflict, use this priority:
 2. current task prompt
 3. `plan.md` current task / ownership / Definition of Done
 4. this `AGENTS.md`
-5. established repository architecture/conventions
-6. implementation convenience
+5. `blog-writing-guidance.md` for blog/article research, editorial quality, originality, sourcing, and publication gating
+6. `docs/content-publishing.md` for the implemented blog publishing workflow
+7. established repository architecture/conventions
+8. implementation convenience
 
 Never sacrifice factual accuracy or task isolation for speed.
