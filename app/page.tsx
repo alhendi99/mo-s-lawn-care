@@ -71,7 +71,7 @@ export default function Page() {
                 <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
               </Link>
             </div>
-            <BeforeAfterSlider />
+            <BeforeAfterSlider mode="home" />
           </div>
         </section>
 

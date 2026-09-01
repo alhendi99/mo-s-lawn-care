@@ -163,9 +163,10 @@ const expectedPublishedIds = [
   'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee',
   'service-area-norwalk', 'service-area-altoona',
   'about',
+  'our-work',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 19)
+assert.equal(buildSitemapEntries().length, 20)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 assert.equal(routesById.about.implementationStatus, 'implemented')
 assert.equal(routesById.about.publicationStatus, 'published')
@@ -271,4 +272,4 @@ for (const english of new Set(task22EnglishStrings)) assert(spanish[english], `M
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 23 — About Page[\s\S]*?\*\*Status:\*\* `\[x\]` Completed/)
 
-console.log(`Task 22 Altoona validation passed: exact ownership, independent nine-service audit, four-city UI/ItemList/schema/lifecycle parity, strict claim/provenance boundaries, Spanish coverage, current nineteen-URL sitemap, and four-city similarities (${similarityResults.join('; ')}).`)
+console.log(`Task 22 Altoona validation passed: exact ownership, independent nine-service audit, four-city UI/ItemList/schema/lifecycle parity, strict claim/provenance boundaries, Spanish coverage, current lifecycle-derived sitemap, and four-city similarities (${similarityResults.join('; ')}).`)

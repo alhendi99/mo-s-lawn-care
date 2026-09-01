@@ -319,67 +319,6 @@ export const propertyHotspots: Hotspot[] = [
   { id: 'driveway', n: 6, label: 'The Driveway', x: 76, y: 84, services: ['Snow Removal'] },
 ]
 
-export type Project = {
-  id: string
-  title: string
-  meta: string
-  before: string
-  after: string
-}
-
-// Set `before`/`after` to real photos when available — e.g. "/projects/yard-before.webp"
-export const projects: Project[] = [
-  {
-    id: '2',
-    title: 'Fall / Leaves Cleanup',
-    meta: 'Des Moines, IA',
-    before: '/seasons/before-after/before2.webp',
-    after: '/seasons/before-after/after2.webp',
-  },
-  {
-    id: '3',
-    title: 'Landscaping / Lawn Restoration',
-    meta: 'Des Moines, IA',
-    before: '/seasons/before-after/before3.webp',
-    after: '/seasons/before-after/after3.webp',
-  },
-  {
-    id: '4',
-    title: 'Landscaping / Lawn Restoration',
-    meta: 'Des Moines, IA',
-    before: '/seasons/before-after/before4.webp',
-    after: '/seasons/before-after/after4.webp',
-  },
-  {
-    id: '5',
-    title: 'Landscaping / Lawn Restoration',
-    meta: 'Des Moines, IA',
-    before: '/seasons/before-after/before5.webp',
-    after: '/seasons/before-after/after5.webp',
-  },
-  {
-    id: '6',
-    title: 'Landscaping / Lawn Restoration',
-    meta: 'Des Moines, IA',
-    before: '/seasons/before-after/before6.webp',
-    after: '/seasons/before-after/after6.webp',
-  },
-  {
-    id: '7',
-    title: 'Landscaping / Lawn Restoration',
-    meta: 'Des Moines, IA',
-    before: '/seasons/before-after/before7.webp',
-    after: '/seasons/before-after/after7.webp',
-  },
-  {
-    id: '8',
-    title: 'Landscaping / Lawn Restoration',
-    meta: 'Des Moines, IA',
-    before: '/media/gallery7.webp',
-    after: '/media/gallery8.webp',
-  },
-]
-
 export const aboveGround = [
   'Mowing Service',
   'Flower Beds Maintenance',

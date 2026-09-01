@@ -683,7 +683,9 @@ export const routeRegistry = [
     h1: 'Lawn Care & Landscaping Work Across the Des Moines Metro',
     description:
       "See lawn care, landscaping, cleanup and snow removal work from Mo's across the Des Moines metro, including before-and-after property transformations.",
-    ...plannedRouteState,
+    implementationStatus: 'implemented',
+    publicationStatus: 'published',
+    indexability: 'indexable',
     inboundLinkIds: [
       'home',
       'service-lawn-mowing',

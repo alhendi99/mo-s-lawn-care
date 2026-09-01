@@ -120,7 +120,8 @@ assert.match(pageSource, /<HomepageTestimonials \/>/)
 assert.doesNotMatch(pageSource, /from ['"]@\/components\/testimonials['"]/)
 
 const gallerySource = read('components/gallery.tsx')
-assert.match(gallerySource, /\.slice\(0, limit\)/)
+assert.match(gallerySource, /getHomepageWorkRecords\(limit\)/)
+assert.match(gallerySource, /from ['"]@\/content\/projects['"]/)
 
 const appFiles = fs.readdirSync(path.join(projectRoot, 'app'), { recursive: true })
   .map(String)

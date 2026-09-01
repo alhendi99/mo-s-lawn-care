@@ -162,7 +162,7 @@ assert.deepEqual(commercialSupportingRouteLinks.map(({ routeId, href }) => [rout
 ])
 assert.equal(routesById['service-areas'].implementationStatus, 'implemented')
 assert.equal(routesById['service-areas'].publicationStatus, 'published')
-for (const id of ['our-work', 'reviews', 'contact'] as const) {
+for (const id of ['reviews', 'contact'] as const) {
   assert.equal(routesById[id].implementationStatus, 'planned')
   assert.equal(routesById[id].publicationStatus, 'planned')
 }
@@ -170,11 +170,11 @@ for (const id of ['our-work', 'reviews', 'contact'] as const) {
 const publishedIds = routeRegistry
   .filter(({ publicationStatus }) => publicationStatus === 'published')
   .map(({ id }) => id)
-assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about'])
-assert.equal(publishedIds.length, 19)
-assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 19)
+assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work'])
+assert.equal(publishedIds.length, 20)
+assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 20)
 
-const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about'] as const
+const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work'] as const
 assert.deepEqual(buildSitemapEntries(), expectedSitemap.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 for (const alias of [

@@ -4,11 +4,11 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 23 complete; Task 24 not started
+- Phase: Incremental implementation — Task 24 complete; Task 25 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–23 completed; Task 24 and later are not authorized
+- Implementation status: Tasks 1–24 completed; Task 25 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
-- Last checkpoint: 2026-08-31 (Asia/Amman)
+- Last checkpoint: 2026-09-01 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
 - Task 3 repository baseline: clean `main` at `e24e7af`
 - Task 4 repository baseline: clean `main` at `abfe88d`
@@ -31,7 +31,8 @@
 - Task 21 repository baseline: clean `main` at `fd781f6`
 - Task 22 repository baseline: clean `main` at `35710af`
 - Task 23 repository baseline: clean `main` at `b285461`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 24 or later
+- Task 24 repository baseline: clean `main` at `a88cf9a`; finalization resumed from WIP checkpoint `80779ff`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 25 or later
 
 ## Evidence Labels
 
@@ -43,7 +44,21 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 23 complete, 2026-08-31 (Asia/Amman)
+### Latest checkpoint — Task 24 complete, 2026-09-01 (Asia/Amman)
+
+- **Authorized scope and resume state:** Task 24 only — Our Work and Gallery Page. Finalization resumed from the clean WIP checkpoint `80779ff` (`wip: checkpoint task 24 our work gallery page`) above the stable pre-Task-24 baseline `a88cf9a`; the legitimate implementation was preserved rather than restarted. Task 25 and all later routes remain unauthorized and `[ ]` Not started.
+- **Ownership and publication:** `/our-work` now owns `lawn care projects des moines` with the exact title `Lawn Care & Landscaping Projects in Des Moines | Mo's`, H1 `Lawn Care & Landscaping Work Across the Des Moines Metro`, approved description, secondary keywords and query-free canonical `https://www.moslawncaredsm.com/our-work`. Exactly one H1 renders.
+- **Canonical dataset and provenance:** one typed `content/projects.ts` source powers both Homepage and Our Work. It governs 92 unique stable records, of which 89 are display-eligible; Homepage receives an eight-image curated selector, and Our Work receives a 12-image server-rendered initial subset followed by deterministic 12-item batches. All service tags are empty, every verified city is null, and all authorship/service/city provenance remains explicitly unverified, so copy and bilingual alt text describe observable content without assigning unsupported work, customer, service or location claims. Three records remain intentionally excluded, including a street-address-overlay image, an unusable legacy file and the broken legacy before asset. The former duplicate `data/all_image_urls.txt` and legacy `lib/site.ts` project arrays were removed.
+- **Media and comparison audit:** the interrupted run verified all 68 unique remote URLs as reachable JPEG resources and all 11 local gallery assets as reachable. Known local filename/type mismatches remain unchanged for Task 34. Six sequence-supported before/after comparisons resolve to unique governed records; the broken legacy pair was excluded from both display and transformation presentation rather than inferred or repaired. No media was converted, rehosted or broadly optimized.
+- **Schema, lifecycle and links:** the JSON-LD graph contains exactly one CollectionPage, one BreadcrumbList with Home → Our Work parity, the central Organization/WebSite references, and zero ImageObjects because available provenance does not justify them. It contains no LocalBusiness, Place, Review, AggregateRating, Offer or Product. Required service, Reviews and Contact links remain crawlable. Exactly `/our-work` was promoted, producing the exact twenty-URL sitemap; Reviews, Contact and Blog remain planned branded non-redirecting 404 routes.
+- **Interaction, accessibility and performance:** the full archive is not serialized or rendered wholesale. The read-only bounded batching endpoint returns at most twelve public records per request; the interrupted production network audit found only three optimized image requests on the initial `1280×800` load, unique browser media requests, all 89 eligible images loadable, and no eager full-archive fetch. Lightbox focus is trapped and returned, before/after controls work by keyboard with visible focus, intermediate Load More batches retain control focus, and the final batch moves focus to the completion status. English/Spanish, desktop/mobile, touch targets, reduced motion, overflow, translated wrapping and fixed-action/footer separation passed the required browser matrix.
+- **Homepage, analytics and regression:** Homepage now consumes the same governed source while preserving its curated eight-image gallery and comparison behavior. No GA4 semantics or allowlisted event names changed, no new event was added, and no PII path was introduced. During the interrupted run, `pnpm validate:our-work`, TypeScript, production build, the complete Tasks 7–23 regression matrix, production source/status/schema/query/sitemap/future-route checks, browser QA and remote/local network-media QA all passed. Valid-route consoles had zero errors or warnings.
+- **Resume-finalization checks:** on 2026-09-01, the clean WIP baseline and scope were re-audited; the incidental `components/before-after-slider.tsx` mode drift was restored to its pre-Task-24 executable bit without changing source. Fresh `pnpm validate:our-work`, `pnpm exec tsc --noEmit --incremental false` and `git diff --check` passed. The production build, full regression matrix and hour-long browser/network workflow were not redundantly rerun because no source changed after their successful interrupted-run execution.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. No lint dependency or configuration was added.
+- **Task status:** Task 24 is `[x]` Completed because one governed dataset powers both surfaces, the full experience is accessible and bounded, every media/service/location statement stays within evidence, exact SEO/schema/links pass, only `/our-work` changed lifecycle and the sitemap contains exactly twenty canonical URLs. Task 25 was not started.
+- **Exact next action:** amend WIP checkpoint `80779ff` to the final Task 24 commit `feat(seo): add our work gallery page`, verify a clean worktree and STOP before Task 25.
+
+### Previous checkpoint — Task 23 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 23 only — About Page. Task 24 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and identity:** `/about` now owns `mo's lawn care des moines` with the exact title, H1, description, secondary keywords and query-free canonical. Visible identity uses the owner-approved legal name `Mo's Lawn Care & Snow Removal Services LLC`; the exact approved metadata wording remains unchanged.
@@ -1623,7 +1638,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 24 — Our Work and Gallery Page
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/our-work/` as the canonical home for the existing gallery and before/after work while preserving interactions.
 - **Why It Is Needed:** The visual portfolio is a strong asset but currently lives only in the homepage payload with weak metadata and no dedicated intent owner.
 - **Dependencies:** Tasks 1–3; verified image/project provenance; Task 4 for CTAs. Task 34 performs the heavier optimization pass.
@@ -1633,7 +1648,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Remote URL rights/stability, missing dimensions, false city/service labels, broken before/after pairs, all 79 URLs serialized initially, focus-trap/return regression, file-type mismatch.
 - **Validation:** Record-by-record provenance/alt review, source payload/network inspection, interaction/keyboard/mobile checks, exact metadata/schema/link inspection, no duplicate dataset.
 - **Tests:** Route/metadata/H1, Collection/Breadcrumb schema, curated/full mode behavior, missing metadata fallbacks, pair integrity, no false city schema, modal accessibility where supported.
-- **Definition of Done:** `[ ]` One canonical typed work dataset powers home and Work; `[ ]` full experience is accessible and not eagerly loaded wholesale; `[ ]` every location/service claim is supported; `[ ]` exact metadata/schema/links pass.
+- **Definition of Done:** `[x]` One canonical typed work dataset powers home and Work; `[x]` full experience is accessible and not eagerly loaded wholesale; `[x]` every location/service claim is supported; `[x]` exact metadata/schema/links pass.
 
 ### Task 25 — Reviews Page and Review Data Governance
 
