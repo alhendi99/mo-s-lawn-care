@@ -272,7 +272,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
               {content.reviews.items.map((review) => (
                 <figure key={review.name} className="flex flex-col border-t border-[color:var(--rule)] py-8 md:px-7 md:first:border-r md:first:pl-0 md:last:pr-0">
                   <blockquote className="text-[1.12rem] leading-relaxed font-medium text-ink sm:text-xl">
-                    &ldquo;<Tr text={review.quote} />&rdquo;
+                    &ldquo;{review.quote}&rdquo;
                   </blockquote>
                   <figcaption className="mt-auto pt-8">
                     <p className="font-bold text-ink">{review.name}</p>

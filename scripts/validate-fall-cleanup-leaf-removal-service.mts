@@ -113,6 +113,7 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 
@@ -199,7 +200,7 @@ assert.match(
   /no fall, leaf service, result, city or customer attribution/i,
 )
 
-const approvedReviewSource = read('components/testimonials.tsx')
+const approvedReviewSource = read('content/reviews.ts')
 assert.deepEqual(fallCleanupLeafRemovalService.reviews.items.map(({ name }) => name), [
   'Rick Terrones',
   'Zach Ten Haken',
@@ -367,6 +368,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
 for (const slug of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${slug}`)), false)

@@ -164,9 +164,10 @@ const expectedPublishedIds = [
   'service-area-norwalk', 'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 20)
+assert.equal(buildSitemapEntries().length, 21)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 assert.equal(routesById.about.implementationStatus, 'implemented')
 assert.equal(routesById.about.publicationStatus, 'published')

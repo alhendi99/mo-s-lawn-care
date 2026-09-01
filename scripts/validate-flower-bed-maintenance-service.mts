@@ -120,6 +120,7 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 
@@ -212,7 +213,7 @@ assert.doesNotMatch(
 )
 assert.match(flowerBedMaintenanceService.hero.image.caption, /no service or city attribution/i)
 
-const approvedReviewSource = read('components/testimonials.tsx').replaceAll('\\"', '"')
+const approvedReviewSource = read('content/reviews.ts').replaceAll('\\"', '"')
 assert.deepEqual(flowerBedMaintenanceService.reviews.items.map(({ name }) => name), [
   'Tony Dugan',
   'Rick Terrones',
@@ -395,6 +396,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
 
 assert.equal(routeLabels['service-flower-bed-maintenance'], 'Flower Bed Maintenance')

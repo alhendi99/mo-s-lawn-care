@@ -120,6 +120,7 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 
@@ -209,7 +210,7 @@ assert.doesNotMatch(
 )
 assert.match(yardCleanupService.hero.image.caption, /no cleanup, result, city or customer attribution/i)
 
-const approvedReviewSource = read('components/testimonials.tsx').replaceAll('\\"', '"')
+const approvedReviewSource = read('content/reviews.ts').replaceAll('\\"', '"')
 assert.deepEqual(yardCleanupService.reviews.items.map(({ name }) => name), [
   'Morgan Wentland',
   'Danielle Russell',
@@ -384,6 +385,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
 for (const alias of consolidatedAliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)

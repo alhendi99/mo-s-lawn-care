@@ -181,7 +181,7 @@ assert.deepEqual(resolvedAboutSupportingLinks.map(({ routeId, href }) => [routeI
   ['reviews', '/reviews'],
   ['contact', '/contact'],
 ])
-for (const futureId of ['reviews', 'contact', 'blog'] as const) {
+for (const futureId of ['contact', 'blog'] as const) {
   assert.equal(routesById[futureId].implementationStatus, 'planned')
   assert.equal(routesById[futureId].publicationStatus, 'planned')
 }
@@ -198,12 +198,13 @@ const expectedPublishedIds = [
   'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
 ] as const
 assert.deepEqual(
   routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id),
   expectedPublishedIds,
 )
-assert.equal(buildSitemapEntries().length, 20)
+assert.equal(buildSitemapEntries().length, 21)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 const pageSource = read('app/about/page.tsx')
@@ -295,7 +296,7 @@ const aboutEnglishStrings = [
 for (const english of aboutEnglishStrings) assert(spanish[english], `Missing About Spanish translation: ${english}`)
 
 const planSource = read('plan.md')
-assert.match(planSource, /### Task 25 — Reviews Page and Review Data Governance\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 25 — Reviews Page and Review Data Governance\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
 console.log(
   'Task 23 About validation passed: exact ownership, verified company facts, AboutPage/Organization/WebSite/BreadcrumbList graph, five-area and ten-service scope, required links, future-route isolation, Spanish coverage, and current lifecycle-derived sitemap.',

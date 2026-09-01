@@ -116,6 +116,7 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 
@@ -197,7 +198,7 @@ for (const image of landscapingService.workPreview.images) {
   assert(!/landscap|install|design|project/i.test(`${image.alt} ${image.caption}`))
 }
 
-const approvedReviewSource = read('components/testimonials.tsx')
+const approvedReviewSource = read('content/reviews.ts')
 for (const review of landscapingService.reviews.items) {
   assert(approvedReviewSource.includes(review.quote), `Review excerpt is not verbatim: ${review.name}`)
   assert.doesNotMatch(review.quote, /landscap/i)
@@ -356,6 +357,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
 
 assert.equal(routeLabels['service-landscaping'], 'Landscaping')

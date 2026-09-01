@@ -1,3 +1,4 @@
+import { getReviewExcerpt } from '../reviews.ts'
 import type { ServiceDetailContent } from './types.ts'
 
 export const snowRemovalService = {
@@ -115,20 +116,7 @@ export const snowRemovalService = {
     heading: 'Customer feedback that explicitly mentions snow.',
     introduction:
       'These verbatim excerpts come from the approved Google review source and describe individual Snow Removal experiences. They do not establish standard availability, timing, response, surface scope or future results.',
-    items: [
-      {
-        name: 'Erick & Deanna Van Cura',
-        quote:
-          'We have been so happy and satisfied with Mo and his services. He is very reliable and very professional and always does a great job. From mowing and snow removal he is the best. We would highly recommend him.',
-        sourceLabel: 'Google Review',
-      },
-      {
-        name: 'Elizabeth Hoffmann',
-        quote:
-          'Mo helped me out last minute in clearing the snow built up at the entrance of my driveway from the city.  Thank you Mo!!',
-        sourceLabel: 'Google Review',
-      },
-    ],
+    items: [getReviewExcerpt('google-review-004'), getReviewExcerpt('google-review-061')],
   },
   serviceArea: {
     eyebrow: 'Des Moines metro coverage',

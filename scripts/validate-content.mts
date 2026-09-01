@@ -95,6 +95,7 @@ assertTaskOneFoundation({
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
   expectedOrigin: SITE_ORIGIN,
   expectedGoogleBusinessProfileUrl,

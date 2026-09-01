@@ -1,3 +1,4 @@
+import { getReviewExcerpt } from '../reviews.ts'
 import type { ServiceDetailContent } from './types.ts'
 
 export const lawnMowingService = {
@@ -111,20 +112,7 @@ export const lawnMowingService = {
     heading: 'Customer feedback that mentions mowing.',
     introduction:
       "These attributed excerpts come from the approved Google review source. They are customer statements, not guarantees or company-wide operating claims.",
-    items: [
-      {
-        name: 'Erick & Deanna Van Cura',
-        quote:
-          'We have been so happy and satisfied with Mo and his services. He is very reliable and very professional and always does a great job. From mowing and snow removal he is the best. We would highly recommend him.',
-        sourceLabel: 'Google Review',
-      },
-      {
-        name: 'Lori Stiles',
-        quote:
-          "Mo has had great advice for us with our lawn, patch reseeding tips, and is very generous with his time and availability. He's aerated & mowed for us and is always very personable. I highly recommend.",
-        sourceLabel: 'Google Review',
-      },
-    ],
+    items: [getReviewExcerpt('google-review-004'), getReviewExcerpt('google-review-005')],
   },
   serviceArea: {
     eyebrow: 'Des Moines metro service area',

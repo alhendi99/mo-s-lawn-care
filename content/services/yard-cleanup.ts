@@ -1,3 +1,4 @@
+import { getReviewExcerpt } from '../reviews.ts'
 import type { ServiceDetailContent } from './types.ts'
 
 export const yardCleanupService = {
@@ -125,20 +126,7 @@ export const yardCleanupService = {
     heading: 'Customer feedback that explicitly mentions cleanup.',
     introduction:
       'These attributed excerpts come from the approved Google review source and explicitly describe yard cleanup. They are individual customer experiences, not proof of a standard process, inclusion, turnaround or guaranteed result.',
-    items: [
-      {
-        name: 'Morgan Wentland',
-        quote:
-          'Mo did a wonderful job on our yard clean up! Very professional, super friendly, and incredibly responsive. We would highly recommend Mo for all lawn care services/needs!',
-        sourceLabel: 'Google Review',
-      },
-      {
-        name: 'Danielle Russell',
-        quote:
-          'Just had my yard cleaned up and it was great! My yard was a disaster and they cleaned it up quickly and it looks amazing! Definitely recommend and I will use them again!',
-        sourceLabel: 'Google Review',
-      },
-    ],
+    items: [getReviewExcerpt('google-review-038'), getReviewExcerpt('google-review-048')],
   },
   serviceArea: {
     eyebrow: 'Des Moines metro coverage',

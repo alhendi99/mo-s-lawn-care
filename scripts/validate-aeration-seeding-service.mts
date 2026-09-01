@@ -114,6 +114,7 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 
@@ -196,7 +197,7 @@ assert.deepEqual(aerationOverseedingService.reviews.items.map(({ name }) => name
   'Mark McGrew',
 ])
 assert(aerationOverseedingService.reviews.items.every(({ quote }) => /aerat/i.test(quote)))
-const approvedReviewSource = read('components/testimonials.tsx')
+const approvedReviewSource = read('content/reviews.ts')
 for (const review of aerationOverseedingService.reviews.items) {
   assert(approvedReviewSource.includes(review.quote), `Review excerpt is not verbatim: ${review.name}`)
 }
@@ -323,6 +324,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
 for (const futureArticle of [
   routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl,

@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 24 complete; Task 25 not started
+- Phase: Incremental implementation — Task 25 complete; Task 26 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–24 completed; Task 25 and later are not authorized
+- Implementation status: Tasks 1–25 completed; Task 26 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-01 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -32,7 +32,8 @@
 - Task 22 repository baseline: clean `main` at `35710af`
 - Task 23 repository baseline: clean `main` at `b285461`
 - Task 24 repository baseline: clean `main` at `a88cf9a`; finalization resumed from WIP checkpoint `80779ff`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 25 or later
+- Task 25 repository baseline: clean `main` at `3050e5b`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 26 or later
 
 ## Evidence Labels
 
@@ -44,7 +45,21 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 24 complete, 2026-09-01 (Asia/Amman)
+### Latest checkpoint — Task 25 complete, 2026-09-01 (Asia/Amman)
+
+- **Authorized scope:** Task 25 only — Reviews Page and Review Data Governance. Work began from the clean `3050e5b` Task 24 baseline. Task 26 and all later routes remain unauthorized and `[ ]` Not started.
+- **Ownership and publication:** `/reviews` now owns `mo's lawn care reviews` with the exact title `Mo's Lawn Care Reviews | Des Moines, IA`, H1 `What Customers Say About Mo's Lawn Care`, approved description, secondary keywords and query-free canonical `https://www.moslawncaredsm.com/reviews`. Exactly one H1 renders and English metadata/canonical remain stable under Spanish, UTM, filter and arbitrary query parameters.
+- **Canonical dataset and provenance:** one typed `content/reviews.ts` source governs all 106 stable unique review records, all of which remain display-eligible. It powers the deterministic five-record Homepage carousel, the Reviews collection and every service-page excerpt through stable ID lookups. Text, reviewer display names, legacy ratings and established categories are preserved from the approved repository source; a fixed integrity hash protects verbatim migration. No record has verified city/date metadata or a direct per-review URL, and no inferred city/service metadata was added. The two different reviewers whose exact text is `Good job` remain separate because they are not proven duplicate entries.
+- **Count and rating policy:** the approved centralized public signal remains exactly `170+ Google Reviews`; the 106 governed repository records are never represented as Google's live count. Legacy rating coverage is 104 five-star values, one four-star value and one missing value, but individual ratings are omitted from public review items and no aggregate is calculated or displayed because provenance does not support a current numeric rating claim. Stale `160` and `5.0 on Google` UI/translation literals were removed.
+- **Categories and service attribution:** the established eleven-category vocabulary is preserved with exact counts. Only the existing Lawn, Cleanup and Snow categories expose contextual links to the Lawn Mowing, Yard Cleanup and Snow Removal canonical service owners. Category labels organize customer feedback; service capability remains governed by the canonical service pages. No city filter or city attribution is emitted.
+- **Schema, lifecycle and links:** one CollectionPage and one BreadcrumbList render with Home → Reviews UI/schema parity and the central Organization/WebSite references. JSON-LD contains no Review, AggregateRating, review/rating count, rating value, reviewer Person, LocalBusiness, Service, Product or Offer nodes/properties. The approved Google Business Profile, `/our-work`, `/contact`, phone and email links render; Our Work resolves 200 while Contact and Blog remain branded 404s. Exactly `/reviews` was promoted, producing exactly twenty-one canonical sitemap URLs.
+- **Performance, interaction and language:** Reviews server-renders nine public records and loads deterministic nine-record category-aware batches through a bounded read-only endpoint. Neither the Homepage nor the initial Reviews client payload contains the full archive; category and later-batch requests return no rating/city/date fields, contain no duplicate IDs and make no third-party review/API request. Filters retain keyboard focus during requests, final Load More removal moves focus to the completion status, and all customer quotations stay in their original language while surrounding UI has explicit Spanish translations.
+- **Browser, analytics and regression:** fresh production contexts at `1440×900`, `1280×800`, `390×844` and `320×568` passed current navigation, breadcrumb, English/Spanish, complete UTM preservation, exact metadata/canonical, original-language quotations, filter/batching integrity, skip focus, mobile Escape/focus return, reduced motion, zero page overflow, translated wrapping, footer/fixed-action separation and clean valid-route consoles. Network inspection found only bounded local review-batch requests and no analytics/third-party review traffic. Task 4's exact five-event allowlist and PII restrictions remain unchanged. The complete Tasks 7–24 regression matrix, content/SEO/navigation/analytics/Homepage validators, Task 25 focused validator, TypeScript and production build passed.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. No lint dependency or configuration was added.
+- **Task status:** Task 25 is `[x]` Completed because one governed review dataset powers all review surfaces, count/rating/provenance policies are restrained, the page remains performant and accessible, exact SEO/schema/links pass, only `/reviews` changed lifecycle and the sitemap contains exactly twenty-one canonical URLs.
+- **Exact next action:** commit as `feat(seo): add reviews page`, verify a clean worktree and STOP before Task 26.
+
+### Previous checkpoint — Task 24 complete, 2026-09-01 (Asia/Amman)
 
 - **Authorized scope and resume state:** Task 24 only — Our Work and Gallery Page. Finalization resumed from the clean WIP checkpoint `80779ff` (`wip: checkpoint task 24 our work gallery page`) above the stable pre-Task-24 baseline `a88cf9a`; the legitimate implementation was preserved rather than restarted. Task 25 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and publication:** `/our-work` now owns `lawn care projects des moines` with the exact title `Lawn Care & Landscaping Projects in Des Moines | Mo's`, H1 `Lawn Care & Landscaping Work Across the Des Moines Metro`, approved description, secondary keywords and query-free canonical `https://www.moslawncaredsm.com/our-work`. Exactly one H1 renders.
@@ -58,7 +73,7 @@
 - **Task status:** Task 24 is `[x]` Completed because one governed dataset powers both surfaces, the full experience is accessible and bounded, every media/service/location statement stays within evidence, exact SEO/schema/links pass, only `/our-work` changed lifecycle and the sitemap contains exactly twenty canonical URLs. Task 25 was not started.
 - **Exact next action:** amend WIP checkpoint `80779ff` to the final Task 24 commit `feat(seo): add our work gallery page`, verify a clean worktree and STOP before Task 25.
 
-### Previous checkpoint — Task 23 complete, 2026-08-31 (Asia/Amman)
+### Earlier checkpoint — Task 23 complete, 2026-08-31 (Asia/Amman)
 
 - **Authorized scope:** Task 23 only — About Page. Task 24 and all later routes remain unauthorized and `[ ]` Not started.
 - **Ownership and identity:** `/about` now owns `mo's lawn care des moines` with the exact title, H1, description, secondary keywords and query-free canonical. Visible identity uses the owner-approved legal name `Mo's Lawn Care & Snow Removal Services LLC`; the exact approved metadata wording remains unchanged.
@@ -1652,7 +1667,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 25 — Reviews Page and Review Data Governance
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Create `/reviews/`, reuse the categorized reviews efficiently, and resolve how mutable rating/count/source data is governed.
 - **Why It Is Needed:** Review trust is valuable, but current records and a hardcoded “160” count conflict and must not produce misleading schema or payloads.
 - **Dependencies:** Tasks 1–3; Task 1 now supplies the verified Google Business Profile URL and `170+ Google Reviews` display policy; Task 4 for external/contact tracking where applicable.
@@ -1662,7 +1677,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Null/negative review records, current live count drift, duplicate records, review text copyright/source, missing dates/cities, false category inference, huge client bundle.
 - **Validation:** Dataset/count/category reconciliation, source/link approval, exact metadata/H1/canonical/schema, initial payload inspection, filter/keyboard/mobile checks, and explicit absence of aggregate/review schema.
 - **Tests:** Route/metadata, record ID uniqueness, safe rating/null rendering, expected categories, no aggregateRating/Review JSON-LD, curated/full mode, required links.
-- **Definition of Done:** `[ ]` One governed review dataset powers home and Reviews; `[ ]` count/rating policy is approved or numeric claims are omitted; `[ ]` page remains performant/accessible; `[ ]` exact metadata/links/schema restraint pass.
+- **Definition of Done:** `[x]` One governed review dataset powers home and Reviews; `[x]` count/rating policy is approved or numeric claims are omitted; `[x]` page remains performant/accessible; `[x]` exact metadata/links/schema restraint pass.
 
 ### Task 26 — Contact Page and Estimate Integration
 

@@ -164,9 +164,10 @@ const expectedPublishedIds = [
   'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 20)
+assert.equal(buildSitemapEntries().length, 21)
 assert.deepEqual(buildSitemapEntries(), expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 const pageSource = read('app/service-areas/[city]/page.tsx')

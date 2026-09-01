@@ -120,6 +120,7 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 
@@ -198,7 +199,7 @@ assert.equal(
   'Front lawns with young trees beside homes and driveways',
 )
 
-const approvedReviewSource = read('components/testimonials.tsx')
+const approvedReviewSource = read('content/reviews.ts')
 assert.deepEqual(fertilizationWeedControlService.reviews.items.map(({ name }) => name), [
   'Rick Terrones',
   "Ashley O'Connor",
@@ -368,6 +369,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
 
 assert.equal(routeLabels['service-fertilization-weed-control'], 'Fertilization & Weed Control')

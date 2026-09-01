@@ -88,12 +88,12 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 assert.equal(routesById['service-areas'].implementationStatus, 'implemented')
 assert.equal(routesById['service-areas'].publicationStatus, 'published')
 for (const futureRouteId of [
-  'reviews',
   'contact',
 ] as const) {
   assert.equal(routesById[futureRouteId].implementationStatus, 'planned')
@@ -220,7 +220,7 @@ assert.match(
   /no service, project, city or customer attribution/i,
 )
 
-const approvedReviewSource = read('components/testimonials.tsx')
+const approvedReviewSource = read('content/reviews.ts')
 assert.deepEqual(snowRemovalService.reviews.items.map(({ name }) => name), [
   'Erick & Deanna Van Cura',
   'Elizabeth Hoffmann',
@@ -415,10 +415,10 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
-assert.equal(buildSitemapEntries().length, 20)
+assert.equal(buildSitemapEntries().length, 21)
 for (const futureRouteId of [
-  'reviews',
   'contact',
 ] as const) {
   assert.equal(

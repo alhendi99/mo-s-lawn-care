@@ -1,3 +1,4 @@
+import { getReviewExcerpt } from '../reviews.ts'
 import type { ServiceDetailContent } from './types.ts'
 
 export const fallCleanupLeafRemovalService = {
@@ -113,20 +114,7 @@ export const fallCleanupLeafRemovalService = {
     heading: 'What customers say about working with Mo’s.',
     introduction:
       'The approved review source has no excerpt that explicitly confirms Fall Cleanup, Leaf Removal or leaf cleanup. These attributed comments are general company feedback, not proof of a fall-service task, method, timing or result.',
-    items: [
-      {
-        name: 'Rick Terrones',
-        quote:
-          'Great service! Mo is very easy to work with. He gets right back to you when you leave a message.  Been with Mo for a few years! Good professional work!',
-        sourceLabel: 'Google Review',
-      },
-      {
-        name: 'Zach Ten Haken',
-        quote:
-          'On-time, quality, and professional service! Super positive experience - would use him again in a heartbeat over some other big companies in town!',
-        sourceLabel: 'Google Review',
-      },
-    ],
+    items: [getReviewExcerpt('google-review-008'), getReviewExcerpt('google-review-041')],
   },
   serviceArea: {
     eyebrow: 'Des Moines metro coverage',

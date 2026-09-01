@@ -32,7 +32,8 @@
     "validate:norwalk": "node --experimental-strip-types scripts/validate-norwalk-service-area.mts",
     "validate:altoona": "node --experimental-strip-types scripts/validate-altoona-service-area.mts",
     "validate:about": "node --experimental-strip-types scripts/validate-about.mts",
-    "validate:our-work": "node --experimental-strip-types scripts/validate-our-work.mts"
+    "validate:our-work": "node --experimental-strip-types scripts/validate-our-work.mts",
+    "validate:reviews": "node --experimental-strip-types scripts/validate-reviews.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

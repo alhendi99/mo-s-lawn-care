@@ -114,6 +114,7 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 
@@ -196,7 +197,7 @@ assert.doesNotMatch(
 )
 assert.match(gradingService.hero.image.caption, /no grading, result, city or customer attribution/i)
 
-const approvedReviewSource = read('components/testimonials.tsx')
+const approvedReviewSource = read('content/reviews.ts')
 assert.deepEqual(gradingService.reviews.items.map(({ name }) => name), [
   'Rick Terrones',
   'Zach Ten Haken',
@@ -374,8 +375,9 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
-assert.equal(buildSitemapEntries().length, 20)
+assert.equal(buildSitemapEntries().length, 21)
 assert.equal(
   buildSitemapEntries().some(({ url }) => url === routesById['service-snow-removal'].canonicalUrl),
   true,

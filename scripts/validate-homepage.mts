@@ -87,6 +87,7 @@ const sectionSources = [
   'components/GalleryClient.tsx',
   'components/homepage-service-areas.tsx',
   'components/homepage-testimonials.tsx',
+  'components/HomepageTestimonialsClient.tsx',
   'components/homepage-tips.tsx',
   'components/estimate-section.tsx',
 ].map(read).join('\n')
@@ -118,6 +119,7 @@ const pageSource = read('app/page.tsx')
 assert.match(pageSource, /<Gallery limit=\{8\} \/>/)
 assert.match(pageSource, /<HomepageTestimonials \/>/)
 assert.doesNotMatch(pageSource, /from ['"]@\/components\/testimonials['"]/)
+assert.match(read('components/homepage-testimonials.tsx'), /getHomepageReviewRecords/)
 
 const gallerySource = read('components/gallery.tsx')
 assert.match(gallerySource, /getHomepageWorkRecords\(limit\)/)

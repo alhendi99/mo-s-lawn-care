@@ -1,3 +1,4 @@
+import { getReviewExcerpt } from '../reviews.ts'
 import type { ServiceDetailContent } from './types.ts'
 
 export const fertilizationWeedControlService = {
@@ -112,20 +113,7 @@ export const fertilizationWeedControlService = {
     heading: 'What customers say about working with Mo’s.',
     introduction:
       'The approved review source has no excerpt that explicitly confirms fertilization or weed-control work. These attributed comments are general customer feedback, not proof of a treatment method or result.',
-    items: [
-      {
-        name: 'Rick Terrones',
-        quote:
-          'Great service! Mo is very easy to work with. He gets right back to you when you leave a message.  Been with Mo for a few years! Good professional work!',
-        sourceLabel: 'Google Review',
-      },
-      {
-        name: "Ashley O'Connor",
-        quote:
-          'Highly recommend this company! Great service, professional, friendly, and top quality! Beyond impressed with the work that was done in my yard! Thank you to Mo and his team for the great work! ⭐️⭐️⭐️⭐️⭐️',
-        sourceLabel: 'Google Review',
-      },
-    ],
+    items: [getReviewExcerpt('google-review-008'), getReviewExcerpt('google-review-021')],
   },
   serviceArea: {
     eyebrow: 'Des Moines metro coverage',

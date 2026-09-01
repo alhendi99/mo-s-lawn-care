@@ -1,3 +1,4 @@
+import { getReviewExcerpt } from '../reviews.ts'
 import type { ServiceDetailContent } from './types.ts'
 
 export const flowerBedMaintenanceService = {
@@ -119,20 +120,7 @@ export const flowerBedMaintenanceService = {
     heading: 'One bed-related experience and general feedback.',
     introduction:
       'One attributed review explicitly mentions the customer’s landscape beds. Its wording describes that individual experience, not a standard bed-maintenance process, inclusion or result; the second comment is general company feedback.',
-    items: [
-      {
-        name: 'Tony Dugan',
-        quote:
-          'Mo is awesome!! My landscape beds had gotten out of control with weeds. I needed a fresh start and Mo "cleared the path" for me to do this. He was on time with a great price and did impeccable work. Incredibly courteous, as well. I highly recommend him!!',
-        sourceLabel: 'Google Review',
-      },
-      {
-        name: 'Rick Terrones',
-        quote:
-          'Great service! Mo is very easy to work with. He gets right back to you when you leave a message.  Been with Mo for a few years! Good professional work!',
-        sourceLabel: 'Google Review',
-      },
-    ],
+    items: [getReviewExcerpt('google-review-014'), getReviewExcerpt('google-review-008')],
   },
   serviceArea: {
     eyebrow: 'Des Moines metro coverage',

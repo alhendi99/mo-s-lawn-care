@@ -112,6 +112,7 @@ assert.deepEqual(
     'service-area-altoona',
   'about',
   'our-work',
+  'reviews',
   ],
 )
 
@@ -206,7 +207,7 @@ assert.doesNotMatch(
 )
 assert.match(springCleanupService.hero.image.caption, /no spring, service, result, city or customer attribution/i)
 
-const approvedReviewSource = read('components/testimonials.tsx')
+const approvedReviewSource = read('content/reviews.ts')
 assert.deepEqual(springCleanupService.reviews.items.map(({ name }) => name), [
   'Rick Terrones',
   'Zach Ten Haken',
@@ -390,6 +391,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['service-area-altoona'].canonicalUrl },
   { url: routesById.about.canonicalUrl },
   { url: routesById['our-work'].canonicalUrl },
+  { url: routesById.reviews.canonicalUrl },
 ])
 for (const alias of aliases) {
   assert.equal(buildSitemapEntries().some(({ url }) => url.endsWith(`/services/${alias}`)), false)

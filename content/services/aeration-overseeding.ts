@@ -1,3 +1,4 @@
+import { getReviewExcerpt } from '../reviews.ts'
 import type { ServiceDetailContent } from './types.ts'
 
 export const aerationOverseedingService = {
@@ -118,20 +119,7 @@ export const aerationOverseedingService = {
     heading: 'Customer feedback that explicitly mentions aeration.',
     introduction:
       'These attributed excerpts come from the approved Google review source. They describe individual customer experiences and are not process, timing or result guarantees.',
-    items: [
-      {
-        name: 'Lori Stiles',
-        quote:
-          "Mo has had great advice for us with our lawn, patch reseeding tips, and is very generous with his time and availability. He's aerated & mowed for us and is always very personable. I highly recommend.",
-        sourceLabel: 'Google Review',
-      },
-      {
-        name: 'Mark McGrew',
-        quote:
-          'I called several lawn care companies to check on aeration services.  Moe was the only one to respond back and did so promptly.  He came to my home at a date and time that fit my schedule and did an excellent job.  I would HIGHLY recommend him for lawn care services. Thanks Moe!',
-        sourceLabel: 'Google Review',
-      },
-    ],
+    items: [getReviewExcerpt('google-review-005'), getReviewExcerpt('google-review-035')],
   },
   serviceArea: {
     eyebrow: 'Des Moines metro coverage',
