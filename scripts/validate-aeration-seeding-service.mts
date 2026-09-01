@@ -330,9 +330,10 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById.contact.canonicalUrl },
   { url: routesById.blog.canonicalUrl },
   { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
+  { url: routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl },
 ])
 for (const futureArticle of [
-  routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl,
+  routesById['article-how-often-to-mow-lawn-iowa'].canonicalUrl,
 ]) {
   assert.equal(buildSitemapEntries().some(({ url }) => url === futureArticle), false)
 }

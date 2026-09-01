@@ -10,8 +10,10 @@ import {
   getPublishedRelatedArticles,
   validateBlogArticles,
 } from '../content/blog/index.ts'
+import { bestTimeToOverseedLawnIowa } from '../content/blog/best-time-to-overseed-lawn-iowa.ts'
 import { whenToAerateLawnIowa } from '../content/blog/when-to-aerate-lawn-iowa.ts'
 import { getBreadcrumbItems, routeRegistry, routesById } from '../content/routes.ts'
+import type { BlogArticleBlock, BlogClaimNote, BlogSource } from '../content/types.ts'
 import { analyticsEventNames } from '../lib/analytics.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
 import {
@@ -24,35 +26,39 @@ import {
 
 const projectRoot = process.cwd()
 const read = (relativePath: string) => fs.readFileSync(path.join(projectRoot, relativePath), 'utf8')
-const article = whenToAerateLawnIowa
-const ownershipRoute = routesById['article-when-to-aerate-lawn-iowa']
+const article = bestTimeToOverseedLawnIowa
+const ownershipRoute = routesById['article-best-time-to-overseed-lawn-iowa']
 
-assert.equal(article.slug, 'when-to-aerate-lawn-iowa')
-assert.equal(article.path, '/blog/when-to-aerate-lawn-iowa')
-assert.equal(article.primaryKeyword, 'when to aerate lawn in iowa')
+assert.equal(article.slug, 'best-time-to-overseed-lawn-iowa')
+assert.equal(article.path, '/blog/best-time-to-overseed-lawn-iowa')
+assert.equal(article.primaryKeyword, 'best time to overseed lawn in iowa')
 assert.deepEqual(article.secondaryKeywords, [
-  'best time to aerate lawn in Iowa',
-  'core aeration Iowa',
-  'aerate lawn in spring or fall Iowa',
+  'when to overseed lawn in Iowa',
+  'overseed lawn in fall Iowa',
+  'Iowa lawn overseeding timing',
 ])
 assert.deepEqual(ownershipRoute.secondaryKeywords, article.secondaryKeywords)
 assert.equal(ownershipRoute.secondaryKeywordStatus, 'defined')
-assert.equal(article.title, "When to Aerate Your Lawn in Iowa | Mo's Lawn Care")
-assert.equal(article.h1, 'When Is the Best Time to Aerate a Lawn in Iowa?')
-assert.equal(article.description, 'Learn when Iowa lawns generally benefit from aeration, what signs to watch for and how aeration fits into a practical Central Iowa lawn care plan.')
-assert.equal(ownershipRoute.canonicalUrl, 'https://www.moslawncaredsm.com/blog/when-to-aerate-lawn-iowa')
+assert.equal(article.title, "Best Time to Overseed a Lawn in Iowa | Mo's Lawn Care")
+assert.equal(article.h1, 'What Is the Best Time to Overseed a Lawn in Iowa?')
+assert.equal(article.description, 'Understand the usual timing considerations for overseeding an Iowa lawn, how weather affects planning and when professional help may make sense.')
+assert.equal(ownershipRoute.canonicalUrl, 'https://www.moslawncaredsm.com/blog/best-time-to-overseed-lawn-iowa')
 assert.equal(article.status, 'published')
 assert.equal(article.publisher, 'organization')
 validateBlogArticles()
 
 assert.equal(article.sources.length, 3)
-assert.equal(article.claimNotes.length, 6)
+assert.equal(article.claimNotes.length, 7)
 assert(article.content.length > 0)
-const sourceIds = new Set(article.sources.map(({ id }) => id))
-const claimIds = new Set(article.claimNotes.map(({ id }) => id))
+const sources = article.sources as readonly BlogSource[]
+const claims = article.claimNotes as readonly BlogClaimNote[]
+const articleBlocks = article.content as readonly BlogArticleBlock[]
+const aerationBlocks = whenToAerateLawnIowa.content as readonly BlogArticleBlock[]
+const sourceIds = new Set(sources.map(({ id }) => id))
+const claimIds = new Set(claims.map(({ id }) => id))
 assert.equal(sourceIds.size, article.sources.length)
 assert.equal(claimIds.size, article.claimNotes.length)
-for (const source of article.sources) {
+for (const source of sources) {
   const sourceUrl = new URL(source.url)
   assert.equal(sourceUrl.protocol, 'https:')
   assert.equal(sourceUrl.hostname, 'yardandgarden.extension.iastate.edu')
@@ -62,46 +68,51 @@ for (const source of article.sources) {
   assert(source.scope)
   for (const claimId of source.supportedClaimIds) {
     assert(claimIds.has(claimId), `Source ${source.id} has unknown claim ${claimId}`)
-    assert(article.claimNotes.find(({ id }) => id === claimId)?.sourceIds.some((id) => id === source.id))
+    assert(claims.find(({ id }) => id === claimId)?.sourceIds.includes(source.id))
   }
 }
-for (const claim of article.claimNotes) {
+for (const claim of claims) {
   assert(claim.sourceIds.length > 0)
   for (const sourceId of claim.sourceIds) {
     assert(sourceIds.has(sourceId), `Claim ${claim.id} has unknown source ${sourceId}`)
-    assert(article.sources.find(({ id }) => id === sourceId)?.supportedClaimIds.some((id) => id === claim.id))
+    assert(sources.find(({ id }) => id === sourceId)?.supportedClaimIds.includes(claim.id))
   }
 }
 
-assert.equal(article.editorialReview.owner, 'Task 28 editorial review')
+assert.equal(article.editorialReview.owner, 'Task 29 editorial review')
 assert.equal(article.editorialReview.reviewedOn, '2026-09-01')
 assert.equal('author' in article, false)
 assert.equal('publishedOn' in article, false)
 assert.equal('modifiedOn' in article, false)
 assert.equal('image' in article, false)
 
-const researchBrief = read('docs/research/task-28-aeration-brief.md')
-for (const gate of ['Research Gate: PASS.', 'Differentiation Gate: PASS.', 'Editorial Quality Gate: PASS.']) {
-  assert(researchBrief.includes(gate), `Missing editorial gate: ${gate}`)
-}
+const researchBrief = read('docs/research/task-29-overseeding-brief.md')
+for (const gate of [
+  'Research Gate: PASS.',
+  'Differentiation Gate: PASS.',
+  'Task 28 Anti-Repetition Gate: PASS.',
+  'Cannibalization Gate: PASS.',
+  'Editorial Quality Gate: PASS.',
+  'Spanish claim-strength review: PASS.',
+]) assert(researchBrief.includes(gate), `Missing editorial gate: ${gate}`)
 for (const required of [
-  'Scope and user intent',
+  'User intent',
+  'Research questions',
   'Source inventory',
   'Claim ledger',
   'Secondary intent research',
-  'SERP and differentiation brief',
-  'Spanish claim-strength review: PASS',
+  'Representative SERP/content-gap analysis',
+  'Task 28 differentiation audit',
 ]) assert(researchBrief.includes(required), `Research brief missing ${required}`)
 
 const published = getPublishedArticles()
-assert.equal(published.length, 2)
-assert.equal(published[0], article)
-const overseedingArticle = published.find(({ slug }) => slug === 'best-time-to-overseed-lawn-iowa')
-assert(overseedingArticle)
+assert.deepEqual(published, [whenToAerateLawnIowa, article])
 assert.equal(getPublishedArticleBySlug(article.slug), article)
-assert.deepEqual(getPublishedRelatedArticles(article), [overseedingArticle])
+assert.deepEqual(getPublishedRelatedArticles(article), [whenToAerateLawnIowa])
+assert.deepEqual(getPublishedRelatedArticles(whenToAerateLawnIowa), [article])
 assert.equal(blogArticles.length, 6)
-const futureArticles = blogArticles.filter(({ status }) => status === 'planned')
+const publishedSlugs = new Set<string>([article.slug, whenToAerateLawnIowa.slug])
+const futureArticles = blogArticles.filter(({ slug }) => !publishedSlugs.has(slug))
 assert.equal(futureArticles.length, 4)
 assert(futureArticles.every(({ status }) => status === 'planned'))
 assert(futureArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
@@ -120,6 +131,7 @@ assert.equal((metadata.robots as { follow?: boolean }).follow, true)
 const sitemap = buildSitemapEntries()
 assert.equal(sitemap.length, 25)
 assert.equal(sitemap.filter(({ url }) => url === ownershipRoute.canonicalUrl).length, 1)
+assert.equal(sitemap.filter(({ url }) => url === routesById[whenToAerateLawnIowa.routeId].canonicalUrl).length, 1)
 for (const future of futureArticles) {
   assert.equal(sitemap.some(({ url }) => url === routesById[future.routeId].canonicalUrl), false)
 }
@@ -155,20 +167,43 @@ for (const forbidden of ['FAQPage', 'Review', 'AggregateRating', 'LocalBusiness'
 }
 
 const visibleBreadcrumbs = getBreadcrumbItems(article.routeId)
-assert.deepEqual(visibleBreadcrumbs.map(({ label }) => label), ['Home', 'Blog', 'When to Aerate a Lawn in Iowa'])
+assert.deepEqual(visibleBreadcrumbs.map(({ label }) => label), ['Home', 'Blog', 'When to Overseed a Lawn in Iowa'])
 assert.deepEqual(visibleBreadcrumbs.map(({ href }) => href), ['/', '/blog', article.path])
 const schemaBreadcrumb = nodesByType('BreadcrumbList')[0]
 const schemaItems = schemaBreadcrumb.itemListElement as readonly Record<string, unknown>[]
 assert.deepEqual(schemaItems.map(({ name }) => name), visibleBreadcrumbs.map(({ label }) => label))
 assert.deepEqual(schemaItems.map(({ position }) => position), [1, 2, 3])
 
-const inlineLinks = article.content.flatMap((block) => block.type === 'paragraph'
-  ? block.content.flatMap((inline) => 'href' in inline && inline.href ? [inline.href] : [])
+const inlineLinks = articleBlocks.flatMap((block) => block.type === 'paragraph'
+  ? block.content.flatMap((inline) => inline.href ? [inline.href] : [])
   : [])
-assert(inlineLinks.includes('/blog'))
-assert(inlineLinks.includes('/services/aeration-overseeding'))
+for (const required of ['/blog', '/blog/when-to-aerate-lawn-iowa', '/services/aeration-overseeding']) {
+  assert(inlineLinks.includes(required), `Missing required article link: ${required}`)
+}
 for (const future of futureArticles) assert.equal(inlineLinks.includes(future.path), false)
 assert.deepEqual(article.relatedServicePaths, ['/services/aeration-overseeding'])
+
+const articleHeadings = articleBlocks.flatMap((block) => block.type === 'heading' ? [block.text] : [])
+const aerationHeadings = new Set<string>(aerationBlocks.flatMap((block) => block.type === 'heading' ? [block.text] : []))
+assert(articleHeadings.every((heading) => !aerationHeadings.has(heading)))
+assert.equal(articleBlocks.some((block) => block.type === 'table'), false)
+assert(articleBlocks.some((block) => block.type === 'list' && block.style === 'checklist'))
+const articleText = [article.excerpt, ...articleHeadings, ...articleBlocks.flatMap((block) => {
+  if (block.type === 'paragraph') return block.content.map(({ text }) => text)
+  if (block.type === 'list') return block.items
+  if (block.type === 'table') return [...block.headers, ...block.rows.flat()]
+  return []
+})].join(' ')
+for (const forbidden of [
+  'When it comes to',
+  "It's important to note",
+  'In conclusion',
+  'Ultimately',
+  'our experience',
+  'our experts',
+  'guaranteed germination',
+  'how often to mow',
+]) assert.equal(articleText.toLowerCase().includes(forbidden.toLowerCase()), false, `Forbidden article pattern: ${forbidden}`)
 
 const articleRouteSource = read('app/blog/[slug]/page.tsx')
 const hubSource = read('app/blog/page.tsx')
@@ -181,17 +216,13 @@ assert.match(hubSource, /buildArticleItemListStructuredData\(route, publishedArt
 assert.match(homepageTipsSource, /getPublishedArticles\(\)\.slice\(0, 3\)/)
 assert.match(templateSource, /getPublishedRelatedArticles\(article\)/)
 assert.match(templateSource, /id=\{`source-/)
-assert.match(templateSource, /tabIndex=\{-1\}/)
 assert.equal(articleRouteSource.includes(article.slug), false)
 assert.equal(hubSource.includes(article.slug), false)
 assert.equal(homepageTipsSource.includes(article.slug), false)
-for (const future of futureArticles) {
-  assert.equal([articleRouteSource, hubSource, homepageTipsSource].some((source) => source.includes(future.slug)), false)
-}
 
 const translations = JSON.parse(read('lib/es-translations.json')) as Record<string, string>
 const visibleArticleStrings = new Set<string>([article.h1, article.excerpt])
-for (const block of article.content) {
+for (const block of articleBlocks) {
   if (block.type === 'heading') visibleArticleStrings.add(block.text)
   if (block.type === 'paragraph') block.content.forEach(({ text }) => visibleArticleStrings.add(text))
   if (block.type === 'list') block.items.forEach((item) => visibleArticleStrings.add(item))
@@ -204,13 +235,12 @@ for (const block of article.content) {
 for (const english of visibleArticleStrings) assert(translations[english], `Missing article translation: ${english}`)
 
 assert.deepEqual(analyticsEventNames, ['generate_lead', 'form_start', 'form_submit_error', 'click_to_call', 'click_email'])
-for (const forbiddenEvent of ['article_view', 'source_click', 'blog_click', 'toc_click', 'related_article_click', 'aeration_article_cta']) {
+for (const forbiddenEvent of ['article_view', 'source_click', 'blog_click', 'toc_click', 'related_article_click', 'overseeding_article_cta']) {
   assert.equal([articleRouteSource, hubSource, homepageTipsSource, templateSource].some((source) => source.includes(forbiddenEvent)), false)
 }
 
 const planSource = read('plan.md')
-assert.match(planSource, /### Task 28 — “When to Aerate a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 30 — “How Often to Mow a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Task 28 aeration article validation passed: exact ownership, six sourced claim groups, three editorial gates, two published articles, truthful schema, four isolated future 404 owners, and exact 25-URL lifecycle.')
+console.log('Task 29 overseeding article validation passed: exact ownership, seven sourced claim groups, five editorial gates, two published articles, truthful schema, four isolated future owners, and exact 25-URL lifecycle.')

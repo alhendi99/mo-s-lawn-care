@@ -36,7 +36,8 @@
     "validate:reviews": "node --experimental-strip-types scripts/validate-reviews.mts",
     "validate:contact": "node --experimental-strip-types scripts/validate-contact.mts",
     "validate:blog": "node --experimental-strip-types scripts/validate-blog.mts",
-    "validate:aeration-article": "node --experimental-strip-types scripts/validate-aeration-article.mts"
+    "validate:aeration-article": "node --experimental-strip-types scripts/validate-aeration-article.mts",
+    "validate:overseeding-article": "node --experimental-strip-types scripts/validate-overseeding-article.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

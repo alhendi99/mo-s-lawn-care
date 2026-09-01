@@ -808,8 +808,12 @@ export const routeRegistry = [
     pageType: 'blog-article',
     parentId: 'blog',
     primaryKeyword: 'best time to overseed lawn in iowa',
-    secondaryKeywords: [],
-    secondaryKeywordStatus: 'pending-research',
+    secondaryKeywords: [
+      'when to overseed lawn in Iowa',
+      'overseed lawn in fall Iowa',
+      'Iowa lawn overseeding timing',
+    ],
+    secondaryKeywordStatus: 'defined',
     title: "Best Time to Overseed a Lawn in Iowa | Mo's Lawn Care",
     h1: 'What Is the Best Time to Overseed a Lawn in Iowa?',
     description:

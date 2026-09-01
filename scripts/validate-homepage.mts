@@ -47,11 +47,12 @@ assert.deepEqual(
 )
 
 const homepageTipArticles = getPublishedArticles().slice(0, 3)
-assert.equal(homepageTipArticles.length, 1)
+assert.equal(homepageTipArticles.length, 2)
 assert.deepEqual(homepageTipArticles.map(({ path: articlePath }) => articlePath), [
   '/blog/when-to-aerate-lawn-iowa',
+  '/blog/best-time-to-overseed-lawn-iowa',
 ])
-assert.equal(new Set(homepageTipArticles.map(({ path: articlePath }) => articlePath)).size, 1)
+assert.equal(new Set(homepageTipArticles.map(({ path: articlePath }) => articlePath)).size, 2)
 
 const expectedProblemRoutes = {
   grass: ['/services/lawn-mowing', '/services/yard-cleanup'],

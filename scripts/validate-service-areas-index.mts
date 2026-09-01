@@ -181,7 +181,11 @@ const expectedPublishedIds = [
 ] as const
 assert.deepEqual(publishedIds, expectedPublishedIds)
 assert.equal(publishedIds.length, 23)
-const expectedSitemapIds = [...expectedPublishedIds, 'article-when-to-aerate-lawn-iowa'] as const
+const expectedSitemapIds = [
+  ...expectedPublishedIds,
+  'article-when-to-aerate-lawn-iowa',
+  'article-best-time-to-overseed-lawn-iowa',
+] as const
 assert.deepEqual(
   buildSitemapEntries(),
   expectedSitemapIds.map((id) => ({ url: routesById[id].canonicalUrl })),

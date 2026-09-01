@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Task 28 complete; Task 29 not started
+- Phase: Incremental implementation — Task 29 complete; Task 30 not started
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–28 completed; Task 29 and later are not authorized
+- Implementation status: Tasks 1–29 completed; Task 30 and later are not authorized
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-01 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -36,7 +36,8 @@
 - Task 26 repository baseline: clean `main` at `247de1d`
 - Task 27 repository baseline: clean `main` at `852f9ed`
 - Task 28 repository baseline: clean `main` at `9320da0` (guidance-only commit above product baseline `b807d05`)
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 29 or later
+- Task 29 repository baseline: clean `main` at `9f05475`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 30 or later
 
 ## Evidence Labels
 
@@ -48,7 +49,23 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 28 complete, 2026-09-01 (Asia/Amman)
+### Latest checkpoint — Task 29 complete, 2026-09-01 (Asia/Amman)
+
+- **Authorized scope:** Task 29 only — research, review and publication of `/blog/best-time-to-overseed-lawn-iowa`. Work began from the required clean `9f05475` Task 28 baseline. Task 30 and all later article/media work remain unauthorized and `[ ]` Not started.
+- **Exact ownership:** the article owns `best time to overseed lawn in iowa` with exact title `Best Time to Overseed a Lawn in Iowa | Mo's Lawn Care`, H1 `What Is the Best Time to Overseed a Lawn in Iowa?`, supplied description and query-free canonical. Current same-intent research retained `when to overseed lawn in Iowa`, `overseed lawn in fall Iowa` and `Iowa lawn overseeding timing` without search-volume or density claims.
+- **Research and claim ledger:** Iowa State University Extension and Outreach is the sole factual authority: `Overseeding a Lawn`, `Late Summer and Fall Lawn Care` (both last reviewed August 2024) and `How should I water a newly seeded lawn?` (updated June 9, 2026), all opened and reverified on 2026-09-01. Seven published claim groups cover the mid-August-through-mid-September general window, seasonal establishment context, seed-to-soil contact, existing-turf competition, surface moisture, hot/windy follow-through, Iowa terminology and the aeration boundary. City/frost deadlines, seed selection, germination promises, fixed irrigation schedules, automatic aeration pairing and invented Mo's methods or outcomes were removed or softened.
+- **Editorial gates and differentiation:** the saved Task 29 research brief records PASS results for the Research, Differentiation, Task 28 Anti-Repetition, Cannibalization and Editorial Quality gates. Task 29 uses an establishment-runway decision, a three-part readiness checklist and follow-through postpone conditions; unlike Task 28, it has no factor table, compaction/traffic analysis, core-equipment moisture test, ordered aeration sequence or separate commercial conclusion. Compression removed generic benefits, seed/product detail, equipment instructions, exact germination/watering schedules, forced FAQ, repeated summary and “why hire” filler.
+- **Capability and cluster boundaries:** the article remains informational and links naturally to Task 28 for the separate aeration decision and to the canonical Aeration and Seeding page only for approved combined commercial scope. It does not claim Mo's equipment, preparation, placement, seed blend, watering process, timing, availability or result. Task 30 retains mowing frequency and Task 33 retains the year-round calendar; no unpublished article link renders.
+- **Author, date and image decisions:** author, `datePublished`, `dateModified` and image are omitted. There is no approved public author, the repository is not deployed so code completion is not a public publication date, and no verified article image was established.
+- **Content, language and accessibility:** the direct answer appears first, four intent-led H2 sections remain readable at all required viewports, and visible Sources expose all three primary URLs. Explicit Spanish translations preserve timing, moisture and aeration qualifications. TOC and skip-link focus, mobile Escape/focus return, reduced motion, zero overflow, unclipped English/Spanish H1 and source names, and fixed-action/footer-content separation pass.
+- **Schema, links and analytics:** the route emits the central Organization/WebSite references, one WebPage, one BreadcrumbList with Home → Blog → article parity, and one BlogPosting with the three source citations. It omits author, public dates, image, FAQ, Review, AggregateRating, LocalBusiness, address, geo and Offer. Public links include Blog, Task 28, Aeration and Seeding, visible sources and the existing restrained Contact CTA. The exact five-event analytics allowlist remains unchanged with no article/source/query event data.
+- **Publication and isolation:** `getPublishedArticles()` returns exactly Task 28 and Task 29 and remains the sole gate for static params/rendering, Blog hub, two-item Blog ItemList, Homepage Latest Tips and sitemap. Both published articles return 200; Tasks 30–33 remain branded non-redirecting 404s and absent from public selectors and the sitemap. Sitemap contains exactly twenty-five canonical URLs.
+- **QA and regression:** production source checks passed exact metadata/canonical under plain, Spanish, UTM and arbitrary queries, one H1, visible sources/links, truthful schema and future-route isolation. Fresh `1440×900`, `1280×800`, `390×844` and `320×568` browser contexts passed English/Spanish, UTM preservation, navigation/breadcrumb, source and related links, TOC/skip focus, mobile menu focus return, reduced motion, zero overflow, footer/fixed-action clearance and clean consoles. The Task 29 focused validator, Task 28/Blog/Contact contracts, complete Tasks 7–28 regression matrix, shared content/SEO/navigation/analytics/Homepage validators, TypeScript, production build and diff check pass.
+- **Unavailable check:** `Unavailable — ESLint is not installed`. No lint dependency or configuration was added.
+- **Task status:** Task 29 is `[x]` Completed because the sourced Iowa timing is accurate and conditional, exact informational ownership and all editorial gates pass, visible/schema/link parity is truthful, only Task 29 was promoted and all unsupported business/image/date facts are omitted.
+- **Exact next action:** commit as `feat(seo): add Iowa overseeding timing article`, verify a clean worktree and STOP before Task 30.
+
+### Previous checkpoint — Task 28 complete, 2026-09-01 (Asia/Amman)
 
 - **Authorized scope:** Task 28 only — research, review and publication of `/blog/when-to-aerate-lawn-iowa`. Work began from clean `9320da0`, preserving the user-authorized Blog guidance commit above product baseline `b807d05`. Task 29 and all later article/media work remain unauthorized and `[ ]` Not started.
 - **Exact ownership:** the article owns `when to aerate lawn in iowa` with exact title `When to Aerate Your Lawn in Iowa | Mo's Lawn Care`, H1 `When Is the Best Time to Aerate a Lawn in Iowa?`, supplied description and query-free canonical. Current search-intent research retained `best time to aerate lawn in Iowa`, `core aeration Iowa` and `aerate lawn in spring or fall Iowa` as natural same-intent secondary terms without search-volume or density claims.
@@ -1792,7 +1809,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Research, author, review, and publish `/blog/best-time-to-overseed-lawn-iowa/` for Iowa overseeding timing intent.
 - **Why It Is Needed:** The second mandatory aeration-cluster guide addresses a related informational query without creating another commercial service page.
 - **Dependencies:** Tasks 27–28; verified authoritative sources and approved CTA/image facts.
@@ -1802,7 +1819,16 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Equating informational overseeding advice with confirmed service method; fertilizer/pesticide prescriptions; weather variability; duplicate aeration article sections; unsupported dates/author/image.
 - **Validation:** Source/claim audit, content differentiation from Task 28 and service page, exact metadata/canonical/H1, links, image and schema parity.
 - **Tests:** Required sources/fields, route/sitemap, exact metadata, Article/Breadcrumb schema, service/related links, and no unsupported method/date/author fields.
-- **Definition of Done:** `[ ]` Sourced Iowa guidance is accurate and conditional; `[ ]` exact intent remains informational; `[ ]` no unverified Mo's method/outcome is stated; `[ ]` metadata/schema/links/sitemap checks pass.
+- **Definition of Done:** `[x]` Sourced Iowa guidance is accurate and conditional; `[x]` exact intent remains informational; `[x]` no unverified Mo's method/outcome is stated; `[x]` metadata/schema/links/sitemap checks pass.
+
+#### Task 29 implementation record
+
+- **Research record:** `docs/research/task-29-overseeding-brief.md` records the reader decision, research questions, three current Iowa State source records, seven published claim mappings, removed/softened claims, secondary-intent research, representative SERP gaps, Task 28 comparison and all mandatory editorial gate results.
+- **Article decision:** the published body answers mid-August through mid-September immediately but treats that range as an establishment opportunity. Its distinct readiness framework checks existing-turf competition, seed-to-soil contact and the ability to maintain surface moisture, then gives evidence-bounded postpone conditions for missing follow-through or hot/windy pressure.
+- **Evidence and commercial restraint:** visible citations and Sources map only to Iowa State. The Task 28 link keeps aeration need separate, and the service link states only the approved combined Aeration and Seeding scope. No seed blend, product, rate, exact germination period, watering schedule, equipment instruction, property diagnosis, Mo's method or outcome guarantee is published.
+- **Publication and schema:** two `published` records drive article routes, Hub cards/ItemList, Homepage tips, static params and the twenty-five-URL sitemap. BlogPosting/WebPage/BreadcrumbList reuse the central publisher and omit unapproved author, public dates, image, FAQ, reviews, ratings, LocalBusiness, address, geo and offers. Tasks 30–33 remain `planned` and 404.
+- **Validation support:** `validate:overseeding-article` protects ownership, reciprocal source/claim mappings, all five editorial gates, translations, schema, links, Task 28 relationship, selector publication, Homepage/Hub behavior, four-route future isolation and the exact 25-URL lifecycle. Inherited validators received lifecycle-only updates without weakening completed-task contracts.
+- **Final result:** all four Task 29 Definition of Done checks and the mandatory Research, Differentiation, Task 28 Anti-Repetition, Cannibalization and Editorial Quality gates pass. No author, public date or image was fabricated, and work stops before Task 30.
 
 ### Task 30 — “How Often to Mow a Lawn in Iowa” Article
 
