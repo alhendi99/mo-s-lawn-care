@@ -127,6 +127,6 @@ assert.equal(Object.values(routesById).filter(({ publicationStatus, indexability
 assert.equal(getPublishedArticles().length, 6)
 const workGraph = buildPageStructuredData(routesById['our-work'], routesById.home)
 assert.equal(workGraph['@graph'].some(({ '@type': type }) => type === 'ImageObject'), false)
-assert.match(read('plan.md'), /### Task 35 — Internal Linking and Content-Cluster Audit\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(read('plan.md'), /### Task 35 — Internal Linking and Content-Cluster Audit\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
 console.log('Task 34 media-performance validation passed: 92 governed records, 68 unchanged remote sources, 89 displayable items, 6 comparisons, bounded 8/12/12 gallery payloads, optimized local derivatives with originals preserved, deferred hero video, non-lazy primary media, 29 sitemap URLs, restrained schema/provenance, and unchanged analytics.')

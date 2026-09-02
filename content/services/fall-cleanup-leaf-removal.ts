@@ -99,6 +99,20 @@ export const fallCleanupLeafRemovalService = {
         'Snow Removal has its own service path for winter requests. This link supports seasonal continuity without implying a bundle or automatic contract.',
     },
   ],
+  helpfulResources: {
+    eyebrow: 'Helpful resources',
+    heading: 'A practical guide for leaf decisions.',
+    description:
+      "This informational guide covers general leaf conditions and local handling questions. It does not define the scope or disposal method of Mo's service.",
+    items: [
+      {
+        routeId: 'article-fall-leaf-cleanup-des-moines',
+        eyebrow: 'Fall leaf cleanup guide',
+        description:
+          'Read the Des Moines-area guide for timing, surface checks and verified municipal resources.',
+      },
+    ],
+  },
   propertyContext: {
     eyebrow: 'Property context first',
     heading: 'Fall service estimates for homes and businesses.',

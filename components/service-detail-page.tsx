@@ -169,6 +169,46 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           </div>
         </section>
 
+        {content.helpfulResources ? (
+          <section aria-labelledby={sectionId('helpful-resources')} className="bg-[#f6f2e8] py-18 sm:py-26">
+            <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[0.55fr_1fr] lg:gap-20">
+              <header>
+                <p className="eyebrow text-ink-soft"><Tr text={content.helpfulResources.eyebrow} /></p>
+                <h2 id={sectionId('helpful-resources')} className="display-md mt-5 max-w-[11ch]">
+                  <Tr text={content.helpfulResources.heading} />
+                </h2>
+                <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-ink-soft">
+                  <Tr text={content.helpfulResources.description} />
+                </p>
+              </header>
+
+              <ul className="border-b border-[color:var(--rule)]">
+                {content.helpfulResources.items.map((item) => {
+                  const resourceRoute = routesById[item.routeId]
+                  return (
+                    <li key={item.routeId} className="border-t border-[color:var(--rule)]">
+                      <Link
+                        href={resourceRoute.path}
+                        prefetch={false}
+                        className="service-detail-link group grid min-h-36 gap-5 py-7 sm:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)_2rem] sm:items-center sm:gap-8 sm:px-5"
+                      >
+                        <span>
+                          <span className="eyebrow block text-ink-soft"><Tr text={item.eyebrow} /></span>
+                          <span className="mt-5 block font-display text-2xl font-bold tracking-[-0.03em] text-ink uppercase sm:text-3xl">
+                            <Tr text={routeLabels[item.routeId]} />
+                          </span>
+                        </span>
+                        <span className="text-sm leading-relaxed text-ink-soft sm:text-[0.98rem]"><Tr text={item.description} /></span>
+                        <span aria-hidden="true" className="service-detail-link-arrow text-2xl text-accent">↗</span>
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          </section>
+        ) : null}
+
         <section aria-labelledby={sectionId('property-context')} className="bg-[#e5ecd9] py-18 sm:py-26">
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <header className="max-w-4xl">

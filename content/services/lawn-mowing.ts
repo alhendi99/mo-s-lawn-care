@@ -97,6 +97,20 @@ export const lawnMowingService = {
         'Start with Yard Cleanup when the property needs more than routine grass cutting.',
     },
   ],
+  helpfulResources: {
+    eyebrow: 'Helpful resources',
+    heading: 'Mowing guidance for changing conditions.',
+    description:
+      "This general Iowa guide explains what can change mowing frequency. It is informational guidance, not Mo's service schedule.",
+    items: [
+      {
+        routeId: 'article-how-often-to-mow-lawn-iowa',
+        eyebrow: 'Iowa mowing-frequency guide',
+        description:
+          'Read about the factors that can change how often a lawn needs mowing without assuming a fixed weekly plan.',
+      },
+    ],
+  },
   propertyContext: {
     eyebrow: 'The right context',
     heading: 'One mowing service, two property settings.',

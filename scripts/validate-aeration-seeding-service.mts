@@ -222,9 +222,13 @@ for (const futureArticle of [
   'when-to-aerate-lawn-iowa',
   'best-time-to-overseed-lawn-iowa',
 ]) {
-  assert.doesNotMatch(componentSource, new RegExp(futureArticle))
-  assert.doesNotMatch(contentSource, new RegExp(futureArticle))
+  assert.match(contentSource, new RegExp(futureArticle))
 }
+assert.match(componentSource, /content\.helpfulResources/)
+assert.deepEqual(
+  aerationOverseedingService.helpfulResources?.items.map(({ routeId }) => routeId),
+  ['article-when-to-aerate-lawn-iowa', 'article-best-time-to-overseed-lawn-iowa'],
+)
 
 const visibleBusinessCopy = JSON.stringify({
   hero: aerationOverseedingService.hero,

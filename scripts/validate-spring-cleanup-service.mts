@@ -234,8 +234,12 @@ assert.match(dynamicRouteSource, /publishedServiceSlugs\.map/)
 assert.match(dynamicRouteSource, /getPublishedServiceDetail\(slug\)/)
 assert.match(dynamicRouteSource, /if \(!service\) notFound\(\)/)
 assert.doesNotMatch(dynamicRouteSource, /serviceNavigationRouteIds|routeRegistry\.find/)
-assert.doesNotMatch(componentSource, /Helpful Resources|spring-lawn-cleanup-des-moines/)
-assert.doesNotMatch(contentSource, /Helpful Resources|spring-lawn-cleanup-des-moines|checklist/i)
+assert.match(componentSource, /content\.helpfulResources/)
+assert.match(contentSource, /article-spring-lawn-cleanup-des-moines/)
+assert.deepEqual(
+  springCleanupService.helpfulResources?.items.map(({ routeId }) => routeId),
+  ['article-spring-lawn-cleanup-des-moines'],
+)
 assert.equal(fs.existsSync(path.join(projectRoot, 'content/blog/spring-lawn-cleanup-des-moines.ts')), true)
 assert.equal(fs.existsSync(path.join(projectRoot, 'app/blog/[slug]/page.tsx')), true)
 assert.equal(routesById['article-spring-lawn-cleanup-des-moines'].publicationStatus, 'planned')

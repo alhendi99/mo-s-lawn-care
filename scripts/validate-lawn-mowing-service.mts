@@ -196,8 +196,12 @@ assert.match(componentSource, /routesById\['our-work'\]/)
 assert.match(componentSource, /routesById\.contact/)
 assert.match(componentSource, /site\.phoneHref/)
 assert.doesNotMatch(componentSource, /use client|gtag|generate_lead|form_start|form_submit_error/)
-assert.doesNotMatch(componentSource, /article-how-often-to-mow-lawn-iowa|how-often-to-mow-lawn-iowa/)
-assert.doesNotMatch(contentSource, /article-how-often-to-mow-lawn-iowa|how-often-to-mow-lawn-iowa/)
+assert.match(componentSource, /content\.helpfulResources/)
+assert.match(contentSource, /article-how-often-to-mow-lawn-iowa/)
+assert.deepEqual(
+  lawnMowingService.helpfulResources?.items.map(({ routeId }) => routeId),
+  ['article-how-often-to-mow-lawn-iowa'],
+)
 
 assert.match(dynamicRouteSource, /export const dynamicParams = true/)
 assert.match(dynamicRouteSource, /publishedServiceSlugs\.map/)

@@ -105,6 +105,20 @@ export const springCleanupService = {
         'Use Landscaping when the request is about broader outdoor-space care or improvement rather than seasonal Spring Cleanup.',
     },
   ],
+  helpfulResources: {
+    eyebrow: 'Helpful resources',
+    heading: 'A condition-led spring checklist.',
+    description:
+      "Use this informational guide to organize a property review as spring begins. It does not define the tasks included in Mo's Spring Cleanup service.",
+    items: [
+      {
+        routeId: 'article-spring-lawn-cleanup-des-moines',
+        eyebrow: 'Spring cleanup checklist',
+        description:
+          'Read the Des Moines-area checklist for general observations and next-step decisions.',
+      },
+    ],
+  },
   propertyContext: {
     eyebrow: 'Property context first',
     heading: 'Spring Cleanup estimates for homes and businesses.',

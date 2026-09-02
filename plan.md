@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Tasks 1–34 complete; Task 35 is next
+- Phase: Incremental implementation — Tasks 1–35 complete; Task 36 is next
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–34 completed; Task 35 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
+- Implementation status: Tasks 1–35 completed; Task 36 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-03 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -42,7 +42,8 @@
 - Task 31 repository baseline: clean `main` at `5327b2f`
 - Task 33 repository baseline: clean `main` at `938966b`; finalization resumed from the preserved Task 33 WIP worktree
 - Task 34 repository baseline: clean `main` at `75f7cb3`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 35 until explicitly authorized
+- Task 35 repository baseline: clean `main` at `c92a3a4`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 36 until explicitly authorized
 
 ## Evidence Labels
 
@@ -54,7 +55,15 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 34 complete, 2026-09-03 (Asia/Amman)
+### Latest checkpoint — Task 35 complete, 2026-09-03 (Asia/Amman)
+
+- **Authorized scope and baseline:** Task 35 only began from clean `c92a3a4`; Tasks 1–34 were preserved. No route lifecycle, canonical-owner, sitemap, redirect, schema, analytics, media, deployment or external-account change occurred, and Task 36 remains not started.
+- **Graph method and baseline:** `docs/seo/task-35-internal-link-audit.md` combines the canonical route registry, published Blog selector, typed relationships and crawlable production-rendered anchors. The reused clean baseline build contained 29 HTTP-200 routes, 2,108 internal anchor instances, 656 unique canonical edges, 299 main-content edges, zero orphans, maximum depth 2 and zero invalid, draft, query-bearing or redirect-dependent links. Only the five reserved service-to-article reverse edges were missing from the Section E semantic matrix.
+- **Minimal implementation and intent safety:** one optional typed `helpfulResources` field and one server-rendered shared section add Lawn Mowing → mowing-frequency; Aeration & Seeding → aeration and overseeding; Spring Cleanup → spring checklist; and Fall Cleanup & Leaf Removal → fall leaf guide. All five articles retain the reverse service links. Copy remains short, bilingual and informationally framed without importing timing models, checklists, municipal instructions or business schedule/capability claims. Commercial, informational, hub, city and pillar/child ownership remain distinct; anchors are natural and clean.
+- **Final graph and cluster result:** the final build contains 2,113 internal anchor instances, 661 unique canonical edges and 304 main-content edges. All 29 routes remain reachable from `/`, published orphan count is zero and maximum shortest-path depth is 2. The exact calendar pillar → five children and five children → pillar directions remain intact. Global navigation/footer, breadcrumbs, Service Areas/approved-city graph, Homepage-owned Des Moines path and all non-article service relationships pass. Sitemap remains exactly 29 canonical URLs.
+- **QA and validation:** `pnpm validate:internal-links`, all 34 historical validators, TypeScript, the single final production build, all-29 rendered graph/href/source checks, sitemap-source validation and diff checks pass. Browser QA at 1440×900 and 390×844 covers the Homepage/global chrome, representative services, one city, one child article and the calendar pillar; all four changed service sections also pass Spanish wrapping at 320×568. Focus, crawlable links, clean hrefs, language/UTM behavior, mobile Escape/focus return, one H1, no nested controls, zero overflow and zero final console warnings/errors pass. `Unavailable — ESLint is not installed`. Task 35 is complete; Task 36 remains `[ ]` Not started.
+
+### Previous checkpoint — Task 34 complete, 2026-09-03 (Asia/Amman)
 
 - **Authorized scope and baseline:** Task 34 only began from clean `75f7cb3`; Tasks 1–33 were preserved. No route lifecycle, deployment, external-account, metadata-owner, analytics or schema-expansion work occurred, and Task 35 remains not started.
 - **Measured baseline:** `docs/performance/task-34-media-performance.md` records the production-loopback Chromium method at `1280×800` and `390×844` for `/`, `/our-work`, Snow Removal and Landscaping. Baseline `public/` contained 43 non-`.DS_Store` files totaling 28,856,819 bytes; the governed registry contained 92 records, 89 displayable records, 68 remote and 24 local sources, three exclusions, six comparisons, and bounded 8/12/12 gallery delivery. Eighteen filename/signature mismatches were identified.
@@ -2019,7 +2028,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 35 — Internal Linking and Content-Cluster Audit
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Complete and validate the intentional crawl graph across all 29 pages after every target page exists.
 - **Why It Is Needed:** Links added incrementally can leave orphans, broken future references, over-optimized anchors, or incomplete service/article reciprocity.
 - **Dependencies:** Tasks 1–34.
@@ -2029,7 +2038,13 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Duplicate links versus harmful repetition, client controls lacking anchors, links to drafts, redirecting/trailing variants, query strings, broken external sources, orphan pages hidden by menus.
 - **Validation:** Generate/review an internal link graph from typed records/rendered HTML, inspect every route's inbound/outbound set, crawl depth, anchor quality, broken/redirect links and source visibility.
 - **Tests:** No orphaned published route, all internal hrefs resolve, required service-link matrices and bidirectional article pairs, exact calendar child set, clean internal URLs, no forbidden city/service paths.
-- **Definition of Done:** `[ ]` All 29 pages have crawlable inbound and contextual outbound links; `[ ]` required matrices/reciprocity pass; `[ ]` depth is ≤3 when practical; `[ ]` anchors are natural and no draft/query/redirect link is used internally.
+- **Definition of Done:** `[x]` All 29 pages have crawlable inbound and contextual outbound links; `[x]` required matrices/reciprocity pass; `[x]` depth is ≤3 when practical; `[x]` anchors are natural and no draft/query/redirect link is used internally.
+
+#### Task 35 implementation record
+
+- **Method and result:** `docs/seo/task-35-internal-link-audit.md` is the one durable baseline/final record. The route-registry-aware production crawl separates full-page and main-content edges, excludes sitemap/schema/self/fragment references from inbound navigation, and verifies status, canonical resolution, clean hrefs, inbound/outbound counts and shortest-path depth for all 29 routes. Final graph: 661 unique canonical edges, 304 main-content edges, zero orphans, zero unreachable routes, maximum depth 2 and zero invalid/query/redirect-dependent destinations.
+- **Relationships and restraint:** exactly five missing reverse edges were added through one optional typed, server-rendered Helpful Resources section on four service owners. Lawn Mowing, Aeration & Seeding, Spring Cleanup and Fall Cleanup & Leaf Removal link their five governed informational guides; reverse article links already existed. The exact five-child bidirectional calendar cluster, global/header/footer, city/hub, trust and commercial relationships remain intact. Copy and anchors preserve commercial/informational intent separation and add no unsupported capability, local evidence, article-body rewrite or doorway architecture.
+- **Lifecycle, accessibility and validation:** the sitemap remains 29 and no route, redirect, canonical, schema or analytics event was added. Task 34 media/performance behavior remains intact. Bilingual focus/overflow/mobile interaction QA passes at the representative 1440×900 and 390×844 viewports plus 320×568 for all changed sections. Focused/historical validators, TypeScript, one production build, final rendered crawl and diff checks pass. Task 36 remains not started.
 
 ### Task 36 — Structured Data Validation and Hardening
 

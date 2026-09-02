@@ -317,8 +317,8 @@ for (const event of ['article_view', 'pillar_view', 'season_click', 'calendar_cl
 
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 33 — Central Iowa Lawn Care Calendar Pillar Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 34 — Gallery, Image SEO, and Media Performance Optimization\n\n- \*\*Status:\*\* `\[ \]` Not started/)
-assert.match(planSource, /### Task 35 — Internal Linking and Content-Cluster Audit\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 34 — Gallery, Image SEO, and Media Performance Optimization\n\n- \*\*Status:\*\* `\[x\]` Completed/)
+assert.match(planSource, /### Task 35 — Internal Linking and Content-Cluster Audit\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
 const baseUrl = process.env.TASK33_BASE_URL
 if (baseUrl) {

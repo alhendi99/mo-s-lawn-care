@@ -1,9 +1,15 @@
-import type { RouteId } from '../types.ts'
+import type { BlogArticleRouteId, RouteId } from '../types.ts'
 
 type ServiceRouteId = Extract<RouteId, `service-${string}`>
 
 type ServiceDetailLink = Readonly<{
   routeId: RouteId
+  eyebrow: string
+  description: string
+}>
+
+type HelpfulResourceLink = Readonly<{
+  routeId: BlogArticleRouteId
   eyebrow: string
   description: string
 }>
@@ -74,6 +80,12 @@ export type ServiceDetailContent = Readonly<{
     description: string
   }>
   relatedServices: readonly ServiceDetailLink[]
+  helpfulResources?: Readonly<{
+    eyebrow: string
+    heading: string
+    description: string
+    items: readonly HelpfulResourceLink[]
+  }>
   propertyContext: Readonly<{
     eyebrow: string
     heading: string

@@ -228,10 +228,14 @@ assert.match(dynamicRouteSource, /getPublishedServiceDetail\(slug\)/)
 assert.match(dynamicRouteSource, /if \(!service\) notFound\(\)/)
 assert.doesNotMatch(dynamicRouteSource, /serviceNavigationRouteIds|routeRegistry\.find/)
 
-const futureArticleSlug = 'fall-leaf-cleanup-des-moines'
-assert.doesNotMatch(componentSource, /Helpful Resources|fall-leaf-cleanup-des-moines/)
-assert.doesNotMatch(contentSource, /Helpful Resources|fall-leaf-cleanup-des-moines/i)
-assert.equal(fs.existsSync(path.join(projectRoot, `content/blog/${futureArticleSlug}.ts`)), true)
+const publishedArticleSlug = 'fall-leaf-cleanup-des-moines'
+assert.match(componentSource, /content\.helpfulResources/)
+assert.match(contentSource, /article-fall-leaf-cleanup-des-moines/)
+assert.deepEqual(
+  fallCleanupLeafRemovalService.helpfulResources?.items.map(({ routeId }) => routeId),
+  ['article-fall-leaf-cleanup-des-moines'],
+)
+assert.equal(fs.existsSync(path.join(projectRoot, `content/blog/${publishedArticleSlug}.ts`)), true)
 assert.equal(fs.existsSync(path.join(projectRoot, 'app/blog/[slug]/page.tsx')), true)
 assert.equal(routesById['article-fall-leaf-cleanup-des-moines'].publicationStatus, 'planned')
 

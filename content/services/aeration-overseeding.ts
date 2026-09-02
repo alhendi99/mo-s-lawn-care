@@ -104,6 +104,26 @@ export const aerationOverseedingService = {
         'Return to the Services overview if the lawn or property has several different needs.',
     },
   ],
+  helpfulResources: {
+    eyebrow: 'Helpful resources',
+    heading: 'Iowa timing guides for lawn decisions.',
+    description:
+      "These informational guides explain general timing considerations for aeration and overseeding. They do not set Mo's schedule or promise availability.",
+    items: [
+      {
+        routeId: 'article-when-to-aerate-lawn-iowa',
+        eyebrow: 'Aeration timing guide',
+        description:
+          'Read the Iowa aeration guide for general timing factors and signs that can inform a property conversation.',
+      },
+      {
+        routeId: 'article-best-time-to-overseed-lawn-iowa',
+        eyebrow: 'Overseeding timing guide',
+        description:
+          'Review general Iowa overseeding timing and the conditions that can affect a seeding decision.',
+      },
+    ],
+  },
   propertyContext: {
     eyebrow: 'Property context first',
     heading: 'A service conversation shaped by the lawn, not a stock package.',

@@ -42,7 +42,8 @@
     "validate:spring-cleanup-article": "node --experimental-strip-types scripts/validate-spring-cleanup-article.mts",
     "validate:fall-leaf-cleanup-article": "node --experimental-strip-types scripts/validate-fall-leaf-cleanup-article.mts",
     "validate:central-iowa-calendar-article": "node --experimental-strip-types scripts/validate-central-iowa-calendar-article.mts",
-    "validate:media-performance": "node --experimental-strip-types scripts/validate-media-performance.mts"
+    "validate:media-performance": "node --experimental-strip-types scripts/validate-media-performance.mts",
+    "validate:internal-links": "node --experimental-strip-types scripts/validate-internal-links.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
