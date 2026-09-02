@@ -165,7 +165,12 @@ assert.equal(nodesByType('BlogPosting').length, 1)
 assert(graph['@graph'].some(({ '@id': id }) => id === ORGANIZATION_ID))
 assert(graph['@graph'].some(({ '@id': id }) => id === WEBSITE_ID))
 assert.deepEqual(articleNode.publisher, { '@id': ORGANIZATION_ID })
-assert.deepEqual(articleNode.citation, article.sources.map(({ url }) => url))
+assert.deepEqual(articleNode.citation, article.sources.map(({ url }) => {
+  const cleanUrl = new URL(url)
+  cleanUrl.search = ''
+  cleanUrl.hash = ''
+  return cleanUrl.toString()
+}))
 for (const omitted of ['author', 'datePublished', 'dateModified', 'image']) assert.equal(Object.hasOwn(articleNode, omitted), false)
 const serializedGraph = JSON.stringify(graph)
 for (const forbidden of ['FAQPage', 'Review', 'AggregateRating', 'LocalBusiness', 'PostalAddress', 'GeoCoordinates', 'Offer']) {

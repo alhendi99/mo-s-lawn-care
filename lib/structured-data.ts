@@ -18,6 +18,13 @@ export type StructuredDataDocument = Readonly<{
 export const ORGANIZATION_ID = `${SITE_ORIGIN}/#organization`
 export const WEBSITE_ID = `${SITE_ORIGIN}/#website`
 
+function getCleanExternalStructuredDataUrl(value: string) {
+  const url = new URL(value)
+  url.search = ''
+  url.hash = ''
+  return url.toString()
+}
+
 export function getStructuredDataIds(route: CanonicalRoute) {
   return {
     organization: ORGANIZATION_ID,
@@ -96,7 +103,7 @@ export function buildBlogPostingStructuredData(
     mainEntityOfPage: { '@id': `${route.canonicalUrl}#webpage` },
     isPartOf: { '@id': WEBSITE_ID },
     publisher: { '@id': ORGANIZATION_ID },
-    citation: article.sources.map(({ url }) => url),
+    citation: article.sources.map(({ url }) => getCleanExternalStructuredDataUrl(url)),
     ...(article.author
       ? { author: { '@type': 'Person', name: article.author.name } }
       : {}),
@@ -137,7 +144,7 @@ function buildOrganizationNode(homeRoute: CanonicalRoute): StructuredDataNode {
         name: region,
       },
     })),
-    sameAs: externalProfiles.map(({ href }) => href),
+    sameAs: externalProfiles.map(({ href }) => getCleanExternalStructuredDataUrl(href)),
   }
 }
 

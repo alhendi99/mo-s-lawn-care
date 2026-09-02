@@ -179,7 +179,15 @@ assert(organization)
 assert(website)
 assert(webpage)
 assert.equal(organization['@type'], 'Organization')
-assert.deepEqual(organization.sameAs, approvedBusinessFacts.externalProfiles.map(({ href }) => href))
+assert.deepEqual(
+  organization.sameAs,
+  approvedBusinessFacts.externalProfiles.map(({ href }) => {
+    const url = new URL(href)
+    url.search = ''
+    url.hash = ''
+    return url.toString()
+  }),
+)
 assert.equal((organization.areaServed as readonly unknown[]).length, 5)
 assert.deepEqual(website.publisher, { '@id': ORGANIZATION_ID })
 assert.deepEqual(webpage.isPartOf, { '@id': WEBSITE_ID })

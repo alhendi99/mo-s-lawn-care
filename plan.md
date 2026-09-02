@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Tasks 1–35 complete; Task 36 is next
+- Phase: Incremental implementation — Tasks 1–36 complete; Task 37 is next
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–35 completed; Task 36 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
+- Implementation status: Tasks 1–36 completed; Task 37 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-03 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -43,7 +43,8 @@
 - Task 33 repository baseline: clean `main` at `938966b`; finalization resumed from the preserved Task 33 WIP worktree
 - Task 34 repository baseline: clean `main` at `75f7cb3`
 - Task 35 repository baseline: clean `main` at `c92a3a4`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 36 until explicitly authorized
+- Task 36 repository baseline: clean `main` at `ee6b286`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 37 until explicitly authorized
 
 ## Evidence Labels
 
@@ -55,7 +56,15 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 35 complete, 2026-09-03 (Asia/Amman)
+### Latest checkpoint — Task 36 complete, 2026-09-03 (Asia/Amman)
+
+- **Authorized scope and baseline:** Task 36 only began from clean `ee6b286`; Tasks 1–35 were preserved. No route, redirect, lifecycle, ownership, visible article/review/media content, internal-link graph, analytics event, deployment or external account changed, and Task 37 remains not started.
+- **Architecture and minimal correction:** all 29 pages retain one coherent graph from the shared typed builders and the same visible collection/breadcrumb records. The only real graph defects were non-semantic query parameters in the approved Google profile `sameAs` value and one article citation; JSON-LD now emits their verified clean resource URLs while visible links/content remain unchanged. Stable central, page, service, article, breadcrumb and ItemList IDs remain canonical-derived and collision-free.
+- **Truth/restraint result:** the route-family page types remain intentionally distinct. The complete audit finds zero LocalBusiness, address/geo/branch, Review/AggregateRating, Offer/Product/price, unsupported author/date/image, FAQPage or ImageObject creep. The five approved service areas, central Organization/WebSite identities, 10 Service nodes, eight ItemLists and 28 interior breadcrumbs pass exact governed parity.
+- **Final rendered result and limitation:** `docs/seo/task-36-structured-data-audit.md` records 29 routes, 29 JSON-LD scripts, 139 nodes, 83 unique IDs, two intentionally repeated central IDs and exact node-type counts, with zero parse, forbidden-field/type, conflicting-ID, dangling-reference, query-URL, breadcrumb or ItemList failures. External Schema.org/Google validation is `Deferred — requires authorized deployed URL / post-deployment validation.`
+- **Validation:** the focused validator passes statically and against the reused single production build; directly affected validators and the one complete Tasks 1–35 regression matrix pass. TypeScript, production build, all-29 rendered source/parity checks, nine-family 1280×800 browser smoke and diff checks pass. `Unavailable — ESLint is not installed`. Sitemap remains 29, the exact five-event analytics allowlist is unchanged, Task 34/35 contracts remain intact, and Task 37 remains `[ ]` Not started.
+
+### Previous checkpoint — Task 35 complete, 2026-09-03 (Asia/Amman)
 
 - **Authorized scope and baseline:** Task 35 only began from clean `c92a3a4`; Tasks 1–34 were preserved. No route lifecycle, canonical-owner, sitemap, redirect, schema, analytics, media, deployment or external-account change occurred, and Task 36 remains not started.
 - **Graph method and baseline:** `docs/seo/task-35-internal-link-audit.md` combines the canonical route registry, published Blog selector, typed relationships and crawlable production-rendered anchors. The reused clean baseline build contained 29 HTTP-200 routes, 2,108 internal anchor instances, 656 unique canonical edges, 299 main-content edges, zero orphans, maximum depth 2 and zero invalid, draft, query-bearing or redirect-dependent links. Only the five reserved service-to-article reverse edges were missing from the Section E semantic matrix.
@@ -2048,7 +2057,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 36 — Structured Data Validation and Hardening
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Audit the final per-page entity graphs against visible content, schema rules, verified facts and Google validation tools.
 - **Why It Is Needed:** Shared builders can still emit mismatched page types, breadcrumbs, dates, images or unsafe business/review claims after all pages are assembled.
 - **Dependencies:** Tasks 1–35; Task 1 supplies the verified daily hours and confirmed Service Area Business no-address/no-geo policy.
@@ -2058,7 +2067,14 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Duplicate/conflicting graph nodes, malformed apostrophe/HTML, breadcrumb mismatch, ItemList order drift, unmaintained `dateModified`, optional images without dimensions, fake LocalBusiness eligibility pressure.
 - **Validation:** Parse every JSON-LD script, compare nodes to rendered content, run Schema.org validator and Google Rich Results Test where applicable after deployment, document expected non-eligibility rather than forcing markup.
 - **Tests:** Graph serialization across all page types, globally stable IDs, required nodes, breadcrumb parity, visible ItemList parity, and forbidden-field/type assertions.
-- **Definition of Done:** `[ ]` Every page graph parses and matches visible content; `[ ]` required page-type nodes and stable references pass; `[ ]` all unverified/self-serving/city-business fields are absent; `[ ]` validator results and limitations are recorded.
+- **Definition of Done:** `[x]` Every page graph parses and matches visible content; `[x]` required page-type nodes and stable references pass; `[x]` all unverified/self-serving/city-business fields are absent; `[x]` validator results and limitations are recorded.
+
+#### Task 36 implementation record
+
+- **Method and graph contract:** `scripts/validate-structured-data.mts` is the single deterministic Task 36 contract. It builds all 29 graphs from route/publication selectors and their governed visible records, validates exact route-family types and stable IDs, recursively audits forbidden data and URLs, verifies reference/collision safety, and optionally compares one production crawl with the builders plus rendered breadcrumbs and collections.
+- **Defects and restraint:** schema-only external URL normalization removes non-semantic query/fragment data from `sameAs` and `citation`; the corresponding visible links and article records remain unchanged. No speculative enrichment was added: hours, LocalBusiness, address/geo/branches, ratings/reviews, offers/products/prices, FAQ, people/credentials, article dates/images and unverified ImageObject remain omitted.
+- **Final result:** the reused production build emitted exactly one parsable graph on each of 29 routes: 139 nodes, 83 unique IDs and two identical shared central IDs. All 10 Service nodes, eight ItemLists, 28 interior breadcrumbs and six BlogPosting nodes pass visible/source parity; forbidden occurrences, unsafe queries, ID conflicts, dangling references and parity failures are all zero. Sitemap remains 29, analytics remains the five-event allowlist, and Task 34/35 behavior is preserved.
+- **Validation and limitation:** focused static/rendered validation, directly affected validators, the one Tasks 1–35 historical matrix, TypeScript, one production build, all-route rendered extraction/parity, representative real-browser smoke and diff checks pass. The durable details and exact counts are in `docs/seo/task-36-structured-data-audit.md`. Live Schema.org/Google validation is `Deferred — requires authorized deployed URL / post-deployment validation.` Task 37 was not started.
 
 ### Task 37 — Accessibility, Performance, SEO, and Route Validation
 
