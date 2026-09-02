@@ -11,7 +11,9 @@ import {
   validateBlogArticles,
 } from '../content/blog/index.ts'
 import { whenToAerateLawnIowa } from '../content/blog/when-to-aerate-lawn-iowa.ts'
+import { centralIowaLawnCareCalendar } from '../content/blog/central-iowa-lawn-care-calendar.ts'
 import { getBreadcrumbItems, routeRegistry, routesById } from '../content/routes.ts'
+import type { BlogArticle } from '../content/types.ts'
 import { analyticsEventNames } from '../lib/analytics.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
 import {
@@ -94,15 +96,16 @@ for (const required of [
 ]) assert(researchBrief.includes(required), `Research brief missing ${required}`)
 
 const published = getPublishedArticles()
-assert.equal(published.length, 5)
+assert.equal(published.length, 6)
 assert.equal(published[0], article)
 const overseedingArticle = published.find(({ slug }) => slug === 'best-time-to-overseed-lawn-iowa')
 assert(overseedingArticle)
 assert.equal(getPublishedArticleBySlug(article.slug), article)
-assert.deepEqual(getPublishedRelatedArticles(article), [overseedingArticle])
+assert.deepEqual(getPublishedRelatedArticles(article), [overseedingArticle, centralIowaLawnCareCalendar])
 assert.equal(blogArticles.length, 6)
-const futureArticles = blogArticles.filter(({ status }) => status === 'planned')
-assert.equal(futureArticles.length, 1)
+const allArticles: readonly BlogArticle[] = blogArticles
+const futureArticles = allArticles.filter(({ status }) => status === 'planned')
+assert.equal(futureArticles.length, 0)
 assert(futureArticles.every(({ status }) => status === 'planned'))
 assert(futureArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
 assert(futureArticles.every((candidate) => !('content' in candidate) && !('sources' in candidate)))
@@ -118,7 +121,7 @@ assert.equal((metadata.robots as { index?: boolean }).index, true)
 assert.equal((metadata.robots as { follow?: boolean }).follow, true)
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 28)
+assert.equal(sitemap.length, 29)
 assert.equal(sitemap.filter(({ url }) => url === ownershipRoute.canonicalUrl).length, 1)
 for (const future of futureArticles) {
   assert.equal(sitemap.some(({ url }) => url === routesById[future.routeId].canonicalUrl), false)
@@ -126,7 +129,7 @@ for (const future of futureArticles) {
 assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 23)
 
 const itemList = buildArticleItemListStructuredData(routesById.blog, published)
-assert.equal(itemList.numberOfItems, 5)
+assert.equal(itemList.numberOfItems, 6)
 assert.deepEqual(itemList.itemListElement, published.map((candidate, index) => ({
   '@type': 'ListItem',
   position: index + 1,
@@ -213,4 +216,4 @@ assert.match(planSource, /### Task 28 — “When to Aerate a Lawn in Iowa” Ar
 assert.match(planSource, /### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 31 — Des Moines Spring Cleanup Checklist Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
-console.log('Task 28 aeration article validation passed: exact ownership, six sourced claim groups, three editorial gates, five published articles, truthful schema, isolated Task 33 owner, and exact 28-URL lifecycle.')
+console.log('Task 28 aeration article validation passed: exact ownership, six sourced claim groups, three editorial gates, six published articles, truthful schema, published Task 33 relationship, and exact 29-URL lifecycle.')

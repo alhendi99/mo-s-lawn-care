@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Tasks 1–32 complete; Task 33 is next
+- Phase: Incremental implementation — Tasks 1–33 complete; Task 34 is next
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–32 completed; Task 33 and later remain not started until explicitly authorized. The approved September 2026 seasonal sequence is complete through Task 31.
+- Implementation status: Tasks 1–33 completed; Task 34 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-02 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -40,7 +40,8 @@
 - Task 32 repository baseline: clean `main` at `7e1d579` (seasonal-priority documentation commit above product baseline `e88a81f`)
 - Task 30 repository baseline: clean `main` at `929c2f1`
 - Task 31 repository baseline: clean `main` at `5327b2f`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 33 until explicitly authorized
+- Task 33 repository baseline: clean `main` at `938966b`; finalization resumed from the preserved Task 33 WIP worktree
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 34 until explicitly authorized
 
 ## Evidence Labels
 
@@ -52,7 +53,17 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 31 complete, 2026-09-02 (Asia/Amman)
+### Latest checkpoint — Task 33 complete, 2026-09-02 (Asia/Amman)
+
+- **Authorized scope and baseline:** Task 33 only resumed from its preserved WIP worktree above clean `938966b`; completed Tasks 1–32 were preserved, no deployment or external-account action occurred, and Task 34 remains not started.
+- **Exact ownership and intent:** `/blog/central-iowa-lawn-care-calendar` owns informational `central iowa lawn care calendar` with title `Central Iowa Lawn Care Calendar | Mo's Lawn Care`, H1 `A Seasonal Lawn Care Calendar for Central Iowa`, the exact supplied description, three reviewed secondary keywords and a query-free canonical.
+- **Research and editorial result:** `docs/research/task-33-central-iowa-calendar-brief.md` records five reopened Iowa State University Extension sources, reciprocal claim/source mapping, current secondary-intent review, child-overlap analysis and every mandatory gate. The pillar uses five observable seasonal signals to orient readers without duplicating the five detailed guides, manufacturing freshness or publishing a rigid twelve-month schedule.
+- **Cluster and capability boundaries:** the pillar links all five child guides, and each child links back, producing ten verified public directions. Four canonical service owners are linked only for approved high-level scope; the article explicitly is not Mo's annual service calendar and claims no package, subscription, automatic sequence, availability, product, chemical program, equipment, diagnosis or result.
+- **Schema, lifecycle and restraint:** one BlogPosting, WebPage and BreadcrumbList reuse central Organization/WebSite references and expose five Iowa State citations with Home → Blog → exact H1 parity. Author, dates, image, FAQ, Review, AggregateRating, LocalBusiness, address, geo and Offer remain absent. The sole publication selector now returns six articles, the Blog ItemList contains six items, Homepage Latest Tips remains the first three selector results, and the sitemap contains exactly 29 canonical URLs.
+- **Language, accessibility and production QA:** explicit Spanish translations preserve conditional and non-commercial boundaries. Production checks passed six article 200s, exact plain/Spanish/UTM/arbitrary-query head and schema behavior, ten reciprocal link directions, source/service links, Blog hub ordering and sitemap parity. Browser QA at `1440×900`, `1280×800`, `390×844` and `320×568` passed English/Spanish, complete UTM preservation, stable canonical/title, one H1, breadcrumb, responsive table containment, reduced motion, skip focus, mobile Escape/focus return, zero page overflow/clipping, fixed-action/footer separation and zero console warnings/errors.
+- **Validation and status:** the focused Task 33 validator, Tasks 28–32/Blog contracts, canonical service validators, the complete established historical matrix, TypeScript, production build, production source QA and diff checks pass. `Unavailable — ESLint is not installed` remains the exact lint status. All five Task 33 Definition of Done checks and the Research, Differentiation, Pillar Value, Child Ownership, Anti-Duplication, Bidirectional Link, Service Capability, Cannibalization, Spanish parity, anti-slop and Editorial Quality gates pass. Tasks 1–33 are complete; Task 34 remains `[ ]` Not started.
+
+### Previous checkpoint — Task 31 complete, 2026-09-02 (Asia/Amman)
 
 - **Authorized scope and baseline:** Task 31 only began from clean `5327b2f`, preserving completed Tasks 28–30 and 32. Task 33+ remains not started; no deployment or external-account action occurred.
 - **Exact ownership and intent:** `/blog/spring-lawn-cleanup-des-moines` owns informational `spring lawn cleanup checklist des moines` with the exact title, H1, description and query-free canonical. Current same-intent review retained `spring yard cleanup checklist Des Moines`, `spring lawn care checklist Des Moines` and `spring lawn cleanup tips Iowa` without volume, difficulty, density or opportunity claims. The canonical Spring Cleanup service retains commercial `spring cleanup des moines ia` intent.
@@ -1952,7 +1963,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 33 — Central Iowa Lawn Care Calendar Pillar Article
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Research, author, review, and publish `/blog/central-iowa-lawn-care-calendar/` as the cluster pillar linking all five supporting guides and relevant services.
 - **Why It Is Needed:** The required pillar organizes year-round seasonal informational demand and strengthens the entire service/content graph after the supporting guides have been published. It should synthesize the completed cluster rather than dictate the order in which seasonal supporting articles must be released.
 - **Dependencies:** Tasks 27–32 must all be complete so every supporting article exists and can be linked, regardless of execution-number order; authoritative source review and approved image/CTA facts.
@@ -1963,7 +1974,17 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Over-specific dates, advice varying by turf/soil/weather/property, repeating full child articles, missing reciprocal links, stale source/date metadata, fake freshness, unsupported author/image season, or encoding the September 2026 execution order into permanent user-facing copy.
 - **Validation:** Full source/claim audit, exact head/H1/canonical, all five bidirectional article links, relevant service links, duplication/content-quality review, schema/sitemap/image/accessibility, and confirmation that the pillar remains evergreen rather than tied to the temporary implementation sequence.
 - **Tests:** Required sources/fields, route/sitemap, exact metadata/schema, exact five-article link set, valid service links, no unsupported dates/author, and no dependency on temporary seasonal-priority wording in public content.
-- **Definition of Done:** `[ ]` Sourced pillar is useful without duplicating child guides; `[ ]` all five article relationships and relevant services are linked; `[ ]` exact ownership/schema/sitemap pass; `[ ]` conditional guidance and review workflow are explicit; `[ ]` temporary execution priority does not leak into evergreen public copy.
+- **Definition of Done:** `[x]` Sourced pillar is useful without duplicating child guides; `[x]` all five article relationships and relevant services are linked; `[x]` exact ownership/schema/sitemap pass; `[x]` conditional guidance and review workflow are explicit; `[x]` temporary execution priority does not leak into evergreen public copy.
+
+#### Task 33 implementation record
+
+- **Research scope and authoritative sources:** `docs/research/task-33-central-iowa-calendar-brief.md` records user intent, claim-led questions, freshness checks and five Iowa State University Extension and Outreach sources covering spring exposure/growth, mowing frequency, summer dormancy, the late-summer/fall transition and the fall growth endpoint. The reciprocal claim ledger passes with no unsupported factual group; no competitor article supplies factual authority.
+- **Differentiation and value-add:** a five-signal, condition-led decision table connects spring exposure, active growth, summer slowdown, the aeration/seeding decision window and separate leaf/growth endpoints. It acts as a navigation layer over the five child guides rather than reproducing their factor test, readiness questions, numerical mowing explanation, spring checklist or leaf/jurisdiction model. The Research, Differentiation, Pillar Value, Child Ownership and Anti-Duplication gates pass.
+- **Uncertainty, capability and cannibalization:** dates, temperature cutoffs, chemical schedules, current conditions and diagnostic certainty are omitted. Iowa State guidance is not business evidence; visible copy keeps Mo's four relevant services property/estimate-specific and expressly rejects a package, recurring program, automatic sequence or availability promise. Informational calendar intent remains separate from each commercial service owner and each child guide. Service Capability and Cannibalization gates pass.
+- **Editorial and anti-slop result:** the direct orientation answer precedes one purpose-built table and five focused decision sections. No forced FAQ, generic benefits/mistakes/conclusion, fake first-hand expertise, temporary September 2026 framing, arbitrary word count or child-copy padding remains. Spanish factual/conditional parity, anti-slop review and the Editorial Quality Gate pass.
+- **Visible sources; author, date and image decisions:** all five authoritative sources are visibly cited and mirrored by truthful BlogPosting citations. No approved individual author, verified publication/modification date or provenance-safe image exists, so author, dates and image remain omitted from visible content and schema.
+- **Internal links and schema restraint:** five pillar-to-child and five child-to-pillar directions are public; four canonical service links plus the property-specific Contact path are crawlable. BlogPosting, WebPage and BreadcrumbList reuse the central Organization/WebSite graph; FAQ, Review, AggregateRating, LocalBusiness, address, geo, Offer and invented identity fields are absent.
+- **Publication status:** `published`. The sole article selector returns six published Blog articles, the Blog hub/ItemList contains six articles, Homepage Latest Tips remains selector-driven, and the lifecycle sitemap contains exactly 29 canonical URLs. Task 34 remains not started.
 
 ### Task 34 — Gallery, Image SEO, and Media Performance Optimization
 

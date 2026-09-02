@@ -904,8 +904,12 @@ export const routeRegistry = [
     pageType: 'blog-article',
     parentId: 'blog',
     primaryKeyword: 'central iowa lawn care calendar',
-    secondaryKeywords: [],
-    secondaryKeywordStatus: 'pending-research',
+    secondaryKeywords: [
+      'Iowa lawn care calendar',
+      'seasonal lawn care Iowa',
+      'Iowa lawn care by season',
+    ],
+    secondaryKeywordStatus: 'defined',
     title: "Central Iowa Lawn Care Calendar | Mo's Lawn Care",
     h1: 'A Seasonal Lawn Care Calendar for Central Iowa',
     description:
@@ -967,7 +971,7 @@ export const routeLabels = {
   'article-how-often-to-mow-lawn-iowa': 'How Often Should You Mow Your Lawn in Iowa?',
   'article-spring-lawn-cleanup-des-moines': 'A Spring Lawn Cleanup Checklist for Des Moines Properties',
   'article-fall-leaf-cleanup-des-moines': 'Fall Leaf Cleanup Tips for Des Moines Properties',
-  'article-central-iowa-lawn-care-calendar': 'Central Iowa Lawn Care Calendar',
+  'article-central-iowa-lawn-care-calendar': 'A Seasonal Lawn Care Calendar for Central Iowa',
 } as const satisfies Readonly<Record<RouteId, string>>
 
 export const primaryNavigationRouteIds = [

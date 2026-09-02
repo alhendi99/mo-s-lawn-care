@@ -11,12 +11,13 @@ import {
   validateBlogArticles,
 } from '../content/blog/index.ts'
 import { bestTimeToOverseedLawnIowa } from '../content/blog/best-time-to-overseed-lawn-iowa.ts'
+import { centralIowaLawnCareCalendar } from '../content/blog/central-iowa-lawn-care-calendar.ts'
 import { fallLeafCleanupDesMoines } from '../content/blog/fall-leaf-cleanup-des-moines.ts'
 import { whenToAerateLawnIowa } from '../content/blog/when-to-aerate-lawn-iowa.ts'
 import { howOftenToMowLawnIowa } from '../content/blog/how-often-to-mow-lawn-iowa.ts'
 import { springLawnCleanupDesMoines } from '../content/blog/spring-lawn-cleanup-des-moines.ts'
 import { getBreadcrumbItems, routesById } from '../content/routes.ts'
-import type { BlogArticleBlock, BlogClaimNote, BlogSource } from '../content/types.ts'
+import type { BlogArticle, BlogArticleBlock, BlogClaimNote, BlogSource } from '../content/types.ts'
 import { analyticsEventNames } from '../lib/analytics.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
 import {
@@ -110,13 +111,14 @@ for (const required of [
 ]) assert(researchBrief.includes(required), `Research brief missing ${required}`)
 
 const published = getPublishedArticles()
-assert.deepEqual(published, [whenToAerateLawnIowa, bestTimeToOverseedLawnIowa, article, springLawnCleanupDesMoines, fallLeafCleanupDesMoines])
+assert.deepEqual(published, [whenToAerateLawnIowa, bestTimeToOverseedLawnIowa, article, springLawnCleanupDesMoines, fallLeafCleanupDesMoines, centralIowaLawnCareCalendar])
 assert.equal(getPublishedArticleBySlug(article.slug), article)
-assert.deepEqual(getPublishedRelatedArticles(article), [])
+assert.deepEqual(getPublishedRelatedArticles(article), [centralIowaLawnCareCalendar])
 assert.equal(blogArticles.length, 6)
-const futureSlugs = new Set(['central-iowa-lawn-care-calendar'])
-const futureArticles = blogArticles.filter(({ slug }) => futureSlugs.has(slug))
-assert.equal(futureArticles.length, 1)
+const futureSlugs = new Set<string>()
+const allArticles: readonly BlogArticle[] = blogArticles
+const futureArticles = allArticles.filter(({ slug }) => futureSlugs.has(slug))
+assert.equal(futureArticles.length, 0)
 assert(futureArticles.every(({ status }) => status === 'planned'))
 assert(futureArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
 assert(futureArticles.every((candidate) => !('content' in candidate) && !('sources' in candidate)))
@@ -132,12 +134,12 @@ assert.equal((metadata.robots as { index?: boolean }).index, true)
 assert.equal((metadata.robots as { follow?: boolean }).follow, true)
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 28)
+assert.equal(sitemap.length, 29)
 for (const candidate of published) assert.equal(sitemap.filter(({ url }) => url === routesById[candidate.routeId].canonicalUrl).length, 1)
 for (const future of futureArticles) assert.equal(sitemap.some(({ url }) => url === routesById[future.routeId].canonicalUrl), false)
 
 const itemList = buildArticleItemListStructuredData(routesById.blog, published)
-assert.equal(itemList.numberOfItems, 5)
+assert.equal(itemList.numberOfItems, 6)
 assert.deepEqual(itemList.itemListElement, published.map((candidate, index) => ({
   '@type': 'ListItem',
   position: index + 1,
@@ -174,7 +176,7 @@ const inlineLinks = articleBlocks.flatMap((block) => block.type === 'paragraph'
   ? block.content.flatMap((inline) => inline.href ? [inline.href] : [])
   : [])
 assert(inlineLinks.includes('/services/lawn-mowing'))
-for (const future of futureArticles) assert.equal(inlineLinks.includes(future.path), false)
+assert(article.relatedArticlePaths.includes(centralIowaLawnCareCalendar.path))
 assert.deepEqual(article.relatedServicePaths, ['/services/lawn-mowing'])
 
 const articleText = [article.excerpt, ...articleBlocks.flatMap((block) => {
@@ -246,7 +248,6 @@ const planSource = read('plan.md')
 assert.match(planSource, /### Task 30 — “How Often to Mow a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 32 — Des Moines Fall Leaf Cleanup Tips Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 31 — Des Moines Spring Cleanup Checklist Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 33 — Central Iowa Lawn Care Calendar Pillar Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
 // Optional source/status gate against the already-built local production server.
 const baseUrl = process.env.TASK30_BASE_URL
@@ -304,6 +305,6 @@ if (baseUrl) {
     assert(!hub.includes(future.path))
     assert(!tipsHtml.includes(future.path))
   }
-  console.log('Task 30 production source QA passed: five 200s, one branded 404, exact head/graph/query/links, hub/ItemList/Homepage parity and 28 sitemap URLs.')
+  console.log('Task 30 production source QA passed: six 200s, exact head/graph/query/links, hub/ItemList/Homepage parity and 29 sitemap URLs.')
 }
-console.log('Task 30 mowing frequency validation passed: ownership, research/gates, numeric and conditional boundaries, Spanish coverage, single publication selector, schema and 28-URL lifecycle.')
+console.log('Task 30 mowing frequency validation passed: ownership, research/gates, numeric and conditional boundaries, Spanish coverage, published pillar relationship, single publication selector, schema and 29-URL lifecycle.')

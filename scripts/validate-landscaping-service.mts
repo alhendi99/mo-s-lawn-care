@@ -367,6 +367,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['article-how-often-to-mow-lawn-iowa'].canonicalUrl },
   { url: routesById['article-spring-lawn-cleanup-des-moines'].canonicalUrl },
   { url: routesById['article-fall-leaf-cleanup-des-moines'].canonicalUrl },
+  { url: routesById['article-central-iowa-lawn-care-calendar'].canonicalUrl },
 ])
 
 assert.equal(routeLabels['service-landscaping'], 'Landscaping')

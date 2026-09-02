@@ -172,7 +172,7 @@ assert.deepEqual(publishedIds, ['home', 'services', ...registryServiceIds, 'comm
 assert.equal(publishedIds.length, 23)
 assert.equal(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').length, 23)
 
-const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact', 'blog', 'article-when-to-aerate-lawn-iowa', 'article-best-time-to-overseed-lawn-iowa', 'article-how-often-to-mow-lawn-iowa', 'article-spring-lawn-cleanup-des-moines', 'article-fall-leaf-cleanup-des-moines'] as const
+const expectedSitemap = ['home', 'services', ...registryServiceIds, 'commercial-property-services', 'service-areas', 'service-area-ankeny', 'service-area-waukee', 'service-area-norwalk', 'service-area-altoona', 'about', 'our-work', 'reviews', 'contact', 'blog', 'article-when-to-aerate-lawn-iowa', 'article-best-time-to-overseed-lawn-iowa', 'article-how-often-to-mow-lawn-iowa', 'article-spring-lawn-cleanup-des-moines', 'article-fall-leaf-cleanup-des-moines', 'article-central-iowa-lawn-care-calendar'] as const
 assert.deepEqual(buildSitemapEntries(), expectedSitemap.map((id) => ({ url: routesById[id].canonicalUrl })))
 
 for (const alias of [

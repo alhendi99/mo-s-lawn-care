@@ -11,12 +11,13 @@ import {
   validateBlogArticles,
 } from '../content/blog/index.ts'
 import { bestTimeToOverseedLawnIowa } from '../content/blog/best-time-to-overseed-lawn-iowa.ts'
+import { centralIowaLawnCareCalendar } from '../content/blog/central-iowa-lawn-care-calendar.ts'
 import { fallLeafCleanupDesMoines } from '../content/blog/fall-leaf-cleanup-des-moines.ts'
 import { whenToAerateLawnIowa } from '../content/blog/when-to-aerate-lawn-iowa.ts'
 import { howOftenToMowLawnIowa } from '../content/blog/how-often-to-mow-lawn-iowa.ts'
 import { springLawnCleanupDesMoines } from '../content/blog/spring-lawn-cleanup-des-moines.ts'
 import { getBreadcrumbItems, routesById } from '../content/routes.ts'
-import type { BlogArticleBlock, BlogClaimNote, BlogSource } from '../content/types.ts'
+import type { BlogArticle, BlogArticleBlock, BlogClaimNote, BlogSource } from '../content/types.ts'
 import { analyticsEventNames } from '../lib/analytics.ts'
 import { buildRouteMetadata, buildSitemapEntries } from '../lib/metadata.ts'
 import {
@@ -117,13 +118,14 @@ for (const required of [
 ]) assert(researchBrief.includes(required), `Research brief missing ${required}`)
 
 const published = getPublishedArticles()
-assert.deepEqual(published, [whenToAerateLawnIowa, bestTimeToOverseedLawnIowa, howOftenToMowLawnIowa, springLawnCleanupDesMoines, article])
+assert.deepEqual(published, [whenToAerateLawnIowa, bestTimeToOverseedLawnIowa, howOftenToMowLawnIowa, springLawnCleanupDesMoines, article, centralIowaLawnCareCalendar])
 assert.equal(getPublishedArticleBySlug(article.slug), article)
-assert.deepEqual(getPublishedRelatedArticles(article), [])
+assert.deepEqual(getPublishedRelatedArticles(article), [centralIowaLawnCareCalendar])
 assert.equal(blogArticles.length, 6)
-const futureSlugs = new Set(['central-iowa-lawn-care-calendar'])
-const futureArticles = blogArticles.filter(({ slug }) => futureSlugs.has(slug))
-assert.equal(futureArticles.length, 1)
+const futureSlugs = new Set<string>()
+const allArticles: readonly BlogArticle[] = blogArticles
+const futureArticles = allArticles.filter(({ slug }) => futureSlugs.has(slug))
+assert.equal(futureArticles.length, 0)
 assert(futureArticles.every(({ status }) => status === 'planned'))
 assert(futureArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
 assert(futureArticles.every((candidate) => !('content' in candidate) && !('sources' in candidate)))
@@ -139,12 +141,12 @@ assert.equal((metadata.robots as { index?: boolean }).index, true)
 assert.equal((metadata.robots as { follow?: boolean }).follow, true)
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 28)
+assert.equal(sitemap.length, 29)
 for (const candidate of published) assert.equal(sitemap.filter(({ url }) => url === routesById[candidate.routeId].canonicalUrl).length, 1)
 for (const future of futureArticles) assert.equal(sitemap.some(({ url }) => url === routesById[future.routeId].canonicalUrl), false)
 
 const itemList = buildArticleItemListStructuredData(routesById.blog, published)
-assert.equal(itemList.numberOfItems, 5)
+assert.equal(itemList.numberOfItems, 6)
 assert.deepEqual(itemList.itemListElement, published.map((candidate, index) => ({
   '@type': 'ListItem',
   position: index + 1,
@@ -187,7 +189,7 @@ for (const required of [
   'https://www.mwatoday.com/collection-drop-off/des-moines/',
   'https://cms2.revize.com/revize/cityofdesmoines/Documents/Departments/Public%20Works/Garbage%20Recycling/SCRUB/Printable%20SCRUB%20Calendar%20for%202026%20by%20Des%20Moines%20Public%20Works.pdf?t=202602031209170',
 ]) assert(inlineLinks.includes(required), `Missing required article link: ${required}`)
-for (const future of futureArticles) assert.equal(inlineLinks.includes(future.path), false)
+assert(article.relatedArticlePaths.includes(centralIowaLawnCareCalendar.path))
 assert.deepEqual(article.relatedServicePaths, ['/services/fall-cleanup-leaf-removal'])
 
 const articleHeadings = articleBlocks.flatMap((block) => block.type === 'heading' ? [block.text] : [])
@@ -245,6 +247,5 @@ for (const forbiddenEvent of ['article_view', 'source_click', 'municipality_clic
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 32 — Des Moines Fall Leaf Cleanup Tips Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 31 — Des Moines Spring Cleanup Checklist Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 33 — Central Iowa Lawn Care Calendar Pillar Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
-console.log('Task 32 fall leaf cleanup article validation passed: exact ownership, authoritative claim and jurisdiction ledgers, five published articles, truthful schema, isolated Task 33 owner, and exact 28-URL lifecycle.')
+console.log('Task 32 fall leaf cleanup article validation passed: exact ownership, authoritative claim and jurisdiction ledgers, six published articles, truthful schema, published Task 33 relationship, and exact 29-URL lifecycle.')

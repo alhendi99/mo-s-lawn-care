@@ -300,5 +300,7 @@ export const howOftenToMowLawnIowa = {
   "relatedServicePaths": [
     "/services/lawn-mowing"
   ],
-  "relatedArticlePaths": []
+  "relatedArticlePaths": [
+    routesById['article-central-iowa-lawn-care-calendar'].path
+  ]
 } as const satisfies PublishedBlogArticle

@@ -128,12 +128,12 @@ const overseedingArticle = blogArticles[1]
 const mowingArticle = blogArticles[2]
 const springCleanupArticle = blogArticles[3]
 const fallLeafArticle = blogArticles[4]
-const publishedArticles = [publishedArticle, overseedingArticle, mowingArticle, springCleanupArticle, fallLeafArticle] as const
-const plannedArticles = [blogArticles[5]] as const
+const calendarArticle = blogArticles[5]
+const publishedArticles = [publishedArticle, overseedingArticle, mowingArticle, springCleanupArticle, fallLeafArticle, calendarArticle] as const
+const allArticles: readonly BlogArticle[] = blogArticles
+const plannedArticles = allArticles.filter(({ status }) => status === 'planned')
 assert(publishedArticles.every(({ status }) => status === 'published'))
-assert(plannedArticles.every(({ status }) => status === 'planned'))
-assert(plannedArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
-assert(plannedArticles.every((article) => !('excerpt' in article) && !('content' in article) && !('sources' in article) && !('claimNotes' in article)))
+assert.equal(plannedArticles.length, 0)
 assert.deepEqual(getPublishedArticles(), publishedArticles)
 assert.equal(getPublishedArticleBySlug('when-to-aerate-lawn-iowa'), publishedArticle)
 assert.equal(getPublishedArticleBySlug('best-time-to-overseed-lawn-iowa'), overseedingArticle)
@@ -147,11 +147,11 @@ const publishedFixtureRegistry: readonly BlogArticle[] = blogArticles
 validateBlogArticles(publishedFixtureRegistry)
 assert.deepEqual(getPublishedArticles(publishedFixtureRegistry), publishedArticles)
 assert.equal(getPublishedArticleBySlug(publishedFixture.slug, publishedFixtureRegistry), publishedFixture)
-assert.deepEqual(getPublishedRelatedArticles(publishedFixture, publishedFixtureRegistry), [overseedingArticle])
+assert.deepEqual(getPublishedRelatedArticles(publishedFixture, publishedFixtureRegistry), [overseedingArticle, calendarArticle])
 assert.equal(getPublishedArticleRoute(publishedFixture).publicationStatus, 'published')
 
 const fixtureItemList = buildArticleItemListStructuredData(route, publishedArticles)
-assert.equal(fixtureItemList.numberOfItems, 5)
+assert.equal(fixtureItemList.numberOfItems, 6)
 assert.deepEqual(fixtureItemList.itemListElement, publishedArticles.map((article, index) => ({
   '@type': 'ListItem',
   position: index + 1,
@@ -166,9 +166,9 @@ for (const omitted of ['author', 'datePublished', 'dateModified', 'image']) asse
 const reviewedFixture = { ...publishedFixture, status: 'reviewed' } as const
 const reviewedFixtureRegistry: readonly BlogArticle[] = [reviewedFixture, ...blogArticles.slice(1)]
 validateBlogArticles(reviewedFixtureRegistry)
-assert.deepEqual(getPublishedArticles(reviewedFixtureRegistry), [overseedingArticle, mowingArticle, springCleanupArticle, fallLeafArticle])
-assert.equal(buildSitemapEntries(routeRegistry, reviewedFixtureRegistry).length, 27)
-assert.equal(buildSitemapEntries(routeRegistry, publishedFixtureRegistry).length, 28)
+assert.deepEqual(getPublishedArticles(reviewedFixtureRegistry), [overseedingArticle, mowingArticle, springCleanupArticle, fallLeafArticle, calendarArticle])
+assert.equal(buildSitemapEntries(routeRegistry, reviewedFixtureRegistry).length, 28)
+assert.equal(buildSitemapEntries(routeRegistry, publishedFixtureRegistry).length, 29)
 assert.throws(
   () => validateBlogArticles([
     { ...publishedFixture, sources: [] } as unknown as PublishedBlogArticle,
@@ -178,8 +178,8 @@ assert.throws(
 )
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 28)
-assert.equal(sitemap.at(-1)?.url, routesById[fallLeafArticle.routeId].canonicalUrl)
+assert.equal(sitemap.length, 29)
+assert.equal(sitemap.at(-1)?.url, routesById[calendarArticle.routeId].canonicalUrl)
 assert.equal(sitemap.filter(({ url }) => url === route.canonicalUrl).length, 1)
 for (const article of publishedArticles) {
   assert.equal(sitemap.filter(({ url }) => url === routesById[article.routeId].canonicalUrl).length, 1)
@@ -296,4 +296,4 @@ assert.match(planSource, /### Task 28 — “When to Aerate a Lawn in Iowa” Ar
 assert.match(planSource, /### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 31 — Des Moines Spring Cleanup Checklist Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
-console.log('Blog validation passed: exact hub ownership, five published and one planned article record, one publication gate, source/schema safeguards, zero future-draft leakage, and exact 28-URL lifecycle.')
+console.log('Blog validation passed: exact hub ownership, six published article records, one publication gate, source/schema safeguards, zero draft leakage, and exact 29-URL lifecycle.')

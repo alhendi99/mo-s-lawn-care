@@ -380,5 +380,5 @@ export const springLawnCleanupDesMoines = {
   showTableOfContents: true,
   publisher: 'organization',
   relatedServicePaths: [routesById['service-spring-cleanup'].path],
-  relatedArticlePaths: [],
+  relatedArticlePaths: [routesById['article-central-iowa-lawn-care-calendar'].path],
 } as const satisfies PublishedBlogArticle

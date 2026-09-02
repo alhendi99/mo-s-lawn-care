@@ -188,6 +188,7 @@ const expectedSitemapIds = [
   'article-how-often-to-mow-lawn-iowa',
   'article-spring-lawn-cleanup-des-moines',
   'article-fall-leaf-cleanup-des-moines',
+  'article-central-iowa-lawn-care-calendar',
 ] as const
 assert.deepEqual(
   buildSitemapEntries(),
