@@ -4,11 +4,11 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Tasks 1–33 complete; Task 34 is next
+- Phase: Incremental implementation — Tasks 1–34 complete; Task 35 is next
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–33 completed; Task 34 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
+- Implementation status: Tasks 1–34 completed; Task 35 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
-- Last checkpoint: 2026-09-02 (Asia/Amman)
+- Last checkpoint: 2026-09-03 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
 - Task 3 repository baseline: clean `main` at `e24e7af`
 - Task 4 repository baseline: clean `main` at `abfe88d`
@@ -41,7 +41,8 @@
 - Task 30 repository baseline: clean `main` at `929c2f1`
 - Task 31 repository baseline: clean `main` at `5327b2f`
 - Task 33 repository baseline: clean `main` at `938966b`; finalization resumed from the preserved Task 33 WIP worktree
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 34 until explicitly authorized
+- Task 34 repository baseline: clean `main` at `75f7cb3`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 35 until explicitly authorized
 
 ## Evidence Labels
 
@@ -53,7 +54,16 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 33 complete, 2026-09-02 (Asia/Amman)
+### Latest checkpoint — Task 34 complete, 2026-09-03 (Asia/Amman)
+
+- **Authorized scope and baseline:** Task 34 only began from clean `75f7cb3`; Tasks 1–33 were preserved. No route lifecycle, deployment, external-account, metadata-owner, analytics or schema-expansion work occurred, and Task 35 remains not started.
+- **Measured baseline:** `docs/performance/task-34-media-performance.md` records the production-loopback Chromium method at `1280×800` and `390×844` for `/`, `/our-work`, Snow Removal and Landscaping. Baseline `public/` contained 43 non-`.DS_Store` files totaling 28,856,819 bytes; the governed registry contained 92 records, 89 displayable records, 68 remote and 24 local sources, three exclusions, six comparisons, and bounded 8/12/12 gallery delivery. Eighteen filename/signature mismatches were identified.
+- **Remote/provenance result:** one bounded pass found all 68 unique Google-hosted URLs reachable as HTTP 200 JPEGs with governed dimensions retained. Rights/provenance for local reproduction remains unestablished, so nothing remote was copied, rehosted, replaced or deleted. Verified city remains null, service tags remain empty, authorship/service/city remain unverified, and no customer/project/result attribution was added. The active property alt now describes observable scene content in English and Spanish without inferring property type or location.
+- **Local optimization:** seven active WebP derivatives preserve original dimensions/crops and reduce their active source bytes from 14,516,660 to 1,671,048 (12,845,612 bytes / 88.5%). Source/derivative visual review passed for the poster, Summer/Winter property scenes, embedded-overlay gallery image and comparison pairs. All originals remain, so the full recoverable `public/` directory is 30,527,867 bytes; no unused derivative remains.
+- **Hero, responsive and gallery result:** the priority/non-lazy poster continues to own first paint; the decorative video now mounts 2.5 seconds after hydration with metadata preload, still autoplays muted/looping/inline, and remains absent for reduced motion. This removes 2,650,809 encoded video bytes and two requests from the defined initial window, reducing Homepage total from 3,114,106 to 463,739 desktop and 3,111,234 to 460,881 mobile while CLS remains zero. Snow's hero changed from lazy to eager. Gallery/lightbox/property/article `sizes` now reflect capped layout slots; cards/comparisons remain lazy, the modal remains demand-driven, and 8-item Homepage / 12-item Our Work / 12-item later-batch contracts remain intact.
+- **QA, limitations and validation:** four-viewport production QA passed hero/poster/video, property image, gallery/lightbox, comparison alignment, Load More, keyboard slider, modal focus/Escape/return, reduced motion, Spanish alt, canonical/H1, zero overflow and zero final console warnings/errors. LCP timing varied in the fast loopback lab and INP was not reliably measurable, so neither is overstated. The focused Task 34 validator, directly affected validators, the one complete historical regression matrix, TypeScript, final production build, 29-URL sitemap/source checks and diff checks pass. `Unavailable — ESLint is not installed` remains the exact lint status. Task 34 is complete; Task 35 remains `[ ]` Not started.
+
+### Previous checkpoint — Task 33 complete, 2026-09-02 (Asia/Amman)
 
 - **Authorized scope and baseline:** Task 33 only resumed from its preserved WIP worktree above clean `938966b`; completed Tasks 1–32 were preserved, no deployment or external-account action occurred, and Task 34 remains not started.
 - **Exact ownership and intent:** `/blog/central-iowa-lawn-care-calendar` owns informational `central iowa lawn care calendar` with title `Central Iowa Lawn Care Calendar | Mo's Lawn Care`, H1 `A Seasonal Lawn Care Calendar for Central Iowa`, the exact supplied description, three reviewed secondary keywords and a query-free canonical.
@@ -1988,7 +1998,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 34 — Gallery, Image SEO, and Media Performance Optimization
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Reduce image/video payload and layout risk across home, services, locations, work, reviews and blog while preserving the visual identity and existing media.
 - **Why It Is Needed:** The repository has ~28 MB of local assets, mislabeled file formats, large seasonal/before-after images, 68 remote gallery URLs and excessive gallery serialization risk.
 - **Dependencies:** Tasks 5–33 so actual placements and approved metadata are known; Task 24 project registry; explicit permission before copying/replacing remote assets.
@@ -1998,7 +2008,14 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Visual quality loss, before/after crop drift, animation timing, remote hotlink failure, rights, incorrect alts/location stuffing, LCP regression from lazy-loading hero, CLS from unknown remote dimensions, cache invalidation.
 - **Validation:** Before/after performance report on representative mobile/desktop routes, visual diff/manual media review, network/payload inspection, file-signature checks, alt/provenance audit, gallery/modal/before-after/reduced-motion regression.
 - **Tests:** Image-record completeness, dimensions/alt rules, featured/full serialization limits, no city alt without verified metadata, browser LCP/CLS budget signals where stable, and preserved modal/slider interactions.
-- **Definition of Done:** `[ ]` Measured payload/CWV risks improve or have documented evidence-based exceptions; `[ ]` primary LCP is not lazy; `[ ]` below-fold/thumbnail behavior and dimensions are correct; `[ ]` all replacements are visually/provenance approved and no original is prematurely deleted.
+- **Definition of Done:** `[x]` Measured payload/CWV risks improve or have documented evidence-based exceptions; `[x]` primary LCP is not lazy; `[x]` below-fold/thumbnail behavior and dimensions are correct; `[x]` all replacements are visually/provenance approved and no original is prematurely deleted.
+
+#### Task 34 implementation record
+
+- **Audit and method:** `docs/performance/task-34-media-performance.md` is the durable inventory, signature/provenance/remote audit, methodology, derivative ledger, before/after table and Task 37 comparison baseline. It records the exact representative routes/viewports, local/remote counts, source bytes, request behavior and honest lab limitations.
+- **Measured result:** the 2.5-second decorative-video activation delay removes 2,650,809 encoded video bytes from the defined initial Homepage window while the priority poster remains preloaded and non-lazy. Desktop/mobile initial total falls by about 85%; CLS remains zero. Non-home routes are stable, with the optimized eager Snow hero modestly reducing image bytes. Variable loopback LCP and unavailable reliable INP are documented rather than converted into scores.
+- **Media and provenance result:** seven active derivatives retain dimensions/crops and source provenance while reducing the active source set by 12,845,612 bytes; every original remains. All 68 remote JPEG URLs stayed in place and reachable, with reproduction rights explicitly unresolved. No city, service, customer, authorship, completion or result fact was inferred, and no ImageObject was introduced.
+- **Delivery and interaction result:** responsive `sizes`, eager/LCP and lazy/below-fold decisions match actual layout roles. Homepage and Our Work remain bounded at 8 / 12 initial / 12 subsequent records; full lightbox media is conditional. Four-viewport English/Spanish media QA, visual comparisons, keyboard slider, modal focus/Escape/return, reduced motion, Load More, route/source/sitemap checks, the focused validator, one historical matrix, TypeScript and production build pass. Sitemap remains exactly 29 canonical URLs; analytics remains unchanged; Task 35 was not started.
 
 ### Task 35 — Internal Linking and Content-Cluster Audit
 

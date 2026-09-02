@@ -16,10 +16,10 @@ export function PropertyHotspots() {
     <div className="mt-10 sm:mt-14">
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-evergreen">
         <Image
-          src="/seasons/summer.png"
-          alt={t('Residential property with a front lawn, flower beds, mature trees and a concrete driveway')}
+          src="/seasons/optimized/summer.webp"
+          alt={t('House with a front lawn, planting beds, mature trees and a concrete driveway')}
           fill
-          sizes="(min-width: 1280px) 1200px, 100vw"
+          sizes="(min-width: 1792px) 1728px, (min-width: 640px) calc(100vw - 4rem), calc(100vw - 2.5rem)"
           loading="lazy"
           className="object-cover"
         />

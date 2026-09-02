@@ -120,7 +120,7 @@ export function BlogArticle({
               width={article.image.width}
               height={article.image.height}
               className="h-auto max-h-[42rem] w-full object-cover"
-              sizes="(max-width: 640px) calc(100vw - 2.5rem), calc(100vw - 4rem)"
+              sizes="(min-width: 1792px) 1728px, (max-width: 640px) calc(100vw - 2.5rem), calc(100vw - 4rem)"
               priority
             />
           </figure>

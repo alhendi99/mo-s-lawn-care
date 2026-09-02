@@ -8,6 +8,7 @@ export function HeroVideo() {
   const [reduced, setReduced] = useState(true)
   const [failed, setFailed] = useState(false)
   const [ready, setReady] = useState(false)
+  const [videoEnabled, setVideoEnabled] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -16,6 +17,18 @@ export function HeroVideo() {
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)
   }, [])
+
+  useEffect(() => {
+    if (reduced) {
+      setVideoEnabled(false)
+      return
+    }
+
+    // The priority poster owns first paint. Defer the decorative autoplay request
+    // so its multi-megabyte transfer cannot contend with the poster and critical UI.
+    const timer = window.setTimeout(() => setVideoEnabled(true), 2500)
+    return () => window.clearTimeout(timer)
+  }, [reduced])
 
   return (
     <>
@@ -27,7 +40,7 @@ export function HeroVideo() {
         sizes="100vw"
         className="object-cover object-center"
       />
-      {!reduced && !failed && (
+      {videoEnabled && !failed && (
         <video
           key={site.heroVideo}
           src={site.heroVideo}
@@ -38,7 +51,7 @@ export function HeroVideo() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           poster={site.heroPoster}
           aria-hidden="true"
           tabIndex={-1}

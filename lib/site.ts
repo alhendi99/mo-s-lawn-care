@@ -120,7 +120,7 @@ export const site = {
   socialLinks: [] as { label: string; href: string }[],
   formEndpoint: '/api/estimate',
   heroVideo: '/background.mp4',
-  heroPoster: '/hero-poster.webp',
+  heroPoster: '/media/optimized/hero-poster.webp',
 } as const
 
 export const nav = [

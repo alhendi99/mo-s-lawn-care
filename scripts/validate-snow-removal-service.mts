@@ -204,8 +204,8 @@ assert.deepEqual(snowRemovalService.serviceArea.cities, [
   'Altoona',
 ])
 assert.equal(snowRemovalService.hero.image.provenance, 'existing-seasonal-image')
-assert.equal(snowRemovalService.hero.image.src, '/seasons/winter.png')
-assert.equal(snowRemovalService.hero.image.loading, 'lazy')
+assert.equal(snowRemovalService.hero.image.src, '/seasons/optimized/winter.webp')
+assert.equal(snowRemovalService.hero.image.loading, 'eager')
 assert.equal(snowRemovalService.hero.compactHeading, true)
 assert.equal('workPreview' in snowRemovalService, false)
 assert.doesNotMatch(
