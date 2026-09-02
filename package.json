@@ -39,6 +39,7 @@
     "validate:aeration-article": "node --experimental-strip-types scripts/validate-aeration-article.mts",
     "validate:overseeding-article": "node --experimental-strip-types scripts/validate-overseeding-article.mts",
     "validate:mowing-frequency-article": "node --experimental-strip-types scripts/validate-mowing-frequency-article.mts",
+    "validate:spring-cleanup-article": "node --experimental-strip-types scripts/validate-spring-cleanup-article.mts",
     "validate:fall-leaf-cleanup-article": "node --experimental-strip-types scripts/validate-fall-leaf-cleanup-article.mts"
   },
   "dependencies": {

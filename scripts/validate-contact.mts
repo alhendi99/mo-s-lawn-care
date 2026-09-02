@@ -248,7 +248,7 @@ assert.deepEqual(services, [
 ])
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 27)
+assert.equal(sitemap.length, 28)
 assert.equal(sitemap.at(-1)?.url, routesById['article-fall-leaf-cleanup-des-moines'].canonicalUrl)
 assert.equal(sitemap.filter(({ url }) => url === route.canonicalUrl).length, 1)
 assert.equal(routesById.blog.implementationStatus, 'implemented')
@@ -276,4 +276,4 @@ for (const english of [
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 29 — “Best Time to Overseed a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
-console.log('Task 26 Contact validation passed: exact ownership/schema, one shared form/backend, controlled placements and services, query/PII boundaries, exact-once leads, native contact paths, and current 27-URL lifecycle.')
+console.log('Task 26 Contact validation passed: exact ownership/schema, one shared form/backend, controlled placements and services, query/PII boundaries, exact-once leads, native contact paths, and current 28-URL lifecycle.')

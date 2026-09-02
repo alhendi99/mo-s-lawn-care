@@ -146,7 +146,7 @@ assert.equal(routesById.blog.implementationStatus, 'implemented')
 assert.equal(routesById.blog.publicationStatus, 'published')
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 27)
+assert.equal(sitemap.length, 28)
 assert.equal(sitemap.some(({ url }) => url.endsWith('/reviews')), true)
 assert.equal(sitemap.some(({ url }) => url.endsWith('/contact')), true)
 assert.equal(sitemap.some(({ url }) => url.endsWith('/blog')), true)
@@ -174,4 +174,4 @@ for (const english of [
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 25 — Reviews Page and Review Data Governance\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
-console.log(`Task 24 Our Work validation passed: exact ownership, ${workRecords.length} governed records, ${fullRecords.length} display-eligible images, ${workComparisons.length} verified pairs, bounded ${OUR_WORK_INITIAL_COUNT}-item SSR, zero ImageObjects, and current 27-URL lifecycle.`)
+console.log(`Task 24 Our Work validation passed: exact ownership, ${workRecords.length} governed records, ${fullRecords.length} display-eligible images, ${workComparisons.length} verified pairs, bounded ${OUR_WORK_INITIAL_COUNT}-item SSR, zero ImageObjects, and current 28-URL lifecycle.`)

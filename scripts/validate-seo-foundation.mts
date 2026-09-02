@@ -127,6 +127,7 @@ assert.deepEqual(buildSitemapEntries(), [
   { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
   { url: routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl },
   { url: routesById['article-how-often-to-mow-lawn-iowa'].canonicalUrl },
+  { url: routesById['article-spring-lawn-cleanup-des-moines'].canonicalUrl },
   { url: routesById['article-fall-leaf-cleanup-des-moines'].canonicalUrl },
 ])
 
@@ -136,12 +137,13 @@ const completedRegistry: CanonicalRoute[] = routeRegistry.map((route) => ({
   publicationStatus: 'published',
 }))
 const completedSitemap = buildSitemapEntries(completedRegistry)
-assert.equal(completedSitemap.length, 27)
-assert.equal(new Set(completedSitemap.map(({ url }) => url)).size, 27)
+assert.equal(completedSitemap.length, 28)
+assert.equal(new Set(completedSitemap.map(({ url }) => url)).size, 28)
 const publishedArticleRouteIds = new Set([
   'article-when-to-aerate-lawn-iowa',
   'article-best-time-to-overseed-lawn-iowa',
   'article-how-often-to-mow-lawn-iowa',
+  'article-spring-lawn-cleanup-des-moines',
   'article-fall-leaf-cleanup-des-moines',
 ])
 for (const articleRoute of routeRegistry.filter(({ pageType }) => pageType === 'blog-article')) {

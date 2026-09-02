@@ -170,12 +170,13 @@ const expectedPublishedIds = [
   'blog',
 ] as const
 assert.deepEqual(routeRegistry.filter(({ publicationStatus }) => publicationStatus === 'published').map(({ id }) => id), expectedPublishedIds)
-assert.equal(buildSitemapEntries().length, 27)
+assert.equal(buildSitemapEntries().length, 28)
 assert.deepEqual(buildSitemapEntries(), [
   ...expectedPublishedIds.map((id) => ({ url: routesById[id].canonicalUrl })),
   { url: routesById['article-when-to-aerate-lawn-iowa'].canonicalUrl },
   { url: routesById['article-best-time-to-overseed-lawn-iowa'].canonicalUrl },
   { url: routesById['article-how-often-to-mow-lawn-iowa'].canonicalUrl },
+  { url: routesById['article-spring-lawn-cleanup-des-moines'].canonicalUrl },
   { url: routesById['article-fall-leaf-cleanup-des-moines'].canonicalUrl },
 ])
 

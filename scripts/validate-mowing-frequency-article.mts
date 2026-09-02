@@ -14,6 +14,7 @@ import { bestTimeToOverseedLawnIowa } from '../content/blog/best-time-to-oversee
 import { fallLeafCleanupDesMoines } from '../content/blog/fall-leaf-cleanup-des-moines.ts'
 import { whenToAerateLawnIowa } from '../content/blog/when-to-aerate-lawn-iowa.ts'
 import { howOftenToMowLawnIowa } from '../content/blog/how-often-to-mow-lawn-iowa.ts'
+import { springLawnCleanupDesMoines } from '../content/blog/spring-lawn-cleanup-des-moines.ts'
 import { getBreadcrumbItems, routesById } from '../content/routes.ts'
 import type { BlogArticleBlock, BlogClaimNote, BlogSource } from '../content/types.ts'
 import { analyticsEventNames } from '../lib/analytics.ts'
@@ -109,13 +110,13 @@ for (const required of [
 ]) assert(researchBrief.includes(required), `Research brief missing ${required}`)
 
 const published = getPublishedArticles()
-assert.deepEqual(published, [whenToAerateLawnIowa, bestTimeToOverseedLawnIowa, article, fallLeafCleanupDesMoines])
+assert.deepEqual(published, [whenToAerateLawnIowa, bestTimeToOverseedLawnIowa, article, springLawnCleanupDesMoines, fallLeafCleanupDesMoines])
 assert.equal(getPublishedArticleBySlug(article.slug), article)
 assert.deepEqual(getPublishedRelatedArticles(article), [])
 assert.equal(blogArticles.length, 6)
-const futureSlugs = new Set(['spring-lawn-cleanup-des-moines', 'central-iowa-lawn-care-calendar'])
+const futureSlugs = new Set(['central-iowa-lawn-care-calendar'])
 const futureArticles = blogArticles.filter(({ slug }) => futureSlugs.has(slug))
-assert.equal(futureArticles.length, 2)
+assert.equal(futureArticles.length, 1)
 assert(futureArticles.every(({ status }) => status === 'planned'))
 assert(futureArticles.every(({ secondaryKeywords }) => secondaryKeywords.length === 0))
 assert(futureArticles.every((candidate) => !('content' in candidate) && !('sources' in candidate)))
@@ -131,12 +132,12 @@ assert.equal((metadata.robots as { index?: boolean }).index, true)
 assert.equal((metadata.robots as { follow?: boolean }).follow, true)
 
 const sitemap = buildSitemapEntries()
-assert.equal(sitemap.length, 27)
+assert.equal(sitemap.length, 28)
 for (const candidate of published) assert.equal(sitemap.filter(({ url }) => url === routesById[candidate.routeId].canonicalUrl).length, 1)
 for (const future of futureArticles) assert.equal(sitemap.some(({ url }) => url === routesById[future.routeId].canonicalUrl), false)
 
 const itemList = buildArticleItemListStructuredData(routesById.blog, published)
-assert.equal(itemList.numberOfItems, 4)
+assert.equal(itemList.numberOfItems, 5)
 assert.deepEqual(itemList.itemListElement, published.map((candidate, index) => ({
   '@type': 'ListItem',
   position: index + 1,
@@ -244,7 +245,7 @@ for (const forbiddenEvent of ['article_view', 'source_click', 'municipality_clic
 const planSource = read('plan.md')
 assert.match(planSource, /### Task 30 — “How Often to Mow a Lawn in Iowa” Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 32 — Des Moines Fall Leaf Cleanup Tips Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(planSource, /### Task 31 — Des Moines Spring Cleanup Checklist Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(planSource, /### Task 31 — Des Moines Spring Cleanup Checklist Article\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 assert.match(planSource, /### Task 33 — Central Iowa Lawn Care Calendar Pillar Article\n\n- \*\*Status:\*\* `\[ \]` Not started/)
 
 // Optional source/status gate against the already-built local production server.
@@ -303,6 +304,6 @@ if (baseUrl) {
     assert(!hub.includes(future.path))
     assert(!tipsHtml.includes(future.path))
   }
-  console.log('Task 30 production source QA passed: four 200s, two branded 404s, exact head/graph/query/links, hub/ItemList/Homepage parity and 27 sitemap URLs.')
+  console.log('Task 30 production source QA passed: five 200s, one branded 404, exact head/graph/query/links, hub/ItemList/Homepage parity and 28 sitemap URLs.')
 }
-console.log('Task 30 mowing frequency validation passed: ownership, research/gates, numeric and conditional boundaries, Spanish coverage, single publication selector, schema and 27-URL lifecycle.')
+console.log('Task 30 mowing frequency validation passed: ownership, research/gates, numeric and conditional boundaries, Spanish coverage, single publication selector, schema and 28-URL lifecycle.')
