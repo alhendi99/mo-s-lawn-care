@@ -60,7 +60,7 @@ All derivatives preserve source dimensions/crop and inherit the source's existin
 |---|---:|---:|---:|---|
 | `hero-poster.webp` (actual PNG) → `media/optimized/hero-poster.webp` | 1717×916 | 882,376 → 4,002 | 99.5% | flat dark-green poster gradient preserved |
 | `seasons/summer.png` → `seasons/optimized/summer.webp` | 1672×941 | 2,957,165 → 323,924 | 89.0% | foliage, lawn, house edges, and driveway preserved |
-| `seasons/winter.png` → `seasons/optimized/winter.webp` | 1672×941 | 2,706,302 → 247,216 | 90.9% | snow detail and light tonal range preserved |
+| `seasons/winter.png` → `seasons/optimized/snow-removal.webp` | 1672×941 | 2,706,302 → 247,216 | 90.9% | snow detail and light tonal range preserved |
 | `media/gallery6.webp` (actual PNG) → `media/optimized/gallery6.webp` | 738×553 | 644,688 → 90,790 | 85.9% | scene and embedded capture overlay remain legible; city remains unclaimed |
 | `before-after/before4.webp` (actual PNG) → `before-after/optimized/before4.webp` | 1448×1086 | 3,356,163 → 475,708 | 85.8% | vegetation, house edge, timestamp, and crop preserved |
 | `before-after/after4.webp` (actual PNG) → `before-after/optimized/after4.webp` | 1448×1086 | 2,962,939 → 355,536 | 88.0% | house, cleared-ground scene, timestamp, and crop preserved |

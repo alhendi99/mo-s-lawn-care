@@ -14,7 +14,7 @@ export const gradingService = {
       "Mo's offers Yard Grading for residential and commercial properties with uneven ground or outdoor areas that need preparation. Request a free estimate to describe the property and the area in question.",
     compactHeading: true,
     image: {
-      src: '/contact.webp',
+      src: '/grading.webp',
       width: 1031,
       height: 580,
       alt: 'Lawns, young trees, driveways and homes along a residential street',

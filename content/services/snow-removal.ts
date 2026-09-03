@@ -14,12 +14,12 @@ export const snowRemovalService = {
       "Mo's offers Snow Removal for residential and commercial properties. Request an estimate to discuss the driveway, access areas and the property in front of you.",
     compactHeading: true,
     image: {
-      src: '/seasons/optimized/winter.webp',
+      src: '/seasons/optimized/snow-removal.webp',
       width: 1672,
       height: 941,
       alt: 'Snow-covered home, yard and trees beside a concrete driveway',
       caption:
-        'Existing seasonal image · visible snow and driveway only; no service, project, city or customer attribution',
+        '',
       loading: 'eager',
       provenance: 'existing-seasonal-image',
     },

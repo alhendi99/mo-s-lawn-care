@@ -13,7 +13,7 @@ export const lawnMowingService = {
     summary:
       "Mo's offers professional lawn mowing for residential and commercial properties. Start with a free estimate for the lawn in front of you.",
     image: {
-      src: '/media/gallery1.webp',
+      src: '/media/lawn-mowing.webp',
       width: 1600,
       height: 1200,
       alt: 'Green lawn with visible mowing lines beside homes and sidewalks',

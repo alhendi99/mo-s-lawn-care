@@ -14,7 +14,7 @@ export const flowerBedMaintenanceService = {
       "Mo's offers Flower Bed Maintenance for residential and commercial properties. Request a free estimate to describe the existing bed area and the attention it needs.",
     compactHeading: true,
     image: {
-      src: '/media/gallery7.webp',
+      src: '/media/flower-bed-maintenance.webp',
       width: 1600,
       height: 1200,
       alt: 'Outdoor area with exposed soil, trees, low plants and several piles of dark material',

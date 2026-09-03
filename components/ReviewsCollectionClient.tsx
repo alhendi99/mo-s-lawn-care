@@ -87,7 +87,7 @@ export function ReviewsCollectionClient({ categories, categoryCounts, initialIte
 
       <div id="review-collection" aria-busy={loading} className="mt-5 grid border-b border-[color:var(--rule)] md:grid-cols-2 xl:grid-cols-3">
         {items.map((review) => (
-          <article key={review.id} className="flex min-w-0 flex-col border-t border-[color:var(--rule)] px-1 py-8 md:px-7 md:nth-[2n+1]:pl-0 md:nth-[2n]:border-l xl:nth-[2n]:border-l-0 xl:nth-[3n+1]:pl-0 xl:nth-[3n+2]:border-l xl:nth-[3n+3]:border-l">
+          <article key={review.id} className="flex min-w-0 flex-col border-t border-[color:var(--rule)] px-1 py-8 md:px-7 md:nth-[2n]:border-l xl:nth-[2n]:border-l-0 xl:nth-[3n+2]:border-l xl:nth-[3n+3]:border-l">
             <p className="eyebrow text-[#3e7a45]">{t(review.sourceLabel)}</p>
             <blockquote className="mt-5 flex-1 whitespace-pre-line text-[1.0625rem] leading-relaxed text-[#263329]">&ldquo;{review.text}&rdquo;</blockquote>
             <footer className="mt-7 border-t border-[#3e7a45]/12 pt-4 font-bold text-[#244729]">{review.reviewerDisplayName}</footer>

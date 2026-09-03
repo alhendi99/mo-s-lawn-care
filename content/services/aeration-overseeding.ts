@@ -13,11 +13,11 @@ export const aerationOverseedingService = {
     summary:
       "Mo's offers Aeration and Seeding for lawns where thin areas or compaction are concerns. Request a free property estimate to discuss the lawn in front of you.",
     image: {
-      src: '/contact.webp',
+      src: '/aeration.webp',
       width: 1031,
       height: 580,
       alt: 'Front lawn with young trees beside homes and driveways',
-      caption: 'Existing neutral property image · no service, city or customer attribution',
+      caption: '',
       provenance: 'existing-neutral-property-image',
     },
   },

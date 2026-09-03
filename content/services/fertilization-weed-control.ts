@@ -13,11 +13,11 @@ export const fertilizationWeedControlService = {
     summary:
       "Mo's offers lawn fertilization and weed control for residential and commercial properties. Request a free estimate to discuss the lawn and the concerns you see.",
     image: {
-      src: '/contact.webp',
+      src: '/Fertilization.webp',
       width: 1031,
       height: 580,
       alt: 'Front lawns with young trees beside homes and driveways',
-      caption: 'Existing neutral property image · no service, result, city or customer attribution',
+      caption: '',
       provenance: 'existing-neutral-property-image',
     },
   },

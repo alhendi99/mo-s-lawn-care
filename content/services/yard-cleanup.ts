@@ -14,7 +14,7 @@ export const yardCleanupService = {
       "Mo's offers Yard Cleanup for residential and commercial properties with overgrown yards or outdoor areas that need broader cleanup attention. Request a free property estimate to describe what you see.",
     compactHeading: true,
     image: {
-      src: '/contact.webp',
+      src: '/yard-cleanup.webp',
       width: 1031,
       height: 580,
       alt: 'Lawns, young trees, driveways and homes along a residential street',

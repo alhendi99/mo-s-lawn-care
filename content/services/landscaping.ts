@@ -14,7 +14,7 @@ export const landscapingService = {
       "Mo's offers landscaping for residential and commercial outdoor spaces. View a small selection from the existing visual archive and request a free property estimate.",
     compactHeading: true,
     image: {
-      src: '/media/gallery8.webp',
+      src: '/media/landscaping.webp',
       width: 1600,
       height: 1200,
       alt: 'Green lawn area between a wooden deck, walkway, trees and a detached garage',

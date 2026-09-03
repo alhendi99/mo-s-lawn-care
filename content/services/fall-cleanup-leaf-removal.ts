@@ -14,7 +14,7 @@ export const fallCleanupLeafRemovalService = {
       "Mo's offers Fall Cleanup and Leaf Removal for residential and commercial properties. Request a free estimate to describe the leaves, seasonal debris and property areas that need attention.",
     compactHeading: true,
     image: {
-      src: '/contact.webp',
+      src: '/fall-cleanup-leaf-removal.webp',
       width: 1031,
       height: 580,
       alt: 'Lawns, young trees, driveways and homes along a residential street',

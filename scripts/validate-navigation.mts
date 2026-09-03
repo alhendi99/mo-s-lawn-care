@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import {
   companyNavigationRouteIds,
   companyNavigationRoutes,
@@ -20,6 +21,23 @@ import {
   buildBreadcrumbStructuredData,
   buildPageStructuredData,
 } from '../lib/structured-data.ts'
+
+const servicesMenuSource = readFileSync(
+  new URL('../components/services-menu.tsx', import.meta.url),
+  'utf8',
+)
+
+assert.match(servicesMenuSource, /data-services-menu-bridge/)
+assert.match(
+  servicesMenuSource,
+  /absolute top-full left-0 w-\[min\(42rem,calc\(100vw-4rem\)\)\] pt-3/,
+  'Desktop services menu must keep a pointer-safe bridge between its trigger and panel',
+)
+assert.doesNotMatch(
+  servicesMenuSource,
+  /top-\[calc\(100%\+0\.75rem\)\]/,
+  'Desktop services menu must not reintroduce a pointer-breaking gap',
+)
 
 const expectedPrimaryIds = [
   'services',

@@ -14,7 +14,7 @@ export const springCleanupService = {
       "Mo's offers Spring Cleanup for residential and commercial properties preparing for the growing season. Request a free estimate to describe the property and the seasonal attention it needs.",
     compactHeading: true,
     image: {
-      src: '/contact.webp',
+      src: '/spring-cleanup.webp',
       width: 1031,
       height: 580,
       alt: 'Lawns, young trees, driveways and homes along a residential street',

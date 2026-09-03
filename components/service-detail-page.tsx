@@ -67,9 +67,9 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
                 className="object-cover"
               />
               <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-evergreen/48 via-transparent to-evergreen/15 lg:bg-linear-to-r lg:from-evergreen/30 lg:via-transparent lg:to-transparent" />
-              <figcaption className="absolute right-5 bottom-5 left-5 border-t border-paper/30 pt-3 text-[0.68rem] leading-relaxed font-semibold tracking-[0.13em] text-paper/75 uppercase sm:right-8 sm:bottom-8 sm:left-8">
+              {/* <figcaption className="absolute right-5 bottom-5 left-5 border-t border-paper/30 pt-3 text-[0.68rem] leading-relaxed font-semibold tracking-[0.13em] text-paper/75 uppercase sm:right-8 sm:bottom-8 sm:left-8">
                 <Tr text={content.hero.image.caption} />
-              </figcaption>
+              </figcaption> */}
             </figure>
           </div>
         </section>

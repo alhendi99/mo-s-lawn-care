@@ -73,7 +73,7 @@ assert.equal(getOurWorkRecords().length, 89)
 const optimizedMappings = [
   ['/hero-poster.webp', site.heroPoster],
   ['/seasons/summer.png', '/seasons/optimized/summer.webp'],
-  ['/seasons/winter.png', '/seasons/optimized/winter.webp'],
+  ['/seasons/winter.png', '/seasons/optimized/snow-removal.webp'],
   ['/media/gallery6.webp', '/media/optimized/gallery6.webp'],
   ['/seasons/before-after/before4.webp', '/seasons/before-after/optimized/before4.webp'],
   ['/seasons/before-after/after4.webp', '/seasons/before-after/optimized/after4.webp'],
@@ -104,7 +104,7 @@ assert.match(heroSource, /setTimeout\(\(\) => setVideoEnabled\(true\), 2500\)/)
 assert.match(heroSource, /preload="metadata"/)
 assert.doesNotMatch(heroSource, /preload="auto"/)
 assert.equal(snowRemovalService.hero.image.loading, 'eager')
-assert.equal(snowRemovalService.hero.image.src, '/seasons/optimized/winter.webp')
+assert.equal(snowRemovalService.hero.image.src, '/seasons/optimized/snow-removal.webp')
 
 const gallerySource = read('components/GalleryClient.tsx')
 const galleryServerSource = read('components/gallery.tsx')
