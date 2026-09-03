@@ -87,7 +87,7 @@ export function BlogArticle({
           <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.55fr)] lg:items-end lg:gap-20">
             <div className="services-index-reveal min-w-0">
               <p className="eyebrow text-[#3e7a45]"><Tr text="Lawn care guide" /></p>
-              <h1 className="display-lg mt-5 max-w-[15ch] break-words text-balance">
+              <h1 className="display-lg-compact mt-5 max-w-[15ch] text-balance [hyphens:none] [overflow-wrap:normal] [word-break:normal]">
                 <Tr text={article.h1} />
               </h1>
             </div>
@@ -146,7 +146,7 @@ export function BlogArticle({
             ) : null}
           </aside>
 
-          <div className="min-w-0 text-[1.0625rem] leading-[1.78] text-[#29342b] sm:text-lg">
+          <div data-article-reading-column className="min-w-0 text-[1.0625rem] leading-[1.78] text-[#29342b] sm:text-lg">
             {article.content.map((block, index) => {
               if (block.type === 'heading') {
                 const Heading = block.level === 2 ? 'h2' : 'h3'
@@ -156,7 +156,7 @@ export function BlogArticle({
                     id={block.id}
                     tabIndex={-1}
                     className={block.level === 2
-                      ? 'scroll-mt-32 pt-10 font-display text-[clamp(2rem,1.3rem+2.5vw,3.6rem)] leading-[1.02] font-bold tracking-[-0.04em] text-ink uppercase first:pt-0'
+                      ? 'scroll-mt-32 pt-10 font-display text-[clamp(2rem,1.45rem+2vw,3rem)] leading-[1.1] font-bold tracking-[-0.035em] text-ink uppercase first:pt-0'
                       : 'scroll-mt-32 pt-8 font-display text-[clamp(1.4rem,1.1rem+1vw,2rem)] leading-tight font-bold tracking-[-0.025em] text-ink uppercase'}
                   >
                     <Tr text={block.text} />
@@ -211,7 +211,7 @@ export function BlogArticle({
         <section aria-labelledby="article-sources-heading" className="bg-paper py-14 sm:py-20">
           <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
             <p className="eyebrow text-[#3e7a45]"><Tr text="Research record" /></p>
-            <h2 id="article-sources-heading" className="display-md mt-5"><Tr text="Sources" /></h2>
+            <h2 id="article-sources-heading" className="display-sm mt-5"><Tr text="Sources" /></h2>
             <ol className="mt-9 border-b border-[color:var(--rule)]">
               {article.sources.map((source, index) => (
                 <li id={`source-${source.id}`} key={source.id} className="scroll-mt-32 border-t border-[color:var(--rule)] py-6">
@@ -234,7 +234,7 @@ export function BlogArticle({
           <section aria-labelledby="related-reading-heading" className="bg-[#f6f2e8] py-14 sm:py-20">
             <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
               <p className="eyebrow text-ink-soft"><Tr text="Continue with canonical paths" /></p>
-              <h2 id="related-reading-heading" className="display-md mt-5"><Tr text="Related Reading" /></h2>
+              <h2 id="related-reading-heading" className="display-sm mt-5"><Tr text="Related Reading" /></h2>
               <ul className="mt-9 grid border-b border-[color:var(--rule)] sm:grid-cols-2">
                 {relatedServices.map((service) => (
                   <li key={service.id} className="border-t border-[color:var(--rule)] sm:odd:border-r">
@@ -261,7 +261,7 @@ export function BlogArticle({
           <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-5 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="min-w-0">
               <p className="eyebrow text-[#D5EE72]"><Tr text="Property-specific questions" /></p>
-              <h2 id="article-cta-heading" className="display-md mt-5 max-w-[13ch] text-paper"><Tr text="Discuss the property with Mo's." /></h2>
+              <h2 id="article-cta-heading" className="display-sm mt-5 max-w-[13ch] text-paper"><Tr text="Discuss the property with Mo's." /></h2>
             </div>
             <Link href={routesById.contact.path} prefetch={false} className="btn-solid w-full max-w-full text-center whitespace-normal sm:w-fit"><Tr text="Request a Free Estimate" /></Link>
           </div>

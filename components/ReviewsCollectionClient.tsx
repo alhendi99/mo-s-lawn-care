@@ -74,7 +74,7 @@ export function ReviewsCollectionClient({ categories, categoryCounts, initialIte
 
   return (
     <div data-review-mode="full">
-      <div className="flex gap-2 overflow-x-auto pb-3" role="group" aria-label={t('Filter customer feedback')}>
+      <div className="review-filter-rail flex gap-2 overflow-x-auto pb-3 pr-10" role="group" aria-label={t('Filter customer feedback')}>
         <FilterButton id="all" label={t('All feedback')} count={categoryCounts.all} active={activeCategory === 'all'} disabled={loading} onSelect={selectCategory} />
         {categories.map((category) => (
           <FilterButton key={category.id} id={category.id} label={t(category.label)} count={categoryCounts[category.id]} active={activeCategory === category.id} disabled={loading} onSelect={selectCategory} />

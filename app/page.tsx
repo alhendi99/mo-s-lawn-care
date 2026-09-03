@@ -33,7 +33,7 @@ export default function Page() {
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <h2
                 id="property-heading"
-                className="max-w-[18ch] text-[clamp(1.75rem,1.05rem+3vw,3.5rem)] uppercase"
+                className="display-sm max-w-[20ch]"
               >
                 <Tr text="One property." />
                 <br />

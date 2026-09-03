@@ -15,7 +15,7 @@ export function HomepageServices() {
         <header className="grid gap-7 border-t border-[color:var(--rule)] pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,0.48fr)] lg:items-end lg:gap-16">
           <div>
             <p className="eyebrow text-ink-soft"><Tr text="Lawn care in Des Moines" /></p>
-            <h2 id="services-heading" className="display-md mt-5 max-w-[15ch]">
+            <h2 id="services-heading" className="display-landmark mt-5 max-w-[15ch]">
               <Tr text="Services for every part of the property." />
             </h2>
           </div>

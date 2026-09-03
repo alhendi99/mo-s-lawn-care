@@ -40,7 +40,7 @@ export function Hero() {
             </h1>
           </div>
           <div className="mt-5 max-w-[31rem] sm:mt-8 xl:mt-0 xl:pb-1">
-            <p className="hero-reveal max-w-[30rem] text-[0.775rem] font-bold leading-5.5 text-paper/78 [animation-delay:240ms] sm:text-lg sm:leading-relaxed">
+            <p className="hero-reveal max-w-[30rem] text-base font-bold leading-relaxed text-paper/78 [animation-delay:240ms] sm:text-lg">
               {t("Lawn care, landscaping, cleanups and snow removal for homes and businesses in the Des Moines metro.")}
             </p>
 

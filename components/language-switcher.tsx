@@ -17,9 +17,9 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
           type="button"
           onClick={() => setLocale(option)}
           aria-pressed={locale === option}
-          className={`min-h-11 rounded-full px-2.5 py-1 text-[0.6875rem] font-bold tracking-[0.12em] uppercase transition-colors ${
+          className={`min-h-11 rounded-full py-1 text-[0.6875rem] font-bold tracking-[0.12em] uppercase transition-colors ${
             locale === option ? 'bg-paper text-evergreen' : 'text-paper/75 hover:text-paper'
-          } ${compact ? 'min-w-9' : 'min-w-10'}`}
+          } ${compact ? 'min-w-11 px-2' : 'min-w-11 px-2.5'}`}
         >
           {option}
         </button>

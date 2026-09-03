@@ -55,10 +55,10 @@ export default async function CityServiceAreaPage({ params }: CityServiceAreaPag
     <InteriorPageShell routeId={content.routeId} structuredDataNodes={[itemListStructuredData]}>
       <article data-city-service-area={content.slug}>
         <section className="mt-6 overflow-hidden bg-evergreen text-paper sm:mt-8">
-          <div className="mx-auto grid min-h-[38rem] w-full max-w-[112rem] gap-12 px-5 py-14 sm:px-8 sm:py-18 lg:grid-cols-[minmax(0,1.18fr)_minmax(22rem,0.62fr)] lg:items-end lg:gap-20 lg:py-24">
+          <div className="mx-auto grid min-h-[33.5rem] w-full max-w-[112rem] gap-12 px-5 py-14 sm:px-8 sm:py-18 lg:grid-cols-[minmax(0,1.18fr)_minmax(22rem,0.62fr)] lg:items-end lg:gap-20 lg:py-20">
             <div className="service-detail-reveal min-w-0">
               <p className="eyebrow text-[#D5EE72]"><Tr text={content.hero.eyebrow} /></p>
-              <h1 className="mt-6 max-w-[12ch] break-words font-display text-[clamp(2.45rem,11.5vw,7rem)] leading-[0.88] font-bold tracking-[-0.055em] uppercase sm:text-[clamp(3rem,6.2vw,7rem)]">
+              <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(2.45rem,11.5vw,7rem)] leading-[0.92] font-bold tracking-[-0.05em] uppercase [hyphens:none] [overflow-wrap:normal] [word-break:normal] sm:text-[clamp(3rem,6.2vw,7rem)]">
                 <Tr text={route.h1} />
               </h1>
             </div>

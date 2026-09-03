@@ -24,25 +24,25 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
     >
       <article data-service-detail={content.slug}>
         <section className="service-detail-hero mt-6 overflow-hidden bg-evergreen text-paper sm:mt-8">
-          <div className="grid min-h-[42rem] lg:grid-cols-[minmax(0,0.96fr)_minmax(30rem,1.04fr)]">
-            <div className="relative z-10 flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-16 lg:px-[max(2rem,calc((100vw-112rem)/2+2rem))] lg:pr-14 lg:py-20">
+          <div className="grid min-h-[38rem] lg:grid-cols-[minmax(0,0.98fr)_minmax(30rem,1.02fr)]">
+            <div className="relative z-10 flex flex-col justify-between px-5 py-12 sm:px-8 sm:py-14 lg:px-[max(2rem,calc((100vw-112rem)/2+2rem))] lg:pr-12 lg:py-16">
               <div className="service-detail-reveal max-w-4xl">
                 <p className="eyebrow text-[#D5EE72]"><Tr text={content.hero.eyebrow} /></p>
                 <h1
-                  className={`mt-6 max-w-[calc(100vw-2.5rem)] break-words font-display text-[clamp(2.35rem,12vw,7.25rem)] leading-[0.88] font-bold tracking-[-0.055em] uppercase sm:max-w-[12ch] ${
+                  className={`mt-6 max-w-[calc(100vw-2.5rem)] font-display text-[clamp(2.3rem,11.5vw,6.65rem)] leading-[0.92] font-bold tracking-[-0.05em] uppercase [hyphens:none] [overflow-wrap:normal] [word-break:normal] sm:max-w-[13.5ch] ${
                     content.hero.compactHeading
-                      ? 'sm:text-[clamp(2.9rem,5.55vw,7.25rem)]'
-                      : 'sm:text-[clamp(2.9rem,6.3vw,7.25rem)]'
+                      ? 'sm:text-[clamp(2.9rem,5.1vw,6.65rem)]'
+                      : 'sm:text-[clamp(2.9rem,5.75vw,6.65rem)]'
                   }`}
                 >
                   <Tr text={route.h1} />
                 </h1>
-                <p className="mt-7 max-w-[35rem] text-base leading-relaxed text-paper/72 sm:text-lg">
+                <p className="mt-5 max-w-[35rem] text-base leading-relaxed text-paper/72 sm:text-lg">
                   <Tr text={content.hero.summary} />
                 </p>
               </div>
 
-              <div className="service-detail-reveal service-detail-reveal-delay mt-10 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+              <div className="service-detail-reveal service-detail-reveal-delay mt-6 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                 <Link
                   href={routesById.contact.path}
                   prefetch={false}
@@ -78,7 +78,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(16rem,0.5fr)_minmax(0,1fr)] lg:gap-20">
             <header className="lg:sticky lg:top-28 lg:self-start">
               <p className="eyebrow text-ink-soft"><Tr text={content.introduction.eyebrow} /></p>
-              <h2 id={sectionId('start')} className="display-md mt-5 max-w-[12ch]">
+              <h2 id={sectionId('start')} className="display-landmark mt-5 max-w-[12ch]">
                 <Tr text={content.introduction.heading} />
               </h2>
             </header>
@@ -122,7 +122,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
                 <article key={item.title} className="border-t border-paper/18 py-8 lg:px-7 lg:not-last:border-r lg:first:pl-0 lg:last:pr-0">
                   <p className="text-[0.68rem] font-bold tracking-[0.16em] text-[#D5EE72] tabular-nums">0{index + 1}</p>
                   <h3 className="mt-8 text-3xl text-paper uppercase"><Tr text={item.title} /></h3>
-                  <p className="mt-5 max-w-[31rem] text-sm leading-relaxed text-paper/62 sm:text-[0.98rem]">
+                  <p className="mt-5 max-w-[31rem] text-[0.96rem] leading-relaxed text-paper/66 sm:text-base">
                     <Tr text={item.description} />
                   </p>
                 </article>
@@ -135,7 +135,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[0.55fr_1fr] lg:gap-20">
             <header>
               <p className="eyebrow text-ink-soft"><Tr text={content.relatedServicesIntro.eyebrow} /></p>
-              <h2 id={sectionId('related-services')} className="display-md mt-5 max-w-[11ch]">
+              <h2 id={sectionId('related-services')} className="display-sm mt-5 max-w-[11ch]">
                 <Tr text={content.relatedServicesIntro.heading} />
               </h2>
               <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-ink-soft">
@@ -174,7 +174,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
             <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[0.55fr_1fr] lg:gap-20">
               <header>
                 <p className="eyebrow text-ink-soft"><Tr text={content.helpfulResources.eyebrow} /></p>
-                <h2 id={sectionId('helpful-resources')} className="display-md mt-5 max-w-[11ch]">
+                <h2 id={sectionId('helpful-resources')} className="display-sm mt-5 max-w-[11ch]">
                   <Tr text={content.helpfulResources.heading} />
                 </h2>
                 <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-ink-soft">
@@ -213,7 +213,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           <div className="mx-auto w-full max-w-[112rem] px-5 sm:px-8">
             <header className="max-w-4xl">
               <p className="eyebrow text-[#315b37]"><Tr text={content.propertyContext.eyebrow} /></p>
-              <h2 id={sectionId('property-context')} className="display-md mt-5 max-w-[13ch] text-[#1d2b1f]">
+              <h2 id={sectionId('property-context')} className="display-sm mt-5 max-w-[13ch] text-[#1d2b1f]">
                 <Tr text={content.propertyContext.heading} />
               </h2>
             </header>
@@ -247,7 +247,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
               <header className="grid gap-7 border-t border-paper/18 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-16">
                 <div>
                   <p className="eyebrow text-[#D5EE72]"><Tr text={content.workPreview.eyebrow} /></p>
-                  <h2 id={sectionId('work-preview')} className="display-md mt-5 max-w-[13ch] text-paper">
+                  <h2 id={sectionId('work-preview')} className="display-sm mt-5 max-w-[13ch] text-paper">
                     <Tr text={content.workPreview.heading} />
                   </h2>
                 </div>
@@ -292,7 +292,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.55fr_1fr] lg:gap-20">
             <header>
               <p className="eyebrow text-ink-soft"><Tr text={content.reviews.eyebrow} /></p>
-              <h2 id={sectionId('reviews')} className="display-md mt-5 max-w-[12ch]">
+              <h2 id={sectionId('reviews')} className="display-sm mt-5 max-w-[12ch]">
                 <Tr text={content.reviews.heading} />
               </h2>
               <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-ink-soft">
@@ -328,7 +328,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           <div className="mx-auto grid w-full max-w-[112rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
             <header>
               <p className="eyebrow text-[#D5EE72]"><Tr text={content.serviceArea.eyebrow} /></p>
-              <h2 id={sectionId('area')} className="display-md mt-5 max-w-[12ch] text-paper">
+              <h2 id={sectionId('area')} className="display-sm mt-5 max-w-[12ch] text-paper">
                 <Tr text={content.serviceArea.heading} />
               </h2>
             </header>
@@ -353,7 +353,7 @@ export function ServiceDetailPage({ content }: { content: ServiceDetailContent }
           <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[0.48fr_1fr] lg:gap-20">
             <header>
               <p className="eyebrow text-ink-soft"><Tr text={content.faqIntro.eyebrow} /></p>
-              <h2 id={sectionId('faq')} className="display-md mt-5 max-w-[10ch]">
+              <h2 id={sectionId('faq')} className="display-sm mt-5 max-w-[10ch]">
                 <Tr text={content.faqIntro.heading} />
               </h2>
             </header>

@@ -21,7 +21,7 @@ export default function ReviewsPage() {
         <div className="mx-auto grid w-full max-w-[112rem] gap-10 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.7fr)] lg:items-end lg:gap-20">
           <div className="services-index-reveal min-w-0">
             <p className="eyebrow text-ink-soft"><Tr text="Customer feedback · governed collection" /></p>
-            <h1 className="display-lg mt-5 max-w-[13ch]"><Tr text={route.h1} /></h1>
+            <h1 className="display-lg-compact mt-5 max-w-[13ch]"><Tr text={route.h1} /></h1>
           </div>
           <div className="services-index-reveal services-index-reveal-delay min-w-0 border-t border-[color:var(--rule)] pt-6 lg:mb-2 lg:pr-10">
             <p className="max-w-[38rem] text-[1.0625rem] leading-relaxed text-ink-soft sm:text-lg">

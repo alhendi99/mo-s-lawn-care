@@ -89,14 +89,14 @@ export default function CommercialPropertyServicesPage() {
                     <h3 id={`commercial-group-${group.name.toLowerCase().replaceAll(' ', '-')}`} className="text-2xl uppercase sm:text-3xl"><Tr text={group.name} /></h3>
                     <p className="max-w-[42rem] text-sm leading-relaxed text-ink-soft sm:text-base"><Tr text={group.description} /></p>
                   </div>
-                  <ol className="mt-6 grid border-b border-[color:var(--rule)] lg:grid-cols-2">
+                  <ol className="commercial-service-list mt-6 grid border-b lg:grid-cols-2">
                     {items.map((service) => (
-                      <li key={service.routeId} className="border-t border-[color:var(--rule)] lg:odd:border-r">
-                        <Link href={service.href} prefetch={false} className="services-index-service-link group grid min-h-40 grid-cols-[2rem_minmax(0,1fr)_1.5rem] gap-x-4 px-1 py-7 sm:grid-cols-[2.5rem_minmax(0,1fr)_2rem] sm:gap-x-6 sm:px-5 sm:py-8">
+                      <li key={service.routeId} className="border-t lg:odd:border-r">
+                        <Link href={service.href} prefetch={false} className="commercial-service-row services-index-service-link group grid min-h-40 grid-cols-[2rem_minmax(0,1fr)_1.5rem] gap-x-4 px-1 py-8 sm:grid-cols-[2.5rem_minmax(0,1fr)_2rem] sm:gap-x-6 sm:px-5 sm:py-9">
                           <span className="pt-1 text-[0.68rem] font-bold tracking-[0.16em] text-ink-soft/60 tabular-nums">{String(service.position).padStart(2, '0')}</span>
                           <span className="min-w-0">
                             <span className="block font-display text-[clamp(1.25rem,1rem+0.8vw,2rem)] leading-[1.02] font-bold tracking-[-0.03em] text-ink uppercase"><Tr text={service.name} /></span>
-                            <span className="mt-4 block max-w-[38rem] text-sm leading-relaxed text-ink-soft"><Tr text={service.summary} /></span>
+                            <span className="mt-4 block max-w-[38rem] text-[0.96rem] leading-relaxed text-ink-soft sm:text-base"><Tr text={service.summary} /></span>
                           </span>
                           <span aria-hidden="true" className="services-index-arrow pt-1 text-xl text-accent">↗</span>
                         </Link>

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Mail, Phone } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { primaryNavigationRoutes, routesById } from '@/content/routes'
 import { site } from '@/lib/site'
 import { useI18n } from '@/lib/i18n'
@@ -20,6 +20,10 @@ export function SiteHeader() {
   const pathname = usePathname()
   const { t } = useI18n()
   const [scrolled, setScrolled] = useState(false)
+  const [phoneCollision, setPhoneCollision] = useState(false)
+  const [actionBarCollision, setActionBarCollision] = useState(false)
+  const phoneFloatRef = useRef<HTMLAnchorElement>(null)
+  const actionBarRef = useRef<HTMLDivElement>(null)
   const isHomepage = pathname === routesById.home.path
   const elevated = !isHomepage || scrolled
 
@@ -33,6 +37,45 @@ export function SiteHeader() {
       window.removeEventListener('resize', update)
     }
   }, [pathname])
+
+  useEffect(() => {
+    let frame: number | null = null
+    const protectedSelector = 'a, button, input, textarea, select, p, blockquote, table, nav, footer, [role="dialog"]'
+    const collides = (control: HTMLElement | null) => {
+      if (!control || document.activeElement === control || control.contains(document.activeElement)) return false
+      const rect = control.getBoundingClientRect()
+      return [...document.querySelectorAll<HTMLElement>(protectedSelector)].some((element) => {
+        if (control.contains(element) || element.getClientRects().length === 0) return false
+        const candidate = element.getBoundingClientRect()
+        return rect.left < candidate.right && rect.right > candidate.left && rect.top < candidate.bottom && rect.bottom > candidate.top
+      })
+    }
+    const update = () => {
+      if (frame !== null) cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        setPhoneCollision(collides(phoneFloatRef.current))
+        setActionBarCollision(collides(actionBarRef.current))
+      })
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    window.addEventListener('focusin', update)
+    window.addEventListener('focusout', update)
+    const observer = new MutationObserver(update)
+    observer.observe(document.body, { childList: true, subtree: true })
+    return () => {
+      if (frame !== null) cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+      window.removeEventListener('focusin', update)
+      window.removeEventListener('focusout', update)
+      observer.disconnect()
+    }
+  }, [pathname])
+
+  const phoneFloatVisible = elevated && !phoneCollision
+  const actionBarVisible = elevated && !actionBarCollision
 
   return (
     <>
@@ -68,7 +111,7 @@ export function SiteHeader() {
             </span>
           </Link>
 
-          <nav aria-label={t('Primary navigation')} className="hidden min-w-0 items-center gap-2 xl:flex 2xl:gap-4">
+          <nav aria-label={t('Primary navigation')} className="hidden min-w-0 items-center gap-1 xl:flex 2xl:gap-3">
             <ServicesMenu />
             {primaryNavigationRoutes.slice(1).map((route) => {
               const active = routeIsActive(pathname, route.href)
@@ -93,7 +136,7 @@ export function SiteHeader() {
             </a>
             <a
               href="/#estimate-form"
-              className="flex h-11 shrink-0 items-center border border-paper/35 px-3 text-[0.68rem] font-bold tracking-[0.13em] text-paper uppercase transition-colors duration-200 hover:border-paper hover:bg-paper hover:text-evergreen 2xl:px-5"
+              className="flex h-11 shrink-0 items-center border border-paper/35 px-3 text-[0.78rem] font-bold tracking-[0.1em] text-paper uppercase transition-colors duration-200 hover:border-paper hover:bg-paper hover:text-evergreen 2xl:px-5"
             >
               {t('Get Estimate')}
             </a>
@@ -107,33 +150,36 @@ export function SiteHeader() {
       </header>
 
       <a
+        ref={phoneFloatRef}
         href={site.phoneHref}
         aria-label={`${t("Call Mo's Lawn Care at")} ${site.phone}`}
         title={`${t('Call')} ${site.phone}`}
-        className={`phone-float fixed right-6 bottom-6 z-40 hidden h-14 w-14 items-center justify-center rounded-full bg-[#D5EE72] text-evergreen shadow-[0_12px_35px_rgba(8,20,14,0.3)] transition-[transform,opacity,background-color] duration-300 hover:scale-105 hover:bg-paper focus-visible:scale-105 motion-reduce:transition-none md:flex ${
-          elevated ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+        aria-hidden={!phoneFloatVisible}
+        className={`phone-float fixed right-6 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] z-40 hidden h-14 w-14 items-center justify-center rounded-full bg-[#D5EE72] text-evergreen shadow-[0_12px_35px_rgba(8,20,14,0.3)] transition-[transform,opacity,background-color] duration-300 hover:scale-105 hover:bg-paper focus-visible:scale-105 motion-reduce:transition-none md:flex ${
+          phoneFloatVisible ? 'translate-y-0 opacity-100' : `pointer-events-none opacity-0 ${elevated ? 'translate-y-0' : 'translate-y-4'}`
         }`}
-        tabIndex={elevated ? undefined : -1}
+        tabIndex={phoneFloatVisible ? undefined : -1}
       >
         <Phone aria-hidden="true" className="relative z-10" size={23} strokeWidth={2.25} />
       </a>
 
       <div
+        ref={actionBarRef}
         className={`fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-paper/15 bg-evergreen/97 p-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(8,20,14,0.24)] backdrop-blur-md transition-[transform,opacity] duration-300 md:hidden ${
-          elevated ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
+          actionBarVisible ? 'translate-y-0 opacity-100' : `pointer-events-none opacity-0 ${elevated ? 'translate-y-0' : 'translate-y-full'}`
         }`}
-        aria-hidden={!elevated}
+        aria-hidden={!actionBarVisible}
       >
         <a
           href="/#estimate-form"
-          tabIndex={elevated ? undefined : -1}
+          tabIndex={actionBarVisible ? undefined : -1}
           className="flex min-h-12 items-center justify-center bg-[#D5EE72] px-3 text-[9px] font-bold tracking-[0.1em] text-evergreen uppercase"
         >
           {t('Free estimate')}
         </a>
         <a
           href={site.phoneHref}
-          tabIndex={elevated ? undefined : -1}
+          tabIndex={actionBarVisible ? undefined : -1}
           aria-label={`${t('Call')} ${site.phone}`}
           className="flex min-h-12 items-center justify-center gap-2 border-t border-paper/15 text-sm font-bold tracking-[0.12em] text-paper uppercase whitespace-nowrap"
         >
@@ -141,7 +187,7 @@ export function SiteHeader() {
         </a>
         <a
           href={site.emailHref}
-          tabIndex={elevated ? undefined : -1}
+          tabIndex={actionBarVisible ? undefined : -1}
           aria-label={`${t('Email')} ${site.email}`}
           className="flex min-h-12 items-center justify-center gap-2 text-sm font-bold tracking-[0.12em] text-paper uppercase whitespace-nowrap"
         >

@@ -188,12 +188,27 @@
   }
 
   .display-lg {
-    font-size: clamp(2.5rem, 1.15rem + 7vw, 7rem);
+    font-size: clamp(2.5rem, 1.25rem + 6.2vw, 6.25rem);
+    text-transform: uppercase;
+  }
+
+  .display-lg-compact {
+    font-size: clamp(2.5rem, 1.35rem + 5.8vw, 6rem);
+    text-transform: uppercase;
+  }
+
+  .display-landmark {
+    font-size: clamp(2.25rem, 1.15rem + 4.4vw, 4.5rem);
     text-transform: uppercase;
   }
 
   .display-md {
-    font-size: clamp(2rem, 1.1rem + 4vw, 4.5rem);
+    font-size: clamp(2rem, 1.15rem + 3.4vw, 3.75rem);
+    text-transform: uppercase;
+  }
+
+  .display-sm {
+    font-size: clamp(1.875rem, 1.2rem + 2.6vw, 3rem);
     text-transform: uppercase;
   }
 
@@ -233,9 +248,9 @@
     justify-content: center;
     padding: 0 0.25rem;
     color: color-mix(in srgb, var(--color-paper) 72%, transparent);
-    font-size: 0.68rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     line-height: 1.25;
     text-align: center;
     text-transform: uppercase;
@@ -341,6 +356,37 @@
     animation: phone-float-glow 1.65s ease-in-out infinite alternate;
   }
 
+  .review-filter-rail {
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 2.5rem), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 2.5rem), transparent 100%);
+  }
+
+  .review-filter-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .commercial-service-list,
+  .commercial-service-list > li {
+    border-color: color-mix(in srgb, var(--rule) 72%, transparent);
+  }
+
+  .commercial-service-row:hover,
+  .commercial-service-row:focus-visible {
+    background-color: color-mix(in srgb, var(--color-evergreen) 5%, transparent);
+  }
+
+  .services-index-arrow,
+  .service-detail-link-arrow,
+  .btn-solid > [aria-hidden='true'],
+  .btn-ghost > [aria-hidden='true'] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-weight: 700;
+  }
+
   .phone-float::before,
   .phone-float::after {
     position: absolute;
@@ -389,11 +435,11 @@
   }
 
   .services-index-reveal {
-    animation: services-index-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: services-index-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .services-index-reveal-delay {
-    animation-delay: 100ms;
+    animation-delay: 60ms;
   }
 
   .services-index-service-link {
@@ -417,15 +463,15 @@
   }
 
   .service-detail-reveal {
-    animation: service-detail-reveal 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: service-detail-reveal 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .service-detail-reveal-delay {
-    animation-delay: 110ms;
+    animation-delay: 60ms;
   }
 
   .service-detail-media-delay {
-    animation-delay: 170ms;
+    animation-delay: 100ms;
   }
 
   .service-detail-media img {
