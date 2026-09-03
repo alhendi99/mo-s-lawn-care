@@ -65,7 +65,8 @@ assert.match(read('components/hero-video.tsx'), /setTimeout\(\(\) => setVideoEna
 assert.match(read('components/gallery.tsx'), /slice\(0, OUR_WORK_INITIAL_COUNT\)/)
 assert.match(read('components/GalleryClient.tsx'), /limit=\$\{batchSize\}/)
 assert.match(read('plan.md'), /### Task 36 — Structured Data Validation and Hardening\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(read('plan.md'), /### Task 38 — GA4 Production Validation and Manual Account Actions\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(read('plan.md'), /### Task 38 — GA4 Production Validation and Manual Account Actions\n\n- \*\*Status:\*\* `\[x\]` Completed/)
+assert.match(read('plan.md'), /### Task 39 — Documentation, Final Cleanup, and Implementation Gate Closure\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
 function decodeHtml(value: string) {
   return value.replace(/&(#x[0-9a-f]+|#\d+|amp|apos|quot|lt|gt|nbsp);/gi, (entity, body: string) => {
@@ -269,7 +270,7 @@ Promise.resolve()
   .then(() => baseUrl ? validateProduction(baseUrl) : undefined)
   .then(() => checkExternal ? validateExternalReachability() : undefined)
   .then(() => {
-    console.log('Task 37 predeployment validation passed: exact public lifecycle, route families, sitemap/robots, prohibited-route isolation, Task 34 media bounds, Task 36 completion, and Task 38 isolation.')
+    console.log('Task 37 predeployment validation passed: exact public lifecycle, route families, sitemap/robots, prohibited-route isolation, Task 34 media bounds, and Tasks 36–39 completion.')
   })
   .catch((error: unknown) => {
     console.error(error)

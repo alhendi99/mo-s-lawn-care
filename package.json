@@ -45,7 +45,8 @@
     "validate:media-performance": "node --experimental-strip-types scripts/validate-media-performance.mts",
     "validate:internal-links": "node --experimental-strip-types scripts/validate-internal-links.mts",
     "validate:structured-data": "node --experimental-strip-types scripts/validate-structured-data.mts",
-    "validate:predeployment": "node --experimental-strip-types scripts/validate-predeployment.mts"
+    "validate:predeployment": "node --experimental-strip-types scripts/validate-predeployment.mts",
+    "validate:operations": "node --experimental-strip-types scripts/validate-operations-docs.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

@@ -2,6 +2,8 @@
 
 The Blog uses static TypeScript records. There is no CMS, database, Markdown/MDX parser, runtime content API, category archive, tag archive, author archive, date archive, search route, or pagination route.
 
+This file owns the mechanical publishing workflow. `plan.md` Section E owns approved route intent and exact SEO fields, while `docs/blog-writing-guidance.md` owns the mandatory Research, Differentiation, Editorial Quality, and STOP gates. Read both completely for the authorized article task, then inspect the relevant canonical service/content owner before making any statement about what Mo's provides. Do not use this workflow to authorize a new route, article, city, or capability.
+
 ## Publication contract
 
 `content/blog/index.ts` exports the six-record registry and `getPublishedArticles()`. The article `status` field is the only publication gate.
@@ -12,7 +14,7 @@ The Blog uses static TypeScript records. There is no CMS, database, Markdown/MDX
 
 Do not add a second allowlist. A safe unpublish is a single `published` → `reviewed` transition. That removes the article from every public selector-driven surface and makes direct requests return the branded 404 again.
 
-The canonical route registry remains the approved SEO ownership record. The Blog registry derives and validates each article's title, H1, description, primary keyword, path, and route ID against that ownership record. Article lifecycle comes only from the Blog record.
+The canonical route registry remains the approved SEO ownership record. The Blog registry derives and validates each article's route ID, path, title, H1, description, primary keyword, and secondary keywords against that ownership record. Article lifecycle comes only from the Blog record. A registry entry can reserve a planned, indexable owner without being implemented or published; only a `published` Blog record is overlaid as implemented and published and may reach public selectors.
 
 ## Research and publication steps
 
@@ -25,10 +27,10 @@ The canonical route registry remains the approved SEO ownership record. The Blog
 7. Keep informational advice distinct from Mo's service capability. Sources can support general guidance; only approved business records can support claims about what Mo's offers or does.
 8. Obtain owner approval before adding a business-capability statement, sales CTA claim, named author, publication or modified date, or article image/provenance claim.
 9. Populate exact ownership metadata, researched secondary keywords when supported, excerpt, semantic content blocks, source citations, claim notes, related service/article paths, and any approved author/date/image fields.
-10. Run `validateBlogArticles()` and `pnpm validate:blog`, complete editorial review, confirm source links and claim mappings, and verify Spanish UI/content requirements for everything newly visible.
+10. Run `validateBlogArticles()` and `pnpm validate:blog`, complete the Research, Differentiation, Editorial Quality, and anti-slop reviews, confirm source links and claim mappings, and add explicit Spanish translations for every newly visible static string. Narrow-width QA must cover long translations.
 11. Change only the article's status to `published` after the record satisfies the stronger published shape and every review is complete.
-12. Confirm the article appears exactly once in the hub, static params, sitemap, Homepage Latest Tips where selected, and the Blog ItemList. Confirm it returns HTTP 200 with indexable metadata and a clean canonical.
-13. Check service/article relationships. Public article-to-article links must resolve through the published selector; an unpublished related article must not render as a link.
+12. Confirm the article appears exactly once in the hub, static params, lifecycle-derived sitemap, Homepage Latest Tips where selected, and the Blog ItemList. The Homepage uses the first three published records in registry order. Confirm the article returns HTTP 200 with indexable metadata and a clean canonical. Never hardcode an article URL into the sitemap or a second publication list.
+13. Check contextual internal links, canonical service ownership, and service/article relationships. Complete the bidirectional article/service and cluster review when the ownership map requires it. Public article-to-article links must resolve through the published selector; an unpublished related article must not render as a link.
 14. Review guidance seasonally and whenever an authoritative source, municipal rule, jurisdiction, or cited recommendation changes.
 15. Add or change `modifiedOn` only after a real visible content update. Preserve the real `publishedOn`; never use the code-edit date as a content date.
 16. If a source or claim becomes unreliable, change the status from `published` to `reviewed` immediately, then correct and re-review the article before republishing.
@@ -48,6 +50,7 @@ Municipal requirements must name their jurisdiction and must not be generalized 
 - Image is optional. A future image requires verified provenance, honest alt text, real positive dimensions, and explicit verification. Appearance or filename is not proof of service, city, season, customer, or result.
 - Publisher is always the central Organization. Do not create a second company identity, LocalBusiness, address, geo record, founder, or author-as-publisher identity.
 - Published articles may emit BlogPosting with only record-backed author, dates, image, citations, and publisher fields. Planned and reviewed records emit no article metadata or Article/BlogPosting schema.
+- Schema must never be stronger than visible, approved content. Do not add FAQ, Review, AggregateRating, invented location, credentials, or any field merely to pursue a rich result.
 
 The Blog hub emits one `Blog` page node and one BreadcrumbList. Its ItemList is generated from the same visible published selector. When there are no published articles, both the visible list and schema list are empty; the ItemList is deliberately omitted because an empty schema-only collection would add no useful entity and must not leak planned URLs.
 

@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Tasks 1–38 complete; Task 39 is next
+- Phase: Phase 1 rollout closed — Tasks 1–39 complete
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–38 completed; Task 39 remains not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
+- Implementation status: Tasks 1–39 completed; Phase 1 rollout is closed. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs. No future expansion has started.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-03 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -46,7 +46,8 @@
 - Task 36 repository baseline: clean `main` at `ee6b286`
 - Task 37 repository baseline: clean `main` at `962cb25`
 - Task 38 repository baseline: clean `main` at `4034574`; production/account work used the same source commit
-- Preservation boundary: preserve all existing user work; do not begin Task 39 until explicitly authorized
+- Task 39 repository baseline: clean local `main` at `f2edd18`; preserve this legitimate unpushed Task 38 documentation commit above `origin/main` at `4034574`
+- Preservation boundary: preserve all existing user work; Phase 1 is closed and no future expansion is authorized
 
 ## Evidence Labels
 
@@ -58,7 +59,15 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 38 complete, 2026-09-03 (Asia/Amman)
+### Latest checkpoint — Task 39 complete and Phase 1 rollout closed, 2026-09-03 (Asia/Amman)
+
+- **Documentation ownership:** `docs/operations.md` now owns durable Production, GA4/privacy, Resend, approved-business-fact, Search Console/GBP, environment, validation, deployment/rollback and manual-QA procedures. `docs/content-publishing.md` continues to own the mechanical Blog workflow and now makes its dependency on Section E ownership, `docs/blog-writing-guidance.md`, canonical service boundaries, Spanish parity, cluster review, schema restraint and lifecycle-derived public selectors explicit. No broad README or overlapping documentation set was created.
+- **Production and account truth:** operating guidance records the deployed source `4034574`, canonical origin, direct production-only GA4 gating, exact five-event allowlist, `generate_lead` as the sole governed Key Event, no GTM/custom dimensions, Enhanced Measurement off, disabled Google Signals/ad personalization, owner-approved direct loading, separate Vercel Analytics, Resend same-account/domain/key requirement, Successful Search Console sitemap with 29 discovered URLs and the exact client-managed/pending GBP Website UTM action. It contains no secret or private recipient value.
+- **Business and publishing safeguards:** the runbook points maintainers to `lib/site.ts` for explicitly owner-confirmed Service Area Business facts and preserves the exact five cities, no-address/no-geo policy, approved hours, review-count copy, schema restraint and homepage Des Moines ownership. The Blog workflow retains a single `getPublishedArticles()` gate and forbids draft leakage, hardcoded sitemap entries, unsupported authors/dates/images/capabilities and source/editorial-gate weakening.
+- **QA reconciliation and cleanup:** the reusable Manual Post-Deployment QA checklist maps to Task 37's durable complete local production-build/browser evidence and Task 38's same-day canonical Production/account evidence. Indexing propagation and the client-managed GBP edit remain honestly pending; no additional real lead or redundant 29-route/browser run occurred. No cleanup deletion was necessary because no unused, duplicate, generated or obsolete implementation artifact was proven.
+- **Validation and boundary:** the focused `validate:operations` contract checks docs/code/plan paths, scripts, lifecycle count, analytics/env names, business facts, external-account state, safe placeholders and common secret forms. Documentation review, link/command checks, `validate:content`, `validate:blog`, `validate:analytics`, `validate:contact`, `validate:seo`, `validate:internal-links`, `validate:structured-data`, `validate:predeployment`, lint-status confirmation and diff/staging checks pass. TypeScript/build and a new Production smoke were not rerun because Task 39 changed no application/runtime/build behavior and the validated deployed source remains unchanged. No push, deploy, account mutation or future expansion occurred.
+
+### Previous checkpoint — Task 38 complete, 2026-09-03 (Asia/Amman)
 
 - **Authorized scope and production identity:** Task 38 only resumed from clean `4034574`, matching `origin/main`. The canonical production deployment remained `https://www.moslawncaredsm.com` from that source commit; approved Vercel Production configuration activated the existing `lawn-care-216f3` GA4 property (`548623677`), web stream `lawn-care` (`15382811142`) and Measurement ID `G-3WGKSK6KBP`. Exactly one direct Google tag loads, GTM remains absent and Vercel Analytics remains independent. No application source, route, lifecycle, sitemap file, schema, content, analytics contract or GBP record changed.
 - **Consent, stream and account decisions:** the stream URL is the canonical production origin, site-owner approval permits direct GA4 loading without a consent banner, Enhanced Measurement remains off, Google Signals/ad-personalization remain disabled and zero custom dimensions were created. `generate_lead` is registered as a key event with once-per-event counting and no default monetary value. `click_to_call`, `click_email`, `form_start` and `form_submit_error` remain normal non-key events; the unused GA4 default `purchase` key event was not altered.
@@ -2133,7 +2142,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 39 — Documentation, Final Cleanup, and Implementation Gate Closure
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Consolidate accurate operating documentation, remove only proven implementation leftovers, record final validation, and close the rollout without starting future expansion.
 - **Why It Is Needed:** The final system needs maintainable publishing, analytics, business-fact, testing and deployment procedures, and a reviewable completion record.
 - **Dependencies:** Tasks 1–38.
@@ -2143,11 +2152,20 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Documentation diverges from actual scripts, secrets copied into examples, cleanup deletes user work, unsupported future ideas presented as delivered, manual QA/account steps incomplete.
 - **Validation:** Line-by-line docs-to-code/plan review, command/link checks, secret scan, final production smoke/manual QA completion, and final git diff/status review scoped to authorized changes.
 - **Tests:** Re-run all tests affected by cleanup plus build/type/lint/SEO/analytics smoke checks; record not-run external checks separately.
-- **Definition of Done:** `[ ]` Documentation matches deployed behavior and contains no secrets; `[ ]` every prior task/QA result and owner decision is recorded; `[ ]` no unrelated refactor/deletion/user change is included; `[ ]` final diff/status are reviewed and the rollout stops.
+- **Definition of Done:** `[x]` Documentation matches deployed behavior and contains no secrets; `[x]` every prior task/QA result and owner decision is recorded; `[x]` no unrelated refactor/deletion/user change is included; `[x]` final diff/status are reviewed and the rollout stops.
+
+#### Task 39 implementation record
+
+- **Documentation and operations:** `docs/operations.md` consolidates the durable Production baseline, GA4/privacy, Resend, approved business facts, Search Console/GBP, safe environment examples, supported validation commands, deployment/rollback, QA reconciliation and Phase 1 boundary. `docs/content-publishing.md` remains the single mechanical article-workflow owner and explicitly defers research/editorial policy to the mandatory guidance rather than duplicating it.
+- **Evidence and cleanup:** Task 37's complete local production-build/browser report and Task 38's canonical Production/account checkpoint were reconciled by checklist area. Search indexing propagation and the approved client-managed GBP Website UTM remain external/pending. No cleanup deletion was necessary, no new lead was submitted and no application/runtime, route, lifecycle, schema, analytics, account or Production state changed.
+- **Validation:** `validate:operations` protects documentation/code/plan/env consistency and safe placeholders. The affected content, Blog, analytics, contact, SEO, link, schema and predeployment contracts pass; documentation paths/commands and Task 39 diff/staging were reviewed. `Unavailable — ESLint is not installed`. TypeScript/build and another Production smoke were not rerun because Task 39 made no application/runtime/build change and Tasks 37/38 already validate the unchanged deployed source.
+- **Final result:** Tasks 1–39 are complete and Phase 1 rollout is closed. The Task 39 commit remains local pending a separate user decision to push; no deploy or future expansion occurred.
 
 ## Manual Post-Deployment QA
 
 Run this checklist against the canonical production origin after an explicitly authorized deployment. Record date, deployed commit, device/browser, tester, pass/fail, evidence, and follow-up owner. A repository build or preview is not a substitute for production/account checks, and no item is complete merely because an automated test exists.
+
+The 2026-09-03 Phase 1 reconciliation is recorded by checklist area in `docs/operations.md`, with Task 37 local production-build/browser evidence kept distinct from Task 38 canonical Production/account evidence. The checkboxes below remain a reusable checklist for later deployments; they are not timeless completion flags. Search indexing propagation and the client-managed GBP Website edit remain separately pending.
 
 ### Deployment identity and all 29 target URLs
 
