@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Tasks 1–37 complete; Task 38 is next
+- Phase: Incremental implementation — Tasks 1–38 complete; Task 39 is next
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–37 completed; Task 38 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
+- Implementation status: Tasks 1–38 completed; Task 39 remains not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-03 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -45,7 +45,8 @@
 - Task 35 repository baseline: clean `main` at `c92a3a4`
 - Task 36 repository baseline: clean `main` at `ee6b286`
 - Task 37 repository baseline: clean `main` at `962cb25`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 38 until explicitly authorized
+- Task 38 repository baseline: clean `main` at `4034574`; production/account work used the same source commit
+- Preservation boundary: preserve all existing user work; do not begin Task 39 until explicitly authorized
 
 ## Evidence Labels
 
@@ -57,7 +58,15 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 37 complete, 2026-09-03 (Asia/Amman)
+### Latest checkpoint — Task 38 complete, 2026-09-03 (Asia/Amman)
+
+- **Authorized scope and production identity:** Task 38 only resumed from clean `4034574`, matching `origin/main`. The canonical production deployment remained `https://www.moslawncaredsm.com` from that source commit; approved Vercel Production configuration activated the existing `lawn-care-216f3` GA4 property (`548623677`), web stream `lawn-care` (`15382811142`) and Measurement ID `G-3WGKSK6KBP`. Exactly one direct Google tag loads, GTM remains absent and Vercel Analytics remains independent. No application source, route, lifecycle, sitemap file, schema, content, analytics contract or GBP record changed.
+- **Consent, stream and account decisions:** the stream URL is the canonical production origin, site-owner approval permits direct GA4 loading without a consent banner, Enhanced Measurement remains off, Google Signals/ad-personalization remain disabled and zero custom dimensions were created. `generate_lead` is registered as a key event with once-per-event counting and no default monetary value. `click_to_call`, `click_email`, `form_start` and `form_submit_error` remain normal non-key events; the unused GA4 default `purchase` key event was not altered.
+- **Production event and privacy result:** Realtime received all five governed event names. `form_start`, intercepted actionable `form_submit_error`, `click_to_call` and `click_email` were exercised without opening a dialer/email client or sending an error-test email. The final approved fictional submission returned production HTTP 200, provider-confirmed `sent` semantics and exactly one backend success identity; Resend recorded exactly one Delivered email and GA4 Realtime recorded exactly one `generate_lead`. Page/session dedupe retained one success identity. Captured custom-event payloads contained only the governed fixed form/contact identity, pathname, controlled placement, language, literal contact protocol and bounded error type—no name, phone, email, message, form values, free text, submission ID, UTM values or raw query string. Earlier provider-configuration attempts failed before delivery with no lead event and were correctly classified as bounded `form_submit_error` events.
+- **Attribution, Search Console, schema and GBP:** the Task 38 UTM test retained source/medium/campaign/content through the Spanish language switch while the canonical stayed query-free and event payloads omitted queries. The verified Search Console domain property accepted the unchanged production sitemap on September 3 with Successful status, 29 discovered URLs and zero videos; representative inspection found the Homepage indexed while newly deployed interior routes were still unknown to Google rather than crawled-and-rejected. Google Rich Results Test successfully crawled Homepage, service, city, Reviews, Contact and article samples with valid detected items and no errors; optional address/image warnings remain intentionally unresolved under the Service Area Business/provenance rules. Schema.org Validator reported zero Homepage errors/warnings. GBP remains `approved / client-managed / pending external completion` for the exact approved UTM Website URL; no profile was created or modified.
+- **Validation and boundary:** `validate:analytics`, `validate:contact`, production tag/network/console inspection, Realtime account receipt, one-delivery Resend evidence, UTM/canonical checks, Search Console sitemap state, live structured-data samples and diff checks pass. No source change required TypeScript/build reruns. Task 38's Definition of Done passes; Task 39 remains `[ ]` Not started.
+
+### Previous checkpoint — Task 37 complete, 2026-09-03 (Asia/Amman)
 
 - **Authorized scope and tested tree:** Task 37 only began from clean `962cb25`. The final production output was built from the completed Task 37 worktree above that baseline; the final committed tree contains the same tested sources. No deployment, production value, route/lifecycle, ownership, external account, article/review/media claim or analytics event changed, and Task 38 remains not started.
 - **Gate and fixes:** all 37 registered validators pass after correcting one stale Task 35 lifecycle assertion. The focused `validate:predeployment` gate covers the exact 29-route lifecycle, route families, source/head/H1/canonical/query contracts, sitemap/robots, representative true 404s, local slash normalization, Task 34 media bounds and Task 38 isolation. The only product regression found was Contact's visible `H1 → H3` jump; the shared estimate form now renders H2 on Contact and retains H3 below the Homepage estimate H2.
@@ -2102,7 +2111,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 38 — GA4 Production Validation and Manual Account Actions
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** After authorized deployment, verify real production measurement and complete/document the required GA4, Google Business Profile, and attribution account actions.
 - **Why It Is Needed:** Repository code can emit events but cannot mark conversions, inspect stream settings, or update external profiles without authorized account access.
 - **Dependencies:** Tasks 4, 26, 35 and 37; explicit deployment/account authorization, verified Measurement ID, consent decision, production access and a safe test-lead procedure.
@@ -2112,7 +2121,15 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** No account authorization, delayed GA processing, ad blockers/consent denial, Enhanced Measurement duplicates, live test generating real emails, multiple data streams, accidental production traffic from preview, UTM loss in language switching.
 - **Validation:** Capture redacted event names/parameter keys and account-state checklist, compare DebugView/Realtime, check acquisition after data latency, open GBP link and verify landing/canonical behavior, and confirm native phone/email.
 - **Tests:** Manual production event matrix plus automated Task 4 regression rerun; one confirmed test submission → one lead; all negative cases → none; PII audit; preview/local network silence.
-- **Definition of Done:** `[ ]` Real production events and safe parameters are verified; `[ ]` `generate_lead` is marked primary and call decision is recorded; `[ ]` custom dimensions/attribution/GBP UTM are tested; `[ ]` any unavailable account action is explicitly blocked, never falsely marked complete.
+- **Definition of Done:** `[x]` Real production events and safe parameters are verified; `[x]` `generate_lead` is marked primary and call decision is recorded; `[x]` custom dimensions/attribution/GBP UTM are tested; `[x]` any unavailable account action is explicitly blocked, never falsely marked complete.
+
+#### Task 38 implementation record
+
+- **Production measurement:** the existing property/stream and `G-3WGKSK6KBP` identity were verified against the canonical domain and activated through the existing production-only fail-closed tag. One direct Google tag is present, GTM is absent, Vercel Analytics remains active, Enhanced Measurement remains off and owner-approved direct loading requires no new consent UI.
+- **Events and delivery:** all five allowlisted events reached Realtime. The final fictional test produced one HTTP-200 provider-confirmed delivery, one backend success identity, one Resend Delivered email and one PII-free/deduplicated `generate_lead`. Safe call/email interactions did not launch native clients, and bounded backend failures emitted only `form_submit_error` with no lead.
+- **Administration and attribution:** `generate_lead` is the sole governed key event; the four other governed events remain non-key. No custom dimensions were created. Standard UTMs survive language switching, canonicals remain clean and no query/form values enter custom analytics payloads.
+- **Search/schema/GBP:** Search Console successfully reprocessed the unchanged sitemap with 29 discovered URLs. Representative Google Rich Results and Schema.org live checks passed without errors; unsupported optional address/image fields remain omitted. The GBP Website UTM change is approved but client-managed and pending external completion; no GBP mutation was attempted.
+- **Final result:** repository validators and live production/account evidence pass without an application source change. Task 38 is complete and work stops before Task 39.
 
 ### Task 39 — Documentation, Final Cleanup, and Implementation Gate Closure
 
