@@ -4,9 +4,9 @@
 
 ## Document Status
 
-- Phase: Incremental implementation — Tasks 1–36 complete; Task 37 is next
+- Phase: Incremental implementation — Tasks 1–37 complete; Task 38 is next
 - Planning status: Complete — Phase 1 gate passed
-- Implementation status: Tasks 1–36 completed; Task 37 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
+- Implementation status: Tasks 1–37 completed; Task 38 and later remain not started until explicitly authorized. All six initial Blog articles are published, and the lifecycle-derived sitemap contains exactly 29 canonical URLs.
 - Task 1 data status: owner-confirmed hours, Service Area Business policy, Google Business Profile, review display copy, and external-profile policy incorporated
 - Last checkpoint: 2026-09-03 (Asia/Amman)
 - Task 2 repository baseline: clean `main` at `4b944bc`
@@ -44,7 +44,8 @@
 - Task 34 repository baseline: clean `main` at `75f7cb3`
 - Task 35 repository baseline: clean `main` at `c92a3a4`
 - Task 36 repository baseline: clean `main` at `ee6b286`
-- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 37 until explicitly authorized
+- Task 37 repository baseline: clean `main` at `962cb25`
+- Preservation boundary: preserve all existing user work; do not deploy, modify production/accounts, or begin Task 38 until explicitly authorized
 
 ## Evidence Labels
 
@@ -56,7 +57,16 @@
 
 ## Live Checkpoint
 
-### Latest checkpoint — Task 36 complete, 2026-09-03 (Asia/Amman)
+### Latest checkpoint — Task 37 complete, 2026-09-03 (Asia/Amman)
+
+- **Authorized scope and tested tree:** Task 37 only began from clean `962cb25`. The final production output was built from the completed Task 37 worktree above that baseline; the final committed tree contains the same tested sources. No deployment, production value, route/lifecycle, ownership, external account, article/review/media claim or analytics event changed, and Task 38 remains not started.
+- **Gate and fixes:** all 37 registered validators pass after correcting one stale Task 35 lifecycle assertion. The focused `validate:predeployment` gate covers the exact 29-route lifecycle, route families, source/head/H1/canonical/query contracts, sitemap/robots, representative true 404s, local slash normalization, Task 34 media bounds and Task 38 isolation. The only product regression found was Contact's visible `H1 → H3` jump; the shared estimate form now renders H2 on Contact and retains H3 below the Homepage estimate H2.
+- **Final production result:** 29/29 canonical routes and all 29 Spanish/UTM query variants return direct 200 with exact governed source/head/H1/canonical/content and parsable schema; mismatch/failure totals are zero. Sitemap is exactly 29, robots is valid, eight representative invalid paths are true 404s and four local slash variants normalize in one hop. The final Task 35 crawl remains 661 unique / 304 main-content edges, zero orphans and depth 2. Task 36 remains 29 graphs / 139 nodes / 83 unique IDs with zero parse, restraint or parity failures.
+- **Conversion, privacy and accessibility:** both shared form placements pass six intercepted scenarios each—client-invalid, provider-confirmed success/double action, backend failure, network failure, malformed response and honeypot suppression—with correct focus/UI and no real email. The five-event analytics allowlist is unchanged, local production emits zero GA4/GTM requests and no PII/query/submission ID reaches analytics. A 35-visit representative browser matrix across 13 families at 1440×900 and 390×844 plus risk-based 1280×800/320×568 passes headings, breadcrumbs, focus, disclosures, Escape/return, interactions, reduced motion, bilingual wrapping, control sizing, zero overflow/footer-content collision and clean final valid-route consoles. Dedicated automated accessibility scanner: Unavailable.
+- **Performance, media and limitations:** the Task 34 loopback method at 1280×800 and 390×844 shows CLS 0, no early hero-video or third-party requests, unchanged image/request behavior and only 447–651-byte comparable total deltas; LCP remains locally variable and INP is unavailable. All 68 remote media URLs are reachable. Of 88 total external URLs, 86 respond directly to automation and two live Metro Waste Authority sources return automated-client 403s but were independently confirmed current. Search Console, deployed-host normalization/canonicals, live schema tools, real GA4/GBP/account actions and a production safe lead are `DEFERRED — requires authorized deployment / Task 38 or post-deployment QA.` Exact evidence is in `docs/qa/task-37-predeployment-validation.md`.
+- **Validation status:** effective 37/37 validator pass, TypeScript pass, final replacement production build pass, production all-route/query/link/schema/form/browser/performance gates pass and diff checks pass. `Unavailable — ESLint is not installed`; no formatting command or dedicated accessibility scanner is installed. Task 37's complete Definition of Done passes; Task 38 remains `[ ]` Not started.
+
+### Previous checkpoint — Task 36 complete, 2026-09-03 (Asia/Amman)
 
 - **Authorized scope and baseline:** Task 36 only began from clean `ee6b286`; Tasks 1–35 were preserved. No route, redirect, lifecycle, ownership, visible article/review/media content, internal-link graph, analytics event, deployment or external account changed, and Task 37 remains not started.
 - **Architecture and minimal correction:** all 29 pages retain one coherent graph from the shared typed builders and the same visible collection/breadcrumb records. The only real graph defects were non-semantic query parameters in the approved Google profile `sameAs` value and one article citation; JSON-LD now emits their verified clean resource URLs while visible links/content remain unchanged. Stable central, page, service, article, breadcrumb and ItemList IDs remain canonical-derived and collision-free.
@@ -2078,7 +2088,7 @@ The order below follows the required priorities while using the prompt's reviewa
 
 ### Task 37 — Accessibility, Performance, SEO, and Route Validation
 
-- **Status:** `[ ]` Not started
+- **Status:** `[x]` Completed
 - **Objective:** Run the full pre-deployment automated and manual quality gate across all 29 routes and the estimate/API flow.
 - **Why It Is Needed:** Incremental page work must be tested as one production build for regressions, correct status/rendering, accessibility and Core Web Vitals.
 - **Dependencies:** Tasks 1–36.
@@ -2088,7 +2098,7 @@ The order below follows the required priorities while using the prompt's reviewa
 - **Edge Cases:** Dependencies still absent, environment secrets unavailable, preview versus production behavior, flaky performance budgets, dynamic route fallback, Next slash redirects, remote image failures, stale build artifacts.
 - **Validation:** Review all command output and representative desktop/mobile rendered pages; inspect every URL/status/source/head; compare performance against Task 34 baseline; record unresolved manual/account items for Task 38.
 - **Tests:** Full registered suite: data/metadata/schema/sitemap/link/blog/form/analytics tests, production build, typecheck, functioning lint if adopted, and browser smoke/a11y flows for all route families and contact cases.
-- **Definition of Done:** `[ ]` Production build and required automated suites pass or a genuine blocker is recorded; `[ ]` all 29 routes/status/head/content are validated; `[ ]` no critical accessibility/performance/conversion regression remains; `[ ]` results are honestly classified.
+- **Definition of Done:** `[x]` Production build and required automated suites pass or a genuine blocker is recorded; `[x]` all 29 routes/status/head/content are validated; `[x]` no critical accessibility/performance/conversion regression remains; `[x]` results are honestly classified.
 
 ### Task 38 — GA4 Production Validation and Manual Account Actions
 

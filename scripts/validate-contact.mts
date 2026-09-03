@@ -145,6 +145,7 @@ assert.equal(site.formEndpoint, '/api/estimate')
 assert.match(formSource, /fetch\(site\.formEndpoint/)
 
 assert.match(formSource, /placement === 'contact_page'/)
+assert.match(formSource, /const FormHeading = controlledPlacement === 'contact_page' \? 'h2' : 'h3'/)
 assert.match(formSource, /'contact-estimate'/)
 assert.match(formSource, /'homepage-estimate'/)
 assert.match(formSource, /data-estimate-placement=\{controlledPlacement\}/)

@@ -338,7 +338,7 @@ assert.doesNotMatch(read('components/service-detail-page.tsx'), /gtag|internal_l
 assert.match(read('components/hero-video.tsx'), /setTimeout\(\(\) => setVideoEnabled\(true\), 2500\)/)
 assert.match(read('components/gallery.tsx'), /slice\(0, OUR_WORK_INITIAL_COUNT\)/)
 assert.match(read('plan.md'), /### Task 35 — Internal Linking and Content-Cluster Audit\n\n- \*\*Status:\*\* `\[x\]` Completed/)
-assert.match(read('plan.md'), /### Task 36 — Structured Data Validation and Hardening\n\n- \*\*Status:\*\* `\[ \]` Not started/)
+assert.match(read('plan.md'), /### Task 36 — Structured Data Validation and Hardening\n\n- \*\*Status:\*\* `\[x\]` Completed/)
 
 async function validateRenderedGraph(renderedBaseUrl: string) {
   const baseUrl = new URL(renderedBaseUrl)

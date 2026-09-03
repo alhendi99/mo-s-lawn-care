@@ -35,6 +35,7 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
   const controlledPlacement: EstimatePlacement = placement === 'contact_page'
     ? 'contact_page'
     : 'homepage_estimate'
+  const FormHeading = controlledPlacement === 'contact_page' ? 'h2' : 'h3'
   const idPrefix = controlledPlacement === 'contact_page' ? 'contact-estimate' : 'homepage-estimate'
   const fieldId = (field: string) => `${idPrefix}-${field}`
   const [status, setStatus] = useState<Status>('idle')
@@ -179,9 +180,9 @@ export function EstimateForm({ placement = 'homepage_estimate' }: { placement?: 
       <div className="flex items-end justify-between gap-5 border-b border-[color:var(--rule)] pb-5">
         <div>
           <p className="eyebrow text-accent">{t('Start here')}</p>
-          <h3 id={fieldId('heading')} className="mt-3 font-display text-2xl leading-none font-bold tracking-[-0.035em] text-ink uppercase sm:text-3xl">
+          <FormHeading id={fieldId('heading')} className="mt-3 font-display text-2xl leading-none font-bold tracking-[-0.035em] text-ink uppercase sm:text-3xl">
             {t('Request an estimate')}
-          </h3>
+          </FormHeading>
         </div>
         <p className="shrink-0 text-[0.75rem] tracking-[0.1em] text-ink-soft uppercase">
           * {t('Required')}
